@@ -132,6 +132,89 @@
         }
 
         @media (max-width: 768px) { nav ul { display: none; } }
+
+        /* =========================================
+           移动端专属优化 (Mobile Optimization)
+           把这段代码放在 <style> 的最后面
+           ========================================= */
+           @media (max-width: 768px) {
+            /* 1. 缩小整体容器边距 */
+            section {
+                padding: 2.5rem 1.5rem; /* 上下减少，左右减少 */
+            }
+            
+            /* 2. 调整 Hero (顶部) 区域 */
+            .hero, .page-header {
+                padding: 3rem 1rem; /* 减少留白 */
+            }
+            .hero h1, .page-header h1 {
+                font-size: 1.8rem; /* 字体改小 (原来是 3rem) */
+                line-height: 1.2;
+            }
+            .hero p, .page-header p {
+                font-size: 1rem; /* 描述文字改小 */
+                max-width: 100%;
+            }
+            .profile-photo {
+                width: 120px; /* 头像缩小 */
+                height: 120px;
+            }
+
+            /* 3. 卡片优化 */
+            .card, .content-card {
+                padding: 1.25rem; /* 卡片内边距变小，内容更紧凑 */
+                margin-bottom: 1.5rem;
+            }
+            .grid {
+                gap: 1.5rem; /* 卡片间距变小 */
+                /* 强制单列显示，防止被挤压 */
+                grid-template-columns: 1fr; 
+            }
+            
+            /* 4. 标题和正文微调 */
+            h2 {
+                font-size: 1.5rem; /* 二级标题改小 */
+                margin-bottom: 1.5rem;
+                padding-left: 0.8rem;
+                border-left-width: 4px;
+            }
+            p, li {
+                font-size: 0.95rem; /* 正文稍微调小一点点，更精致 */
+                line-height: 1.5;
+            }
+            
+            /* 5. 按钮和图标 */
+            .btn {
+                width: 100%; /* 手机上按钮通栏显示，更易点击 */
+                text-align: center;
+                margin-bottom: 0.5rem; /* 按钮之间增加间距 */
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+            .btn-container {
+                flex-direction: column; /* 按钮竖着排 */
+                width: 100%;
+            }
+
+            /* 6. 技能标签堆叠优化 */
+            .skills-container {
+                gap: 0.6rem;
+            }
+            .skill-tag {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            
+            /* 7. 音乐卡片 (About页面) */
+            .music-player-card {
+                padding: 1rem;
+                flex-direction: column; /* 竖着排 */
+                text-align: center;
+            }
+            .album-cover {
+                margin: 0 auto 1rem auto; /* 封面居中 */
+            }
+        }
     </style>
 </head>
 <body>
