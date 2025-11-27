@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baowen Liu - Portfolio</title>
+    
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2563eb; /* Tech Blue */
+            --secondary-color: #1e293b; /* Dark Slate */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --light-text: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* --- 动画类 --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: blur(4px);
+        }
+
+        .animate-on-scroll.show {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Navbar */
+        nav {
+            background: var(--card-bg);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav .logo { font-size: 1.5rem; font-weight: bold; color: var(--secondary-color); }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--primary-color); }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 5%;
+            text-align: center;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            background-color: #cbd5e1;
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
+            opacity: 0; 
+            transform: scale(0.5);
+        }
+
+        .hero h1 { 
+            font-size: 3rem; color: var(--secondary-color); margin-bottom: 1rem; 
+            animation: slideUp 0.8s ease-out 0.2s forwards; opacity: 0; transform: translateY(20px);
+        }
+        .hero p { 
+            font-size: 1.25rem; color: var(--light-text); max-width: 800px; margin: 0 auto 2rem; 
+            animation: slideUp 0.8s ease-out 0.4s forwards; opacity: 0; transform: translateY(20px);
+        }
+        .btn-container { 
+            display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 20px;
+            animation: slideUp 0.8s ease-out 0.6s forwards; opacity: 0; transform: translateY(20px);
+        }
+
+        @keyframes popIn { to { opacity: 1; transform: scale(1); } }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color); color: white; border-radius: 50px;
+            text-decoration: none; font-weight: 600; cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s; border: 2px solid var(--primary-color);
+        }
+        .btn:hover { transform: translateY(-2px); background-color: #1d4ed8; border-color: #1d4ed8; }
+        
+        .btn-outline { background-color: transparent; color: var(--primary-color); }
+        .btn-outline:hover { background-color: var(--primary-color); color: white; }
+        
+        .btn-dark { background-color: var(--secondary-color); border-color: var(--secondary-color); }
+        .btn-dark:hover { background-color: #0f172a; border-color: #0f172a; }
+        
+        /* Instagram Button Style */
+        .btn-insta { 
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+            border: none; color: white; 
+        }
+        .btn-insta:hover { filter: brightness(1.1); }
+
+        /* General Sections */
+        section { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+        h2 { font-size: 2rem; color: var(--secondary-color); margin-bottom: 2rem; border-left: 5px solid var(--primary-color); padding-left: 1rem; }
+
+        /* Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card {
+            background: var(--card-bg); padding: 2rem; border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { color: var(--secondary-color); margin-bottom: 0.5rem; }
+        .card .date { color: var(--primary-color); font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; display: block; text-transform: uppercase; letter-spacing: 0.05em; }
+        .card ul { padding-left: 1.2rem; color: var(--light-text); }
+        .card li { margin-bottom: 0.5rem; }
+
+        /* Images inside cards (for UTA Offer) */
+        .card-images {
+            display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;
+        }
+        .card-img-wrapper {
+            flex: 1; min-width: 150px;
+            border: 1px solid #e2e8f0; border-radius: 8px; padding: 5px;
+        }
+        .card-img-wrapper img {
+            width: 100%; height: 150px; object-fit: cover; border-radius: 4px;
+        }
+        .card-img-caption {
+            font-size: 0.8rem; color: #64748b; text-align: center; margin-top: 5px;
+        }
+
+        /* Skills Tags */
+        .skills-container { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; margin-bottom: 1.5rem; }
+        .skill-tag {
+            background: #f1f5f9; padding: 0.6rem 1.2rem; border-radius: 8px;
+            font-weight: 500; color: var(--secondary-color);
+            display: flex; align-items: center; gap: 0.5rem;
+            border: 1px solid #e2e8f0;
+            transition: background 0.3s;
+        }
+        .skill-tag:hover { background: #e2e8f0; }
+        .skill-tag i { font-size: 1.2rem; }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: #94a3b8;
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+            font-family: 'Inter', sans-serif; 
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+        footer p { margin-bottom: 0.5rem; }
+        .footer-socials { margin-top: 1rem; }
+        .footer-socials a { color: #cbd5e1; margin: 0 10px; font-size: 1.2rem; transition: color 0.3s; }
+        .footer-socials a:hover { color: white; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            nav ul { display: none; }
+            .btn-container { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Baowen Liu</div>
+        <ul>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="#about">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <img src="photo.jpg" alt="Baowen Liu" class="profile-photo" onerror="this.style.display='none'; document.getElementById('photo-fallback').style.display='flex'">
+        <div id="photo-fallback" class="profile-photo" style="display:none; align-items:center; justify-content:center; color:#fff; font-size:2rem; background:#cbd5e1;">BL</div>
+        
+        <h1>Hello, I am Baowen Liu</h1>
+        <p>
+            Computer Science and Engineering & Math Student at The Ohio State University
+            <br>
+            Pursuing a Career in Software and Web Development
+        </p>
+        
+        <div class="btn-container">
+            <a href="mailto:liu.11884@buckeyemail.osu.edu" class="btn">
+                <i class="fas fa-envelope"></i> Email Me
+            </a>
+            
+            <a href="Baowen Liu_Resume.pdf" target="_blank" class="btn btn-outline">
+                <i class="fas fa-file-pdf"></i> Resume
+            </a>
+
+            <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank" class="btn btn-outline" style="border-color: #0077b5; color: #0077b5;">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            
+            <a href="https://github.com/PowerSixxx" target="_blank" class="btn btn-dark">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+
+            <a href="https://www.instagram.com/powersix2006/" target="_blank" class="btn btn-insta">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+        </div>
+    </header>
+
+    <section id="about">
+        <h2>Education</h2>
+        <div class="card">
+            <h3>The Ohio State University</h3>
+            <span class="date">Expected May 2028 | Columbus, OH</span>
+            <p><strong>Degree:</strong> B.S. Computer Science and Engineering</p>
+            <p><strong>GPA:</strong> 3.965 / 4.0</p>
+            <p><strong>Honors:</strong> Dean's List (>3.5 GPA) 2 semesters</p>
+            <p><strong>Coursework:</strong> Calculus, Fundamentals of Engineering, Physics, Statistics, Computer Science</p>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Work Experience</h2>
+        <div class="grid" style="display: flex; flex-direction: column; gap: 2rem;">
+            
+            <div class="card" style="border-left: 5px solid #b00000;"> <h3>Undergraduate Teaching Assistant (ENGR 1182)</h3>
+                <span class="date">The Ohio State University College of Engineering | Nov 2025 - Present</span>
+                <ul>
+                    <li><strong>Status:</strong> Offer received. Position begins Spring 2026.</li>
+                    <li><strong>Type:</strong> Part-time · On-site · Columbus, Ohio</li>
+                </ul>
+                
+                <div class="card-images">
+                    <div class="card-img-wrapper">
+                        <img src="assets/osu_eng.jpg" alt="OSU College of Engineering" onerror="this.src='https://placehold.co/400x300?text=OSU+Logo'">
+                        <div class="card-img-caption">College of Engineering</div>
+                    </div>
+                    <div class="card-img-wrapper">
+                        <img src="assets/offer.png" alt="Job Offer Letter" onerror="this.src='https://placehold.co/400x300?text=Offer+Letter'">
+                        <div class="card-img-caption">Offer Verification</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Technical Intern</h3>
+                <span class="date">Nanoshape, Inc. | Oct 2025 - Present</span>
+                <ul>
+                    <li>Assisted in developing Nanoshape's modular AI and simulation framework.</li>
+                    <li>Refined algorithms for agent coordination and physics modeling.</li>
+                    <li>Implemented and tested modules to enhance simulation accuracy and responsiveness.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Software Engineer Intern</h3>
+                <span class="date">SPIC Integrated Smart Energy Co., Ltd. | May 2025 - July 2025</span>
+                <ul>
+                    <li>Compiled "System Architecture Design Document" to standardize technical frameworks and module logic.</li>
+                    <li>Created use case diagrams, business architecture diagrams, and system architecture diagrams.</li>
+                    <li>Engaged in Java code development to implement logical functions of core modules.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Academic & Engineering Projects</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>AI Flash Card Web Application</h3>
+                <span class="date">Dec 2024 - Present</span>
+                <p>Designed and developed an interactive website using HTML and CSS to promote AI-powered flashcards.</p>
+                <ul>
+                    <li>Created dynamic webpage components, including navigation menus, scheduling tables, and user authentication forms.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Game Gomoku (Five in a Row) Project</h3>
+                <span class="date">Sep 2024 - Dec 2024</span>
+                <p>Designed a game with a promotion video as a member of a four-person team.</p>
+                <ul>
+                    <li>Utilized MATLAB to complete calculations and design.</li>
+                    <li>Designed three levels of the game (three in a row, five in a row, with AI).</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills & Interests</h2>
+        <div class="card">
+            <h3>Technical Skills</h3>
+            <div class="skills-container">
+                <span class="skill-tag"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+                <span class="skill-tag"><i class="devicon-spring-original colored"></i> Spring</span>
+                <span class="skill-tag"><i class="devicon-spring-original wordmark colored"></i> Spring Boot</span>
+                <span class="skill-tag"><i class="devicon-java-plain colored"></i> Java</span>
+                <span class="skill-tag"><i class="devicon-html5-plain colored"></i> HTML/CSS</span>
+                <span class="skill-tag"><i class="devicon-matlab-plain colored"></i> MATLAB</span>
+                <span class="skill-tag"><i class="devicon-python-plain colored"></i> Python</span>
+                <span class="skill-tag"><i class="devicon-mysql-plain colored"></i> MySQL</span>
+                <span class="skill-tag"><i class="devicon-embeddedc-plain"></i> Simulink</span> 
+            </div>
+            
+            <h3>Activities</h3>
+            <ul style="margin-top: 0.5rem;">
+                <li><strong>OSU Audio Engineering Club:</strong> Active Member (Nov 2024 - Present)</li>
+                <li><strong>OSU Buckeye AutoDrive:</strong> Active Member (Nov 2024 - Present). Utilize MATLAB and Simulink to support system modeling and simulation for autonomous vehicle development; Work closely with the Safety Team.</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <p>Phone: 380-249-9220 | Email: liu.11884@buckeyemail.osu.edu</p>
+        
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/powersix2006/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/PowerSixxx" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+
+        <p style="margin-top: 1rem;">&copy; 2025 Baowen Liu. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        const hiddenElements = document.querySelectorAll('.card, h2');
+        hiddenElements.forEach((el) => {
+            el.classList.add('animate-on-scroll');
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>

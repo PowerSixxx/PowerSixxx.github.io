@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Baowen Liu</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e293b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --light-text: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        html { scroll-behavior: smooth; }
+
+        /* Animation */
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: blur(4px);
+        }
+        .animate-on-scroll.show { opacity: 1; transform: translateY(0); filter: blur(0); }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Navbar */
+        nav { background: var(--card-bg); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        nav .logo { font-size: 1.5rem; font-weight: bold; color: var(--secondary-color); text-decoration: none; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--primary-color); }
+
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            padding: 5rem 5%; text-align: center;
+        }
+        .page-header h1 { 
+            font-size: 3rem; color: var(--secondary-color); margin-bottom: 0.5rem; 
+            animation: slideUp 0.8s ease-out 0.1s forwards; opacity: 0; transform: translateY(20px);
+        }
+        .page-header p { 
+            color: var(--light-text); font-size: 1.2rem; 
+            animation: slideUp 0.8s ease-out 0.3s forwards; opacity: 0; transform: translateY(20px);
+        }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+        /* Sections */
+        section { padding: 3rem 5%; max-width: 1000px; margin: 0 auto; }
+        .content-card {
+            background: var(--card-bg); padding: 2.5rem; border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;
+            opacity: 0; transform: translateY(40px);
+        }
+        h2 { color: var(--secondary-color); margin-bottom: 1.5rem; border-left: 5px solid var(--primary-color); padding-left: 1rem; }
+        p { margin-bottom: 1rem; color: var(--text-color); }
+        ul.custom-list { padding-left: 1.2rem; color: var(--text-color); }
+        ul.custom-list li { margin-bottom: 0.5rem; }
+
+        /* --- 🎵 Stylish Music Player Card --- */
+        .music-player-card {
+            background: linear-gradient(145deg, #2b3242, #1e2330); /* 深色背景 */
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            max-width: 600px;
+        }
+        
+        .album-cover {
+            width: 80px; height: 80px;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .album-cover img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .track-info { flex-grow: 1; }
+        .track-info h4 { font-size: 1.2rem; margin-bottom: 0.2rem; color: #fff; }
+        .track-info p { font-size: 0.9rem; color: #94a3b8; margin: 0; }
+
+        /* Customizing the audio element */
+        audio {
+            width: 100%;
+            height: 35px;
+            margin-top: 0.5rem;
+            filter: invert(1) contrast(0.8); /* 让原生播放器变白，适配深色背景 */
+            opacity: 0.8;
+            outline: none;
+        }
+        
+        @media (max-width: 600px) {
+            .music-player-card { flex-direction: column; text-align: center; }
+            .track-info { width: 100%; }
+        }
+        /* ------------------------------------- */
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;
+        }
+        .gallery-item {
+            width: 100%; height: 200px; background-color: #e2e8f0; border-radius: 8px;
+            overflow: hidden; display: flex; align-items: center; justify-content: center; color: #94a3b8;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .gallery-item img:hover { transform: scale(1.05); }
+
+        .btn { display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary-color); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-top: 1rem; transition: transform 0.2s; }
+        .btn:hover { transform: translateY(-2px); background-color: #1d4ed8; }
+
+        footer { 
+            background: var(--secondary-color); color: #94a3b8; text-align: center; padding: 3rem 1rem; margin-top: 2rem; 
+            font-family: 'Inter', sans-serif; font-size: 0.95rem; 
+        }
+
+        @media (max-width: 768px) { nav ul { display: none; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Baowen Liu</a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" style="color: var(--primary-color);">About Me</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <h1>More About Me</h1>
+        <p>Beyond the code: My hobbies, interests, and life.</p>
+    </div>
+
+    <section>
+        
+        <div class="content-card animate-on-scroll">
+            <h2>My Story</h2>
+            <p>
+                Hello! While my resume highlights my technical skills in Java and MATLAB, there is more to me than just engineering. 
+                I am currently studying at The Ohio State University, where I enjoy exploring the intersection of technology and creativity.
+            </p>
+            <p>
+                My passion for software development started when I realized how code can solve real-world problems. 
+                When I'm not debugging algorithms for the Buckeye AutoDrive team, you can find me exploring new technologies or working on personal web design projects.
+            </p>
+        </div>
+
+        <div class="content-card animate-on-scroll delay-100">
+            <h2>High School Highlights</h2>
+            <p><strong>Tianjin the Second Yaohua High School</strong></p>
+            <p style="font-size: 0.95rem; color: var(--light-text); margin-bottom: 1rem;">Activities & Awards</p>
+            <ul class="custom-list">
+                <li><strong>President of Student Union:</strong> Led student initiatives and organized campus events.</li>
+                <li><strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin.</li>
+                <li><strong>Academic Excellence Award:</strong> Consistently maintained high academic standards.</li>
+                <li><strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics.</li>
+                <li><strong>Math Teaching Assistant:</strong> Assisted peers in understanding complex mathematical concepts.</li>
+            </ul>
+        </div>
+
+        <div class="content-card animate-on-scroll delay-200">
+            <h2>Interests & Hobbies</h2>
+            
+            <p><strong>🎵 Music Taste:</strong> I enjoy listening to Mandopop and electronic music. My favorite artists include <strong>Jay Chou (周杰伦)</strong>, <strong>JJ Lin (林俊杰)</strong>, <strong>G.E.M. (邓紫棋)</strong>, and <strong>Alan Walker</strong>.</p>
+            
+            <div class="music-player-card">
+                <div class="album-cover">
+                    <img src="assets/faded_cover.jpg" alt="Faded Album Art" onerror="this.style.display='none'">
+                    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#555;">
+                        <i class="fas fa-music"></i>
+                    </div>
+                </div>
+                <div class="track-info">
+                    <h4>Faded</h4>
+                    <p>Alan Walker</p>
+                    <audio controls>
+                        <source src="assets/faded.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0;">
+
+            <p><strong>⚫ Go (Weiqi):</strong> I hold a <strong>5-Dan certificate (围棋五段)</strong>. I love the strategic depth and patience required in this ancient game.</p>
+            <p><strong>🎮 Gaming:</strong> In my free time, I enjoy playing <strong>Minecraft</strong> for its creativity and <strong>PUBG</strong> for the competitive team strategy.</p>
+            <p><strong>🏊 Swimming & Fitness:</strong> Staying active is important to me; I regularly go swimming and workout to keep a healthy balance.</p>
+
+            <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 1.5rem 0;">
+
+            <p><strong>🎧 Audio Engineering:</strong> As a member of the OSU Audio Engineering Club, I love exploring the technical side of music and sound production.</p>
+            <p><strong>🚗 Autonomous Vehicles:</strong> I have a deep interest in how AI interacts with the physical world, which drives my work with simulation frameworks in Buckeye AutoDrive.</p>
+        </div>
+
+        <div class="content-card animate-on-scroll delay-300">
+            <h2>Life Gallery</h2>
+            <p>Here are some snapshots of my life and projects.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item animate-on-scroll delay-100">
+                    <img src="assets/hobby1.jpg" alt="Hobby Photo" onerror="this.style.display='none'; this.parentElement.innerText='Photo 1'">
+                </div>
+                <div class="gallery-item animate-on-scroll delay-200">
+                     <img src="assets/hobby2.jpg" alt="Campus Life" onerror="this.style.display='none'; this.parentElement.innerText='Photo 2'">
+                </div>
+                <div class="gallery-item animate-on-scroll delay-300">
+                     <img src="assets/project.jpg" alt="Project Screenshot" onerror="this.style.display='none'; this.parentElement.innerText='Photo 3'">
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="index.html" class="btn animate-on-scroll">← Back to Home</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Baowen Liu. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        const hiddenElements = document.querySelectorAll('.animate-on-scroll');
+        hiddenElements.forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
