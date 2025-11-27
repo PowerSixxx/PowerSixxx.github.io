@@ -61,6 +61,55 @@
         .nav-links a:hover { color: var(--primary); }
         #theme-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-main); }
 
+        .lang-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: var(--text-main);
+            padding: 0.3rem 0.8rem;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .lang-toggle:hover {
+            background-color: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: none;
+            background: var(--primary);
+            color: #ffffff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s, background-color 0.3s;
+            z-index: 150;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background-color: #1d4ed8;
+        }
+
         /* Head (including the Easter egg button */
         .header { padding: 4rem 1rem; text-align: center; }
         .header-title-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.5rem; }
@@ -172,69 +221,70 @@
                 <text x="12" y="72" font-size="85" fill="none" stroke="var(--text-main)" stroke-width="6" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
                 <text x="12" y="72" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
             </svg>
-            <span>Baowen Liu</span>
+            <span data-en="Baowen Liu" data-zh="刘宝文">Baowen Liu</span>
         </a>
 
         <div class="nav-right">
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" style="color: var(--primary)">About Me</a></li>
+                <li><a href="index.html" data-en="Home" data-zh="主页">Home</a></li>
+                <li><a href="about.html" style="color: var(--primary)" data-en="About Me" data-zh="关于我">About Me</a></li>
             </ul>
+            <button id="lang-toggle" class="lang-toggle" title="Switch language">EN | 中文</button>
             <button id="theme-btn" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
         </div>
     </nav>
 
     <div class="header">
         <div class="header-title-row animate-on-scroll">
-            <h1 id="more-about-title">More About Me</h1>
+            <h1 id="more-about-title" data-en="More About Me" data-zh="更多关于我">More About Me</h1>
             <button id="firework-btn" title="Click for magic!">✨</button>
         </div>
-        <p class="animate-on-scroll delay-100">Beyond the code: My hobbies, interests, and life.</p>
+        <p class="animate-on-scroll delay-100" data-en="Beyond the code: My hobbies, interests, and life." data-zh="除了代码之外，这里是我的兴趣爱好和生活。">Beyond the code: My hobbies, interests, and life.</p>
     </div>
 
     <div class="simple-card animate-on-scroll delay-200">
-        <h2>My Story</h2>
-        <p>While my resume highlights my technical skills in Java and MATLAB, there is more to me than just engineering. I enjoy exploring the intersection of technology and creativity, from designing websites to strategizing in Go.</p>
+        <h2 data-en="My Story" data-zh="我的故事">My Story</h2>
+        <p data-en="While my resume highlights my technical skills in Java and MATLAB, there is more to me than just engineering. I enjoy exploring the intersection of technology and creativity, from designing websites to strategizing in Go." data-zh="虽然我的简历主要展示了我在 Java 和 MATLAB 等技术上的能力，但我并不只有工程的一面。我喜欢在技术和创意的交汇处探索，比如设计网站、下围棋时思考策略等。">While my resume highlights my technical skills in Java and MATLAB, there is more to me than just engineering. I enjoy exploring the intersection of technology and creativity, from designing websites to strategizing in Go.</p>
     </div>
 
     <div class="simple-card animate-on-scroll delay-200">
-        <h2>High School Highlights</h2>
-        <p><strong>Tianjin the Second Yaohua High School</strong></p>
+        <h2 data-en="High School Highlights" data-zh="高中经历亮点">High School Highlights</h2>
+        <p data-en="<strong>Tianjin the Second Yaohua High School</strong>" data-zh="<strong>天津市第二耀华中学</strong>"><strong>Tianjin the Second Yaohua High School</strong></p>
         <ul>
-            <li><strong>President of Student Union:</strong> Led student initiatives and organized campus events.</li>
-            <li><strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin.</li>
-            <li><strong>Math Teaching Assistant:</strong> Graded assignments and quizzes, explained solutions, and helped classmates with questions and problem-solving.</li>
-            <li><strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics.</li>
+            <li data-en="<strong>President of Student Union:</strong> Led student initiatives and organized campus events." data-zh="<strong>学生会主席：</strong> 负责带领学生组织活动并策划校园活动。"><strong>President of Student Union:</strong> Led student initiatives and organized campus events.</li>
+            <li data-en="<strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin." data-zh="<strong>市级三好学生：</strong> 被评为天津市优秀学生。"><strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin.</li>
+            <li data-en="<strong>Math Teaching Assistant:</strong> Graded assignments and quizzes, explained solutions, and helped classmates with questions and problem-solving." data-zh="<strong>数学助教：</strong> 批改作业和测验，讲解题目思路，帮助同学解决问题。"><strong>Math Teaching Assistant:</strong> Graded assignments and quizzes, explained solutions, and helped classmates with questions and problem-solving.</li>
+            <li data-en="<strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics." data-zh="<strong>物理竞赛（COP）：</strong> 参加第 39 届全国中学生物理竞赛。"><strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics.</li>
         </ul>
     </div>
 
     <div class="showcase-container animate-on-scroll delay-300">
-        <div class="showcase-header">Hobbies</div>
+        <div class="showcase-header" data-en="Hobbies" data-zh="兴趣爱好">Hobbies</div>
         
         <div class="toggle-wrapper">
             <div class="toggle-glider" id="glider"></div>
-            <button class="toggle-btn active" onclick="switchTab('games')">Video Games</button>
-            <button class="toggle-btn" onclick="switchTab('music')">Music</button>
+            <button class="toggle-btn active" onclick="switchTab('games')" data-en="Video Games" data-zh="电子游戏">Video Games</button>
+            <button class="toggle-btn" onclick="switchTab('music')" data-en="Music" data-zh="音乐">Music</button>
         </div>
 
         <div id="games-panel" class="grid-panel games-grid active">
             <div class="game-card animate-on-scroll delay-100">
                 <div class="card-img-box"><img src="assets/game_mc.jpg" alt="MC" onerror="this.src='https://placehold.co/150x150?text=MC'"></div>
-                <div class="card-title">Minecraft</div>
-                <div class="card-stat">Creative Mode</div>
-                <span class="stat-badge">Builder</span>
+                <div class="card-title" data-en="Minecraft" data-zh="我的世界">Minecraft</div>
+                <div class="card-stat" data-en="Creative Mode" data-zh="创造模式">Creative Mode</div>
+                <span class="stat-badge" data-en="Builder" data-zh="建造者">Builder</span>
             </div>
             <div class="game-card animate-on-scroll delay-200">
                 <div class="card-img-box"><img src="assets/game_pubg.jpg" alt="PUBG" onerror="this.src='https://placehold.co/150x150?text=PUBG'"></div>
-                <div class="card-title">PUBG</div>
-                <div class="card-stat">Rank: Ace</div>
-                <span class="stat-badge">Tactical</span>
+                <div class="card-title" data-en="PUBG" data-zh="绝地求生（PUBG）">PUBG</div>
+                <div class="card-stat" data-en="Rank: Ace" data-zh="段位：王牌">Rank: Ace</div>
+                <span class="stat-badge" data-en="Tactical" data-zh="战术型">Tactical</span>
             </div>
             <div class="game-card animate-on-scroll delay-300">
                 <div class="card-img-box"><img src="assets/game_go.jpg" alt="Go" onerror="this.src='https://placehold.co/150x150?text=Go'"></div>
-                <div class="card-title">Go (Weiqi)</div>
-                <div class="card-stat">Rank: 5-Dan</div>
-                <span class="stat-badge">Master</span>
+                <div class="card-title" data-en="Go (Weiqi)" data-zh="围棋（Weiqi）">Go (Weiqi)</div>
+                <div class="card-stat" data-en="Rank: 5-Dan" data-zh="段位：业余五段">Rank: 5-Dan</div>
+                <span class="stat-badge" data-en="Master" data-zh="大师">Master</span>
             </div>
         </div>
 
@@ -242,41 +292,43 @@
             <div class="music-card animate-on-scroll delay-100">
                 <div class="music-cover-wrapper"><img src="assets/cover_faded.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=Faded'"></div>
                 <div class="music-info">
-                    <div class="music-title">Faded</div>
-                    <div class="music-artist">Alan Walker</div>
+                    <div class="music-title" data-en="Faded" data-zh="Faded">Faded</div>
+                    <div class="music-artist" data-en="Alan Walker" data-zh="Alan Walker">Alan Walker</div>
                     <audio controls><source src="assets/faded.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
             <div class="music-card animate-on-scroll delay-200">
                 <div class="music-cover-wrapper"><img src="assets/cover_eot.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=EOT'"></div>
                 <div class="music-info">
-                    <div class="music-title">End of Time</div>
-                    <div class="music-artist">Alan Walker, K-391</div>
+                    <div class="music-title" data-en="End of Time" data-zh="End of Time">End of Time</div>
+                    <div class="music-artist" data-en="Alan Walker, K-391" data-zh="Alan Walker, K-391">Alan Walker, K-391</div>
                     <audio controls><source src="assets/endoftime.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
             <div class="music-card animate-on-scroll delay-300">
                 <div class="music-cover-wrapper"><img src="assets/cover_huahai.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=HuaHai'"></div>
                 <div class="music-info">
-                    <div class="music-title">花海</div>
-                    <div class="music-artist">Jay Chou</div>
+                    <div class="music-title" data-en="花海" data-zh="花海">花海</div>
+                    <div class="music-artist" data-en="Jay Chou" data-zh="周杰伦">Jay Chou</div>
                     <audio controls><source src="assets/huahai.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
             <div class="music-card animate-on-scroll delay-400">
                 <div class="music-cover-wrapper"><img src="assets/cover_qing.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=Qing'"></div>
                 <div class="music-info">
-                    <div class="music-title">晴</div>
-                    <div class="music-artist">Silence Wang</div>
+                    <div class="music-title" data-en="晴" data-zh="晴">晴</div>
+                    <div class="music-artist" data-en="Silence Wang" data-zh="汪苏泷">Silence Wang</div>
                     <audio controls><source src="assets/qing.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="index.html" class="btn-home">← Back to Home</a>
+    <a href="index.html" class="btn-home" data-en="← Back to Home" data-zh="← 返回主页">← Back to Home</a>
 
-    <footer>
+    <button id="back-to-top" class="back-to-top">↑</button>
+
+    <footer data-en="&copy; 2025 Baowen Liu. All Rights Reserved." data-zh="&copy; 2025 刘宝文。保留所有权利。">
         &copy; 2025 Baowen Liu. All Rights Reserved.
     </footer>
 
@@ -353,7 +405,26 @@
             }
         });
 
-        // 4. firework Easter eggs
+        // 4. Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // 5. firework Easter eggs
         function launchFireworks() {
             // Fire two fireworks
             var duration = 2 * 1000;
@@ -381,6 +452,39 @@
 
         document.getElementById('firework-btn').addEventListener('click', launchFireworks);
         document.getElementById('more-about-title').addEventListener('click', launchFireworks);
+
+        // 6. Language Toggle Logic (shared with index.html)
+        const langToggle = document.getElementById('lang-toggle');
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function applyLanguage(lang) {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const enText = el.getAttribute('data-en');
+                const zhText = el.getAttribute('data-zh');
+                const text = (lang === 'zh' ? (zhText || enText) : enText) || '';
+                if (text) {
+                    el.innerHTML = text;
+                }
+            });
+        }
+
+        function updateLangToggleLabel() {
+            if (!langToggle) return;
+            langToggle.textContent = currentLang === 'en' ? 'EN | 中文' : '中 | EN';
+        }
+
+        // Initialize language on page load
+        applyLanguage(currentLang);
+        updateLangToggleLabel();
+
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                localStorage.setItem('lang', currentLang);
+                applyLanguage(currentLang);
+                updateLangToggleLabel();
+            });
+        }
     </script>
 
 </body>

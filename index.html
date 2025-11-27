@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baowen Liu - Portfolio</title>
+    <meta name="description" content="Baowen Liu's Portfolio - CS Student at OSU specializing in Software & Web Development.">
+    <meta name="keywords" content="Baowen Liu, Portfolio, OSU, Computer Science, Web Development, Java, JavaScript">
+    <meta name="author" content="Baowen Liu">
+    <meta property="og:title" content="Baowen Liu - Portfolio">
+    <meta property="og:description" content="Check out my projects, skills, and experience in Software Engineering.">
+    <meta property="og:image" content="https://powersixxx.github.io/assets/photo.jpg">
+    <meta property="og:url" content="https://powersixxx.github.io/">
+    <meta property="og:type" content="website">
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%231e293b'/><text x='42' y='82' font-family='Times New Roman, serif' font-weight='bold' font-size='85' fill='white'>L</text><text x='12' y='72' font-family='Times New Roman, serif' font-weight='bold' font-size='85' stroke='%231e293b' stroke-width='6' fill='none'>B</text><text x='12' y='72' font-family='Times New Roman, serif' font-weight='bold' font-size='85' fill='white'>B</text></svg>">
 
@@ -61,12 +69,112 @@
         
         .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: bold; color: var(--text-main); text-decoration: none; }
         
-        .nav-container { display: flex; align-items: center; gap: 2rem; }
+        .nav-container { display: flex; align-items: center; gap: 2rem; position: relative; }
         .nav-links { display: flex; gap: 2rem; list-style: none; }
         .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--primary); }
+        .nav-links li {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 2.2rem;
+            left: 0;
+            background: var(--bg-card);
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            padding: 0.5rem 0;
+            list-style: none;
+            min-width: 220px;
+            border: 1px solid var(--border);
+            display: none;
+            z-index: 150;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 0.5rem 1rem;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--bg-body);
+            color: var(--primary);
+        }
+
+        .has-dropdown:hover > .dropdown-menu {
+            display: block;
+        }
         #theme-toggle { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-main); padding: 0.5rem; transition: transform 0.2s; }
         #theme-toggle:hover { transform: scale(1.1); }
+        .lang-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: var(--text-main);
+            padding: 0.3rem 0.8rem;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .lang-toggle:hover {
+            background-color: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 0.3rem 0.4rem;
+        }
+
+        .hamburger span {
+            width: 18px;
+            height: 2px;
+            background-color: var(--text-main);
+            border-radius: 999px;
+            transition: transform 0.2s, opacity 0.2s, background-color 0.2s;
+        }
+
+        .hamburger-menu {
+            position: absolute;
+            right: 5%;
+            top: 3.1rem;
+            background: var(--bg-card);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            padding: 0.5rem 0;
+            list-style: none;
+            min-width: 180px;
+            border: 1px solid var(--border);
+            display: none;
+            z-index: 160;
+        }
+
+        .hamburger-menu.show {
+            display: block;
+        }
+
+        .hamburger-menu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            white-space: nowrap;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .hamburger-menu a:hover {
+            background-color: var(--bg-body);
+            color: var(--primary);
+        }
 
         /* Hero */
         .hero { 
@@ -99,7 +207,13 @@
         .hero h1 { font-size: 3rem; color: var(--text-main); margin-bottom: 1rem; line-height: 1.2; }
         .hero p { font-size: 1.2rem; color: var(--text-sub); max-width: 800px; margin: 0 auto 2rem; }
         
-        .btn-container { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+        .btn-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(160px, 1fr));
+            gap: 1rem 1.5rem;
+            justify-items: center;
+            margin-top: 20px;
+        }
         .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; background-color: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.2s, filter 0.2s; border: none; }
         .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
         .btn-outline { background-color: transparent; color: var(--primary); border: 2px solid var(--primary); }
@@ -134,14 +248,120 @@
         .footer-socials { margin-top: 1rem; }
         .footer-socials a { color: var(--text-sub); margin: 0 10px; font-size: 1.5rem; transition: color 0.3s; }
         .footer-socials a:hover { color: var(--primary); }
+        .back-to-top {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: #ffffff;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+            z-index: 120;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+        }
+        
+        .back-to-top i {
+            font-size: 1rem;
+        }
 
+        .copy-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 5rem;
+            transform: translateX(-50%);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            background-color: var(--text-main);
+            color: #ffffff;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 130;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translate(-50%, -6px);
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            margin: 2rem 0 0;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 120px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), rgba(148, 163, 184, 0.5));
+        }
+        
+        .timeline-item {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-date {
+            width: 110px;
+            text-align: right;
+            padding-right: 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-sub);
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 120px;
+            top: 1.2rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 999px;
+            background-color: var(--bg-body);
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+        }
+        
+        .timeline-content {
+            margin-left: 2.5rem;
+            flex: 1;
+        }
+        
         @media (max-width: 768px) {
             nav { padding: 1rem; }
             .nav-links { display: none; }
             .hero { padding: 3rem 1rem; }
             .hero h1 { font-size: 2rem; }
             .hero p { font-size: 1rem; padding: 0 0.5rem; }
-            .btn-container { flex-direction: column; width: 100%; gap: 0.8rem; }
+            .btn-container { display: flex; flex-direction: column; width: 100%; gap: 0.8rem; }
             .btn { width: 100%; justify-content: center; }
             section { padding: 2.5rem 1rem; }
             .card { padding: 1.5rem; }
@@ -149,6 +369,34 @@
             .card-images { flex-direction: column; }
             .card-img-wrapper { width: 100%; margin-bottom: 0.5rem; }
             .card-img-wrapper img { height: auto; max-height: 200px; }
+
+            .timeline {
+                margin-top: 1.5rem;
+            }
+
+            .timeline::before {
+                left: 16px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                padding-left: 0.5rem;
+            }
+
+            .timeline-date {
+                width: auto;
+                text-align: left;
+                padding: 0 0 0.5rem 2.5rem;
+            }
+
+            .timeline-dot {
+                left: 16px;
+                top: 1.4rem;
+            }
+
+            .timeline-content {
+                margin-left: 2.5rem;
+            }
         }
     </style>
 </head>
@@ -162,18 +410,29 @@
                 <text x="12" y="72" font-size="85" fill="none" stroke="var(--text-main)" stroke-width="6" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
                 <text x="12" y="72" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
             </svg>
-            <span>Baowen Liu</span>
+            <span data-en="Baowen Liu" data-zh="刘宝文">Baowen Liu</span>
         </a>
 
         <div class="nav-container">
             <ul class="nav-links">
-                <li><a href="about.html">About Me</a></li>
-                <li><a href="#about">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="about.html" data-en="About Me" data-zh="关于我">About Me</a></li>
             </ul>
+
+            <button id="hamburger" class="hamburger" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div id="hamburger-menu" class="hamburger-menu">
+                <a href="#about" data-en="Education" data-zh="教育">Education</a>
+                <a href="#experience" data-en="Experience" data-zh="经历">Experience</a>
+                <a href="#projects" data-en="Projects" data-zh="项目">Projects</a>
+                <a href="#skills" data-en="Skills" data-zh="技能">Skills</a>
+                <a href="#contact" data-en="Contact" data-zh="联系方式">Contact</a>
+            </div>
+
+            <button id="lang-toggle" class="lang-toggle" title="Switch language">EN | 中文</button>
             <button id="theme-toggle" title="Toggle Dark Mode">
                 <i class="fas fa-moon"></i>
             </button>
@@ -184,116 +443,169 @@
         <img id="profile-pic" src="photo.jpg" alt="Baowen Liu" class="profile-photo" onerror="this.style.display='none'; document.getElementById('photo-fallback').style.display='flex'">
         <div id="photo-fallback" class="profile-photo" style="display:none; align-items:center; justify-content:center; color:#fff; font-size:2rem; background:#cbd5e1;">BL</div>
         
-        <h1 class="animate-on-scroll">Hello, I am Baowen Liu</h1>
-        <p class="animate-on-scroll delay-100">
-            Computer Science and Engineering & Math Student at The Ohio State University<br>
+        <h1 class="animate-on-scroll" data-en="Hello, I am Baowen Liu" data-zh="你好，我是刘宝文">Hello, I am Baowen Liu</h1>
+        <p class="animate-on-scroll delay-100"
+           data-en="Computer Science and Engineering &amp; Math Student at The Ohio State University&lt;br&gt;Pursuing a Career in Software and Web Development"
+           data-zh="就读于俄亥俄州立大学计算机科学与工程与数学专业的学生&lt;br&gt;立志从事软件开发和网页开发相关工作">
+            Computer Science and Engineering &amp; Math Student at The Ohio State University<br>
             Pursuing a Career in Software and Web Development
         </p>
         
         <div class="btn-container animate-on-scroll delay-200">
-            <a href="mailto:liu.11884@buckeyemail.osu.edu" class="btn"><i class="fas fa-envelope"></i> Email Me</a>
-            <a href="Baowen Liu_Resume.pdf" target="_blank" class="btn btn-outline"><i class="fas fa-file-pdf"></i> Resume</a>
-            <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank" class="btn btn-outline" style="border-color: #0077b5; color: #0077b5;"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="https://github.com/PowerSixxx" target="_blank" class="btn btn-dark"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://www.instagram.com/powersix2006/" target="_blank" class="btn btn-insta"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="about.html" class="btn btn-outline" data-en="About Me" data-zh="关于我"><i class="fas fa-user"></i> About Me</a>
+            <a href="mailto:liu.11884@buckeyemail.osu.edu" id="email-btn" class="btn" data-en="Email Me" data-zh="给我发邮件"><i class="fas fa-envelope"></i> Email Me</a>
+            <a href="Baowen Liu_Resume.pdf" target="_blank" class="btn btn-outline" data-en="Resume" data-zh="简历"><i class="fas fa-file-pdf"></i> Resume</a>
+            <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank" class="btn btn-outline" style="border-color: #0077b5; color: #0077b5;" data-en="LinkedIn" data-zh="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/PowerSixxx" target="_blank" class="btn btn-dark" data-en="GitHub" data-zh="GitHub"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://www.instagram.com/powersix2006/" target="_blank" class="btn btn-insta" data-en="Instagram" data-zh="Instagram"><i class="fab fa-instagram"></i> Instagram</a>
         </div>
     </header>
 
     <section id="about">
-        <h2 class="animate-on-scroll">Education</h2>
+        <h2 class="animate-on-scroll" data-en="Education" data-zh="教育背景">Education</h2>
         <div class="card animate-on-scroll delay-100">
-            <h3>The Ohio State University</h3>
-            <span class="date">Expected May 2028 | Columbus, OH</span>
-            <p><strong>Degree:</strong> B.S. Computer Science and Engineering</p>
-            <p><strong>GPA:</strong> 3.965 / 4.0</p>
-            <p><strong>Honors:</strong> Dean's List (>3.5 GPA) 2 semesters</p>
-            <p><strong>Coursework:</strong> Calculus, Fundamentals of Engineering, Physics, Statistics, Computer Science</p>
+            <h3 data-en="The Ohio State University" data-zh="俄亥俄州立大学">The Ohio State University</h3>
+            <span class="date" data-en="Expected May 2028 | Columbus, OH" data-zh="预计 2028 年 5 月毕业 | 哥伦布，俄亥俄州">Expected May 2028 | Columbus, OH</span>
+            <p data-en="<strong>Degree:</strong> B.S. Computer Science and Engineering" data-zh="<strong>学位：</strong> 计算机科学与工程学士"><strong>Degree:</strong> B.S. Computer Science and Engineering</p>
+            <p data-en="<strong>GPA:</strong> 3.965 / 4.0" data-zh="<strong>绩点：</strong> 3.965 / 4.0"><strong>GPA:</strong> 3.965 / 4.0</p>
+            <p data-en="<strong>Honors:</strong> Dean's List (&gt;3.5 GPA) 2 semesters" data-zh="<strong>荣誉：</strong> 两学期进入院长名单（GPA &gt; 3.5）"><strong>Honors:</strong> Dean's List (&gt;3.5 GPA) 2 semesters</p>
+            <p data-en="<strong>Coursework:</strong> Calculus, Computer Science, Fundamentals of Engineering, Linear Algebra, Physics, Statistics" data-zh="<strong>主要课程：</strong> 微积分、计算机科学、工程基础、线性代数、物理、统计学"><strong>Coursework:</strong> Calculus, Computer Science, Fundamentals of Engineering, Linear Algebra, Physics, Statistics</p>
         </div>
     </section>
 
     <section id="experience">
-        <h2 class="animate-on-scroll">Work Experience</h2>
-        <div class="grid" style="display: flex; flex-direction: column; gap: 2rem;">
-            <div class="card animate-on-scroll delay-100" style="border-left: 5px solid #b00000;"> 
-                <h3>Undergraduate Teaching Assistant (ENGR 1182)</h3>
-                <span class="date">The Ohio State University College of Engineering</span>
-                <ul>
-                    <li><strong>Status:</strong> Offer received. Position begins Spring 2026.</li>
-                    <li><strong>Type:</strong> Part-time · On-site · Columbus, Ohio</li>
-                </ul>
-                <div class="card-images">
-                    <div class="card-img-wrapper"><img src="assets/osu_eng.jpg" alt="OSU College of Engineering" onerror="this.src='https://placehold.co/400x300?text=OSU+Logo'"><div class="card-img-caption">College of Engineering</div></div>
-                    <div class="card-img-wrapper"><img src="assets/offer.png" alt="Job Offer Letter" onerror="this.src='https://placehold.co/400x300?text=Offer+Letter'"><div class="card-img-caption">Offer Verification</div></div>
+        <h2 class="animate-on-scroll" data-en="Work Experience" data-zh="实习与工作经历">Work Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item animate-on-scroll delay-100">
+                <div class="timeline-date" data-en="Spring 2026" data-zh="2026 年春季">Spring 2026</div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="card" style="border-left: 5px solid #b00000;">
+                        <h3 data-en="Undergraduate Teaching Assistant (ENGR 1182)" data-zh="本科教学助理（ENGR 1182）">Undergraduate Teaching Assistant (ENGR 1182)</h3>
+                        <span class="date" data-en="The Ohio State University College of Engineering" data-zh="俄亥俄州立大学工程学院">The Ohio State University College of Engineering</span>
+                        <ul>
+                            <li data-en="<strong>Status:</strong> Offer received. Position begins Spring 2026." data-zh="<strong>状态：</strong> 已收到录用通知，将于 2026 年春季开始任职。"><strong>Status:</strong> Offer received. Position begins Spring 2026.</li>
+                            <li data-en="<strong>Type:</strong> Part-time · On-site · Columbus, Ohio" data-zh="<strong>类型：</strong> 兼职 · 线下 · 俄亥俄州哥伦布市"><strong>Type:</strong> Part-time · On-site · Columbus, Ohio</li>
+                        </ul>
+                        <div class="card-images">
+                            <div class="card-img-wrapper"><img src="assets/osu_eng.jpg" alt="OSU College of Engineering" onerror="this.src='https://placehold.co/400x300?text=OSU+Logo'"><div class="card-img-caption" data-en="College of Engineering" data-zh="工程学院">College of Engineering</div></div>
+                            <div class="card-img-wrapper"><img src="assets/offer.png" alt="Job Offer Letter" onerror="this.src='https://placehold.co/400x300?text=Offer+Letter'"><div class="card-img-caption" data-en="Offer Verification" data-zh="录用通知确认">Offer Verification</div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="card animate-on-scroll delay-200">
-                <h3>Technical Intern</h3>
-                <span class="date">Nanoshape, Inc. | Oct 2025 - Present</span>
-                <ul><li>Assisted in developing Nanoshape's modular AI and simulation framework.</li><li>Refined algorithms for agent coordination and physics modeling.</li><li>Implemented and tested modules to enhance simulation accuracy and responsiveness.</li></ul>
+            <div class="timeline-item animate-on-scroll delay-200">
+                <div class="timeline-date" data-en="Oct 2025 - Present" data-zh="2025 年 10 月至今">Oct 2025 - Present</div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="card">
+                        <h3 data-en="Technical Intern" data-zh="技术实习生">Technical Intern</h3>
+                        <span class="date" data-en="Nanoshape, Inc." data-zh="Nanoshape 公司">Nanoshape, Inc.</span>
+                        <ul>
+                            <li data-en="Assisted in developing Nanoshape's modular AI and simulation framework." data-zh="协助开发 Nanoshape 的模块化人工智能与仿真框架。">Assisted in developing Nanoshape's modular AI and simulation framework.</li>
+                            <li data-en="Refined algorithms for agent coordination and physics modeling." data-zh="改进智能体协同与物理建模相关算法。">Refined algorithms for agent coordination and physics modeling.</li>
+                            <li data-en="Implemented and tested modules to enhance simulation accuracy and responsiveness." data-zh="实现并测试多个功能模块，以提升仿真的精度和响应速度。">Implemented and tested modules to enhance simulation accuracy and responsiveness.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-
-            <div class="card animate-on-scroll delay-300">
-                <h3>Software Engineer Intern</h3>
-                <span class="date">SPIC Integrated Smart Energy Co., Ltd. | May 2025 - July 2025</span>
-                <ul><li>Compiled "System Architecture Design Document" to standardize technical frameworks and module logic.</li><li>Created use case diagrams, business architecture diagrams, and system architecture diagrams.</li><li>Engaged in Java code development to implement logical functions of core modules.</li></ul>
+            <div class="timeline-item animate-on-scroll delay-300">
+                <div class="timeline-date" data-en="May 2025 - July 2025" data-zh="2025 年 5 月 - 7 月">May 2025 - July 2025</div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="card">
+                        <h3 data-en="Software Engineer Intern" data-zh="软件工程实习生">Software Engineer Intern</h3>
+                        <span class="date" data-en="SPIC Integrated Smart Energy Co., Ltd." data-zh="国家电投集成智慧能源有限公司">SPIC Integrated Smart Energy Co., Ltd.</span>
+                        <ul>
+                            <li data-en="Compiled &quot;System Architecture Design Document&quot; to standardize technical frameworks and module logic." data-zh="编写《系统架构设计文档》，规范技术框架与模块逻辑。">Compiled "System Architecture Design Document" to standardize technical frameworks and module logic.</li>
+                            <li data-en="Created use case diagrams, business architecture diagrams, and system architecture diagrams." data-zh="绘制用例图、业务架构图和系统架构图。">Created use case diagrams, business architecture diagrams, and system architecture diagrams.</li>
+                            <li data-en="Engaged in Java code development to implement logical functions of core modules." data-zh="参与核心模块的 Java 代码开发，实现关键业务逻辑功能。">Engaged in Java code development to implement logical functions of core modules.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="animate-on-scroll">Academic & Engineering Projects</h2>
+        <h2 class="animate-on-scroll" data-en="Academic &amp; Engineering Projects" data-zh="学术与工程项目">Academic &amp; Engineering Projects</h2>
         <div class="grid">
             <div class="card animate-on-scroll delay-100">
-                <h3>AI Flash Card Web Application</h3>
-                <span class="date">Dec 2024 - Present</span>
-                <p>Designed and developed an interactive website using HTML and CSS to promote AI-powered flashcards.</p>
-                <ul><li>Created dynamic webpage components, including navigation menus, scheduling tables, and user authentication forms.</li></ul>
+                <h3 data-en="AI Flash Card Web Application" data-zh="AI 记忆卡网页应用">AI Flash Card Web Application</h3>
+                <span class="date" data-en="Dec 2024 - Present" data-zh="2024 年 12 月至今">Dec 2024 - Present</span>
+                <p data-en="Designed and developed an interactive website using HTML and CSS to promote AI-powered flashcards." data-zh="使用 HTML 和 CSS 设计并开发交互式网站，用于展示和推广 AI 驱动的记忆卡工具。">Designed and developed an interactive website using HTML and CSS to promote AI-powered flashcards.</p>
+                <ul><li data-en="Created dynamic webpage components, including navigation menus, scheduling tables, and user authentication forms." data-zh="编写动态网页组件，包括导航菜单、课程安排表和用户认证表单。">Created dynamic webpage components, including navigation menus, scheduling tables, and user authentication forms.</li></ul>
             </div>
             <div class="card animate-on-scroll delay-200">
-                <h3>Game Gomoku (Five in a Row) Project</h3>
-                <span class="date">Sep 2024 - Dec 2024</span>
-                <p>Designed a game with a promotion video as a member of a four-person team.</p>
-                <ul><li>Utilized MATLAB to complete calculations and design.</li><li>Designed three levels of the game (three in a row, five in a row, with AI).</li></ul>
+                <h3 data-en="Game Gomoku (Five in a Row) Project" data-zh="五子棋游戏项目">Game Gomoku (Five in a Row) Project</h3>
+                <span class="date" data-en="Sep 2024 - Dec 2024" data-zh="2024 年 9 月 - 12 月">Sep 2024 - Dec 2024</span>
+                <p data-en="Designed a game with a promotion video as a member of a four-person team." data-zh="作为四人小组成员之一，参与设计五子棋游戏并制作宣传视频。">Designed a game with a promotion video as a member of a four-person team.</p>
+                <ul>
+                    <li data-en="Utilized MATLAB to complete calculations and design." data-zh="使用 MATLAB 完成游戏相关的计算与设计。">Utilized MATLAB to complete calculations and design.</li>
+                    <li data-en="Designed three levels of the game (three in a row, five in a row, with AI)." data-zh="设计了三种难度模式（三子棋、五子棋以及带有 AI 对手的模式）。">Designed three levels of the game (three in a row, five in a row, with AI).</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section id="skills">
-        <h2 class="animate-on-scroll">Skills & Interests</h2>
+        <h2 class="animate-on-scroll" data-en="Skills &amp; Interests" data-zh="技能与兴趣">Skills &amp; Interests</h2>
         <div class="card animate-on-scroll delay-100">
-            <h3>Technical Skills</h3>
+            <h3 data-en="Technical Skills" data-zh="技术技能">Technical Skills</h3>
             <div class="skills-container">
+                <span class="skill-tag"><i class="devicon-html5-plain colored"></i> HTML/CSS</span>
+                <span class="skill-tag"><i class="devicon-java-plain colored"></i> Java</span>
                 <span class="skill-tag"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+                <span class="skill-tag"><i class="devicon-matlab-plain colored"></i> MATLAB</span>
+                <span class="skill-tag"><i class="devicon-mysql-plain colored"></i> MySQL</span>
+                <span class="skill-tag"><i class="devicon-python-plain colored"></i> Python</span>
+                <span class="skill-tag"><i class="devicon-embeddedc-plain"></i> Simulink</span>
                 <span class="skill-tag"><i class="devicon-spring-original colored"></i> Spring</span>
                 <span class="skill-tag"><i class="devicon-spring-original wordmark colored"></i> Spring Boot</span>
-                <span class="skill-tag"><i class="devicon-java-plain colored"></i> Java</span>
-                <span class="skill-tag"><i class="devicon-html5-plain colored"></i> HTML/CSS</span>
-                <span class="skill-tag"><i class="devicon-matlab-plain colored"></i> MATLAB</span>
-                <span class="skill-tag"><i class="devicon-python-plain colored"></i> Python</span>
-                <span class="skill-tag"><i class="devicon-mysql-plain colored"></i> MySQL</span>
-                <span class="skill-tag"><i class="devicon-embeddedc-plain"></i> Simulink</span> 
             </div>
             
-            <h3>Activities</h3>
+            <h3 data-en="Activities" data-zh="课外活动">Activities</h3>
             <ul style="margin-top: 0.5rem;">
-                <li><strong>OSU Audio Engineering Club:</strong> Active Member (Nov 2024 - Present)</li>
-                <li><strong>OSU Buckeye AutoDrive:</strong> Active Member (Nov 2024 - Present). Utilize MATLAB and Simulink to support system modeling and simulation for autonomous vehicle development.</li>
+                <li data-en="<strong>OSU Audio Engineering Club:</strong> Active Member (Nov 2024 - Present)" data-zh="<strong>OSU 音频工程俱乐部：</strong> 活跃成员（2024 年 11 月至今）"><strong>OSU Audio Engineering Club:</strong> Active Member (Nov 2024 - Present)</li>
+                <li data-en="<strong>OSU Buckeye AutoDrive:</strong> Active Member (Nov 2024 - Present). Utilize MATLAB and Simulink to support system modeling and simulation for autonomous vehicle development." data-zh="<strong>OSU Buckeye AutoDrive 车队：</strong> 活跃成员（2024 年 11 月至今），使用 MATLAB 和 Simulink 支持自动驾驶车辆的系统建模与仿真。"><strong>OSU Buckeye AutoDrive:</strong> Active Member (Nov 2024 - Present). Utilize MATLAB and Simulink to support system modeling and simulation for autonomous vehicle development.</li>
             </ul>
         </div>
     </section>
 
     <footer id="contact">
-        <p>Phone: 380-249-9220 | Email: liu.11884@buckeyemail.osu.edu</p>
+        <p data-en="Phone (US): +1 380-249-9220 | Phone (CN): +86 135-8181-5272 | Email: liu.11884@buckeyemail.osu.edu"
+           data-zh="电话（美国）：+1 380-249-9220 | 电话（中国）：+86 135-8181-5272 | 邮箱：liu.11884@buckeyemail.osu.edu">
+           Phone (US): +1 380-249-9220 | Phone (CN): +86 135-8181-5272 | Email: liu.11884@buckeyemail.osu.edu
+        </p>
         <div class="footer-socials">
             <a href="https://www.instagram.com/powersix2006/" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank"><i class="fab fa-linkedin"></i></a>
             <a href="https://github.com/PowerSixxx" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" id="wechat-btn" title="Copy WeChat ID"><i class="fab fa-weixin"></i></a>
         </div>
-        <p style="margin-top: 1rem;">&copy; 2025 Baowen Liu. All Rights Reserved.</p>
+        <p style="margin-top: 1rem;" data-en="&copy; 2025 Baowen Liu. All Rights Reserved." data-zh="&copy; 2025 刘宝文。保留所有权利。">&copy; 2025 Baowen Liu. All Rights Reserved.</p>
     </footer>
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div id="copy-toast" class="copy-toast"
+         data-en="Copied to clipboard"
+         data-zh="已复制到剪贴板">
+         Copied to clipboard
+    </div>
 
     <script>
+        // Simple toast for copy actions
+        const copyToast = document.getElementById('copy-toast');
+        function showCopyToast() {
+            if (!copyToast) return;
+            copyToast.classList.add('show');
+            setTimeout(() => {
+                copyToast.classList.remove('show');
+            }, 1600);
+        }
+
         // Scroll Animation (Observer)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -313,10 +625,13 @@
         const htmlElement = document.documentElement;
         const icon = themeToggle.querySelector('i');
 
-        if (localStorage.getItem('theme') !== 'light') {
+        // Default to light mode unless user previously chose dark
+        if (localStorage.getItem('theme') === 'dark') {
             htmlElement.setAttribute('data-theme', 'dark');
             icon.classList.replace('fa-moon', 'fa-sun');
-            localStorage.setItem('theme', 'dark');
+        } else {
+            htmlElement.removeAttribute('data-theme');
+            icon.classList.replace('fa-sun', 'fa-moon');
         }
 
         themeToggle.addEventListener('click', () => {
@@ -338,6 +653,110 @@
             void profilePic.offsetWidth; // Trigger reflow
             profilePic.classList.add('beam-active');
         });
+
+        // Click-to-copy Email Logic
+        const emailBtn = document.getElementById('email-btn');
+        if (emailBtn && navigator.clipboard) {
+            emailBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent opening default mail client
+                const email = "liu.11884@buckeyemail.osu.edu";
+                navigator.clipboard.writeText(email).then(() => {
+                    const originalText = emailBtn.innerHTML;
+                    emailBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    showCopyToast();
+                    setTimeout(() => {
+                        emailBtn.innerHTML = originalText;
+                    }, 2000);
+                }).catch(() => {
+                    // Fallback: if clipboard API fails, still try mailto
+                    window.location.href = `mailto:${email}`;
+                });
+            });
+        }
+
+        // Click-to-copy WeChat ID
+        const wechatBtn = document.getElementById('wechat-btn');
+        if (wechatBtn && navigator.clipboard) {
+            wechatBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const wechatID = "_6Jan-Baower";
+                navigator.clipboard.writeText(wechatID).then(() => {
+                    wechatBtn.style.color = "var(--primary)";
+                    showCopyToast();
+                    setTimeout(() => {
+                        wechatBtn.style.color = "";
+                    }, 1500);
+                });
+            });
+        }
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Hamburger menu logic
+        const hamburger = document.getElementById('hamburger');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+
+        if (hamburger && hamburgerMenu) {
+            hamburger.addEventListener('click', (event) => {
+                event.stopPropagation();
+                hamburgerMenu.classList.toggle('show');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!hamburgerMenu.contains(event.target) && event.target !== hamburger) {
+                    hamburgerMenu.classList.remove('show');
+                }
+            });
+        }
+
+        // Language Toggle Logic (shared across pages)
+        const langToggle = document.getElementById('lang-toggle');
+        // Load saved language or default to English
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function applyLanguage(lang) {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const enText = el.getAttribute('data-en');
+                const zhText = el.getAttribute('data-zh');
+                const text = (lang === 'zh' ? (zhText || enText) : enText) || '';
+                if (text) {
+                    el.innerHTML = text;
+                }
+            });
+        }
+
+        function updateLangToggleLabel() {
+            if (!langToggle) return;
+            langToggle.textContent = currentLang === 'en' ? 'EN | 中文' : '中 | EN';
+        }
+
+        // Initialize language on page load
+        applyLanguage(currentLang);
+        updateLangToggleLabel();
+
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                localStorage.setItem('lang', currentLang);
+                applyLanguage(currentLang);
+                updateLangToggleLabel();
+            });
+        }
     </script>
 
 </body>
