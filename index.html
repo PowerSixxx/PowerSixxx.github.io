@@ -5,336 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baowen Liu - Portfolio</title>
     
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%231e293b'/><text x='42' y='82' font-family='Times New Roman, serif' font-weight='bold' font-size='85' fill='white'>L</text><text x='12' y='72' font-family='Times New Roman, serif' font-weight='bold' font-size='85' stroke='%231e293b' stroke-width='6' fill='none'>B</text><text x='12' y='72' font-family='Times New Roman, serif' font-weight='bold' font-size='85' fill='white'>B</text></svg>">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* Global Configuration */
         :root {
-            --primary-color: #2563eb; /* Tech Blue */
-            --secondary-color: #1e293b; /* Dark Slate */
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-color: #334155;
-            --light-text: #64748b;
+            --primary: #2563eb;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-sub: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        [data-theme="dark"] {
+            --primary: #60a5fa;
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --border: #334155;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
         html { scroll-behavior: smooth; }
 
-        /* --- 动画类 --- */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            filter: blur(4px);
+        /* Dynamic Scroll animation */
+        .animate-on-scroll { 
+            opacity: 0; 
+            transform: translateY(40px) scale(0.95); 
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
         }
-
-        .animate-on-scroll.show {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
+        .animate-on-scroll.show { 
+            opacity: 1; 
+            transform: translateY(0) scale(1); 
         }
-
+        
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
 
-        /* Navbar */
-        nav {
-            background: var(--card-bg);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* navigation bar */
+        nav { 
+            background: var(--bg-card); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); border-bottom: 1px solid var(--border);
         }
-        nav .logo { font-size: 1.5rem; font-weight: bold; color: var(--secondary-color); }
-        nav ul { display: flex; list-style: none; gap: 2rem; }
-        nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s; }
-        nav a:hover { color: var(--primary-color); }
+        
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: bold; color: var(--text-main); text-decoration: none; }
+        
+        .nav-container { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        #theme-toggle { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-main); padding: 0.5rem; transition: transform 0.2s; }
+        #theme-toggle:hover { transform: scale(1.1); }
 
-        /* Hero Section */
-        .hero {
-            padding: 5rem 5%;
-            text-align: center;
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Hero */
+        .hero { 
+            padding: 5rem 5%; text-align: center; 
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+            display: flex; flex-direction: column; align-items: center;
         }
-
+        
+        /* Technological beam */
         .profile-photo {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.5rem;
-            background-color: #cbd5e1;
-            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
-            opacity: 0; 
-            transform: scale(0.5);
+            width: 150px; height: 150px; object-fit: cover; border-radius: 50%;
+            border: 4px solid var(--bg-card); box-shadow: var(--shadow); margin-bottom: 1.5rem; background-color: #cbd5e1;
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            
+            cursor: pointer; position: relative; z-index: 10; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .hero h1 { 
-            font-size: 3rem; color: var(--secondary-color); margin-bottom: 1rem; 
-            animation: slideUp 0.8s ease-out 0.2s forwards; opacity: 0; transform: translateY(20px);
-        }
-        .hero p { 
-            font-size: 1.25rem; color: var(--light-text); max-width: 800px; margin: 0 auto 2rem; 
-            animation: slideUp 0.8s ease-out 0.4s forwards; opacity: 0; transform: translateY(20px);
-        }
-        .btn-container { 
-            display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 20px;
-            animation: slideUp 0.8s ease-out 0.6s forwards; opacity: 0; transform: translateY(20px);
-        }
-
-        @keyframes popIn { to { opacity: 1; transform: scale(1); } }
-        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.8rem 1.5rem;
-            background-color: var(--primary-color); color: white; border-radius: 50px;
-            text-decoration: none; font-weight: 600; cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s; border: 2px solid var(--primary-color);
-        }
-        .btn:hover { transform: translateY(-2px); background-color: #1d4ed8; border-color: #1d4ed8; }
         
-        .btn-outline { background-color: transparent; color: var(--primary-color); }
-        .btn-outline:hover { background-color: var(--primary-color); color: white; }
+        .profile-photo:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3); }
         
-        .btn-dark { background-color: var(--secondary-color); border-color: var(--secondary-color); }
-        .btn-dark:hover { background-color: #0f172a; border-color: #0f172a; }
-        
-        /* Instagram Button Style */
-        .btn-insta { 
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
-            border: none; color: white; 
-        }
-        .btn-insta:hover { filter: brightness(1.1); }
+        /* Click to emit the beam */
+        .profile-photo.beam-active { animation: tech-shockwave 0.6s ease-out; }
 
-        /* General Sections */
+        @keyframes tech-shockwave {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.8), 0 0 0 0 rgba(96, 165, 250, 0.8); }
+            100% { box-shadow: 0 0 0 60px rgba(37, 99, 235, 0), 0 0 0 120px rgba(96, 165, 250, 0); }
+        }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+
+        .hero h1 { font-size: 3rem; color: var(--text-main); margin-bottom: 1rem; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; color: var(--text-sub); max-width: 800px; margin: 0 auto 2rem; }
+        
+        .btn-container { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; background-color: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.2s, filter 0.2s; border: none; }
+        .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn-outline { background-color: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-outline:hover { background-color: var(--primary); color: white; }
+        .btn-dark { background-color: var(--text-main); color: var(--bg-card); }
+        .btn-dark:hover { opacity: 0.9; }
+        .btn-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
+
         section { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
-        h2 { font-size: 2rem; color: var(--secondary-color); margin-bottom: 2rem; border-left: 5px solid var(--primary-color); padding-left: 1rem; }
-
-        /* Cards */
+        h2 { font-size: 2rem; color: var(--text-main); margin-bottom: 2rem; border-left: 5px solid var(--primary); padding-left: 1rem; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card {
-            background: var(--card-bg); padding: 2rem; border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: transform 0.3s;
-        }
+        .card { background: var(--bg-card); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.3s; }
         .card:hover { transform: translateY(-5px); }
-        .card h3 { color: var(--secondary-color); margin-bottom: 0.5rem; }
-        .card .date { color: var(--primary-color); font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; display: block; text-transform: uppercase; letter-spacing: 0.05em; }
-        .card ul { padding-left: 1.2rem; color: var(--light-text); }
+        .card h3 { color: var(--text-main); margin-bottom: 0.5rem; font-size: 1.25rem; }
+        .card .date { color: var(--primary); font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card ul { padding-left: 1.2rem; color: var(--text-sub); }
         .card li { margin-bottom: 0.5rem; }
+        .card p { color: var(--text-sub); }
 
-        /* Images inside cards (for UTA Offer) */
-        .card-images {
-            display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;
-        }
-        .card-img-wrapper {
-            flex: 1; min-width: 150px;
-            border: 1px solid #e2e8f0; border-radius: 8px; padding: 5px;
-        }
-        .card-img-wrapper img {
-            width: 100%; height: 150px; object-fit: cover; border-radius: 4px;
-        }
-        .card-img-caption {
-            font-size: 0.8rem; color: #64748b; text-align: center; margin-top: 5px;
-        }
+        .card-images { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .card-img-wrapper { flex: 1; border: 1px solid var(--border); border-radius: 8px; padding: 5px; background: var(--bg-body); }
+        .card-img-wrapper img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; }
+        .card-img-caption { font-size: 0.8rem; color: var(--text-sub); text-align: center; margin-top: 5px; }
 
-        /* Skills Tags */
-        .skills-container { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; margin-bottom: 1.5rem; }
-        .skill-tag {
-            background: #f1f5f9; padding: 0.6rem 1.2rem; border-radius: 8px;
-            font-weight: 500; color: var(--secondary-color);
-            display: flex; align-items: center; gap: 0.5rem;
-            border: 1px solid #e2e8f0;
-            transition: background 0.3s;
-        }
-        .skill-tag:hover { background: #e2e8f0; }
+        .skills-container { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; margin-bottom: 1.5rem; }
+        .skill-tag { background: var(--bg-body); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; color: var(--text-main); border: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; transition: border-color 0.3s; }
+        .skill-tag:hover { border-color: var(--primary); }
         .skill-tag i { font-size: 1.2rem; }
 
-        /* Footer */
-        footer {
-            background: var(--secondary-color);
-            color: #94a3b8;
-            text-align: center;
-            padding: 3rem 1rem;
-            margin-top: 4rem;
-            font-family: 'Inter', sans-serif; 
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-        }
-        footer p { margin-bottom: 0.5rem; }
+        footer { background: var(--bg-card); color: var(--text-sub); text-align: center; padding: 3rem 1rem; margin-top: 4rem; border-top: 1px solid var(--border); }
         .footer-socials { margin-top: 1rem; }
-        .footer-socials a { color: #cbd5e1; margin: 0 10px; font-size: 1.2rem; transition: color 0.3s; }
-        .footer-socials a:hover { color: white; }
+        .footer-socials a { color: var(--text-sub); margin: 0 10px; font-size: 1.5rem; transition: color 0.3s; }
+        .footer-socials a:hover { color: var(--primary); }
 
         @media (max-width: 768px) {
+            nav { padding: 1rem; }
+            .nav-links { display: none; }
+            .hero { padding: 3rem 1rem; }
             .hero h1 { font-size: 2rem; }
-            nav ul { display: none; }
-            .btn-container { flex-direction: column; width: 100%; }
+            .hero p { font-size: 1rem; padding: 0 0.5rem; }
+            .btn-container { flex-direction: column; width: 100%; gap: 0.8rem; }
             .btn { width: 100%; justify-content: center; }
-        }
-
-        /* =========================================
-           移动端专属优化 (Mobile Optimization)
-           把这段代码放在 <style> 的最后面
-           ========================================= */
-           @media (max-width: 768px) {
-            /* 1. 缩小整体容器边距 */
-            section {
-                padding: 2.5rem 1.5rem; /* 上下减少，左右减少 */
-            }
-            
-            /* 2. 调整 Hero (顶部) 区域 */
-            .hero, .page-header {
-                padding: 3rem 1rem; /* 减少留白 */
-            }
-            .hero h1, .page-header h1 {
-                font-size: 1.8rem; /* 字体改小 (原来是 3rem) */
-                line-height: 1.2;
-            }
-            .hero p, .page-header p {
-                font-size: 1rem; /* 描述文字改小 */
-                max-width: 100%;
-            }
-            .profile-photo {
-                width: 120px; /* 头像缩小 */
-                height: 120px;
-            }
-
-            /* 3. 卡片优化 */
-            .card, .content-card {
-                padding: 1.25rem; /* 卡片内边距变小，内容更紧凑 */
-                margin-bottom: 1.5rem;
-            }
-            .grid {
-                gap: 1.5rem; /* 卡片间距变小 */
-                /* 强制单列显示，防止被挤压 */
-                grid-template-columns: 1fr; 
-            }
-            
-            /* 4. 标题和正文微调 */
-            h2 {
-                font-size: 1.5rem; /* 二级标题改小 */
-                margin-bottom: 1.5rem;
-                padding-left: 0.8rem;
-                border-left-width: 4px;
-            }
-            p, li {
-                font-size: 0.95rem; /* 正文稍微调小一点点，更精致 */
-                line-height: 1.5;
-            }
-            
-            /* 5. 按钮和图标 */
-            .btn {
-                width: 100%; /* 手机上按钮通栏显示，更易点击 */
-                text-align: center;
-                margin-bottom: 0.5rem; /* 按钮之间增加间距 */
-                padding: 0.7rem;
-                font-size: 0.9rem;
-            }
-            .btn-container {
-                flex-direction: column; /* 按钮竖着排 */
-                width: 100%;
-            }
-
-            /* 6. 技能标签堆叠优化 */
-            .skills-container {
-                gap: 0.6rem;
-            }
-            .skill-tag {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.85rem;
-            }
-            
-            /* 7. 音乐卡片 (About页面) */
-            .music-player-card {
-                padding: 1rem;
-                flex-direction: column; /* 竖着排 */
-                text-align: center;
-            }
-            .album-cover {
-                margin: 0 auto 1rem auto; /* 封面居中 */
-            }
+            section { padding: 2.5rem 1rem; }
+            .card { padding: 1.5rem; }
+            .grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .card-images { flex-direction: column; }
+            .card-img-wrapper { width: 100%; margin-bottom: 0.5rem; }
+            .card-img-wrapper img { height: auto; max-height: 200px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Baowen Liu</div>
-        <ul>
-            <li><a href="about.html">About Me</a></li>
-            <li><a href="#about">Education</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <a href="index.html" class="logo">
+            <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="100" height="100" rx="25" fill="var(--text-main)"/>
+                <text x="42" y="82" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">L</text>
+                <text x="12" y="72" font-size="85" fill="none" stroke="var(--text-main)" stroke-width="6" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
+                <text x="12" y="72" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
+            </svg>
+            <span>Baowen Liu</span>
+        </a>
+
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="#about">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button id="theme-toggle" title="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
     </nav>
 
     <header class="hero">
-        <img src="photo.jpg" alt="Baowen Liu" class="profile-photo" onerror="this.style.display='none'; document.getElementById('photo-fallback').style.display='flex'">
+        <img id="profile-pic" src="photo.jpg" alt="Baowen Liu" class="profile-photo" onerror="this.style.display='none'; document.getElementById('photo-fallback').style.display='flex'">
         <div id="photo-fallback" class="profile-photo" style="display:none; align-items:center; justify-content:center; color:#fff; font-size:2rem; background:#cbd5e1;">BL</div>
         
-        <h1>Hello, I am Baowen Liu</h1>
-        <p>
-            Computer Science and Engineering & Math Student at The Ohio State University
-            <br>
+        <h1 class="animate-on-scroll">Hello, I am Baowen Liu</h1>
+        <p class="animate-on-scroll delay-100">
+            Computer Science and Engineering & Math Student at The Ohio State University<br>
             Pursuing a Career in Software and Web Development
         </p>
         
-        <div class="btn-container">
-            <a href="mailto:liu.11884@buckeyemail.osu.edu" class="btn">
-                <i class="fas fa-envelope"></i> Email Me
-            </a>
-            
-            <a href="Baowen Liu_Resume.pdf" target="_blank" class="btn btn-outline">
-                <i class="fas fa-file-pdf"></i> Resume
-            </a>
-
-            <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank" class="btn btn-outline" style="border-color: #0077b5; color: #0077b5;">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            
-            <a href="https://github.com/PowerSixxx" target="_blank" class="btn btn-dark">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-
-            <a href="https://www.instagram.com/powersix2006/" target="_blank" class="btn btn-insta">
-                <i class="fab fa-instagram"></i> Instagram
-            </a>
+        <div class="btn-container animate-on-scroll delay-200">
+            <a href="mailto:liu.11884@buckeyemail.osu.edu" class="btn"><i class="fas fa-envelope"></i> Email Me</a>
+            <a href="Baowen Liu_Resume.pdf" target="_blank" class="btn btn-outline"><i class="fas fa-file-pdf"></i> Resume</a>
+            <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank" class="btn btn-outline" style="border-color: #0077b5; color: #0077b5;"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/PowerSixxx" target="_blank" class="btn btn-dark"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://www.instagram.com/powersix2006/" target="_blank" class="btn btn-insta"><i class="fab fa-instagram"></i> Instagram</a>
         </div>
     </header>
 
     <section id="about">
-        <h2>Education</h2>
-        <div class="card">
+        <h2 class="animate-on-scroll">Education</h2>
+        <div class="card animate-on-scroll delay-100">
             <h3>The Ohio State University</h3>
             <span class="date">Expected May 2028 | Columbus, OH</span>
             <p><strong>Degree:</strong> B.S. Computer Science and Engineering</p>
@@ -345,76 +212,56 @@
     </section>
 
     <section id="experience">
-        <h2>Work Experience</h2>
+        <h2 class="animate-on-scroll">Work Experience</h2>
         <div class="grid" style="display: flex; flex-direction: column; gap: 2rem;">
-            
-            <div class="card" style="border-left: 5px solid #b00000;"> <h3>Undergraduate Teaching Assistant (ENGR 1182)</h3>
-                <span class="date">The Ohio State University College of Engineering | Nov 2025 - Present</span>
+            <div class="card animate-on-scroll delay-100" style="border-left: 5px solid #b00000;"> 
+                <h3>Undergraduate Teaching Assistant (ENGR 1182)</h3>
+                <span class="date">The Ohio State University College of Engineering</span>
                 <ul>
                     <li><strong>Status:</strong> Offer received. Position begins Spring 2026.</li>
                     <li><strong>Type:</strong> Part-time · On-site · Columbus, Ohio</li>
                 </ul>
-                
                 <div class="card-images">
-                    <div class="card-img-wrapper">
-                        <img src="assets/osu_eng.jpg" alt="OSU College of Engineering" onerror="this.src='https://placehold.co/400x300?text=OSU+Logo'">
-                        <div class="card-img-caption">College of Engineering</div>
-                    </div>
-                    <div class="card-img-wrapper">
-                        <img src="assets/offer.png" alt="Job Offer Letter" onerror="this.src='https://placehold.co/400x300?text=Offer+Letter'">
-                        <div class="card-img-caption">Offer Verification</div>
-                    </div>
+                    <div class="card-img-wrapper"><img src="assets/osu_eng.jpg" alt="OSU College of Engineering" onerror="this.src='https://placehold.co/400x300?text=OSU+Logo'"><div class="card-img-caption">College of Engineering</div></div>
+                    <div class="card-img-wrapper"><img src="assets/offer.png" alt="Job Offer Letter" onerror="this.src='https://placehold.co/400x300?text=Offer+Letter'"><div class="card-img-caption">Offer Verification</div></div>
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card animate-on-scroll delay-200">
                 <h3>Technical Intern</h3>
                 <span class="date">Nanoshape, Inc. | Oct 2025 - Present</span>
-                <ul>
-                    <li>Assisted in developing Nanoshape's modular AI and simulation framework.</li>
-                    <li>Refined algorithms for agent coordination and physics modeling.</li>
-                    <li>Implemented and tested modules to enhance simulation accuracy and responsiveness.</li>
-                </ul>
+                <ul><li>Assisted in developing Nanoshape's modular AI and simulation framework.</li><li>Refined algorithms for agent coordination and physics modeling.</li><li>Implemented and tested modules to enhance simulation accuracy and responsiveness.</li></ul>
             </div>
 
-            <div class="card">
+            <div class="card animate-on-scroll delay-300">
                 <h3>Software Engineer Intern</h3>
                 <span class="date">SPIC Integrated Smart Energy Co., Ltd. | May 2025 - July 2025</span>
-                <ul>
-                    <li>Compiled "System Architecture Design Document" to standardize technical frameworks and module logic.</li>
-                    <li>Created use case diagrams, business architecture diagrams, and system architecture diagrams.</li>
-                    <li>Engaged in Java code development to implement logical functions of core modules.</li>
-                </ul>
+                <ul><li>Compiled "System Architecture Design Document" to standardize technical frameworks and module logic.</li><li>Created use case diagrams, business architecture diagrams, and system architecture diagrams.</li><li>Engaged in Java code development to implement logical functions of core modules.</li></ul>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2>Academic & Engineering Projects</h2>
+        <h2 class="animate-on-scroll">Academic & Engineering Projects</h2>
         <div class="grid">
-            <div class="card">
+            <div class="card animate-on-scroll delay-100">
                 <h3>AI Flash Card Web Application</h3>
                 <span class="date">Dec 2024 - Present</span>
                 <p>Designed and developed an interactive website using HTML and CSS to promote AI-powered flashcards.</p>
-                <ul>
-                    <li>Created dynamic webpage components, including navigation menus, scheduling tables, and user authentication forms.</li>
-                </ul>
+                <ul><li>Created dynamic webpage components, including navigation menus, scheduling tables, and user authentication forms.</li></ul>
             </div>
-            <div class="card">
+            <div class="card animate-on-scroll delay-200">
                 <h3>Game Gomoku (Five in a Row) Project</h3>
                 <span class="date">Sep 2024 - Dec 2024</span>
                 <p>Designed a game with a promotion video as a member of a four-person team.</p>
-                <ul>
-                    <li>Utilized MATLAB to complete calculations and design.</li>
-                    <li>Designed three levels of the game (three in a row, five in a row, with AI).</li>
-                </ul>
+                <ul><li>Utilized MATLAB to complete calculations and design.</li><li>Designed three levels of the game (three in a row, five in a row, with AI).</li></ul>
             </div>
         </div>
     </section>
 
     <section id="skills">
-        <h2>Skills & Interests</h2>
-        <div class="card">
+        <h2 class="animate-on-scroll">Skills & Interests</h2>
+        <div class="card animate-on-scroll delay-100">
             <h3>Technical Skills</h3>
             <div class="skills-container">
                 <span class="skill-tag"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
@@ -431,24 +278,23 @@
             <h3>Activities</h3>
             <ul style="margin-top: 0.5rem;">
                 <li><strong>OSU Audio Engineering Club:</strong> Active Member (Nov 2024 - Present)</li>
-                <li><strong>OSU Buckeye AutoDrive:</strong> Active Member (Nov 2024 - Present). Utilize MATLAB and Simulink to support system modeling and simulation for autonomous vehicle development; Work closely with the Safety Team.</li>
+                <li><strong>OSU Buckeye AutoDrive:</strong> Active Member (Nov 2024 - Present). Utilize MATLAB and Simulink to support system modeling and simulation for autonomous vehicle development.</li>
             </ul>
         </div>
     </section>
 
     <footer id="contact">
         <p>Phone: 380-249-9220 | Email: liu.11884@buckeyemail.osu.edu</p>
-        
         <div class="footer-socials">
             <a href="https://www.instagram.com/powersix2006/" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank"><i class="fab fa-linkedin"></i></a>
             <a href="https://github.com/PowerSixxx" target="_blank"><i class="fab fa-github"></i></a>
         </div>
-
         <p style="margin-top: 1rem;">&copy; 2025 Baowen Liu. All Rights Reserved.</p>
     </footer>
 
     <script>
+        // Scroll Animation (Observer)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -457,15 +303,40 @@
                     entry.target.classList.remove('show');
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        // select all animate-on-scroll elements
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // Dark Mode Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const icon = themeToggle.querySelector('i');
+
+        if (localStorage.getItem('theme') !== 'light') {
+            htmlElement.setAttribute('data-theme', 'dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.getAttribute('data-theme') === 'dark') {
+                htmlElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
         });
 
-        const hiddenElements = document.querySelectorAll('.card, h2');
-        hiddenElements.forEach((el) => {
-            el.classList.add('animate-on-scroll');
-            observer.observe(el);
+        // Tech Beam Logic
+        const profilePic = document.getElementById('profile-pic');
+        profilePic.addEventListener('click', () => {
+            profilePic.classList.remove('beam-active');
+            void profilePic.offsetWidth; // Trigger reflow
+            profilePic.classList.add('beam-active');
         });
     </script>
 

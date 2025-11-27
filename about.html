@@ -5,321 +5,283 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me - Baowen Liu</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%231e293b'/><text x='42' y='82' font-family='Times New Roman, serif' font-weight='bold' font-size='85' fill='white'>L</text><text x='12' y='72' font-family='Times New Roman, serif' font-weight='bold' font-size='85' stroke='%231e293b' stroke-width='6' fill='none'>B</text><text x='12' y='72' font-family='Times New Roman, serif' font-weight='bold' font-size='85' fill='white'>B</text></svg>">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
+        /* Global color matching variable */
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e293b;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-color: #334155;
-            --light-text: #64748b;
+            --primary: #2563eb;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-sub: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --panel-bg: #ffffff;
+            --card-hover: #f1f5f9;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
-        html { scroll-behavior: smooth; }
-
-        /* Animation */
-        .animate-on-scroll {
-            opacity: 0; transform: translateY(40px);
-            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            filter: blur(4px);
+        [data-theme="dark"] {
+            --primary: #60a5fa;
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --border: #334155;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --panel-bg: #1e293b;
+            --card-hover: #2d3748;
         }
-        .animate-on-scroll.show { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
         
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
+        /* Dynamic animation */
+        .animate-on-scroll { 
+            opacity: 0; transform: translateY(30px) scale(0.98); 
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
+        }
+        .animate-on-scroll.show { opacity: 1; transform: translateY(0) scale(1); }
+        .delay-100 { transition-delay: 100ms; } .delay-200 { transition-delay: 200ms; } .delay-300 { transition-delay: 300ms; } .delay-400 { transition-delay: 400ms; }
 
-        /* Navbar */
-        nav { background: var(--card-bg); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        nav .logo { font-size: 1.5rem; font-weight: bold; color: var(--secondary-color); text-decoration: none; }
-        nav ul { display: flex; list-style: none; gap: 2rem; }
-        nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s; }
-        nav a:hover { color: var(--primary-color); }
+        /* navigation bar */
+        nav { 
+            background: var(--bg-card); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); border-bottom: 1px solid var(--border);
+        }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: bold; color: var(--text-main); text-decoration: none; }
+        .nav-right { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; }
+        .nav-links a:hover { color: var(--primary); }
+        #theme-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-main); }
 
-        /* Header */
-        .page-header {
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-            padding: 5rem 5%; text-align: center;
-        }
-        .page-header h1 { 
-            font-size: 3rem; color: var(--secondary-color); margin-bottom: 0.5rem; 
-            animation: slideUp 0.8s ease-out 0.1s forwards; opacity: 0; transform: translateY(20px);
-        }
-        .page-header p { 
-            color: var(--light-text); font-size: 1.2rem; 
-            animation: slideUp 0.8s ease-out 0.3s forwards; opacity: 0; transform: translateY(20px);
-        }
-        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        /* Head (including the Easter egg button */
+        .header { padding: 4rem 1rem; text-align: center; }
+        .header-title-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.5rem; }
+        .header h1 { font-size: 2.5rem; color: var(--text-main); margin: 0; }
+        .header p { color: var(--text-sub); font-size: 1.1rem; }
 
-        /* Sections */
-        section { padding: 3rem 5%; max-width: 1000px; margin: 0 auto; }
-        .content-card {
-            background: var(--card-bg); padding: 2.5rem; border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;
-            opacity: 0; transform: translateY(40px);
+        /* Easter egg button style */
+        #firework-btn {
+            background: none; border: none; font-size: 1.5rem; cursor: pointer;
+            transition: transform 0.2s; animation: pulse 2s infinite;
         }
-        h2 { color: var(--secondary-color); margin-bottom: 1.5rem; border-left: 5px solid var(--primary-color); padding-left: 1rem; }
-        p { margin-bottom: 1rem; color: var(--text-color); }
-        ul.custom-list { padding-left: 1.2rem; color: var(--text-color); }
-        ul.custom-list li { margin-bottom: 0.5rem; }
+        #firework-btn:active { transform: scale(0.8); }
+        #firework-btn:hover { transform: scale(1.2) rotate(15deg); }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        /* --- 🎵 Stylish Music Player Card --- */
-        .music-player-card {
-            background: linear-gradient(145deg, #2b3242, #1e2330); /* 深色背景 */
-            color: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            max-width: 600px;
+        /* Card style */
+        .simple-card { 
+            background: var(--bg-card); padding: 2rem; border-radius: 12px; 
+            max-width: 900px; margin: 0 auto 2rem auto; 
+            box-shadow: var(--shadow); border: 1px solid var(--border);
         }
-        
-        .album-cover {
-            width: 80px; height: 80px;
-            background: #000;
-            border-radius: 10px;
+        .simple-card h2 { color: var(--text-main); margin-bottom: 1rem; border-left: 4px solid var(--primary); padding-left: 1rem; }
+        .simple-card ul { padding-left: 1.2rem; color: var(--text-sub); }
+        .simple-card p, .simple-card li { color: var(--text-sub); margin-bottom: 0.5rem; }
+
+        /* Hobbies Panel */
+        .showcase-container {
+            max-width: 1000px; margin: 0 auto 4rem auto;
+            background: var(--panel-bg);
+            border-radius: 20px; padding: 2.5rem;
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
             overflow: hidden;
-            flex-shrink: 0;
-            position: relative;
         }
-        .album-cover img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .track-info { flex-grow: 1; }
-        .track-info h4 { font-size: 1.2rem; margin-bottom: 0.2rem; color: #fff; }
-        .track-info p { font-size: 0.9rem; color: #94a3b8; margin: 0; }
+        .showcase-header { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main); }
 
-        /* Customizing the audio element */
-        audio {
-            width: 100%;
-            height: 35px;
-            margin-top: 0.5rem;
-            filter: invert(1) contrast(0.8); /* 让原生播放器变白，适配深色背景 */
-            opacity: 0.8;
-            outline: none;
+        .toggle-wrapper {
+            background: var(--bg-body); width: fit-content; padding: 4px; border-radius: 10px;
+            display: flex; position: relative; margin-bottom: 2rem; border: 1px solid var(--border);
         }
-        
-        @media (max-width: 600px) {
-            .music-player-card { flex-direction: column; text-align: center; }
-            .track-info { width: 100%; }
+        .toggle-glider {
+            position: absolute; top: 4px; left: 4px; width: 120px; height: 36px;
+            background: var(--primary); border-radius: 8px;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1;
         }
-        /* ------------------------------------- */
-
-        /* Gallery */
-        .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;
+        .toggle-btn {
+            position: relative; z-index: 2; width: 120px; height: 36px;
+            background: none; border: none; color: var(--text-sub); font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: color 0.3s;
         }
-        .gallery-item {
-            width: 100%; height: 200px; background-color: #e2e8f0; border-radius: 8px;
-            overflow: hidden; display: flex; align-items: center; justify-content: center; color: #94a3b8;
+        .toggle-btn.active { color: white; }
+
+        .grid-panel { display: none; }
+        .grid-panel.active { display: grid; }
+
+        /* Game Card */
+        .games-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+        .game-card {
+            background: var(--bg-body); border-radius: 12px; padding: 1.5rem; text-align: center;
+            border: 1px solid var(--border); transition: all 0.3s;
         }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-        .gallery-item img:hover { transform: scale(1.05); }
-
-        .btn { display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary-color); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-top: 1rem; transition: transform 0.2s; }
-        .btn:hover { transform: translateY(-2px); background-color: #1d4ed8; }
-
-        footer { 
-            background: var(--secondary-color); color: #94a3b8; text-align: center; padding: 3rem 1rem; margin-top: 2rem; 
-            font-family: 'Inter', sans-serif; font-size: 0.95rem; 
+        .game-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow); background: var(--card-hover); }
+        .card-img-box {
+            width: 80px; height: 80px; margin: 0 auto 1rem auto;
+            border-radius: 16px; overflow: hidden; background: #e2e8f0;
         }
+        .card-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main); }
+        .card-stat { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 0.2rem; }
+        .stat-badge { display: inline-block; margin-top: 0.8rem; padding: 4px 12px; background: rgba(37, 99, 235, 0.1); color: var(--primary); border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
 
-        @media (max-width: 768px) { nav ul { display: none; } }
+        /* Music Card */
+        .music-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.2rem; }
+        .music-card {
+            background: var(--bg-body); border-radius: 12px; overflow: hidden; 
+            border: 1px solid var(--border); transition: all 0.3s;
+        }
+        .music-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow); }
+        .music-cover-wrapper { width: 100%; aspect-ratio: 1/1; position: relative; overflow: hidden; background: #eee; }
+        .music-cover { width: 100%; height: 100%; object-fit: cover; }
+        .music-info { padding: 0.8rem; }
+        .music-title { font-size: 0.95rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.2rem; }
+        .music-artist { font-size: 0.75rem; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.6rem; }
+        audio { width: 100%; height: 28px; opacity: 0.8; outline: none; margin-top: auto; }
+        [data-theme="dark"] audio { filter: invert(0.9) hue-rotate(180deg); }
 
-        /* =========================================
-           移动端专属优化 (Mobile Optimization)
-           把这段代码放在 <style> 的最后面
-           ========================================= */
-           @media (max-width: 768px) {
-            /* 1. 缩小整体容器边距 */
-            section {
-                padding: 2.5rem 1.5rem; /* 上下减少，左右减少 */
-            }
-            
-            /* 2. 调整 Hero (顶部) 区域 */
-            .hero, .page-header {
-                padding: 3rem 1rem; /* 减少留白 */
-            }
-            .hero h1, .page-header h1 {
-                font-size: 1.8rem; /* 字体改小 (原来是 3rem) */
-                line-height: 1.2;
-            }
-            .hero p, .page-header p {
-                font-size: 1rem; /* 描述文字改小 */
-                max-width: 100%;
-            }
-            .profile-photo {
-                width: 120px; /* 头像缩小 */
-                height: 120px;
-            }
+        .btn-home { display: block; width: fit-content; margin: 2rem auto; padding: 0.8rem 2rem; background: var(--primary); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.2s; }
+        .btn-home:hover { transform: translateY(-2px); }
+        footer { text-align: center; padding: 3rem; color: var(--text-sub); font-size: 0.9rem; }
 
-            /* 3. 卡片优化 */
-            .card, .content-card {
-                padding: 1.25rem; /* 卡片内边距变小，内容更紧凑 */
-                margin-bottom: 1.5rem;
-            }
-            .grid {
-                gap: 1.5rem; /* 卡片间距变小 */
-                /* 强制单列显示，防止被挤压 */
-                grid-template-columns: 1fr; 
-            }
-            
-            /* 4. 标题和正文微调 */
-            h2 {
-                font-size: 1.5rem; /* 二级标题改小 */
-                margin-bottom: 1.5rem;
-                padding-left: 0.8rem;
-                border-left-width: 4px;
-            }
-            p, li {
-                font-size: 0.95rem; /* 正文稍微调小一点点，更精致 */
-                line-height: 1.5;
-            }
-            
-            /* 5. 按钮和图标 */
-            .btn {
-                width: 100%; /* 手机上按钮通栏显示，更易点击 */
-                text-align: center;
-                margin-bottom: 0.5rem; /* 按钮之间增加间距 */
-                padding: 0.7rem;
-                font-size: 0.9rem;
-            }
-            .btn-container {
-                flex-direction: column; /* 按钮竖着排 */
-                width: 100%;
-            }
-
-            /* 6. 技能标签堆叠优化 */
-            .skills-container {
-                gap: 0.6rem;
-            }
-            .skill-tag {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.85rem;
-            }
-            
-            /* 7. 音乐卡片 (About页面) */
-            .music-player-card {
-                padding: 1rem;
-                flex-direction: column; /* 竖着排 */
-                text-align: center;
-            }
-            .album-cover {
-                margin: 0 auto 1rem auto; /* 封面居中 */
-            }
+        @media (max-width: 768px) {
+            nav { flex-direction: row; flex-wrap: wrap; } .logo { flex-grow: 1; }
+            .nav-links { display: none; }
+            .header { padding: 3rem 1rem; } .header h1 { font-size: 2rem; }
+            .simple-card, .showcase-container { padding: 1.5rem; width: 95%; border-radius: 16px; }
+            .games-grid { grid-template-columns: 1fr; }
+            .music-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            audio { height: 24px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="logo">Baowen Liu</a>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" style="color: var(--primary-color);">About Me</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-        </ul>
+        <a href="index.html" class="logo">
+            <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="100" height="100" rx="25" fill="var(--text-main)"/>
+                <text x="42" y="82" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">L</text>
+                <text x="12" y="72" font-size="85" fill="none" stroke="var(--text-main)" stroke-width="6" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
+                <text x="12" y="72" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
+            </svg>
+            <span>Baowen Liu</span>
+        </a>
+
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" style="color: var(--primary)">About Me</a></li>
+            </ul>
+            <button id="theme-btn" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+        </div>
     </nav>
 
-    <div class="page-header">
-        <h1>More About Me</h1>
-        <p>Beyond the code: My hobbies, interests, and life.</p>
+    <div class="header">
+        <div class="header-title-row animate-on-scroll">
+            <h1 id="more-about-title">More About Me</h1>
+            <button id="firework-btn" title="Click for magic!">✨</button>
+        </div>
+        <p class="animate-on-scroll delay-100">Beyond the code: My hobbies, interests, and life.</p>
     </div>
 
-    <section>
+    <div class="simple-card animate-on-scroll delay-200">
+        <h2>My Story</h2>
+        <p>While my resume highlights my technical skills in Java and MATLAB, there is more to me than just engineering. I enjoy exploring the intersection of technology and creativity, from designing websites to strategizing in Go.</p>
+    </div>
+
+    <div class="simple-card animate-on-scroll delay-200">
+        <h2>High School Highlights</h2>
+        <p><strong>Tianjin the Second Yaohua High School</strong></p>
+        <ul>
+            <li><strong>President of Student Union:</strong> Led student initiatives and organized campus events.</li>
+            <li><strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin.</li>
+            <li><strong>Math Teaching Assistant:</strong> Graded assignments and quizzes, explained solutions, and helped classmates with questions and problem-solving.</li>
+            <li><strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics.</li>
+        </ul>
+    </div>
+
+    <div class="showcase-container animate-on-scroll delay-300">
+        <div class="showcase-header">Hobbies</div>
         
-        <div class="content-card animate-on-scroll">
-            <h2>My Story</h2>
-            <p>
-                Hello! While my resume highlights my technical skills in Java and MATLAB, there is more to me than just engineering. 
-                I am currently studying at The Ohio State University, where I enjoy exploring the intersection of technology and creativity.
-            </p>
-            <p>
-                My passion for software development started when I realized how code can solve real-world problems. 
-                When I'm not debugging algorithms for the Buckeye AutoDrive team, you can find me exploring new technologies or working on personal web design projects.
-            </p>
+        <div class="toggle-wrapper">
+            <div class="toggle-glider" id="glider"></div>
+            <button class="toggle-btn active" onclick="switchTab('games')">Video Games</button>
+            <button class="toggle-btn" onclick="switchTab('music')">Music</button>
         </div>
 
-        <div class="content-card animate-on-scroll delay-100">
-            <h2>High School Highlights</h2>
-            <p><strong>Tianjin the Second Yaohua High School</strong></p>
-            <p style="font-size: 0.95rem; color: var(--light-text); margin-bottom: 1rem;">Activities & Awards</p>
-            <ul class="custom-list">
-                <li><strong>President of Student Union:</strong> Led student initiatives and organized campus events.</li>
-                <li><strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin.</li>
-                <li><strong>Academic Excellence Award:</strong> Consistently maintained high academic standards.</li>
-                <li><strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics.</li>
-                <li><strong>Math Teaching Assistant:</strong> Assisted peers in understanding complex mathematical concepts.</li>
-            </ul>
-        </div>
-
-        <div class="content-card animate-on-scroll delay-200">
-            <h2>Interests & Hobbies</h2>
-            
-            <p><strong>🎵 Music Taste:</strong> I enjoy listening to Mandopop and electronic music. My favorite artists include <strong>Jay Chou (周杰伦)</strong>, <strong>JJ Lin (林俊杰)</strong>, <strong>G.E.M. (邓紫棋)</strong>, and <strong>Alan Walker</strong>.</p>
-            
-            <div class="music-player-card">
-                <div class="album-cover">
-                    <img src="assets/faded_cover.jpg" alt="Faded Album Art" onerror="this.style.display='none'">
-                    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#555;">
-                        <i class="fas fa-music"></i>
-                    </div>
-                </div>
-                <div class="track-info">
-                    <h4>Faded</h4>
-                    <p>Alan Walker</p>
-                    <audio controls>
-                        <source src="assets/faded.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
+        <div id="games-panel" class="grid-panel games-grid active">
+            <div class="game-card animate-on-scroll delay-100">
+                <div class="card-img-box"><img src="assets/game_mc.jpg" alt="MC" onerror="this.src='https://placehold.co/150x150?text=MC'"></div>
+                <div class="card-title">Minecraft</div>
+                <div class="card-stat">Creative Mode</div>
+                <span class="stat-badge">Builder</span>
             </div>
-
-            <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0;">
-
-            <p><strong>⚫ Go (Weiqi):</strong> I hold a <strong>5-Dan certificate (围棋五段)</strong>. I love the strategic depth and patience required in this ancient game.</p>
-            <p><strong>🎮 Gaming:</strong> In my free time, I enjoy playing <strong>Minecraft</strong> for its creativity and <strong>PUBG</strong> for the competitive team strategy.</p>
-            <p><strong>🏊 Swimming & Fitness:</strong> Staying active is important to me; I regularly go swimming and workout to keep a healthy balance.</p>
-
-            <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 1.5rem 0;">
-
-            <p><strong>🎧 Audio Engineering:</strong> As a member of the OSU Audio Engineering Club, I love exploring the technical side of music and sound production.</p>
-            <p><strong>🚗 Autonomous Vehicles:</strong> I have a deep interest in how AI interacts with the physical world, which drives my work with simulation frameworks in Buckeye AutoDrive.</p>
-        </div>
-
-        <div class="content-card animate-on-scroll delay-300">
-            <h2>Life Gallery</h2>
-            <p>Here are some snapshots of my life and projects.</p>
-            <div class="gallery-grid">
-                <div class="gallery-item animate-on-scroll delay-100">
-                    <img src="assets/hobby1.jpg" alt="Hobby Photo" onerror="this.style.display='none'; this.parentElement.innerText='Photo 1'">
-                </div>
-                <div class="gallery-item animate-on-scroll delay-200">
-                     <img src="assets/hobby2.jpg" alt="Campus Life" onerror="this.style.display='none'; this.parentElement.innerText='Photo 2'">
-                </div>
-                <div class="gallery-item animate-on-scroll delay-300">
-                     <img src="assets/project.jpg" alt="Project Screenshot" onerror="this.style.display='none'; this.parentElement.innerText='Photo 3'">
-                </div>
+            <div class="game-card animate-on-scroll delay-200">
+                <div class="card-img-box"><img src="assets/game_pubg.jpg" alt="PUBG" onerror="this.src='https://placehold.co/150x150?text=PUBG'"></div>
+                <div class="card-title">PUBG</div>
+                <div class="card-stat">Rank: Ace</div>
+                <span class="stat-badge">Tactical</span>
+            </div>
+            <div class="game-card animate-on-scroll delay-300">
+                <div class="card-img-box"><img src="assets/game_go.jpg" alt="Go" onerror="this.src='https://placehold.co/150x150?text=Go'"></div>
+                <div class="card-title">Go (Weiqi)</div>
+                <div class="card-stat">Rank: 5-Dan</div>
+                <span class="stat-badge">Master</span>
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="index.html" class="btn animate-on-scroll">← Back to Home</a>
+        <div id="music-panel" class="grid-panel music-grid">
+            <div class="music-card animate-on-scroll delay-100">
+                <div class="music-cover-wrapper"><img src="assets/cover_faded.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=Faded'"></div>
+                <div class="music-info">
+                    <div class="music-title">Faded</div>
+                    <div class="music-artist">Alan Walker</div>
+                    <audio controls><source src="assets/faded.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <div class="music-card animate-on-scroll delay-200">
+                <div class="music-cover-wrapper"><img src="assets/cover_eot.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=EOT'"></div>
+                <div class="music-info">
+                    <div class="music-title">End of Time</div>
+                    <div class="music-artist">Alan Walker, K-391</div>
+                    <audio controls><source src="assets/endoftime.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <div class="music-card animate-on-scroll delay-300">
+                <div class="music-cover-wrapper"><img src="assets/cover_huahai.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=HuaHai'"></div>
+                <div class="music-info">
+                    <div class="music-title">花海</div>
+                    <div class="music-artist">Jay Chou</div>
+                    <audio controls><source src="assets/huahai.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <div class="music-card animate-on-scroll delay-400">
+                <div class="music-cover-wrapper"><img src="assets/cover_qing.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=Qing'"></div>
+                <div class="music-info">
+                    <div class="music-title">晴</div>
+                    <div class="music-artist">Silence Wang</div>
+                    <audio controls><source src="assets/qing.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+
+    <a href="index.html" class="btn-home">← Back to Home</a>
 
     <footer>
-        <p>&copy; 2025 Baowen Liu. All Rights Reserved.</p>
+        &copy; 2025 Baowen Liu. All Rights Reserved.
     </footer>
 
     <script>
+        // 1. Scroll Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -328,15 +290,97 @@
                     entry.target.classList.remove('show');
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // 2. Tab Logic
+        function switchTab(tabName) {
+            const glider = document.getElementById('glider');
+            const btns = document.querySelectorAll('.toggle-btn');
+            
+            btns.forEach(btn => btn.classList.remove('active'));
+            
+            if(tabName === 'games') {
+                glider.style.transform = 'translateX(0)';
+                btns[0].classList.add('active');
+            } else {
+                glider.style.transform = 'translateX(100%)'; 
+                btns[1].classList.add('active');
+            }
+
+            const gamesPanel = document.getElementById('games-panel');
+            const musicPanel = document.getElementById('music-panel');
+
+            if(tabName === 'games') {
+                musicPanel.style.display = 'none';
+                gamesPanel.style.display = 'grid';
+                resetAnimations(gamesPanel);
+            } else {
+                gamesPanel.style.display = 'none';
+                musicPanel.style.display = 'grid';
+                resetAnimations(musicPanel);
+            }
+        }
+
+        function resetAnimations(panel) {
+            const cards = panel.querySelectorAll('.animate-on-scroll');
+            cards.forEach(card => {
+                card.classList.remove('show');
+                setTimeout(() => card.classList.add('show'), 50);
+            });
+        }
+
+        // 3. Dark Mode
+        const btn = document.getElementById('theme-btn');
+        const icon = btn.querySelector('i');
+        const html = document.documentElement;
+
+        if(localStorage.getItem('theme') !== 'light') {
+            html.setAttribute('data-theme', 'dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'dark');
+        }
+
+        btn.addEventListener('click', () => {
+            if(html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
         });
 
-        const hiddenElements = document.querySelectorAll('.animate-on-scroll');
-        hiddenElements.forEach((el) => {
-            observer.observe(el);
-        });
+        // 4. firework Easter eggs
+        function launchFireworks() {
+            // Fire two fireworks
+            var duration = 2 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                var particleCount = 50 * (timeLeft / duration);
+                
+                // Shoot from both sides of the screen
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+
+        document.getElementById('firework-btn').addEventListener('click', launchFireworks);
+        document.getElementById('more-about-title').addEventListener('click', launchFireworks);
     </script>
 
 </body>
