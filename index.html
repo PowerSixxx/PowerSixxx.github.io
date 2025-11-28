@@ -483,6 +483,57 @@
             .edu-logo {
                 display: none;
             }
+
+            /* Mobile: make work-ex cards flex so logo can occupy first row alone */
+            .timeline-content .card {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .card-uta,
+            .card-nano,
+            .card-spic {
+                padding-top: 1.2rem;
+                padding-left: 1.2rem;
+            }
+
+            /* Logo on first row, top-left, smaller on mobile */
+            .coe-logo,
+            .nano-logo,
+            .spic-logo {
+                position: static !important;
+                order: 0;
+                margin: 0 0 0.5rem 0;
+                text-align: left;
+            }
+
+            .coe-logo img,
+            .nano-logo img,
+            .spic-logo img {
+                width: 70px !important;
+                height: auto;
+                display: block;
+            }
+
+            /* Title & date appear below logo, full-width */
+            .card-uta h3,
+            .card-uta .date,
+            .card-nano h3,
+            .card-nano .date,
+            .card-spic h3,
+            .card-spic .date {
+                order: 1;
+                width: 100%;
+            }
+
+            /* Bullet points follow after title/date */
+            .card-uta ul,
+            .card-nano ul,
+            .card-spic ul {
+                order: 2;
+                width: 100%;
+            }
         }
     </style>
 </head>
