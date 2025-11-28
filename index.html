@@ -306,6 +306,31 @@
 
         footer { background: var(--bg-card); color: var(--text-sub); text-align: center; padding: 3rem 1rem; margin-top: 4rem; border-top: 1px solid var(--border); }
         .footer-socials { margin-top: 1rem; }
+        /* Footer contact info layout */
+        .footer-contact {
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .footer-contact p {
+            margin: 0.1rem 0;
+        }
+
+        @media (min-width: 769px) {
+            .footer-contact {
+                text-align: center;
+            }
+
+            .footer-contact p {
+                display: inline;
+            }
+
+            .footer-contact p + p::before {
+                content: " | ";
+                padding: 0 0.35rem;
+            }
+        }
+
         .footer-socials a { color: var(--text-sub); margin: 0 10px; font-size: 1.5rem; transition: color 0.3s; }
         .footer-socials a:hover { color: var(--primary); }
         .back-to-top {
@@ -417,6 +442,10 @@
         
         @media (max-width: 768px) {
             nav { padding: 1rem; }
+            .logo span {
+                font-size: 1.2rem;
+                white-space: nowrap;
+            }
             .nav-links { display: none; }
             .hero { padding: 3rem 1rem; }
             .hero h1 { font-size: 1.8rem; }
@@ -445,6 +474,10 @@
 
             .btn-container { display: flex; flex-direction: column; width: 100%; gap: 0.8rem; }
             .btn { width: 100%; justify-content: center; }
+            /* Hide top hero About Me button on mobile (keep desktop unchanged) */
+            .btn-container a:first-child {
+                display: none;
+            }
             section { padding: 2.5rem 1rem; }
             .card { padding: 1.5rem; }
             .grid { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -718,10 +751,20 @@
     </section>
 
     <footer id="contact">
-        <p data-en="Phone (US): +1 380-249-9220 | Phone (CN): +86 135-8181-5272 | Email: liu.11884@buckeyemail.osu.edu"
-           data-zh="电话（美国）：+1 380-249-9220 | 电话（中国）：+86 135-8181-5272 | 邮箱：liu.11884@buckeyemail.osu.edu">
-           Phone (US): +1 380-249-9220 | Phone (CN): +86 135-8181-5272 | Email: liu.11884@buckeyemail.osu.edu
-        </p>
+        <div class="footer-contact">
+            <p data-en="Phone (US): +1 380-249-9220"
+               data-zh="电话（美国）：+1 380-249-9220">
+               Phone (US): +1 380-249-9220
+            </p>
+            <p data-en="Phone (CN): +86 135-8181-5272"
+               data-zh="电话（中国）：+86 135-8181-5272">
+               Phone (CN): +86 135-8181-5272
+            </p>
+            <p data-en="Email: liu.11884@buckeyemail.osu.edu"
+               data-zh="邮箱：liu.11884@buckeyemail.osu.edu">
+               Email: liu.11884@buckeyemail.osu.edu
+            </p>
+        </div>
         <div class="footer-socials">
             <a href="https://www.instagram.com/powersix2006/" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank"><i class="fab fa-linkedin"></i></a>
