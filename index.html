@@ -234,6 +234,66 @@
         .card li { margin-bottom: 0.5rem; }
         .card p { color: var(--text-sub); }
 
+        .card-uta {
+            position: relative;
+        }
+
+        .coe-logo {
+            position: absolute;
+            right: 1.75rem;
+            top: 1.5rem;
+        }
+
+        .coe-logo img {
+            width: 200px;
+            height: auto;
+            display: block;
+        }
+
+        .card-nano,
+        .card-spic {
+            position: relative;
+        }
+
+        .nano-logo,
+        .spic-logo {
+            position: absolute;
+            right: 1.75rem;
+            top: 1.5rem;
+        }
+
+        .nano-logo img {
+            width: 110px;
+            height: auto;
+            display: block;
+        }
+
+        .spic-logo img {
+            width: 140px;
+            height: auto;
+            display: block;
+        }
+
+        .edu-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .edu-logo {
+            position: absolute;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 1;
+            pointer-events: none;
+        }
+
+        .edu-logo img {
+            width: 150px;
+            height: auto;
+            display: block;
+        }
+
         .card-images { display: flex; gap: 1rem; margin-top: 1.5rem; }
         .card-img-wrapper { flex: 1; border: 1px solid var(--border); border-radius: 8px; padding: 5px; background: var(--bg-body); }
         .card-img-wrapper img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; }
@@ -419,6 +479,10 @@
             .timeline-content {
                 margin-left: 2.5rem;
             }
+
+            .edu-logo {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -468,7 +532,7 @@
         <h1 class="animate-on-scroll" data-en="Hello, I am Baowen Liu" data-zh="你好，我是刘宝文">Hello, I am Baowen Liu</h1>
         <p class="animate-on-scroll delay-100"
            data-en="Computer Science and Engineering &amp; Math Student at The Ohio State University&lt;br&gt;Pursuing a Career in Software and Web Development"
-           data-zh="就读于俄亥俄州立大学计算机科学与工程与数学专业的学生&lt;br&gt;立志从事软件开发和网页开发相关工作">
+           data-zh="就读于俄亥俄州立大学计算机科学与工程专业并辅修数学的学生&lt;br&gt;立志从事软件开发和网页开发相关工作">
             Computer Science and Engineering &amp; Math Student at The Ohio State University<br>
             Pursuing a Career in Software and Web Development
         </p>
@@ -485,13 +549,16 @@
 
     <section id="about">
         <h2 class="animate-on-scroll" data-en="Education" data-zh="教育背景">Education</h2>
-        <div class="card animate-on-scroll delay-100">
+        <div class="card edu-card animate-on-scroll delay-100">
             <h3 data-en="The Ohio State University" data-zh="俄亥俄州立大学">The Ohio State University</h3>
             <span class="date" data-en="Expected May 2028 | Columbus, OH" data-zh="预计 2028 年 5 月毕业 | 哥伦布，俄亥俄州">Expected May 2028 | Columbus, OH</span>
             <p data-en="<strong>Degree:</strong> B.S. Computer Science and Engineering" data-zh="<strong>学位：</strong> 计算机科学与工程学士"><strong>Degree:</strong> B.S. Computer Science and Engineering</p>
             <p data-en="<strong>GPA:</strong> 3.965 / 4.0" data-zh="<strong>绩点：</strong> 3.965 / 4.0"><strong>GPA:</strong> 3.965 / 4.0</p>
             <p data-en="<strong>Honors:</strong> Dean's List (&gt;3.5 GPA) 2 semesters" data-zh="<strong>荣誉：</strong> 两学期进入院长名单（GPA &gt; 3.5）"><strong>Honors:</strong> Dean's List (&gt;3.5 GPA) 2 semesters</p>
             <p data-en="<strong>Coursework:</strong> Calculus, Computer Science, Fundamentals of Engineering, Linear Algebra, Physics, Statistics" data-zh="<strong>主要课程：</strong> 微积分、计算机科学、工程基础、线性代数、物理、统计学"><strong>Coursework:</strong> Calculus, Computer Science, Fundamentals of Engineering, Linear Algebra, Physics, Statistics</p>
+            <div class="edu-logo">
+                <img src="assets/osu-o-logo.png" alt="Ohio State University O logo">
+            </div>
         </div>
     </section>
 
@@ -502,17 +569,16 @@
                 <div class="timeline-date" data-en="Spring 2026" data-zh="2026 年春季">Spring 2026</div>
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <div class="card" style="border-left: 5px solid #b00000;">
+                    <div class="card card-uta" style="border-left: 5px solid #b00000;">
                         <h3 data-en="Undergraduate Teaching Assistant (ENGR 1182)" data-zh="本科教学助理（ENGR 1182）">Undergraduate Teaching Assistant (ENGR 1182)</h3>
                         <span class="date" data-en="The Ohio State University College of Engineering" data-zh="俄亥俄州立大学工程学院">The Ohio State University College of Engineering</span>
+                        <div class="coe-logo">
+                            <img src="assets/osu_eng.jpg" alt="OSU College of Engineering" onerror="this.src='https://placehold.co/200x80?text=OSU+Engineering'">
+                        </div>
                         <ul>
                             <li data-en="<strong>Status:</strong> Offer received. Position begins Spring 2026." data-zh="<strong>状态：</strong> 已收到录用通知，将于 2026 年春季开始任职。"><strong>Status:</strong> Offer received. Position begins Spring 2026.</li>
                             <li data-en="<strong>Type:</strong> Part-time · On-site · Columbus, Ohio" data-zh="<strong>类型：</strong> 兼职 · 线下 · 俄亥俄州哥伦布市"><strong>Type:</strong> Part-time · On-site · Columbus, Ohio</li>
                         </ul>
-                        <div class="card-images">
-                            <div class="card-img-wrapper"><img src="assets/osu_eng.jpg" alt="OSU College of Engineering" onerror="this.src='https://placehold.co/400x300?text=OSU+Logo'"><div class="card-img-caption" data-en="College of Engineering" data-zh="工程学院">College of Engineering</div></div>
-                            <div class="card-img-wrapper"><img src="assets/offer.png" alt="Job Offer Letter" onerror="this.src='https://placehold.co/400x300?text=Offer+Letter'"><div class="card-img-caption" data-en="Offer Verification" data-zh="录用通知确认">Offer Verification</div></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -520,9 +586,12 @@
                 <div class="timeline-date" data-en="Oct 2025 - Present" data-zh="2025 年 10 月至今">Oct 2025 - Present</div>
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <div class="card">
+                    <div class="card card-nano">
                         <h3 data-en="Technical Intern" data-zh="技术实习生">Technical Intern</h3>
                         <span class="date" data-en="Nanoshape, Inc." data-zh="Nanoshape 公司">Nanoshape, Inc.</span>
+                        <div class="nano-logo">
+                            <img src="assets/nanoshape-logo.png" alt="Nanoshape logo">
+                        </div>
                         <ul>
                             <li data-en="Assisted in developing Nanoshape's modular AI and simulation framework." data-zh="协助开发 Nanoshape 的模块化人工智能与仿真框架。">Assisted in developing Nanoshape's modular AI and simulation framework.</li>
                             <li data-en="Refined algorithms for agent coordination and physics modeling." data-zh="改进智能体协同与物理建模相关算法。">Refined algorithms for agent coordination and physics modeling.</li>
@@ -535,9 +604,12 @@
                 <div class="timeline-date" data-en="May 2025 - July 2025" data-zh="2025 年 5 月 - 7 月">May 2025 - July 2025</div>
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <div class="card">
+                    <div class="card card-spic">
                         <h3 data-en="Software Engineer Intern" data-zh="软件工程实习生">Software Engineer Intern</h3>
-                        <span class="date" data-en="SPIC Integrated Smart Energy Co., Ltd." data-zh="国家电投集成智慧能源有限公司">SPIC Integrated Smart Energy Co., Ltd.</span>
+                        <span class="date" data-en="SPIC Integrated Smart Energy Co., Ltd." data-zh="国家电投集团综合智慧能源有限公司">SPIC Integrated Smart Energy Co., Ltd.</span>
+                        <div class="spic-logo">
+                            <img src="assets/spic.png" alt="SPIC logo">
+                        </div>
                         <ul>
                             <li data-en="Compiled &quot;System Architecture Design Document&quot; to standardize technical frameworks and module logic." data-zh="编写《系统架构设计文档》，规范技术框架与模块逻辑。">Compiled "System Architecture Design Document" to standardize technical frameworks and module logic.</li>
                             <li data-en="Created use case diagrams, business architecture diagrams, and system architecture diagrams." data-zh="绘制用例图、业务架构图和系统架构图。">Created use case diagrams, business architecture diagrams, and system architecture diagrams.</li>

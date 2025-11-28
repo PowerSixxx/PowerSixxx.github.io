@@ -145,6 +145,118 @@
             border: 1px solid var(--border);
             overflow: hidden;
         }
+
+        .photo-section {
+            max-width: 1000px;
+            margin: 0 auto 4rem auto;
+            background: var(--panel-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .photo-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .photo-sub {
+            color: var(--text-sub);
+            font-size: 0.98rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .photo-grid {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .photo-card {
+            flex: 0 0 280px;
+            background: var(--bg-body);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            scroll-snap-align: start;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow);
+            background: var(--card-hover);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            padding: 0.9rem 1.1rem 1.1rem;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        .photo-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .photo-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .photo-grid::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.6);
+            border-radius: 999px;
+        }
+
+        .photo-grid::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 116, 139, 0.8);
+        }
+
+        .photo-nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-nav-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: background-color 0.2s, transform 0.2s, border-color 0.2s;
+        }
+
+        .photo-nav-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
         .showcase-header { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main); }
 
         .toggle-wrapper {
@@ -226,6 +338,24 @@
                 padding: 1.5rem;
                 width: 95%;
                 border-radius: 16px;
+            }
+
+            .photo-section {
+                padding: 1.5rem;
+                width: 95%;
+                border-radius: 16px;
+            }
+
+            .photo-title {
+                font-size: 1.5rem;
+            }
+
+            .photo-sub {
+                font-size: 0.9rem;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
             }
 
             .simple-card h2 {
@@ -378,6 +508,67 @@
         </div>
     </div>
 
+    <div class="photo-section animate-on-scroll delay-300">
+        <h2 class="photo-title" data-en="My Photography" data-zh="我的摄影作品">My Photography</h2>
+        <p class="photo-sub" data-en="A few moments I've captured from my travels and campus life." data-zh="这里是我在旅行和校园生活中记录的一些瞬间。">
+            A few moments I've captured from my travels and campus life.
+        </p>
+
+        <div class="photo-nav">
+            <button type="button" class="photo-nav-btn" onclick="scrollPhotos(-1)" aria-label="Previous photo">
+                ‹
+            </button>
+            <button type="button" class="photo-nav-btn" onclick="scrollPhotos(1)" aria-label="Next photo">
+                ›
+            </button>
+        </div>
+        <div class="photo-grid">
+            <figure class="photo-card animate-on-scroll delay-100">
+                <img src="assets/photo-lantern-boat.jpg" alt="Lantern festival boat at night" loading="lazy">
+                <figcaption class="photo-caption" data-en="Lantern festival night scene on the river." data-zh="河面上的灯会夜景。">
+                    Lantern festival night scene on the river.
+                </figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll delay-150">
+                <img src="assets/photo-city-night.jpg" alt="Modern city skyline at night" loading="lazy">
+                <figcaption class="photo-caption" data-en="City lights and skyscrapers at night." data-zh="夜晚的城市灯光与高楼。">
+                    City lights and skyscrapers at night.
+                </figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll delay-200">
+                <img src="assets/photo-campus-snow.jpg" alt="Snowy campus path with robot" loading="lazy">
+                <figcaption class="photo-caption" data-en="A quiet snowy day on campus with a delivery robot." data-zh="校园里安静的雪天和送货机器人。">
+                    A quiet snowy day on campus with a delivery robot.
+                </figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll delay-250">
+                <img src="assets/photo-forest-cows.jpg" alt="Cows grazing in a green forest" loading="lazy">
+                <figcaption class="photo-caption" data-en="Cows grazing quietly in a forest in Inner Mongolia." data-zh="内蒙古森林里安静吃草的牛群。">
+                    Cows grazing quietly in a forest in Inner Mongolia.
+                </figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll delay-300">
+                <img src="assets/photo-night-stars.jpg" alt="Night sky full of stars over ruins" loading="lazy">
+                <figcaption class="photo-caption" data-en="Starry night sky above ancient ruins in the desert." data-zh="沙漠遗址上空的繁星夜空。">
+                    Starry night sky above ancient ruins in the desert.
+                </figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll delay-350">
+                <img src="assets/photo-tesla-windfarm.jpg" alt="Tesla parked in front of wind turbines at sunset" loading="lazy">
+                <figcaption class="photo-caption" 
+                    data-en="Golden light draping the grassland, wind turbines standing quietly along the fading horizon." 
+                    data-zh="金色夕阳洒落在草原上，风机静静矗立在渐远的天边。">
+                    Golden light draping the grassland, wind turbines standing quietly along the fading horizon.
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+
     <a href="index.html" class="btn-home" data-en="← Back to Home" data-zh="← 返回主页">← Back to Home</a>
 
     <button id="back-to-top" class="back-to-top">↑</button>
@@ -400,6 +591,18 @@
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
         // 2. Tab Logic
+
+        // 2.5 Photo strip navigation
+        function scrollPhotos(direction) {
+            const grid = document.querySelector('.photo-grid');
+            if (!grid) return;
+            const card = grid.querySelector('.photo-card');
+            const cardWidth = card ? card.offsetWidth + 24 : 300; // include gap
+            grid.scrollBy({
+                left: direction * cardWidth,
+                behavior: 'smooth'
+            });
+        }
         function switchTab(tabName) {
             const glider = document.getElementById('glider');
             const btns = document.querySelectorAll('.toggle-btn');
