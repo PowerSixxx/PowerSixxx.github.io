@@ -474,6 +474,10 @@
 
             .btn-container { display: flex; flex-direction: column; width: 100%; gap: 0.8rem; }
             .btn { width: 100%; justify-content: center; }
+            /* Ensure Hero About Me button is visible on mobile */
+            .btn-container .btn[data-en="About Me"] {
+                display: inline-flex !important;
+            }
             /* Hide top hero About Me button on mobile (keep desktop unchanged) */
             .btn-container a:first-child {
                 display: none;
