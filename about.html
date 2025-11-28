@@ -201,13 +201,67 @@
         footer { text-align: center; padding: 3rem; color: var(--text-sub); font-size: 0.9rem; }
 
         @media (max-width: 768px) {
-            nav { flex-direction: row; flex-wrap: wrap; } .logo { flex-grow: 1; }
+            nav { flex-direction: row; flex-wrap: wrap; }
+            .logo { flex-grow: 1; }
             .nav-links { display: none; }
-            .header { padding: 3rem 1rem; } .header h1 { font-size: 2rem; }
-            .simple-card, .showcase-container { padding: 1.5rem; width: 95%; border-radius: 16px; }
-            .games-grid { grid-template-columns: 1fr; }
-            .music-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-            audio { height: 24px; }
+
+            /* Mobile spacing + fonts */
+            body {
+                font-size: 0.95rem;
+            }
+
+            .header {
+                padding: 3rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 0.95rem;
+            }
+
+            .simple-card, .showcase-container {
+                padding: 1.5rem;
+                width: 95%;
+                border-radius: 16px;
+            }
+
+            .simple-card h2 {
+                font-size: 1.4rem;
+            }
+
+            .simple-card p,
+            .simple-card li {
+                font-size: 0.95rem;
+            }
+
+            .showcase-header {
+                font-size: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .music-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            audio {
+                height: 24px;
+            }
+
+            footer {
+                font-size: 0.85rem;
+                padding: 2.5rem 1.5rem;
+            }
         }
     </style>
 </head>
