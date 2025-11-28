@@ -517,8 +517,24 @@
                 margin-left: 2.5rem;
             }
 
+            /* Mobile: Education card logo on top & centered */
+            .edu-card {
+                position: relative;
+            }
+
             .edu-logo {
-                display: none;
+                position: static;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 1rem;
+                pointer-events: auto;
+                transform: none;
+            }
+
+            .edu-logo img {
+                width: 120px;
+                height: auto;
             }
 
             /* Mobile: make work-ex cards flex so logo can occupy first row alone */
@@ -620,7 +636,7 @@
         <h1 class="animate-on-scroll" data-en="Hello, I am Baowen Liu" data-zh="你好，我是刘宝文">Hello, I am Baowen Liu</h1>
         <p class="animate-on-scroll delay-100"
            data-en="Computer Science and Engineering &amp; Math Student at The Ohio State University&lt;br&gt;Pursuing a Career in Software and Web Development"
-           data-zh="就读于俄亥俄州立大学计算机科学与工程专业并辅修数学的学生&lt;br&gt;立志从事软件开发和网页开发相关工作">
+           data-zh="就读于俄亥俄州立大学，主修计算机科学与工程，并辅修数学&lt;br&gt;立志从事软件开发和网页开发相关工作">
             Computer Science and Engineering &amp; Math Student at The Ohio State University<br>
             Pursuing a Career in Software and Web Development
         </p>
@@ -638,9 +654,9 @@
     <section id="about">
         <h2 class="animate-on-scroll" data-en="Education" data-zh="教育背景">Education</h2>
         <div class="card edu-card animate-on-scroll delay-100">
-            <h3 data-en="The Ohio State University" data-zh="俄亥俄州立大学">The Ohio State University</h3>
+            <h3 data-en="The Ohio State University" data-zh="俄亥俄州立大学 (US.News 41)">The Ohio State University</h3>
             <span class="date" data-en="Expected May 2028 | Columbus, OH" data-zh="预计 2028 年 5 月毕业 | 哥伦布，俄亥俄州">Expected May 2028 | Columbus, OH</span>
-            <p data-en="<strong>Degree:</strong> B.S. Computer Science and Engineering" data-zh="<strong>学位：</strong> 计算机科学与工程学士"><strong>Degree:</strong> B.S. Computer Science and Engineering</p>
+            <p data-en="<strong>Degree:</strong> B.S. Computer Science and Engineering" data-zh="<strong>学位：</strong> 计算机科学与工程学士 "><strong>Degree:</strong> B.S. Computer Science and Engineering</p>
             <p data-en="<strong>GPA:</strong> 3.965 / 4.0" data-zh="<strong>绩点：</strong> 3.965 / 4.0"><strong>GPA:</strong> 3.965 / 4.0</p>
             <p data-en="<strong>Honors:</strong> Dean's List (&gt;3.5 GPA) 2 semesters" data-zh="<strong>荣誉：</strong> 连续两学期进入院长名单（GPA &gt; 3.5）"><strong>Honors:</strong> Dean's List (&gt;3.5 GPA) 2 semesters</p>
             <p data-en="<strong>Coursework:</strong> Calculus, Computer Science, Fundamentals of Engineering, Linear Algebra, Physics, Statistics" data-zh="<strong>主要课程：</strong> 微积分、计算机科学、工程基础、线性代数、物理、统计学"><strong>Coursework:</strong> Calculus, Computer Science, Fundamentals of Engineering, Linear Algebra, Physics, Statistics</p>
