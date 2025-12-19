@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Baowen Liu | 关于 刘宝文</title>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        .about-intro-layout {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .about-selfie {
+            width: 260px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            object-fit: cover;
+        }
+        .hs-card-layout {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .hs-text {
+            flex: 1;
+        }
+
+        .hs-logo-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hs-logo {
+            width: 120px;
+            max-width: 30vw;
+            object-fit: contain;
+        }
+        /* Global color matching variable */
+        :root {
+            --primary: #2563eb;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-sub: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --panel-bg: #ffffff;
+            --card-hover: #f1f5f9;
+        }
+
+        [data-theme="dark"] {
+            --primary: #60a5fa;
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --border: #334155;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --panel-bg: #1e293b;
+            --card-hover: #2d3748;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        
+        /* Dynamic animation */
+        .animate-on-scroll { 
+            opacity: 0; transform: translateY(30px) scale(0.98); 
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
+        }
+        .animate-on-scroll.show { opacity: 1; transform: translateY(0) scale(1); }
+        .delay-100 { transition-delay: 100ms; } .delay-200 { transition-delay: 200ms; } .delay-300 { transition-delay: 300ms; } .delay-400 { transition-delay: 400ms; }
+
+        /* navigation bar */
+        nav { 
+            background: var(--bg-card); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); border-bottom: 1px solid var(--border);
+        }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: bold; color: var(--text-main); text-decoration: none; }
+        .nav-right { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; }
+        .nav-links a:hover { color: var(--primary); }
+        #theme-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-main); }
+
+        .lang-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: var(--text-main);
+            padding: 0.3rem 0.8rem;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .lang-toggle:hover {
+            background-color: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: none;
+            background: var(--primary);
+            color: #ffffff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s, background-color 0.3s;
+            z-index: 150;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Head (including the Easter egg button */
+        .header { padding: 4rem 1rem; text-align: center; }
+        .header-title-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.5rem; }
+        .header h1 { font-size: 2.5rem; color: var(--text-main); margin: 0; }
+        .header p { color: var(--text-sub); font-size: 1.1rem; }
+
+        /* Easter egg button style */
+        #firework-btn {
+            background: none; border: none; font-size: 1.5rem; cursor: pointer;
+            transition: transform 0.2s; animation: pulse 2s infinite;
+        }
+        #firework-btn:active { transform: scale(0.8); }
+        #firework-btn:hover { transform: scale(1.2) rotate(15deg); }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        /* Card style */
+        .simple-card { 
+            background: var(--bg-card); padding: 2rem; border-radius: 12px; 
+            max-width: 900px; margin: 0 auto 2rem auto; 
+            box-shadow: var(--shadow); border: 1px solid var(--border);
+        }
+        .simple-card h2 { color: var(--text-main); margin-bottom: 1rem; border-left: 4px solid var(--primary); padding-left: 1rem; }
+        .simple-card ul { padding-left: 1.2rem; color: var(--text-sub); }
+        .simple-card p, .simple-card li { color: var(--text-sub); margin-bottom: 0.5rem; }
+
+        /* Hobbies Panel */
+        .showcase-container {
+            max-width: 1000px; margin: 0 auto 4rem auto;
+            background: var(--panel-bg);
+            border-radius: 20px; padding: 2.5rem;
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .photo-section {
+            max-width: 1000px;
+            margin: 0 auto 4rem auto;
+            background: var(--panel-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .photo-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .photo-sub {
+            color: var(--text-sub);
+            font-size: 0.98rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .photo-grid {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .photo-card {
+            flex: 0 0 280px;
+            background: var(--bg-body);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            scroll-snap-align: start;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow);
+            background: var(--card-hover);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            padding: 0.9rem 1.1rem 1.1rem;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        .photo-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .photo-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .photo-grid::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.6);
+            border-radius: 999px;
+        }
+
+        .photo-grid::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 116, 139, 0.8);
+        }
+
+        .photo-nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-nav-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: background-color 0.2s, transform 0.2s, border-color 0.2s;
+        }
+
+        .photo-nav-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .showcase-header { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main); }
+
+        .toggle-wrapper {
+            background: var(--bg-body); width: fit-content; padding: 4px; border-radius: 10px;
+            display: flex; position: relative; margin-bottom: 2rem; border: 1px solid var(--border);
+        }
+        .toggle-glider {
+            position: absolute; top: 4px; left: 4px; width: 120px; height: 36px;
+            background: var(--primary); border-radius: 8px;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1;
+        }
+        .toggle-btn {
+            position: relative; z-index: 2; width: 120px; height: 36px;
+            background: none; border: none; color: var(--text-sub); font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: color 0.3s;
+        }
+        .toggle-btn.active { color: white; }
+
+        .grid-panel { display: none; }
+        .grid-panel.active { display: grid; }
+
+        /* Game Card */
+        .games-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+        .game-card {
+            background: var(--bg-body); border-radius: 12px; padding: 1.5rem; text-align: center;
+            border: 1px solid var(--border); transition: all 0.3s;
+        }
+        .game-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow); background: var(--card-hover); }
+        .card-img-box {
+            width: 80px; height: 80px; margin: 0 auto 1rem auto;
+            border-radius: 16px; overflow: hidden; background: #e2e8f0;
+        }
+        .card-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main); }
+        .card-stat { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 0.2rem; }
+        .stat-badge { display: inline-block; margin-top: 0.8rem; padding: 4px 12px; background: rgba(37, 99, 235, 0.1); color: var(--primary); border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+
+        /* Music Card */
+        .music-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.2rem; }
+        .music-card {
+            background: var(--bg-body); border-radius: 12px; overflow: hidden; 
+            border: 1px solid var(--border); transition: all 0.3s;
+        }
+        .music-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow); }
+        .music-cover-wrapper { width: 100%; aspect-ratio: 1/1; position: relative; overflow: hidden; background: #eee; }
+        .music-cover { width: 100%; height: 100%; object-fit: cover; }
+        .music-info { padding: 0.8rem; }
+        .music-title { font-size: 0.95rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.2rem; }
+        .music-artist { font-size: 0.75rem; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.6rem; }
+        audio { width: 100%; height: 28px; opacity: 0.8; outline: none; margin-top: auto; }
+        [data-theme="dark"] audio { filter: invert(0.9) hue-rotate(180deg); }
+
+        .btn-home { display: block; width: fit-content; margin: 2rem auto; padding: 0.8rem 2rem; background: var(--primary); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.2s; }
+        .btn-home:hover { transform: translateY(-2px); }
+        footer { text-align: center; padding: 3rem; color: var(--text-sub); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: row; flex-wrap: wrap; }
+            .logo { flex-grow: 1; }
+            .nav-links { display: none; }
+
+            /* Mobile spacing + fonts */
+            body {
+                font-size: 0.95rem;
+            }
+
+            .header {
+                padding: 3rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 0.95rem;
+            }
+
+            .simple-card, .showcase-container {
+                padding: 1.5rem;
+                width: 95%;
+                border-radius: 16px;
+            }
+
+            .about-intro-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-selfie {
+                width: 70vw;
+                max-width: 260px;
+            }
+
+            .hs-card-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hs-logo-wrapper {
+                margin-bottom: 0.5rem;
+            }
+
+            .hs-text {
+                width: 100%;
+            }
+
+            .photo-section {
+                padding: 1.5rem;
+                width: 95%;
+                border-radius: 16px;
+            }
+
+            .photo-title {
+                font-size: 1.5rem;
+            }
+
+            .photo-sub {
+                font-size: 0.9rem;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .simple-card h2 {
+                font-size: 1.4rem;
+            }
+
+            .simple-card p,
+            .simple-card li {
+                font-size: 0.95rem;
+            }
+
+            .showcase-header {
+                font-size: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .music-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            audio {
+                height: 24px;
+            }
+
+            footer {
+                font-size: 0.85rem;
+                padding: 2.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="100" height="100" rx="25" fill="var(--text-main)"/>
+                <text x="42" y="82" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">L</text>
+                <text x="12" y="72" font-size="85" fill="none" stroke="var(--text-main)" stroke-width="6" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
+                <text x="12" y="72" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
+            </svg>
+            <span data-en="Baowen Liu" data-zh="刘宝文">Baowen Liu</span>
+        </a>
+
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="index.html" data-en="Home" data-zh="主页">Home</a></li>
+                <li><a href="about.html" style="color: var(--primary)" data-en="About Me" data-zh="关于我">About Me</a></li>
+            </ul>
+            <button id="lang-toggle" class="lang-toggle" title="Switch language">EN | 中文</button>
+            <button id="theme-btn" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <div class="header">
+        <div class="header-title-row animate-on-scroll">
+            <h1 id="more-about-title" data-en="About Me" data-zh="关于我">More About Me</h1>
+            <button id="firework-btn" title="Click for magic!">✨</button>
+        </div>
+        <p class="animate-on-scroll delay-100" data-en="Beyond the code: My hobbies, interests, and life." data-zh="除了代码之外，这里是我的兴趣爱好和生活。">Beyond the code: My hobbies, interests, and life.</p>
+    </div>
+
+    <div class="simple-card animate-on-scroll" style="padding: 2rem;">
+
+        <div class="about-intro-layout">
+
+            <!-- Left: Selfie -->
+            <img src="assets/baowen-selfie.jpg"
+                 alt="Baowen Liu Portrait"
+                 class="about-selfie">
+
+            <!-- Right: Text -->
+            <div style="flex: 1; min-width: 260px;">
+
+                <p data-en="I am Baowen Liu, an undergraduate at The Ohio State University majoring in Computer Science and Engineering with a Mathematics minor. I enjoy building things that connect theory with real-world impact, from Java utilities to autonomous vehicle safety tools."
+                   data-zh="我叫刘宝文，目前就读于俄亥俄州立大学，主修计算机科学与工程，并辅修数学。我喜欢做能够将理论与现实影响相结合的项目，从 Java 工具到自动驾驶安全系统。">
+                    I am Baowen Liu, an undergraduate at The Ohio State University majoring in Computer Science and Engineering with a Mathematics minor. I enjoy building things that connect theory with real-world impact, from Java utilities to autonomous vehicle safety tools.
+                </p>
+
+                <p data-en="My current goal is to dive deeper into algorithms and AI, and to grow as a software engineer through real projects. I’m actively looking for summer internships where I can solve practical problems, collaborate with experienced engineers, and explore which areas of computer science I enjoy the most."
+                   data-zh="我目前的目标是更深入学习算法和人工智能，并通过真实项目提升自己作为软件工程师的能力。我正在积极寻找暑期实习，希望解决实际问题、与有经验的工程师合作，并探索自己最喜欢的计算机科学方向。">
+                    My current goal is to dive deeper into algorithms and AI, and to grow as a software engineer through real projects. I’m actively looking for summer internships where I can solve practical problems, collaborate with experienced engineers, and explore which areas of computer science I enjoy the most.
+                </p>
+
+            </div>
+
+        </div>
+</div>
+
+
+    <div class="simple-card animate-on-scroll delay-200">
+        <div class="hs-card-layout">
+            <!-- Logo (will appear on the right on desktop, above title on mobile) -->
+            <div class="hs-logo-wrapper">
+                <img src="assets/logo-yaohua.png" alt="Tianjin the Second Yaohua High School Logo" class="hs-logo">
+            </div>
+
+            <!-- Text content -->
+            <div class="hs-text">
+                <h2 data-en="High School Highlights" data-zh="高中经历亮点">High School Highlights</h2>
+                <p data-en="<strong>Tianjin the Second Yaohua High School</strong>" data-zh="<strong>天津市第二耀华中学</strong>">
+                    <strong>Tianjin the Second Yaohua High School</strong>
+                </p>
+                <ul>
+                    <li data-en="<strong>President of Student Union:</strong> Led student initiatives and organized campus events." data-zh="<strong>学生会主席：</strong> 负责带领学生组织活动并策划校园活动。"><strong>President of Student Union:</strong> Led student initiatives and organized campus events.</li>
+                    <li data-en="<strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin." data-zh="<strong>市级三好学生：</strong> 被评为天津市市级优秀学生。"><strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin.</li>
+                    <li data-en="<strong>Math Teaching Assistant:</strong> explained solutions, and helped classmates with questions and problem-solving." data-zh="<strong>数学助教：</strong> 讲解题目思路，帮助同学解决问题。"><strong>Math Teaching Assistant:</strong> Graded assignments and quizzes, explained solutions, and helped classmates with questions and problem-solving.</li>
+                    <li data-en="<strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics." data-zh="<strong>物理竞赛（COP）：</strong> 参加第 39 届全国中学生物理竞赛。"><strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="showcase-container animate-on-scroll delay-300">
+        <div class="showcase-header" data-en="Hobbies" data-zh="兴趣爱好">Hobbies</div>
+        
+        <div class="toggle-wrapper">
+            <div class="toggle-glider" id="glider"></div>
+            <button class="toggle-btn active" onclick="switchTab('games')" data-en="Video Games" data-zh="电子游戏">Video Games</button>
+            <button class="toggle-btn" onclick="switchTab('music')" data-en="Music" data-zh="音乐">Music</button>
+        </div>
+
+        <div id="games-panel" class="grid-panel games-grid active">
+            <div class="game-card animate-on-scroll delay-100">
+                <div class="card-img-box"><img src="assets/game_mc.jpg" alt="MC" onerror="this.src='https://placehold.co/150x150?text=MC'"></div>
+                <div class="card-title" data-en="Minecraft" data-zh="我的世界">Minecraft</div>
+                <div class="card-stat" data-en="Creative Mode" data-zh="创造模式">Creative Mode</div>
+                <span class="stat-badge" data-en="Builder" data-zh="建造者">Builder</span>
+            </div>
+            <div class="game-card animate-on-scroll delay-200">
+                <div class="card-img-box"><img src="assets/game_pubg.jpg" alt="PUBG" onerror="this.src='https://placehold.co/150x150?text=PUBG'"></div>
+                <div class="card-title" data-en="PUBG" data-zh="绝地求生（PUBG）">PUBG</div>
+                <div class="card-stat" data-en="Rank: Ace" data-zh="段位：王牌">Rank: Ace</div>
+                <span class="stat-badge" data-en="Tactical" data-zh="战术型">Tactical</span>
+            </div>
+            <div class="game-card animate-on-scroll delay-300">
+                <div class="card-img-box"><img src="assets/game_go.jpg" alt="Go" onerror="this.src='https://placehold.co/150x150?text=Go'"></div>
+                <div class="card-title" data-en="Go (Weiqi)" data-zh="围棋（Weiqi）">Go (Weiqi)</div>
+                <div class="card-stat" data-en="Rank: 5-Dan" data-zh="段位：业余五段">Rank: 5-Dan</div>
+                <span class="stat-badge" data-en="Master" data-zh="大师">Master</span>
+            </div>
+        </div>
+
+        <div id="music-panel" class="grid-panel music-grid">
+            <div class="music-card animate-on-scroll delay-100">
+                <div class="music-cover-wrapper"><img src="assets/cover_faded.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=Faded'"></div>
+                <div class="music-info">
+                    <div class="music-title" data-en="Faded" data-zh="Faded">Faded</div>
+                    <div class="music-artist" data-en="Alan Walker" data-zh="Alan Walker">Alan Walker</div>
+                    <audio controls><source src="assets/faded.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <div class="music-card animate-on-scroll delay-200">
+                <div class="music-cover-wrapper"><img src="assets/cover_eot.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=EOT'"></div>
+                <div class="music-info">
+                    <div class="music-title" data-en="End of Time" data-zh="End of Time">End of Time</div>
+                    <div class="music-artist" data-en="Alan Walker, K-391" data-zh="Alan Walker, K-391">Alan Walker, K-391</div>
+                    <audio controls><source src="assets/endoftime.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <div class="music-card animate-on-scroll delay-300">
+                <div class="music-cover-wrapper"><img src="assets/cover_huahai.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=HuaHai'"></div>
+                <div class="music-info">
+                    <div class="music-title" data-en="花海" data-zh="花海">花海</div>
+                    <div class="music-artist" data-en="Jay Chou" data-zh="周杰伦">Jay Chou</div>
+                    <audio controls><source src="assets/huahai.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <div class="music-card animate-on-scroll delay-400">
+                <div class="music-cover-wrapper"><img src="assets/cover_qing.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=Qing'"></div>
+                <div class="music-info">
+                    <div class="music-title" data-en="晴" data-zh="晴">晴</div>
+                    <div class="music-artist" data-en="Silence Wang" data-zh="汪苏泷">Silence Wang</div>
+                    <audio controls><source src="assets/qing.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="photo-section animate-on-scroll delay-300">
+        <h2 class="photo-title" data-en="My Photography" data-zh="我的摄影作品">My Photography</h2>
+        <p class="photo-sub" data-en="A few moments I've captured from my travels and campus life." data-zh="这里是我在旅行和校园生活中记录的一些瞬间。">
+            A few moments I've captured from my travels and campus life.
+        </p>
+
+        <div class="photo-nav">
+            <button type="button" class="photo-nav-btn" onclick="scrollPhotos(-1)" aria-label="Previous photo">
+                ‹
+            </button>
+            <button type="button" class="photo-nav-btn" onclick="scrollPhotos(1)" aria-label="Next photo">
+                ›
+            </button>
+        </div>
+        <div class="photo-grid">
+            <figure class="photo-card animate-on-scroll delay-100">
+                <img src="assets/photo-lantern-boat.jpg" alt="Lantern festival boat at night" loading="lazy">
+                <figcaption class="photo-caption" data-en="Lantern festival night scene on the river." data-zh="河面上的灯会夜景。">
+                    Lantern festival night scene on the river.
+                </figcaption>
+            </figure>
+
+
+            <figure class="photo-card animate-on-scroll delay-200">
+                <img src="assets/photo-campus-snow.jpg" alt="Snowy campus path with robot" loading="lazy">
+                <figcaption class="photo-caption" data-en="A quiet snowy day on campus with a delivery robot." data-zh="校园里安静的雪天和送货机器人。">
+                    A quiet snowy day on campus with a delivery robot.
+                </figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll delay-250">
+                <img src="assets/photo-forest-cows.jpg" alt="Cows grazing in a green forest" loading="lazy">
+                <figcaption class="photo-caption" data-en="Cows grazing quietly in a forest in Inner Mongolia." data-zh="内蒙古森林里安静吃草的牛群。">
+                    Cows grazing quietly in a forest in Inner Mongolia.
+                </figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll delay-300">
+                <img src="assets/photo-night-stars.jpg" alt="Night sky full of stars over ruins" loading="lazy">
+                <figcaption class="photo-caption" data-en="Starry night sky above ancient ruins in the desert." data-zh="沙漠遗址上空的繁星夜空。">
+                    Starry night sky above ancient ruins in the desert.
+                </figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll delay-350">
+                <img src="assets/photo-tesla-windfarm.jpg" alt="Tesla parked in front of wind turbines at sunset" loading="lazy">
+                <figcaption class="photo-caption" 
+                    data-en="Golden light draping the grassland, wind turbines standing quietly along the fading horizon." 
+                    data-zh="金色夕阳洒落在草原上，风机静静矗立在渐远的天边。">
+                    Golden light draping the grassland, wind turbines standing quietly along the fading horizon.
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <a href="index.html" class="btn-home" data-en="← Back to Home" data-zh="← 返回主页">← Back to Home</a>
+
+    <button id="back-to-top" class="back-to-top">↑</button>
+
+    <footer data-en="&copy; 2025 Baowen Liu. All Rights Reserved." data-zh="&copy; 2025 刘宝文。保留所有权利。">
+        &copy; 2025 Baowen Liu. All Rights Reserved.
+    </footer>
+
+    <script>
+        // 1. Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // 2. Tab Logic
+
+        // 2.5 Photo strip navigation
+        function scrollPhotos(direction) {
+            const grid = document.querySelector('.photo-grid');
+            if (!grid) return;
+            const card = grid.querySelector('.photo-card');
+            const cardWidth = card ? card.offsetWidth + 24 : 300; // include gap
+            grid.scrollBy({
+                left: direction * cardWidth,
+                behavior: 'smooth'
+            });
+        }
+        function switchTab(tabName) {
+            const glider = document.getElementById('glider');
+            const btns = document.querySelectorAll('.toggle-btn');
+            
+            btns.forEach(btn => btn.classList.remove('active'));
+            
+            if(tabName === 'games') {
+                glider.style.transform = 'translateX(0)';
+                btns[0].classList.add('active');
+            } else {
+                glider.style.transform = 'translateX(100%)'; 
+                btns[1].classList.add('active');
+            }
+
+            const gamesPanel = document.getElementById('games-panel');
+            const musicPanel = document.getElementById('music-panel');
+
+            if(tabName === 'games') {
+                musicPanel.style.display = 'none';
+                gamesPanel.style.display = 'grid';
+                resetAnimations(gamesPanel);
+            } else {
+                gamesPanel.style.display = 'none';
+                musicPanel.style.display = 'grid';
+                resetAnimations(musicPanel);
+            }
+        }
+
+        function resetAnimations(panel) {
+            const cards = panel.querySelectorAll('.animate-on-scroll');
+            cards.forEach(card => {
+                card.classList.remove('show');
+                setTimeout(() => card.classList.add('show'), 50);
+            });
+        }
+
+        // 3. Dark Mode
+        const btn = document.getElementById('theme-btn');
+        const icon = btn.querySelector('i');
+        const html = document.documentElement;
+
+        if(localStorage.getItem('theme') !== 'light') {
+            html.setAttribute('data-theme', 'dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'dark');
+        }
+
+        btn.addEventListener('click', () => {
+            if(html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // 4. Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // 5. firework Easter eggs
+        function launchFireworks() {
+            // Fire two fireworks
+            var duration = 2 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                var particleCount = 50 * (timeLeft / duration);
+                
+                // Shoot from both sides of the screen
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+
+        document.getElementById('firework-btn').addEventListener('click', launchFireworks);
+        document.getElementById('more-about-title').addEventListener('click', launchFireworks);
+
+        // 6. Language Toggle Logic (shared with index.html)
+        const langToggle = document.getElementById('lang-toggle');
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function applyLanguage(lang) {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const enText = el.getAttribute('data-en');
+                const zhText = el.getAttribute('data-zh');
+                const text = (lang === 'zh' ? (zhText || enText) : enText) || '';
+                if (text) {
+                    el.innerHTML = text;
+                }
+            });
+        }
+
+        function updateLangToggleLabel() {
+            if (!langToggle) return;
+            langToggle.textContent = currentLang === 'en' ? 'EN | 中文' : '中 | EN';
+        }
+
+        // Initialize language on page load
+        applyLanguage(currentLang);
+        updateLangToggleLabel();
+
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                localStorage.setItem('lang', currentLang);
+                applyLanguage(currentLang);
+                updateLangToggleLabel();
+            });
+        }
+    </script>
+
+</body>
+</html>
