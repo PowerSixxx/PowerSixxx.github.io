@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Study Notes – Baowen Liu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- The font style is consistent with that of the homepage -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #050816;
+            --bg-card: #111827;
+            --bg-header: #1f2933;
+            --text-main: #f9fafb;
+            --text-sub: #9ca3af;
+            --accent: #60a5fa;
+            --border: #374151;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2.5rem 1.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-sub);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.4rem;
+            margin-bottom: 2rem;
+        }
+
+        .projects-table {
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        thead {
+            background-color: var(--bg-header);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            color: var(--text-sub);
+        }
+
+        th,
+        td {
+            padding: 0.9rem 1.2rem;
+            vertical-align: top;
+        }
+
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 30%;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 22%;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        tbody tr {
+            border-top: 1px solid var(--border);
+        }
+
+        tbody tr:hover {
+            background-color: rgba(31, 41, 55, 0.85);
+        }
+
+        .project-name {
+            font-weight: 600;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        .link-group a {
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-decoration: none;
+            margin-left: 0.25rem;
+        }
+
+        .link-group a:first-child {
+            margin-left: 0;
+        }
+
+        .link-group a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 1.5rem 1rem 2rem;
+            }
+
+            h1 {
+                font-size: 1.9rem;
+            }
+
+            th,
+            td {
+                padding: 0.75rem 0.7rem;
+            }
+
+            th:nth-child(1),
+            td:nth-child(1) {
+                width: 30%;
+            }
+
+            th:nth-child(3),
+            td:nth-child(3) {
+                width: 22%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html" data-en="Home" data-zh="主页">Home</a> &nbsp;›&nbsp;
+            <span data-en="Study Notes" data-zh="学习笔记">Study Notes</span>
+        </div>
+
+        <h1 data-en="Study Notes" data-zh="学习笔记">Study Notes</h1>
+
+        <div class="projects-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-en="TOPIC" data-zh="主题">TOPIC</th>
+                        <th data-en="DESCRIPTION" data-zh="描述">DESCRIPTION</th>
+                        <th data-en="LINK" data-zh="链接">LINK</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Study Notes -->
+
+                    <tr>
+                        <td class="project-name" data-en="OSU CSE 2231 Note" data-zh="笔记">OSU CSE 2231 Note</td>
+                        <td class="project-desc">
+                            <span data-en="My personal study notes on CSE 2231." data-zh="我的CSE 2231课程个人学习笔记。">
+                                My personal study notes on CSE 2231.
+                            </span>
+                        </td>
+                        <td class="link-group">
+                            <a href="https://drive.google.com/file/d/1rC5IbQhbV4m2xp7-aSANVgtMPAuIYmDT/view?usp=sharing"
+                                target="_blank" data-en="Open PDF" data-zh="打开 PDF">Open</a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Language sync with main site -->
+    <script>
+        // Language sync with main site
+        (function () {
+            // Load saved language or default to English
+            let currentLang = localStorage.getItem('lang') || 'en';
+
+            function applyLanguage(lang) {
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    const enText = el.getAttribute('data-en');
+                    const zhText = el.getAttribute('data-zh');
+                    const text = (lang === 'zh' ? (zhText || enText) : enText) || '';
+                    if (text) {
+                        el.innerHTML = text;
+                    }
+                });
+            }
+
+            // Apply language on initial load
+            applyLanguage(currentLang);
+        })();
+    </script>
+</body>
+
+</html>
