@@ -1,0 +1,258 @@
+:root {
+    --glass-surface: rgba(255, 255, 255, 0.25);
+    --glass-surface-strong: rgba(255, 255, 255, 0.40);
+    --glass-border: rgba(255, 255, 255, 0.50);
+    --glass-shadow: 0 28px 80px rgba(46, 65, 110, 0.16);
+    --glass-highlight: rgba(255, 255, 255, 0.70);
+}
+
+[data-theme="dark"] {
+    --glass-surface: rgba(15, 23, 42, 0.35);
+    --glass-surface-strong: rgba(15, 23, 42, 0.50);
+    --glass-border: rgba(148, 163, 184, 0.15);
+    --glass-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    --glass-highlight: rgba(255, 255, 255, 0.10);
+}
+
+html {
+    background: #f7fbff;
+}
+
+html[data-theme="dark"] {
+    background: #07111f;
+}
+
+body {
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(135deg, #e0efff 0%, #d6eaff 42%, #ffe4dd 100%) !important;
+    background-attachment: fixed;
+}
+
+html[data-theme="dark"] body {
+    background: linear-gradient(135deg, #0b1a38 0%, #15224a 50%, #1c1f40 100%) !important;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+}
+
+body::before {
+    background:
+        radial-gradient(ellipse 34rem 40rem at -3% 46%, rgba(58, 143, 255, 0.85), transparent 68%),
+        radial-gradient(ellipse 44rem 38rem at 102% 44%, rgba(255, 88, 106, 0.80), transparent 70%),
+        radial-gradient(ellipse 34rem 30rem at 40% 34%, rgba(142, 125, 255, 0.60), transparent 72%),
+        radial-gradient(ellipse 46rem 24rem at 42% 98%, rgba(73, 151, 255, 0.70), transparent 72%),
+        radial-gradient(circle at 71% 34%, rgba(255, 255, 255, 0.88) 0 0.42rem, transparent 0.76rem),
+        radial-gradient(circle at 11% 52%, rgba(220, 244, 255, 0.88) 0 0.48rem, transparent 0.82rem);
+    filter: blur(22px);
+    opacity: 0.98;
+}
+
+body::after {
+    z-index: -1;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.16)),
+        radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.38), transparent 34rem);
+    backdrop-filter: blur(18px) saturate(132%);
+    -webkit-backdrop-filter: blur(18px) saturate(132%);
+}
+
+html[data-theme="dark"] body::after {
+    background: rgba(2, 6, 23, 0.2);
+}
+
+nav,
+footer,
+.header,
+.card,
+.simple-card,
+.showcase-container,
+.photo-section,
+.photo-card,
+.game-card,
+.music-card,
+.skill-tag,
+.card-img-wrapper,
+.toggle-wrapper,
+.hamburger-menu,
+.dropdown-menu,
+.projects-table,
+.btn-outline,
+.lang-toggle {
+    background: var(--glass-surface) !important;
+    border-color: var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+}
+
+nav {
+    background: rgba(255, 255, 255, 0.30) !important;
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+html[data-theme="dark"] nav {
+    background: rgba(15, 23, 42, 0.28) !important;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.4rem, 6vw, 5rem) clamp(3.25rem, 6vw, 4.8rem) !important;
+    background: transparent !important;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 50% 12%, rgba(255, 255, 255, 0.70), transparent 18rem),
+        radial-gradient(circle at 84% 58%, rgba(160, 120, 255, 0.14), transparent 18rem);
+    pointer-events: none;
+    z-index: -1;
+}
+
+
+
+.header {
+    position: relative;
+    overflow: hidden;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.header::before {
+    display: none;
+}
+
+.card,
+.simple-card,
+.showcase-container,
+.photo-section,
+.projects-table {
+    position: relative;
+}
+
+.card::before,
+.simple-card:not(.no-glass-box)::before,
+.showcase-container::before,
+.photo-section::before,
+.projects-table::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    border: 1px solid var(--glass-highlight);
+    pointer-events: none;
+}
+
+.no-glass-box {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.btn:not(.btn-outline):not(.btn-dark):not(.btn-insta),
+.btn-home,
+.back-to-top {
+    background: linear-gradient(135deg, #7c5cff 0%, #2f80ff 100%) !important;
+    box-shadow: 0 14px 34px rgba(47, 128, 255, 0.26) !important;
+}
+
+.btn-outline:hover,
+.lang-toggle:hover,
+.photo-nav-btn:hover {
+    background: linear-gradient(135deg, #7c5cff 0%, #2f80ff 100%) !important;
+    border-color: transparent !important;
+}
+
+.profile-photo {
+    width: 128px !important;
+    height: 128px !important;
+    border-color: rgba(255, 255, 255, 0.84) !important;
+    box-shadow: 0 16px 42px rgba(35, 52, 95, 0.18) !important;
+}
+
+.hero h1 {
+    font-size: clamp(2.35rem, 4vw, 3.2rem) !important;
+    letter-spacing: 0;
+}
+
+.hero .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.hero p {
+    color: rgba(51, 65, 85, 0.78) !important;
+}
+
+html[data-theme="dark"] .hero p {
+    color: rgba(226, 232, 240, 0.78) !important;
+}
+
+.hero .btn {
+    min-height: 52px;
+    border-radius: 999px !important;
+    font-weight: 700;
+    box-shadow: 0 16px 34px rgba(59, 130, 246, 0.16);
+}
+
+.hero .btn-outline {
+    background: rgba(255, 255, 255, 0.34) !important;
+    border: 2px solid rgba(87, 124, 255, 0.72) !important;
+    color: #2563eb !important;
+}
+
+.hero .btn-outline:hover {
+    color: #ffffff !important;
+}
+
+thead {
+    background: var(--glass-surface-strong) !important;
+}
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.36) !important;
+}
+
+html[data-theme="dark"] tbody tr:hover {
+    background: rgba(148, 163, 184, 0.12) !important;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-size: 160% 160%;
+    }
+
+    body::after {
+        backdrop-filter: blur(24px) saturate(130%);
+        -webkit-backdrop-filter: blur(24px) saturate(130%);
+    }
+
+    .hero {
+        width: 100%;
+        margin: 0;
+        padding: 4rem 1rem !important;
+    }
+}
