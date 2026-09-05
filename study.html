@@ -11,13 +11,14 @@
 
     <style>
         :root {
-            --bg: #050816;
-            --bg-card: #111827;
-            --bg-header: #1f2933;
+            --bg: #050510;
+            --bg-card: rgba(255, 255, 255, 0.075);
+            --bg-header: rgba(255, 255, 255, 0.08);
             --text-main: #f9fafb;
-            --text-sub: #9ca3af;
-            --accent: #60a5fa;
-            --border: #374151;
+            --text-sub: #a8b3cf;
+            --accent: #c084fc;
+            --accent-2: #22d3ee;
+            --border: rgba(255, 255, 255, 0.14);
         }
 
         * {
@@ -28,13 +29,30 @@
         }
 
         body {
-            background-color: var(--bg);
+            background:
+                radial-gradient(circle at 12% 8%, rgba(168, 85, 247, 0.32), transparent 28rem),
+                radial-gradient(circle at 85% 18%, rgba(34, 211, 238, 0.18), transparent 26rem),
+                radial-gradient(circle at 50% 95%, rgba(244, 114, 182, 0.16), transparent 30rem),
+                var(--bg);
             color: var(--text-main);
             min-height: 100vh;
             padding: 2.5rem 1.5rem 3rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 70px 70px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 82%);
+            z-index: -1;
         }
 
         .container {
@@ -59,16 +77,21 @@
 
         h1 {
             text-align: center;
-            font-size: 2.4rem;
+            font-size: clamp(2.6rem, 8vw, 6rem);
+            line-height: 0.95;
             margin-bottom: 2rem;
+            font-weight: 900;
+            text-shadow: 0 0 34px rgba(168, 85, 247, 0.26);
         }
 
         .projects-table {
             width: 100%;
-            border-radius: 1rem;
+            border-radius: 8px;
             overflow: hidden;
             background-color: var(--bg-card);
             border: 1px solid var(--border);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(20px);
         }
 
         table {
@@ -108,7 +131,7 @@
         }
 
         tbody tr:hover {
-            background-color: rgba(31, 41, 55, 0.85);
+            background-color: rgba(168, 85, 247, 0.12);
         }
 
         .project-name {

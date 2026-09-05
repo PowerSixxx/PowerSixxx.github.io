@@ -32,7 +32,7 @@ A modern, fully responsive personal portfolio website built with **HTML, CSS, an
 │   ├── osu_eng.jpg
 │   ├── offer.png
 │   └── other images...
-├── Baowen Liu_Resume.pdf
+├── Baowen_Resume.pdf
 └── README.md
 ```
 
