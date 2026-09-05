@@ -242,6 +242,7 @@
             display: flex;
             gap: 1.5rem;
             overflow-x: auto;
+            overflow-y: hidden;
             padding-bottom: 0.5rem;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
@@ -279,6 +280,7 @@
 
         .photo-grid::-webkit-scrollbar {
             height: 6px;
+            width: 0;
         }
 
         .photo-grid::-webkit-scrollbar-track {
@@ -484,6 +486,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="assets/glass-theme.css">
 </head>
 <body>
 
@@ -516,7 +519,7 @@
         <p class="animate-on-scroll delay-100" data-en="Beyond the code: My hobbies, interests, and life." data-zh="除了代码之外，这里是我的兴趣爱好和生活。">Beyond the code: My hobbies, interests, and life.</p>
     </div>
 
-    <div class="simple-card animate-on-scroll" style="padding: 2rem;">
+    <div class="simple-card no-glass-box animate-on-scroll" style="padding: 2rem;">
 
         <div class="about-intro-layout">
 
@@ -544,28 +547,7 @@
 </div>
 
 
-    <div class="simple-card animate-on-scroll delay-200">
-        <div class="hs-card-layout">
-            <!-- Logo (will appear on the right on desktop, above title on mobile) -->
-            <div class="hs-logo-wrapper">
-                <img src="assets/logo-yaohua.png" alt="Tianjin the Second Yaohua High School Logo" class="hs-logo">
-            </div>
 
-            <!-- Text content -->
-            <div class="hs-text">
-                <h2 data-en="High School Highlights" data-zh="高中经历亮点">High School Highlights</h2>
-                <p data-en="<strong>Tianjin the Second Yaohua High School</strong>" data-zh="<strong>天津市第二耀华中学</strong>">
-                    <strong>Tianjin the Second Yaohua High School</strong>
-                </p>
-                <ul>
-                    <li data-en="<strong>President of Student Union:</strong> Led student initiatives and organized campus events." data-zh="<strong>学生会主席：</strong> 负责带领学生组织活动并策划校园活动。"><strong>President of Student Union:</strong> Led student initiatives and organized campus events.</li>
-                    <li data-en="<strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin." data-zh="<strong>市级三好学生：</strong> 被评为天津市市级优秀学生。"><strong>Municipal Excellent Student:</strong> Recognized as an Excellent Student at the municipal level in Tianjin.</li>
-                    <li data-en="<strong>Math Teaching Assistant:</strong> explained solutions, and helped classmates with questions and problem-solving." data-zh="<strong>数学助教：</strong> 讲解题目思路，帮助同学解决问题。"><strong>Math Teaching Assistant:</strong> Graded assignments and quizzes, explained solutions, and helped classmates with questions and problem-solving.</li>
-                    <li data-en="<strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics." data-zh="<strong>物理竞赛（COP）：</strong> 参加第 39 届全国中学生物理竞赛。"><strong>Physics Olympiad (COP):</strong> Participant in the 39th National Olympiad in Physics.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
     <div class="showcase-container animate-on-scroll delay-300">
         <div class="showcase-header" data-en="Hobbies" data-zh="兴趣爱好">Hobbies</div>
@@ -763,10 +745,12 @@
         const icon = btn.querySelector('i');
         const html = document.documentElement;
 
-        if(localStorage.getItem('theme') !== 'light') {
+        if(localStorage.getItem('theme') === 'dark') {
             html.setAttribute('data-theme', 'dark');
             icon.classList.replace('fa-moon', 'fa-sun');
-            localStorage.setItem('theme', 'dark');
+        } else {
+            html.removeAttribute('data-theme');
+            icon.classList.replace('fa-sun', 'fa-moon');
         }
 
         btn.addEventListener('click', () => {
