@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,30 +52,31 @@
         /* Global color matching variable */
         :root {
             --primary: #2563eb;
-            --bg-body: #f8fafc;
+            --bg-body: #f7f5f0;
             --bg-card: #ffffff;
-            --text-main: #334155;
-            --text-sub: #64748b;
-            --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --text-main: #1c1917;
+            --text-sub: #57534e;
+            --border: #e5e1d8;
+            --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
             --panel-bg: #ffffff;
-            --card-hover: #f1f5f9;
+            --card-hover: #fcfbfa;
         }
 
         [data-theme="dark"] {
-            --primary: #60a5fa;
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
+            --primary: #3b82f6;
+            --bg-body: #000000;
+            --bg-card: #0c0c0e;
             --text-main: #f1f5f9;
             --text-sub: #94a3b8;
-            --border: #334155;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-            --panel-bg: #1e293b;
-            --card-hover: #2d3748;
+            --border: #1f1f24;
+            --shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.85);
+            --panel-bg: #0c0c0e;
+            --card-hover: #16161a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        html, body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        body::before, body::after { display: none !important; }
         
         /* Dynamic animation */
         .animate-on-scroll { 
@@ -85,33 +86,334 @@
         .animate-on-scroll.show { opacity: 1; transform: translateY(0) scale(1); }
         .delay-100 { transition-delay: 100ms; } .delay-200 { transition-delay: 200ms; } .delay-300 { transition-delay: 300ms; } .delay-400 { transition-delay: 400ms; }
 
-        /* navigation bar */
-        nav { 
-            background: var(--bg-card); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; 
-            position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); border-bottom: 1px solid var(--border);
+        /* --------------------------------------------------------------------------
+           Capsule Navigation Bar (Pill Header) - Always Fixed to Viewport Top
+           -------------------------------------------------------------------------- */
+        body {
+            padding-top: 5.5rem !important;
         }
-        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: bold; color: var(--text-main); text-decoration: none; }
-        .nav-right { display: flex; align-items: center; gap: 2rem; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; }
-        .nav-links a:hover { color: var(--primary); }
-        #theme-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-main); }
+
+        html {
+            scroll-behavior: smooth !important;
+            scroll-padding-top: 6rem !important;
+        }
+
+        section,
+        footer {
+            scroll-margin-top: 6rem !important;
+        }
+
+        nav,
+        nav.capsule-nav {
+            position: fixed !important;
+            top: 1.1rem !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            z-index: 99999 !important;
+            max-width: 1180px !important;
+            width: min(1180px, calc(100% - 2.4rem)) !important;
+            margin: 0 !important;
+            padding: 0.5rem 1.4rem !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            border-radius: 999px !important;
+            background: rgba(255, 255, 255, 0.88) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+        }
+
+        [data-theme="dark"] nav,
+        [data-theme="dark"] nav.capsule-nav {
+            background: rgba(16, 16, 20, 0.88) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .nav-brand,
+        .logo {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.65rem !important;
+            text-decoration: none !important;
+            flex-shrink: 0 !important;
+        }
+
+        .brand-avatar {
+            width: 32px !important;
+            height: 32px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 50% !important;
+            overflow: hidden !important;
+        }
+
+        .brand-title,
+        .portfolio-title {
+            font-size: 1.02rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.02em !important;
+            text-transform: none !important;
+            color: #1c1917 !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        }
+
+        [data-theme="dark"] .brand-title,
+        [data-theme="dark"] .portfolio-title {
+            color: #f4f4f5 !important;
+        }
+
+        .nav-links {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.35rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .nav-links li {
+            position: relative !important;
+        }
+
+        .nav-links a {
+            text-decoration: none !important;
+            font-size: 0.88rem !important;
+            font-weight: 500 !important;
+            color: #57534e !important;
+            padding: 0.45rem 0.9rem !important;
+            border-radius: 999px !important;
+            transition: all 0.2s ease !important;
+            white-space: nowrap !important;
+            display: inline-block !important;
+        }
+
+        .nav-links a:hover {
+            color: #1c1917 !important;
+            background: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .nav-links a.nav-pill-active,
+        .nav-links a.active {
+            background: #18181b !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        [data-theme="dark"] .nav-links a {
+            color: #a1a1aa !important;
+        }
+
+        [data-theme="dark"] .nav-links a:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        [data-theme="dark"] .nav-links a.nav-pill-active,
+        [data-theme="dark"] .nav-links a.active {
+            background: #f4f4f5 !important;
+            color: #09090b !important;
+            box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .nav-actions,
+        .nav-right,
+        .nav-container {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.55rem !important;
+            position: static !important;
+        }
+
+        .nav-resume-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.3rem !important;
+            font-size: 0.82rem !important;
+            font-weight: 500 !important;
+            color: #27272a !important;
+            text-decoration: none !important;
+            border: 1px solid rgba(0, 0, 0, 0.14) !important;
+            border-radius: 999px !important;
+            padding: 0.38rem 0.9rem !important;
+            background: rgba(255, 255, 255, 0.7) !important;
+            transition: all 0.2s ease !important;
+            white-space: nowrap !important;
+        }
+
+        .nav-resume-btn:hover {
+            background: #ffffff !important;
+            border-color: rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            transform: translateY(-1px) !important;
+        }
+
+        [data-theme="dark"] .nav-resume-btn {
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            color: #e4e4e7 !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        [data-theme="dark"] .nav-resume-btn:hover {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.35) !important;
+            color: #ffffff !important;
+        }
 
         .lang-toggle {
-            background: none;
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            color: var(--text-main);
-            padding: 0.3rem 0.8rem;
-            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+            background: rgba(255, 255, 255, 0.7) !important;
+            border: 1px solid rgba(0, 0, 0, 0.14) !important;
+            color: #44403c !important;
+            padding: 0.38rem 0.85rem !important;
+            border-radius: 999px !important;
+            font-size: 0.82rem !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            white-space: nowrap !important;
         }
 
         .lang-toggle:hover {
-            background-color: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
+            background: #ffffff !important;
+            border-color: rgba(0, 0, 0, 0.3) !important;
+            color: #1c1917 !important;
+            transform: translateY(-1px) !important;
+        }
+
+        [data-theme="dark"] .lang-toggle {
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            color: #e2e8f0 !important;
+        }
+
+        [data-theme="dark"] .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.35) !important;
+            color: #ffffff !important;
+        }
+
+        #theme-toggle,
+        .theme-btn,
+        #theme-btn {
+            width: 34px !important;
+            height: 34px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: rgba(255, 255, 255, 0.7) !important;
+            border: 1px solid rgba(0, 0, 0, 0.14) !important;
+            border-radius: 50% !important;
+            color: #44403c !important;
+            font-size: 0.95rem !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            padding: 0 !important;
+        }
+
+        #theme-toggle:hover,
+        .theme-btn:hover,
+        #theme-btn:hover {
+            background: #ffffff !important;
+            border-color: rgba(0, 0, 0, 0.3) !important;
+            color: #1c1917 !important;
+            transform: scale(1.06) !important;
+        }
+
+        [data-theme="dark"] #theme-toggle,
+        [data-theme="dark"] .theme-btn,
+        [data-theme="dark"] #theme-btn {
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            color: #f1f5f9 !important;
+        }
+
+        [data-theme="dark"] #theme-toggle:hover,
+        [data-theme="dark"] .theme-btn:hover,
+        [data-theme="dark"] #theme-btn:hover {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.35) !important;
+            color: #ffffff !important;
+        }
+
+        /* Responsive Capsule Nav */
+        @media (max-width: 900px) {
+            .nav-resume-btn {
+                display: none !important;
+            }
+            .nav-item-about,
+            .nav-item-skills {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 4.5rem !important;
+            }
+            nav,
+            nav.capsule-nav {
+                width: calc(100% - 1.4rem) !important;
+                max-width: 100% !important;
+                top: 0.65rem !important;
+                padding: 0.35rem 0.85rem !important;
+                box-sizing: border-box !important;
+            }
+            .nav-brand,
+            .logo {
+                gap: 0.45rem !important;
+                flex-shrink: 0 !important;
+            }
+            .brand-avatar {
+                width: 26px !important;
+                height: 26px !important;
+            }
+            .brand-avatar svg {
+                width: 26px !important;
+                height: 26px !important;
+            }
+            .brand-title,
+            .portfolio-title {
+                font-size: 0.88rem !important;
+                letter-spacing: 0.01em !important;
+            }
+            .nav-links {
+                gap: 0 !important;
+                padding: 2px !important;
+            }
+            .nav-item-hero,
+            .nav-item-about,
+            .nav-item-experience,
+            .nav-item-projects,
+            .nav-item-skills {
+                display: none !important;
+            }
+            .nav-links a {
+                font-size: 0.82rem !important;
+                padding: 0.35rem 0.75rem !important;
+            }
+            .nav-actions {
+                gap: 0.38rem !important;
+                flex-shrink: 0 !important;
+            }
+            .nav-resume-btn {
+                display: none !important;
+            }
+            .lang-toggle {
+                padding: 0.3rem 0.55rem !important;
+                font-size: 0.75rem !important;
+            }
+            #theme-toggle,
+            .theme-btn,
+            #theme-btn {
+                width: 28px !important;
+                height: 28px !important;
+                font-size: 0.82rem !important;
+            }
         }
 
         .back-to-top {
@@ -346,15 +648,48 @@
         audio { width: 100%; height: 28px; opacity: 0.8; outline: none; margin-top: auto; }
         [data-theme="dark"] audio { filter: invert(0.9) hue-rotate(180deg); }
 
-        .btn-home { display: block; width: fit-content; margin: 2rem auto; padding: 0.8rem 2rem; background: var(--primary); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.2s; }
-        .btn-home:hover { transform: translateY(-2px); }
+        .btn-home {
+            display: block;
+            width: fit-content;
+            margin: 2.5rem auto 1.5rem auto;
+            padding: 0.85rem 2.2rem;
+            background: #18181b;
+            color: #ffffff;
+            border: 1.5px solid #18181b;
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+        }
+        .btn-home:hover {
+            background: #27272a;
+            border-color: #27272a;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+        }
+        [data-theme="dark"] .btn-home,
+        html[data-theme="dark"] .btn-home {
+            background: #ffffff;
+            color: #09090b;
+            border: 1.5px solid #ffffff;
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+        }
+        [data-theme="dark"] .btn-home:hover,
+        html[data-theme="dark"] .btn-home:hover {
+            background: #f4f4f5;
+            color: #000000;
+            border-color: #f4f4f5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(255, 255, 255, 0.25);
+        }
         footer { text-align: center; padding: 3rem; color: var(--text-sub); font-size: 0.9rem; }
 
         @media (max-width: 768px) {
-            nav { flex-direction: row; flex-wrap: wrap; }
-            .logo { flex-grow: 1; }
-            .nav-links { display: none; }
-
             /* Mobile spacing + fonts */
             body {
                 font-size: 0.95rem;
@@ -455,28 +790,40 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="assets/glass-theme.css">
+    <link rel="stylesheet" href="assets/glass-theme.css?v=20260907_nav_pill_fix">
 </head>
-<body>
+<body class="about-page">
 
-    <nav>
-        <a href="index.html" class="logo">
-            <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0" y="0" width="100" height="100" rx="25" fill="var(--text-main)"/>
-                <text x="42" y="82" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">L</text>
-                <text x="12" y="72" font-size="85" fill="none" stroke="var(--text-main)" stroke-width="6" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
-                <text x="12" y="72" font-size="85" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
-            </svg>
-            <span data-en="Baowen Liu" data-zh="刘宝文">Baowen Liu</span>
+    <nav class="capsule-nav">
+        <a href="index.html" class="nav-brand logo">
+            <div class="brand-avatar">
+                <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="var(--text-main)"/>
+                    <text x="42" y="80" font-size="80" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">L</text>
+                    <text x="14" y="70" font-size="80" fill="none" stroke="var(--text-main)" stroke-width="6" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
+                    <text x="14" y="70" font-size="80" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
+                </svg>
+            </div>
+            <span class="portfolio-title">BAOWEN</span>
         </a>
 
-        <div class="nav-right">
-            <ul class="nav-links">
-                <li><a href="index.html" data-en="Home" data-zh="主页">Home</a></li>
-                <li><a href="about.html" style="color: var(--primary)" data-en="About Me" data-zh="关于我">About Me</a></li>
-            </ul>
+        <ul class="nav-links">
+            <li class="nav-item-hero"><a href="about.html" class="nav-pill-active" data-en="About Me" data-zh="关于我">About Me</a></li>
+            <li class="nav-item-about"><a href="index.html#about" data-en="Education" data-zh="教育背景">Education</a></li>
+            <li class="nav-item-experience"><a href="index.html#experience" data-en="Experience" data-zh="工作经历">Experience</a></li>
+            <li class="nav-item-projects"><a href="index.html#projects" data-en="Projects" data-zh="项目">Projects</a></li>
+            <li class="nav-item-skills"><a href="index.html#skills" data-en="Skills & Interests" data-zh="技能与爱好">Skills & Interests</a></li>
+            <li class="nav-item-contact"><a href="index.html#contact" data-en="Contact" data-zh="联系我">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <a href="Baowen_Resume.pdf" target="_blank" class="nav-resume-btn" data-en="Resume.pdf ↗" data-zh="简历.pdf ↗" data-href-en="Baowen_Resume.pdf" data-href-zh="Baowen_Resume_CN.pdf">
+                Resume.pdf ↗
+            </a>
             <button id="lang-toggle" class="lang-toggle" title="Switch language">EN | 中文</button>
-            <button id="theme-btn" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+            <button id="theme-btn" class="theme-btn" title="Toggle theme (Day/Night)">
+                <i class="fas fa-sun"></i>
+            </button>
         </div>
     </nav>
 
@@ -500,14 +847,14 @@
             <!-- Right: Text -->
             <div style="flex: 1; min-width: 260px;">
 
-                <p data-en="I am Baowen Liu, an undergraduate at The Ohio State University majoring in Computer Science and Engineering with a Mathematics minor. I enjoy building things that connect theory with real-world impact, from Java utilities to autonomous vehicle safety tools."
-                   data-zh="我叫刘宝文，目前就读于俄亥俄州立大学，主修计算机科学与工程，并辅修数学。我喜欢做能够将理论与现实影响相结合的项目，从 Java 工具到自动驾驶安全系统。">
-                    I am Baowen Liu, an undergraduate at The Ohio State University majoring in Computer Science and Engineering with a Mathematics minor. I enjoy building things that connect theory with real-world impact, from Java utilities to autonomous vehicle safety tools.
+                <p data-en="I am Baowen Liu, an undergraduate at The Ohio State University majoring in Computer Science and Engineering with a Mathematics minor. I am passionate about building robust, scalable systems and solving complex engineering challenges, with hands-on experience spanning distributed backend architectures, full-stack development, and AI-powered platforms (RAG)."
+                   data-zh="我叫刘宝文，目前就读于俄亥俄州立大学，主修计算机科学与工程，并辅修数学。我热衷于构建高可用、高扩展性的软件系统并攻克复杂的工程挑战，在分布式后端架构、全栈开发以及 AI 驱动平台（RAG）方面拥有扎实的实战经验。">
+                    I am Baowen Liu, an undergraduate at The Ohio State University majoring in Computer Science and Engineering with a Mathematics minor. I am passionate about building robust, scalable systems and solving complex engineering challenges, with hands-on experience spanning distributed backend architectures, full-stack development, and AI-powered platforms (RAG).
                 </p>
 
-                <p data-en="My current goal is to dive deeper into algorithms and AI, and to grow as a software engineer through real projects. I’m actively looking for summer internships where I can solve practical problems, collaborate with experienced engineers, and explore which areas of computer science I enjoy the most."
-                   data-zh="我目前的目标是更深入学习算法和人工智能，并通过真实项目提升自己作为软件工程师的能力。我正在积极寻找暑期实习，希望解决实际问题、与有经验的工程师合作，并探索自己最喜欢的计算机科学方向。">
-                    My current goal is to dive deeper into algorithms and AI, and to grow as a software engineer through real projects. I’m actively looking for summer internships where I can solve practical problems, collaborate with experienced engineers, and explore which areas of computer science I enjoy the most.
+                <p data-en="I am actively seeking Software Development Engineer (SDE) internship and full-time opportunities. Leveraging my background in the Java/Spring ecosystem, cloud-native AWS infrastructure, and modern data-driven systems, I look forward to contributing to high-impact products and collaborating with forward-thinking engineering teams."
+                   data-zh="我目前正在积极寻找软件开发工程师（SDE）实习与全职工作机会。期望结合自己在 Java/Spring 生态、云原生 AWS 基础设施及数据驱动系统方面的扎实技术积累，投入到具有实际影响力的生产级产品研发中，与优秀的工程师团队并肩协作。">
+                    I am actively seeking Software Development Engineer (SDE) internship and full-time opportunities. Leveraging my background in the Java/Spring ecosystem, cloud-native AWS infrastructure, and modern data-driven systems, I look forward to contributing to high-impact products and collaborating with forward-thinking engineering teams.
                 </p>
 
             </div>
@@ -643,8 +990,8 @@
 
     <button id="back-to-top" class="back-to-top">↑</button>
 
-    <footer data-en="&copy; 2025 Baowen Liu. All Rights Reserved." data-zh="&copy; 2025 刘宝文。保留所有权利。">
-        &copy; 2025 Baowen Liu. All Rights Reserved.
+    <footer data-en="&copy; {YEAR} Baowen Liu. All Rights Reserved." data-zh="&copy; {YEAR} 刘宝文。保留所有权利。">
+        &copy; 2026 Baowen Liu. All Rights Reserved.
     </footer>
 
     <script>
@@ -714,23 +1061,23 @@
         const icon = btn.querySelector('i');
         const html = document.documentElement;
 
-        if(localStorage.getItem('theme') === 'dark') {
-            html.setAttribute('data-theme', 'dark');
-            icon.classList.replace('fa-moon', 'fa-sun');
-        } else {
+        if (localStorage.getItem('theme') === 'light') {
             html.removeAttribute('data-theme');
-            icon.classList.replace('fa-sun', 'fa-moon');
+            icon.className = 'fas fa-moon';
+        } else {
+            html.setAttribute('data-theme', 'dark');
+            icon.className = 'fas fa-sun';
         }
 
         btn.addEventListener('click', () => {
-            if(html.getAttribute('data-theme') === 'dark') {
+            if (html.getAttribute('data-theme') === 'dark') {
                 html.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
-                icon.classList.replace('fa-sun', 'fa-moon');
+                icon.className = 'fas fa-moon';
             } else {
                 html.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
-                icon.classList.replace('fa-moon', 'fa-sun');
+                icon.className = 'fas fa-sun';
             }
         });
 
@@ -787,13 +1134,26 @@
         let currentLang = localStorage.getItem('lang') || 'en';
 
         function applyLanguage(lang) {
+            const currentYear = new Date().getFullYear();
             document.querySelectorAll('[data-en]').forEach(el => {
                 const enText = el.getAttribute('data-en');
                 const zhText = el.getAttribute('data-zh');
-                const text = (lang === 'zh' ? (zhText || enText) : enText) || '';
+                let text = (lang === 'zh' ? (zhText || enText) : enText) || '';
                 if (text) {
+                    text = text.replace('{YEAR}', currentYear);
                     el.innerHTML = text;
                 }
+            });
+
+            // Update Resume PDF links based on language
+            const resumeHref = lang === 'zh' ? 'Baowen_Resume_CN.pdf' : 'Baowen_Resume.pdf';
+            document.querySelectorAll('a[href*="Baowen_Resume"]').forEach(a => {
+                a.setAttribute('href', resumeHref);
+            });
+            document.querySelectorAll('[data-href-en]').forEach(el => {
+                const enHref = el.getAttribute('data-href-en');
+                const zhHref = el.getAttribute('data-href-zh');
+                el.setAttribute('href', lang === 'zh' ? (zhHref || enHref) : enHref);
             });
         }
 

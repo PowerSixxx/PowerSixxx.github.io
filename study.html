@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -11,13 +11,23 @@
 
     <style>
         :root {
-            --bg: #f8fafc;
+            --bg: #f7f5f0;
             --bg-card: #ffffff;
-            --bg-header: #eef4ff;
-            --text-main: #0f172a;
-            --text-sub: #64748b;
+            --bg-header: #efece6;
+            --text-main: #1c1917;
+            --text-sub: #57534e;
             --accent: #2563eb;
-            --border: #dbe4f0;
+            --border: #e5e1d8;
+        }
+
+        [data-theme="dark"] {
+            --bg: #000000;
+            --bg-card: #0c0c0e;
+            --bg-header: #141417;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --accent: #3b82f6;
+            --border: #1f1f24;
         }
 
         * {
@@ -27,7 +37,7 @@
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        body {
+        html, body {
             background-color: var(--bg);
             color: var(--text-main);
             min-height: 100vh;
@@ -36,6 +46,7 @@
             flex-direction: column;
             align-items: center;
         }
+        body::before, body::after { display: none !important; }
 
         .container {
             width: 100%;
@@ -160,7 +171,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="assets/glass-theme.css">
+    <link rel="stylesheet" href="assets/glass-theme.css?v=20260907_pureblack">
 </head>
 
 <body>
