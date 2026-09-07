@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -1534,7 +1534,7 @@
             </a>
             <button id="lang-toggle" class="lang-toggle" title="Switch language">EN | 中文</button>
             <button id="theme-toggle" class="theme-btn" title="Toggle theme (Day/Night)">
-                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
             </button>
             <button id="hamburger" class="hamburger" aria-label="Open navigation menu"
                 style="display: none !important;">
@@ -2036,13 +2036,13 @@
         const htmlElement = document.documentElement;
         const icon = themeToggle.querySelector('i');
 
-        // Check stored preference; default to dark (pure black)
-        if (localStorage.getItem('theme') === 'light') {
-            htmlElement.removeAttribute('data-theme');
-            icon.className = 'fas fa-moon';
-        } else {
+        // Check stored preference; default to light (米白色)
+        if (localStorage.getItem('theme') === 'dark') {
             htmlElement.setAttribute('data-theme', 'dark');
             icon.className = 'fas fa-sun';
+        } else {
+            htmlElement.removeAttribute('data-theme');
+            icon.className = 'fas fa-moon';
         }
 
         themeToggle.addEventListener('click', () => {
