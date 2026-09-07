@@ -1276,6 +1276,49 @@ html[data-theme="dark"] .back-to-top:hover {
     html[data-theme="dark"] .footer-contact p+p {
         border-top-color: rgba(255, 255, 255, 0.12) !important;
     }
+
+    /* Mobile: Work experience card ordering: Logo -> Title -> Company -> Button -> Body */
+    .timeline-content .card {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+
+    .coe-logo,
+    .nano-logo,
+    .spic-logo {
+        position: static !important;
+        order: 0 !important;
+        margin: 0 0 0.5rem 0 !important;
+        text-align: left !important;
+    }
+
+    .coe-logo img,
+    .nano-logo img,
+    .spic-logo img {
+        width: 70px !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+    .timeline-content .card h3 {
+        order: 1 !important;
+        width: 100% !important;
+    }
+
+    .timeline-content .card .date {
+        order: 2 !important;
+        width: 100% !important;
+    }
+
+    .timeline-content .card .card-toggle-btn {
+        order: 3 !important;
+    }
+
+    .timeline-content .card .card-collapsible-body {
+        order: 4 !important;
+        width: 100% !important;
+    }
 }
 
 /* --------------------------------------------------------------------------

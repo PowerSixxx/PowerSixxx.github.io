@@ -1468,26 +1468,29 @@
             }
 
             /* Title & date appear below logo, full-width */
-            .card-uta h3,
-            .card-uta .date,
-            .card-nano h3,
-            .card-nano .date,
-            .card-spic h3,
-            .card-spic .date {
-                order: 1;
+            .timeline-content .card h3 {
+                order: 1 !important;
                 width: 100%;
             }
 
-            /* Bullet points follow after title/date */
-            .card-uta ul,
-            .card-nano ul,
-            .card-spic ul {
-                order: 2;
+            .timeline-content .card .date {
+                order: 2 !important;
+                width: 100%;
+            }
+
+            /* "View details" button appears below company name/date */
+            .timeline-content .card .card-toggle-btn {
+                order: 3 !important;
+            }
+
+            /* Collapsible body follows after button */
+            .timeline-content .card .card-collapsible-body {
+                order: 4 !important;
                 width: 100%;
             }
         }
     </style>
-    <link rel="stylesheet" href="assets/glass-theme.css?v=20260907_nav_pill_fix">
+    <link rel="stylesheet" href="assets/glass-theme.css?v=20260907_card_btn_order">
 </head>
 
 <body>
@@ -1961,7 +1964,8 @@
                 <h3 data-en="Activities" data-zh="课外活动" style="margin-top: 1.5rem;">Activities</h3>
                 <ul style="margin-top: 0.5rem;">
                     <li data-en="<strong>OSU Audio Engineering Club:</strong> Active Member (Nov 2024 - Nov 2025)"
-                        data-zh="<strong>OSU 音频工程俱乐部：</strong> 活跃成员（2024 年 11 月 - 2025 年 11 月）"><strong>OSU Audio Engineering
+                        data-zh="<strong>OSU 音频工程俱乐部：</strong> 活跃成员（2024 年 11 月 - 2025 年 11 月）"><strong>OSU Audio
+                            Engineering
                             Club:</strong> Active Member (Nov 2024 - Nov 2025)</li>
                     <li data-en="<strong>OSU Buckeye AutoDrive:</strong> Active Member (Nov 2024 - Dec 2025)."
                         data-zh="<strong>OSU Buckeye AutoDrive 车队：</strong> 活跃成员（2024 年 11 月 - 2025 年 12 月）。">
