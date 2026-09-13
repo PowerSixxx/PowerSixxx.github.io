@@ -586,6 +586,8 @@ html[data-theme="dark"] .hero p {
     height: 128px !important;
     border: 2px solid #e5e1d8 !important;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+    object-fit: cover !important;
+    object-position: center top !important;
 }
 
 html[data-theme="dark"] .profile-photo {
