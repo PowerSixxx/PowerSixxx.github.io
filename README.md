@@ -1,119 +1,79 @@
-# 🌐 Baowen Liu — Personal Portfolio Website
+# Baowen Liu — Personal Website
 
-A modern, fully responsive personal portfolio website built with **HTML, CSS, and JavaScript**, featuring:
+Personal portfolio built with plain HTML, CSS and JavaScript. No framework, no build step. Hosted on GitHub Pages.
 
-- 🌗 **Light/Dark Mode**
-- 🌍 **English / 中文 Language Toggle**
-- 📱 **Fully Responsive (Mobile-Friendly)**
-- 🕹️ **Interactive Hero Section**
-- 🧭 **Animated Scroll Effects**
-- 📌 **Vertical Timeline for Work Experience**
-- 🔝 **Back to Top Button**
-- 📋 **Click-to-Copy Email & WeChat**
-- 🧾 **SEO + Open Graph meta tags**
-- ☁️ **Deployed with GitHub Pages**
+- Live: https://www.baowenliu.com/ (mirror: https://powersixxx.github.io/)
 
----
+## Features
 
-## 🚀 Live Demo
+**Content**
+- Home: hero, "Now" status block, education, work-experience timeline, LeetCode & study notes, projects, skills, guestbook, contact
+- About page: hobbies (games, music player) and a photography gallery
+- Resume page: web version of the PDF in English and Chinese, print-optimised (Ctrl/Cmd+P gives a one-page PDF)
+- Study notes and projects tables on separate pages
 
-👉 https://powersixxx.github.io/<br>
-👉 https://www.baowenliu.com/
+**Site-wide**
+- Light / dark theme; first visit follows the OS setting, then the toggle is remembered
+- English / Chinese toggle, remembered across pages (`data-en` / `data-zh` on every text node)
+- Responsive layout with a capsule nav on desktop and a compact bar on mobile
+- Page transitions via the cross-document View Transitions API (older browsers simply navigate)
+- Command palette: press Cmd+K / Ctrl+K to jump to any section, switch theme or language, open the resume, copy contact info
+- Terminal easter egg: click the `>_` button or press the backtick key, then type `help`
+- Guestbook powered by giscus (comments and reactions stored in the repo's GitHub Discussions)
+- Footer status card: days online plus today's / total visitors from GoatCounter (privacy-friendly, no cookies)
+- SEO: meta descriptions, Open Graph tags, canonical URLs, `robots.txt`, `sitemap.xml`, custom 404 page
+- Honours the OS "reduce motion" setting
 
----
-
-## 📁 Project Structure
+## Project structure
 
 ```
-/
-├── index.html
-├── about.html
-├── assets/
-│   ├── osu_eng.jpg
-│   ├── offer.png
-│   └── other images...
-├── Baowen_Resume.pdf
-└── README.md
+index.html            Home page
+about.html            About page
+resume.html           Web resume (EN / 中文)
+study.html            Study notes
+projects.html         Projects table
+404.html              Custom not-found page
+assets/
+  glass-theme.css     Shared theme (palette, nav, cards, timeline, transitions)
+  terminal.js         Terminal easter egg
+  palette.js          Cmd+K command palette
+  site-stats.js       Footer status card (uptime + GoatCounter counts)
+  *.png               Logos (light and dark-mode variants)
+  *.webp, *.mp3       Photos, game cards, music covers and tracks
+photo1.jpg            Profile photo (also the Open Graph preview)
+Baowen_Resume.pdf     English resume
+Baowen_Resume_CN.pdf  Chinese resume
+CNAME                 Custom domain
+robots.txt, sitemap.xml
 ```
 
----
+## Where to edit things
 
-## ✨ Features
+| What | Where |
+|---|---|
+| Fun facts under the hero | `FACTS` array near the bottom of `index.html` |
+| "Now" block text and its "Updated" date | `<section id="now">` in `index.html` |
+| Guestbook (giscus) settings | `GISCUS` object near the bottom of `index.html` |
+| Visitor counter | `GOATCOUNTER` and `LAUNCHED` in `assets/site-stats.js` |
+| Command palette entries | `COMMANDS` array in `assets/palette.js` |
+| Terminal commands and data | `DATA` and `commands` in `assets/terminal.js` |
+| Resume content | `resume.html` (keep in sync with the PDFs) |
+| Theme colours | `:root` / `[data-theme="dark"]` in `index.html` and `assets/glass-theme.css` |
 
-### 🔶 1. Fully Responsive UI
-- Desktop / Mobile layout adapts automatically  
-- Hamburger menu for small screens  
-- Grid-based button layout  
-
-### 🔶 2. Bilingual Support (EN ↔ 中文)
-- All text content includes `data-en` and `data-zh`
-- Language preference stored in `localStorage`
-- Language auto-syncs across pages (index + about)
-
-### 🔶 3. Dark Mode
-- Toggle button with icon switch (moon ↔ sun)
-- Theme preference saved in `localStorage`
-
-### 🔶 4. Scroll Animations
-- IntersectionObserver-based fade/slide-in animations  
-- Smooth user experience
-
-### 🔶 5. Interactive Elements
-- Profile picture tech-shockwave animation  
-- Email click‑to‑copy  
-- WeChat click‑to‑copy  
-- Toast popup (“Copied!”)  
-- Back‑to‑top button  
-
-### 🔶 6. SEO + Social Sharing
-Includes:
-- `description`
-- `keywords`
-- `author`
-- Open Graph (OG) tags (title / description / preview image)
-
----
-
-## 🛠️ Technologies Used
-
-- **HTML5**
-- **CSS3**  
-- **JavaScript (ES6)**  
-- **GitHub Pages**  
-
----
-
-## 📦 How to Run Locally
+## Run locally
 
 ```bash
 git clone https://github.com/PowerSixxx/PowerSixxx.github.io
 cd PowerSixxx.github.io
-open index.html   # macOS
+python3 -m http.server 8000   # open http://localhost:8000
 ```
 
----
+Use a local server rather than opening the files directly: the guestbook and the pixel-art avatar need an http(s) origin.
 
-## 🌍 Deployment (GitHub Pages)
+## Deployment
 
-1. Push your files to GitHub  
-2. Go to **Settings → Pages**  
-3. Select branch: `main`  
-4. Save  
+Push to `main`. GitHub Pages serves the repository root; `CNAME` points it at the custom domain.
 
-Your site will be live at:
+## License
 
-```
-https://<username>.github.io/
-```
-
----
-
-## 🤝 Contributions
-
-Feel free to fork or reference this project.
-
----
-
-## 📜 License
-
-MIT License © 2025 Baowen Liu
+MIT License, Baowen Liu

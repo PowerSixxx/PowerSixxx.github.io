@@ -2,15 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+        // Apply saved theme before first paint; fall back to the OS preference on first visit
+        (function () {
+            var s = localStorage.getItem('theme');
+            var dark = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me - Baowen Liu | 关于 刘宝文</title>
-    
+    <meta name="description"
+        content="About Baowen Liu — CS & Engineering student at The Ohio State University. Hobbies, music, games, and photography beyond the code.">
+    <meta name="author" content="Baowen Liu">
+    <link rel="canonical" href="https://www.baowenliu.com/about.html">
+    <meta property="og:title" content="About Me - Baowen Liu">
+    <meta property="og:description" content="Beyond the code: my hobbies, interests, and life at Ohio State.">
+    <meta property="og:image" content="https://www.baowenliu.com/assets/baowen-selfie.jpg">
+    <meta property="og:url" content="https://www.baowenliu.com/about.html">
+    <meta property="og:type" content="profile">
+    <meta name="twitter:card" content="summary">
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         .about-intro-layout {
@@ -343,7 +368,19 @@
         /* Responsive Capsule Nav */
         @media (max-width: 900px) {
             .nav-resume-btn {
-                display: none !important;
+                width: 34px;
+                height: 34px;
+                padding: 0 !important;
+                justify-content: center;
+                border-radius: 50% !important;
+            }
+
+            .nav-resume-btn .nav-resume-label {
+                display: none;
+            }
+
+            .nav-resume-btn .nav-resume-icon {
+                display: inline-block;
             }
             .nav-item-about,
             .nav-item-skills {
@@ -401,7 +438,9 @@
                 flex-shrink: 0 !important;
             }
             .nav-resume-btn {
-                display: none !important;
+                width: 28px;
+                height: 28px;
+                font-size: 0.82rem !important;
             }
             .lang-toggle {
                 padding: 0.3rem 0.55rem !important;
@@ -687,7 +726,150 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 22px rgba(255, 255, 255, 0.25);
         }
-        footer { text-align: center; padding: 3rem; color: var(--text-sub); font-size: 0.9rem; }
+        /* Footer — same watermark footer as index.html */
+        footer.watermark-footer {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 4rem;
+            padding: 7rem 1rem 2.25rem;   /* room above the contact bar so the watermark isn't clipped */
+            color: var(--text-main);
+            background: #000000 !important;
+            border-top: 1px solid #18181b !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        footer.watermark-footer::before {
+            content: "BAOWEN";
+            position: absolute;
+            left: 50%;
+            top: var(--wm-top, 46%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            font-size: clamp(5rem, 20vw, 16.5rem);
+            line-height: 0.8;
+            font-weight: 800;
+            letter-spacing: 0;
+            color: rgba(0, 0, 0, 0.05);
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        [data-theme="dark"] footer.watermark-footer::before {
+            color: rgba(255, 255, 255, 0.18) !important;
+        }
+
+        footer.watermark-footer::after {
+            display: none !important;
+        }
+
+        .footer-socials {
+            margin-top: 0.35rem;
+        }
+
+        /* Footer contact info layout */
+        .footer-contact {
+            width: min(100%, 760px);
+            margin: 0 auto 0.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+            padding: 0.8rem 1.45rem;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.03),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .footer-contact p {
+            margin: 0;
+            color: #1c1917;
+            font-size: 0.92rem;
+            font-weight: 600;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .footer-contact p+p {
+            border-left: 1px solid rgba(0, 0, 0, 0.12);
+            margin-left: 1.25rem;
+            padding-left: 1.25rem;
+        }
+
+        [data-theme="dark"] .footer-contact {
+            background: rgba(255, 255, 255, 0.015) !important;
+            border: 1px solid rgba(255, 255, 255, 0.10) !important;
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        [data-theme="dark"] .footer-contact p {
+            color: #ffffff !important;
+        }
+
+        [data-theme="dark"] .footer-contact p+p {
+            border-left: 1px solid rgba(255, 255, 255, 0.25) !important;
+        }
+
+        .footer-socials a {
+            color: rgba(51, 65, 85, 0.58);
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-socials a:hover {
+            color: var(--primary);
+        }
+
+        .footer-copyright {
+            margin-top: 0.25rem;
+            color: rgba(51, 65, 85, 0.48);
+            font-size: 0.86rem;
+        }
+
+        .copy-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 5rem;
+            transform: translateX(-50%);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            background-color: var(--text-main);
+            color: #ffffff;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 130;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translate(-50%, -6px);
+        }
+
 
         @media (max-width: 768px) {
             /* Mobile spacing + fonts */
@@ -784,13 +966,48 @@
                 height: 24px;
             }
 
-            footer {
-                font-size: 0.85rem;
-                padding: 2.5rem 1.5rem;
+            footer.watermark-footer {
+                min-height: 360px;
+                padding: 4rem 1rem 2rem;
             }
+
+            footer.watermark-footer::before {
+                top: var(--wm-top, 42%);
+                font-size: clamp(4.75rem, 28vw, 7rem);
+            }
+
+            .footer-contact {
+                width: min(100%, 360px);
+                flex-direction: column;
+                align-items: center;
+                gap: 0.65rem;
+                padding: 1rem 1.1rem;
+                border-radius: 14px;
+            }
+
+            .footer-contact p {
+                width: 100%;
+                text-align: center;
+                white-space: normal;
+                margin: 0;
+            }
+
+            .footer-contact p+p {
+                border-left: none !important;
+                border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+                margin-left: 0 !important;
+                padding-left: 0 !important;
+                padding-top: 0.65rem !important;
+            }
+
+            [data-theme="dark"] .footer-contact p+p {
+                border-left: none !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+            }
+
         }
     </style>
-    <link rel="stylesheet" href="assets/glass-theme.css?v=20260907_nav_pill_fix">
+    <link rel="stylesheet" href="assets/glass-theme.css?v=20260914_vt">
 </head>
 <body class="about-page">
 
@@ -817,8 +1034,10 @@
         </ul>
 
         <div class="nav-actions">
-            <a href="Baowen_Resume.pdf" target="_blank" class="nav-resume-btn" data-en="Resume.pdf ↗" data-zh="简历.pdf ↗" data-href-en="Baowen_Resume.pdf" data-href-zh="Baowen_Resume_CN.pdf">
-                Resume.pdf ↗
+            <a href="Baowen_Resume.pdf" target="_blank" class="nav-resume-btn" aria-label="Resume (PDF)"
+                data-href-en="Baowen_Resume.pdf" data-href-zh="Baowen_Resume_CN.pdf">
+                <i class="fas fa-file-pdf nav-resume-icon" aria-hidden="true"></i>
+                <span class="nav-resume-label" data-en="Resume.pdf ↗" data-zh="简历.pdf ↗">Resume.pdf ↗</span>
             </a>
             <button id="lang-toggle" class="lang-toggle" title="Switch language">EN | 中文</button>
             <button id="theme-btn" class="theme-btn" title="Toggle theme (Day/Night)">
@@ -876,19 +1095,19 @@
 
         <div id="games-panel" class="grid-panel games-grid active">
             <div class="game-card animate-on-scroll delay-100">
-                <div class="card-img-box"><img src="assets/game_mc.jpg" alt="MC" onerror="this.src='https://placehold.co/150x150?text=MC'"></div>
+                <div class="card-img-box img-skeleton"><img src="assets/game_mc.webp" alt="MC" onerror="this.src='https://placehold.co/150x150?text=MC'" loading="lazy"></div>
                 <div class="card-title" data-en="Minecraft" data-zh="我的世界">Minecraft</div>
                 <div class="card-stat" data-en="Creative Mode" data-zh="创造模式">Creative Mode</div>
                 <span class="stat-badge" data-en="Builder" data-zh="建造者">Builder</span>
             </div>
             <div class="game-card animate-on-scroll delay-200">
-                <div class="card-img-box"><img src="assets/game_pubg.jpg" alt="PUBG" onerror="this.src='https://placehold.co/150x150?text=PUBG'"></div>
+                <div class="card-img-box img-skeleton"><img src="assets/game_pubg.webp" alt="PUBG" onerror="this.src='https://placehold.co/150x150?text=PUBG'" loading="lazy"></div>
                 <div class="card-title" data-en="PUBG" data-zh="绝地求生（PUBG）">PUBG</div>
                 <div class="card-stat" data-en="Rank: Ace" data-zh="段位：王牌">Rank: Ace</div>
                 <span class="stat-badge" data-en="Tactical" data-zh="战术型">Tactical</span>
             </div>
             <div class="game-card animate-on-scroll delay-300">
-                <div class="card-img-box"><img src="assets/game_go.jpg" alt="Go" onerror="this.src='https://placehold.co/150x150?text=Go'"></div>
+                <div class="card-img-box img-skeleton"><img src="assets/game_go.webp" alt="Go" onerror="this.src='https://placehold.co/150x150?text=Go'" loading="lazy"></div>
                 <div class="card-title" data-en="Go (Weiqi)" data-zh="围棋（Weiqi）">Go (Weiqi)</div>
                 <div class="card-stat" data-en="Rank: 5-Dan" data-zh="段位：业余五段">Rank: 5-Dan</div>
                 <span class="stat-badge" data-en="Master" data-zh="大师">Master</span>
@@ -897,35 +1116,35 @@
 
         <div id="music-panel" class="grid-panel music-grid">
             <div class="music-card animate-on-scroll delay-100">
-                <div class="music-cover-wrapper"><img src="assets/cover_faded.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=Faded'"></div>
+                <div class="music-cover-wrapper img-skeleton"><img src="assets/cover_faded.webp" alt="Faded — Alan Walker album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=Faded'" loading="lazy"></div>
                 <div class="music-info">
                     <div class="music-title" data-en="Faded" data-zh="Faded">Faded</div>
                     <div class="music-artist" data-en="Alan Walker" data-zh="Alan Walker">Alan Walker</div>
-                    <audio controls><source src="assets/faded.mp3" type="audio/mpeg"></audio>
+                    <audio controls preload="none"><source src="assets/faded.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
             <div class="music-card animate-on-scroll delay-200">
-                <div class="music-cover-wrapper"><img src="assets/cover_eot.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=EOT'"></div>
+                <div class="music-cover-wrapper img-skeleton"><img src="assets/cover_eot.webp" alt="End of Time — Alan Walker, K-391 album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=EOT'" loading="lazy"></div>
                 <div class="music-info">
                     <div class="music-title" data-en="End of Time" data-zh="End of Time">End of Time</div>
                     <div class="music-artist" data-en="Alan Walker, K-391" data-zh="Alan Walker, K-391">Alan Walker, K-391</div>
-                    <audio controls><source src="assets/endoftime.mp3" type="audio/mpeg"></audio>
+                    <audio controls preload="none"><source src="assets/endoftime.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
             <div class="music-card animate-on-scroll delay-300">
-                <div class="music-cover-wrapper"><img src="assets/cover_huahai.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=HuaHai'"></div>
+                <div class="music-cover-wrapper img-skeleton"><img src="assets/cover_huahai.webp" alt="花海 — Jay Chou album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=HuaHai'" loading="lazy"></div>
                 <div class="music-info">
                     <div class="music-title" data-en="花海" data-zh="花海">花海</div>
                     <div class="music-artist" data-en="Jay Chou" data-zh="周杰伦">Jay Chou</div>
-                    <audio controls><source src="assets/huahai.mp3" type="audio/mpeg"></audio>
+                    <audio controls preload="none"><source src="assets/huahai.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
             <div class="music-card animate-on-scroll delay-400">
-                <div class="music-cover-wrapper"><img src="assets/cover_qing.jpg" class="music-cover" onerror="this.src='https://placehold.co/200?text=Qing'"></div>
+                <div class="music-cover-wrapper img-skeleton"><img src="assets/cover_qing.webp" alt="晴 — Silence Wang album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=Qing'" loading="lazy"></div>
                 <div class="music-info">
                     <div class="music-title" data-en="晴" data-zh="晴">晴</div>
                     <div class="music-artist" data-en="Silence Wang" data-zh="汪苏泷">Silence Wang</div>
-                    <audio controls><source src="assets/qing.mp3" type="audio/mpeg"></audio>
+                    <audio controls preload="none"><source src="assets/qing.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
         </div>
@@ -947,7 +1166,7 @@
         </div>
         <div class="photo-grid">
             <figure class="photo-card animate-on-scroll delay-100">
-                <img src="assets/photo-lantern-boat.jpg" alt="Lantern festival boat at night" loading="lazy">
+                <div class="img-skeleton"><img src="assets/photo-lantern-boat.webp" alt="Lantern festival boat at night" loading="lazy"></div>
                 <figcaption class="photo-caption" data-en="Lantern festival night scene on the river." data-zh="河面上的灯会夜景。">
                     Lantern festival night scene on the river.
                 </figcaption>
@@ -955,28 +1174,28 @@
 
 
             <figure class="photo-card animate-on-scroll delay-200">
-                <img src="assets/photo-campus-snow.jpg" alt="Snowy campus path with robot" loading="lazy">
+                <div class="img-skeleton"><img src="assets/photo-campus-snow.webp" alt="Snowy campus path with robot" loading="lazy"></div>
                 <figcaption class="photo-caption" data-en="A quiet snowy day on campus with a delivery robot." data-zh="校园里安静的雪天和送货机器人。">
                     A quiet snowy day on campus with a delivery robot.
                 </figcaption>
             </figure>
 
             <figure class="photo-card animate-on-scroll delay-250">
-                <img src="assets/photo-forest-cows.jpg" alt="Cows grazing in a green forest" loading="lazy">
+                <div class="img-skeleton"><img src="assets/photo-forest-cows.webp" alt="Cows grazing in a green forest" loading="lazy"></div>
                 <figcaption class="photo-caption" data-en="Cows grazing quietly in a forest in Inner Mongolia." data-zh="内蒙古森林里安静吃草的牛群。">
                     Cows grazing quietly in a forest in Inner Mongolia.
                 </figcaption>
             </figure>
 
             <figure class="photo-card animate-on-scroll delay-300">
-                <img src="assets/photo-night-stars.jpg" alt="Night sky full of stars over ruins" loading="lazy">
+                <div class="img-skeleton"><img src="assets/photo-night-stars.webp" alt="Night sky full of stars over ruins" loading="lazy"></div>
                 <figcaption class="photo-caption" data-en="Starry night sky above ancient ruins in the desert." data-zh="沙漠遗址上空的繁星夜空。">
                     Starry night sky above ancient ruins in the desert.
                 </figcaption>
             </figure>
 
             <figure class="photo-card animate-on-scroll delay-350">
-                <img src="assets/photo-tesla-windfarm.jpg" alt="Tesla parked in front of wind turbines at sunset" loading="lazy">
+                <div class="img-skeleton"><img src="assets/photo-tesla-windfarm.webp" alt="Tesla parked in front of wind turbines at sunset" loading="lazy"></div>
                 <figcaption class="photo-caption" 
                     data-en="Golden light draping the grassland, wind turbines standing quietly along the fading horizon." 
                     data-zh="金色夕阳洒落在草原上，风机静静矗立在渐远的天边。">
@@ -990,12 +1209,60 @@
 
     <button id="back-to-top" class="back-to-top">↑</button>
 
-    <footer data-en="&copy; {YEAR} Baowen Liu. All Rights Reserved." data-zh="&copy; {YEAR} 刘宝文。保留所有权利。">
-        &copy; 2026 Baowen Liu. All Rights Reserved.
+    <footer id="contact" class="watermark-footer">
+        <div class="footer-contact">
+            <p data-en="liu.11884@osu.edu" data-zh="liu.11884@osu.edu">
+                liu.11884@osu.edu
+            </p>
+            <p data-en="+1 380-249-9220" data-zh="+1 380-249-9220">
+                +1 380-249-9220
+            </p>
+            <p data-en="+86 135-8181-5272" data-zh="+86 135-8181-5272">
+                +86 135-8181-5272
+            </p>
+        </div>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/powersix2006/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/PowerSixxx" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" id="wechat-btn" title="Copy WeChat ID"><i class="fab fa-weixin"></i></a>
+        </div>
+        <p class="footer-copyright" data-en="&copy; {YEAR} Baowen Liu. All Rights Reserved."
+            data-zh="&copy; {YEAR} 刘宝文。保留所有权利。">&copy; 2026 Baowen Liu. All Rights Reserved.</p>
     </footer>
 
+    <div id="copy-toast" class="copy-toast" data-en="Copied to clipboard" data-zh="已复制到剪贴板">
+        Copied to clipboard
+    </div>
+
     <script>
-        // 1. Scroll Animation
+        // Simple toast for copy actions
+        const copyToast = document.getElementById('copy-toast');
+        function showCopyToast() {
+            if (!copyToast) return;
+            copyToast.classList.add('show');
+            setTimeout(() => {
+                copyToast.classList.remove('show');
+            }, 1600);
+        }
+
+        // Click-to-copy WeChat ID
+        const wechatBtn = document.getElementById('wechat-btn');
+        if (wechatBtn && navigator.clipboard) {
+            wechatBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const wechatID = "_6Jan-Baower";
+                navigator.clipboard.writeText(wechatID).then(() => {
+                    wechatBtn.style.color = "var(--primary)";
+                    showCopyToast();
+                    setTimeout(() => {
+                        wechatBtn.style.color = "";
+                    }, 1500);
+                });
+            });
+        }
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1061,7 +1328,10 @@
         const icon = btn.querySelector('i');
         const html = document.documentElement;
 
-        if (localStorage.getItem('theme') === 'dark') {
+        // Saved preference wins; otherwise follow the OS setting (prefers-color-scheme)
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (storedTheme ? storedTheme === 'dark' : prefersDark) {
             html.setAttribute('data-theme', 'dark');
             icon.className = 'fas fa-sun';
         } else {
@@ -1134,6 +1404,8 @@
         let currentLang = localStorage.getItem('lang') || 'en';
 
         function applyLanguage(lang) {
+
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
             const currentYear = new Date().getFullYear();
             document.querySelectorAll('[data-en]').forEach(el => {
                 const enText = el.getAttribute('data-en');
@@ -1176,5 +1448,33 @@
         }
     </script>
 
+    <!-- Skeleton shimmer: reveal images once they have loaded -->
+    <script>
+        document.querySelectorAll('.img-skeleton').forEach(box => {
+            const img = box.querySelector('img');
+            if (!img) { box.classList.add('is-loaded'); return; }
+            const done = () => box.classList.add('is-loaded');
+            if (img.complete && img.naturalWidth) done();
+            else { img.addEventListener('load', done, { once: true }); img.addEventListener('error', done, { once: true }); }
+        });
+    </script>
+    <!-- Keep the BAOWEN watermark vertically centred on the contact bar -->
+    <script>
+        (function () {
+            const footer = document.querySelector('footer.watermark-footer');
+            const bar = footer && footer.querySelector('.footer-contact');
+            if (!bar) return;
+            const align = () => footer.style.setProperty('--wm-top', (bar.offsetTop + bar.offsetHeight / 2) + 'px');
+            align();
+            window.addEventListener('load', align);
+            if (window.ResizeObserver) new ResizeObserver(align).observe(footer);
+        })();
+    </script>
+    <!-- Footer status card: uptime + visitor counts (GoatCounter) -->
+    <script src="assets/site-stats.js?v=20260914b"></script>
+    <!-- Command palette: ⌘K / Ctrl+K -->
+    <script src="assets/palette.js?v=20260914c"></script>
+    <!-- Easter egg: interactive terminal (press ` or click the >_ button) -->
+    <script src="assets/terminal.js?v=20260914h"></script>
 </body>
 </html>

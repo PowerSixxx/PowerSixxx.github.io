@@ -292,6 +292,11 @@ html[data-theme="dark"] .nav-links:has(#nav-slider-pill) a.nav-pill-active {
     white-space: nowrap;
 }
 
+/* Desktop: text only; the icon is for the compact mobile version */
+.nav-resume-btn .nav-resume-icon {
+    display: none;
+}
+
 .nav-resume-btn:hover {
     background: #ffffff !important;
     border-color: rgba(0, 0, 0, 0.3) !important;
@@ -458,8 +463,20 @@ html[data-theme="dark"] .hamburger-menu a:hover {
 }
 
 @media (max-width: 900px) {
+    /* Compact resume button: round PDF icon, same size as the theme toggle */
     .nav-resume-btn {
-        display: none !important;
+        width: 34px;
+        height: 34px;
+        padding: 0 !important;
+        justify-content: center;
+        border-radius: 50% !important;
+        font-size: 0.95rem !important;
+    }
+    .nav-resume-btn .nav-resume-label {
+        display: none;
+    }
+    .nav-resume-btn .nav-resume-icon {
+        display: inline-block;
     }
     .nav-item-about,
     .nav-item-skills {
@@ -523,7 +540,9 @@ html[data-theme="dark"] .hamburger-menu a:hover {
         flex-shrink: 0 !important;
     }
     .nav-resume-btn {
-        display: none !important;
+        width: 28px;
+        height: 28px;
+        font-size: 0.82rem !important;
     }
     .hamburger {
         display: none !important;
@@ -858,6 +877,7 @@ h2 {
 #leetcode h2::before { content: "03/"; }
 #projects h2::before { content: "04/"; }
 #skills h2::before { content: "05/"; }
+#guestbook h2::before { content: "06/"; }
 
 section > h2::before {
     display: inline-block;
@@ -1174,11 +1194,15 @@ html[data-theme="dark"] footer.watermark-footer::before {
 }
 
 .footer-contact {
-    background: rgba(255, 255, 255, 0.22) !important;
-    border: 1px solid rgba(0, 0, 0, 0.08) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03) !important;
-    backdrop-filter: blur(2px) !important;
-    -webkit-backdrop-filter: blur(2px) !important;
+    /* Clear glass: near-zero fill, no blur so the BAOWEN watermark shows through; only a bright edge */
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.55) !important;
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.02) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 
 .footer-contact p {
@@ -1190,11 +1214,14 @@ html[data-theme="dark"] footer.watermark-footer::before {
 }
 
 html[data-theme="dark"] .footer-contact {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(2px) !important;
-    -webkit-backdrop-filter: blur(2px) !important;
+    background: rgba(255, 255, 255, 0.015) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 
 html[data-theme="dark"] .footer-contact p {
@@ -1489,3 +1516,134 @@ html[data-theme="dark"] .btn-home:hover {
     box-shadow: 0 6px 22px rgba(255, 255, 255, 0.25) !important;
 }
 
+/* --------------------------------------------------------------------------
+   Page transitions (cross-document View Transitions API)
+   - Supported browsers cross-fade between pages; the capsule nav and the
+     floating buttons are shared elements, so they stay put while the
+     content fades. Unsupported browsers simply navigate as usual.
+   -------------------------------------------------------------------------- */
+@view-transition {
+    navigation: auto;
+}
+
+nav.capsule-nav {
+    view-transition-name: site-nav;
+}
+
+.back-to-top {
+    view-transition-name: back-to-top;
+}
+
+::view-transition-old(root) {
+    animation: vt-fade-out 0.18s ease-in both;
+}
+
+::view-transition-new(root) {
+    animation: vt-fade-in 0.28s ease-out both;
+}
+
+/* Shared elements: no crossfade, just stay in place */
+::view-transition-old(site-nav),
+::view-transition-new(site-nav),
+::view-transition-old(back-to-top),
+::view-transition-new(back-to-top) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+@keyframes vt-fade-out {
+    to {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes vt-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Skeleton shimmer while images load (class added/removed by JS)
+   -------------------------------------------------------------------------- */
+.img-skeleton {
+    position: relative;
+    background: #ece9e2;
+    overflow: hidden;
+}
+
+.img-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, transparent 80%);
+    transform: translateX(-100%);
+    animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.img-skeleton img {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.img-skeleton.is-loaded {
+    background: transparent;
+}
+
+.img-skeleton.is-loaded::after {
+    display: none;
+}
+
+.img-skeleton.is-loaded img {
+    opacity: 1;
+}
+
+html[data-theme="dark"] .img-skeleton {
+    background: #16161a;
+}
+
+html[data-theme="dark"] .img-skeleton::after {
+    background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.08) 50%, transparent 80%);
+}
+
+@keyframes skeleton-shimmer {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion: honour the OS "reduce motion" setting
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
+
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none !important;
+    }
+
+    .img-skeleton::after {
+        animation: none;
+    }
+
+    /* Scroll-in elements render in their final state immediately */
+    .animate-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /baidu_verify_codeva-pv0HwHQnyO.html
+
+Sitemap: https://www.baowenliu.com/sitemap.xml

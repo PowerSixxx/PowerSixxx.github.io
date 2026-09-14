@@ -3,6 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <script>
+        // Apply saved theme before first paint; fall back to the OS preference on first visit
+        (function () {
+            var s = localStorage.getItem('theme');
+            var dark = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baowen Liu's Website</title>
     <meta name="description"
@@ -11,16 +19,27 @@
     <meta name="author" content="Baowen Liu">
     <meta property="og:title" content="Baowen Liu - Portfolio">
     <meta property="og:description" content="Check out my projects, skills, and experience in Software Engineering.">
-    <meta property="og:image" content="https://powersixxx.github.io/assets/photo.jpg">
-    <meta property="og:url" content="https://powersixxx.github.io/">
+    <meta property="og:image" content="https://www.baowenliu.com/photo1.jpg">
+    <link rel="canonical" href="https://www.baowenliu.com/">
+    <meta property="og:url" content="https://www.baowenliu.com/">
     <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
     <meta name="baidu-site-verification" content="codeva-pv0HwHQnyO" />
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Performance: warm up third-party connections early -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Icon font is not needed for first paint: load it without blocking render -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print"
+        onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
 
     <style>
         /* Global Configuration */
@@ -32,6 +51,14 @@
             --text-sub: #57534e;
             --border: #e5e1d8;
             --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+            /* Teal accent (Now badge, fun-fact hover, guestbook icon…) */
+            --tl-accent: #14c3b6;
+            --tl-accent-soft: rgba(20, 195, 182, 0.18);
+            --tl-glow: rgba(20, 195, 182, 0.45);
+            /* Timeline: OSU scarlet */
+            --timeline-accent: #bb0000;
+            --timeline-accent-soft: rgba(187, 0, 0, 0.14);
+            --timeline-glow: rgba(187, 0, 0, 0.35);
         }
 
         [data-theme="dark"] {
@@ -42,6 +69,12 @@
             --text-sub: #94a3b8;
             --border: #1f1f24;
             --shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.85);
+            --tl-accent: #3ee9db;
+            --tl-accent-soft: rgba(62, 233, 219, 0.18);
+            --tl-glow: rgba(62, 233, 219, 0.6);
+            --timeline-accent: #f0433f;
+            --timeline-accent-soft: rgba(240, 67, 63, 0.18);
+            --timeline-glow: rgba(240, 67, 63, 0.55);
         }
 
         * {
@@ -379,7 +412,19 @@
            -------------------------------------------------------------------------- */
         @media (max-width: 900px) {
             .nav-resume-btn {
-                display: none !important;
+                width: 34px;
+                height: 34px;
+                padding: 0 !important;
+                justify-content: center;
+                border-radius: 50% !important;
+            }
+
+            .nav-resume-btn .nav-resume-label {
+                display: none;
+            }
+
+            .nav-resume-btn .nav-resume-icon {
+                display: inline-block;
             }
 
             .nav-item-about,
@@ -452,7 +497,9 @@
             }
 
             .nav-resume-btn {
-                display: none !important;
+                width: 28px;
+                height: 28px;
+                font-size: 0.82rem !important;
             }
 
             .hamburger {
@@ -688,6 +735,17 @@
             animation: tech-shockwave 0.6s ease-out;
         }
 
+        /* 8-bit mode: crisp pixels, no smoothing; quick blink while swapping */
+        .profile-photo.pixel-mode {
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        .profile-photo.pixel-swap {
+            filter: contrast(1.6) saturate(1.4);
+            transform: scale(0.92);
+        }
+
         @keyframes tech-shockwave {
             0% {
                 box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.8), 0 0 0 0 rgba(96, 165, 250, 0.8);
@@ -722,6 +780,65 @@
             color: var(--text-sub);
             max-width: 800px;
             margin: 0 auto 2rem;
+        }
+
+        /* Rotating fun fact under the hero subtitle */
+        .fun-fact {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin: -0.75rem auto 2rem;
+            padding: 0.45rem 1rem 0.45rem 0.8rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            cursor: pointer;
+            user-select: none;
+            max-width: min(92vw, 560px);
+            transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.2s ease;
+        }
+
+        .fun-fact:hover {
+            border-color: var(--tl-accent);
+        }
+
+        .fun-fact.swap {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+
+        .fun-fact .fun-fact-emoji {
+            font-size: 1.05rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .fun-fact .fun-fact-text {
+            text-align: left;
+        }
+
+        .fun-fact .fun-fact-next {
+            flex-shrink: 0;
+            font-size: 0.75rem;
+            opacity: 0.45;
+            transition: opacity 0.2s ease, transform 0.3s ease;
+        }
+
+        .fun-fact:hover .fun-fact-next {
+            opacity: 0.9;
+            transform: rotate(180deg);
+        }
+
+        [data-theme="dark"] .fun-fact {
+            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
         .btn-container {
@@ -848,6 +965,44 @@
             content: "05/";
         }
 
+        #guestbook h2::before {
+            content: "06/";
+        }
+
+        /* Guestbook (giscus) */
+        .guestbook-intro {
+            color: var(--text-sub);
+            margin: -0.75rem 0 1.5rem;
+            line-height: 1.6;
+        }
+
+        .guestbook-card {
+            padding: 1.25rem 1.5rem 0.75rem;
+        }
+
+        .guestbook-card:hover {
+            transform: none;
+        }
+
+        .guestbook-note {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.25rem 0.5rem 1.5rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        .guestbook-note i {
+            font-size: 1.4rem;
+            color: var(--tl-accent);
+        }
+
+        .giscus,
+        .giscus-frame {
+            width: 100%;
+        }
+
         section>h2::before {
             display: inline-block;
             font-size: 0.88em;
@@ -868,6 +1023,107 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+        }
+
+        /* "Now" — what I'm up to at the moment (edit the text in the #now section) */
+        #now {
+            padding-top: 1rem;
+            padding-bottom: 2rem;
+        }
+
+        #now h2 {
+            margin-bottom: 1.25rem;
+        }
+
+        .now-updated {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-left: 0.25rem;
+            padding: 0.2rem 0.65rem;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            /* "live" green, same hue as the online dot in the footer */
+            color: #15803d;
+            background: rgba(34, 197, 94, 0.14);
+            vertical-align: middle;
+        }
+
+        [data-theme="dark"] .now-updated {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.14);
+        }
+
+        .now-updated::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+            animation: now-pulse 1.8s ease-out infinite;
+        }
+
+        @keyframes now-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+            70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .now-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+        }
+
+        .now-card {
+            padding: 1.25rem 1.35rem;
+        }
+
+        .now-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .now-card .now-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-sub);
+            margin-bottom: 0.55rem;
+        }
+
+        .now-card .now-label i {
+            color: var(--tl-accent);
+            font-size: 0.85rem;
+        }
+
+        .now-card .now-main {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .now-card .now-sub {
+            margin-top: 0.35rem;
+            font-size: 0.86rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+        }
+
+        .now-card .now-sub a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .now-card .now-sub a:hover {
+            text-decoration: underline;
         }
 
         .card {
@@ -959,6 +1215,8 @@
         .edu-card {
             position: relative;
             overflow: hidden;
+            /* Reserve room on the right so text never runs under the logo */
+            padding-right: calc(150px + 2.5rem + 2rem);
         }
 
         .edu-logo {
@@ -1029,8 +1287,17 @@
             border-color: var(--primary);
         }
 
-        .skill-tag i {
+        .skill-tag i,
+        .skill-tag .skill-icon {
             font-size: 1.2rem;
+        }
+
+        .skill-tag .skill-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            vertical-align: -4px;
+            margin-right: 0.15rem;
         }
 
         footer {
@@ -1053,7 +1320,7 @@
             justify-content: center;
             gap: 1rem;
             margin-top: 4rem;
-            padding: 4.5rem 1rem 2.25rem;
+            padding: 7rem 1rem 2.25rem;   /* room above the contact bar so the watermark isn't clipped */
             color: var(--text-main);
             background: #000000 !important;
             border-top: 1px solid #18181b !important;
@@ -1066,7 +1333,7 @@
             content: "BAOWEN";
             position: absolute;
             left: 50%;
-            top: 46%;
+            top: var(--wm-top, 46%);
             transform: translate(-50%, -50%);
             z-index: -1;
             font-size: clamp(5rem, 20vw, 16.5rem);
@@ -1101,12 +1368,15 @@
             flex-wrap: wrap;
             gap: 0;
             padding: 0.8rem 1.45rem;
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.55);
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.22);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.03),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
         }
 
         .footer-contact p {
@@ -1125,11 +1395,14 @@
         }
 
         [data-theme="dark"] .footer-contact {
-            background: rgba(255, 255, 255, 0.04) !important;
-            border: 1px solid rgba(255, 255, 255, 0.14) !important;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.08) !important;
-            backdrop-filter: blur(2px) !important;
-            -webkit-backdrop-filter: blur(2px) !important;
+            background: rgba(255, 255, 255, 0.015) !important;
+            border: 1px solid rgba(255, 255, 255, 0.10) !important;
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
         }
 
         [data-theme="dark"] .footer-contact p {
@@ -1215,53 +1488,145 @@
             transform: translate(-50%, -6px);
         }
 
-        /* Timeline Styles */
+        /* Timeline Styles — centered line, alternating cards, teal accent */
         .timeline {
             position: relative;
             margin: 2rem 0 0;
+            padding: 1rem 0 0.5rem;
         }
 
         .timeline::before {
             content: "";
             position: absolute;
-            left: 120px;
+            left: 50%;
             top: 0;
             bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary), rgba(148, 163, 184, 0.5));
+            width: 3px;
+            transform: translateX(-50%);
+            border-radius: 999px;
+            background: linear-gradient(to bottom, transparent 0, var(--timeline-accent) 4%, var(--timeline-accent) 96%, transparent 100%);
+            box-shadow: 0 0 14px var(--timeline-glow);
         }
 
         .timeline-item {
             position: relative;
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 2rem;
+            width: 50%;
+            margin-bottom: 2.5rem;
         }
 
-        .timeline-date {
-            width: 110px;
-            text-align: right;
-            padding-right: 1rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-sub);
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* odd = left side, even = right side */
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(3rem + 11px);
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+            padding-left: calc(3rem + 11px);
         }
 
         .timeline-dot {
             position: absolute;
-            left: 120px;
-            top: 1.2rem;
-            width: 14px;
-            height: 14px;
-            border-radius: 999px;
-            background-color: var(--bg-body);
-            border: 3px solid var(--primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+            top: 2rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--bg-body);
+            border: 3px solid var(--timeline-accent);
+            box-shadow: 0 0 0 5px var(--timeline-accent-soft), 0 0 18px var(--timeline-glow);
+            z-index: 2;
+        }
+
+        .timeline-dot::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            background: var(--timeline-accent);
+            box-shadow: 0 0 8px var(--timeline-glow);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -11px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -11px;
         }
 
         .timeline-content {
-            margin-left: 2.5rem;
-            flex: 1;
+            position: relative;
+        }
+
+        /* Short connector from card to dot */
+        .timeline-content::after {
+            content: "";
+            position: absolute;
+            top: calc(2rem + 10px);
+            width: 3rem;
+            height: 2px;
+            background: var(--timeline-accent);
+            opacity: 0.85;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            right: -3rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -3rem;
+        }
+
+        /* Teal edge on the outer side of each card */
+        .timeline-item:nth-child(odd) .timeline-content .card {
+            border-left: 4px solid var(--timeline-accent) !important;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content .card {
+            border-left: 1px solid var(--border) !important;
+            border-right: 4px solid var(--timeline-accent) !important;
+        }
+
+        /* Date lives inside the card now */
+        .timeline-date {
+            position: relative;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.9rem;
+            padding-bottom: 0.6rem;
+        }
+
+        .timeline-date::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 44px;
+            height: 3px;
+            border-radius: 999px;
+            background: var(--timeline-accent);
+        }
+
+        /* Cards are half-width now: shrink logos and keep text clear of them */
+        .timeline-content .card .coe-logo img {
+            width: 120px;
+        }
+
+        .timeline-content .card .spic-logo img {
+            width: 100px;
+        }
+
+        .timeline-content .card-uta .timeline-date,
+        .timeline-content .card-uta h3,
+        .timeline-content .card-uta .date,
+        .timeline-content .card-spic .timeline-date,
+        .timeline-content .card-spic h3,
+        .timeline-content .card-spic .date {
+            padding-right: 140px;
         }
 
         @media (max-width: 768px) {
@@ -1306,7 +1671,7 @@
             }
 
             footer.watermark-footer::before {
-                top: 42%;
+                top: var(--wm-top, 42%);
                 font-size: clamp(4.75rem, 28vw, 7rem);
             }
 
@@ -1390,35 +1755,58 @@
 
             .timeline {
                 margin-top: 1.5rem;
+                padding: 0.5rem 0 0;
             }
 
             .timeline::before {
-                left: 16px;
+                left: 12px;
+                transform: none;
             }
 
-            .timeline-item {
-                flex-direction: column;
-                padding-left: 0.5rem;
+            .timeline-item,
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                padding-left: 2.6rem;
+                padding-right: 0;
             }
 
-            .timeline-date {
-                width: auto;
-                text-align: left;
-                padding: 0 0 0.5rem 2.5rem;
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 2.5px;
+                right: auto;
+                top: 1.6rem;
             }
 
-            .timeline-dot {
-                left: 16px;
-                top: 1.4rem;
+            .timeline-content::after {
+                display: none;
             }
 
-            .timeline-content {
-                margin-left: 2.5rem;
+            /* Single column: teal edge always on the left */
+            .timeline-item:nth-child(even) .timeline-content .card {
+                border-right: 1px solid var(--border) !important;
+                border-left: 4px solid var(--timeline-accent) !important;
+            }
+
+            .timeline-content .card .timeline-date {
+                order: -1;
+                width: 100%;
+            }
+
+            .timeline-content .card-uta .timeline-date,
+            .timeline-content .card-uta h3,
+            .timeline-content .card-uta .date,
+            .timeline-content .card-spic .timeline-date,
+            .timeline-content .card-spic h3,
+            .timeline-content .card-spic .date {
+                padding-right: 0;
             }
 
             /* Mobile: Education card logo on top & centered */
             .edu-card {
                 position: relative;
+                padding-right: 2rem;
             }
 
             .edu-logo {
@@ -1491,7 +1879,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="assets/glass-theme.css?v=20260913_photo_fit">
+    <link rel="stylesheet" href="assets/glass-theme.css?v=20260914_vt">
 </head>
 
 <body>
@@ -1529,9 +1917,10 @@
         </ul>
 
         <div class="nav-actions">
-            <a href="Baowen_Resume.pdf" target="_blank" class="nav-resume-btn" data-en="Resume.pdf ↗" data-zh="简历.pdf ↗"
+            <a href="Baowen_Resume.pdf" target="_blank" class="nav-resume-btn" aria-label="Resume (PDF)"
                 data-href-en="Baowen_Resume.pdf" data-href-zh="Baowen_Resume_CN.pdf">
-                Resume.pdf ↗
+                <i class="fas fa-file-pdf nav-resume-icon" aria-hidden="true"></i>
+                <span class="nav-resume-label" data-en="Resume.pdf ↗" data-zh="简历.pdf ↗">Resume.pdf ↗</span>
             </a>
             <button id="lang-toggle" class="lang-toggle" title="Switch language">EN | 中文</button>
             <button id="theme-toggle" class="theme-btn" title="Toggle theme (Day/Night)">
@@ -1564,7 +1953,7 @@
     </nav>
 
     <header class="hero" id="hero">
-        <img id="profile-pic" src="photo1.jpg" alt="Baowen Liu" class="profile-photo"
+        <img id="profile-pic" src="photo1.jpg" alt="Baowen Liu" class="profile-photo" title="Click me!"
             onerror="this.style.display='none'; document.getElementById('photo-fallback').style.display='flex'">
         <div id="photo-fallback" class="profile-photo"
             style="display:none; align-items:center; justify-content:center; color:#fff; font-size:2rem; background:#cbd5e1;">
@@ -1578,14 +1967,21 @@
             Pursuing a Career in Software Development Engineer
         </p>
 
-        <div class="btn-container animate-on-scroll delay-200">
+        <button type="button" class="fun-fact animate-on-scroll delay-200" id="fun-fact" title="Click for another one"
+            aria-live="polite">
+            <span class="fun-fact-emoji" aria-hidden="true">✨</span>
+            <span class="fun-fact-text">Loading a fun fact…</span>
+            <span class="fun-fact-next" aria-hidden="true">↻</span>
+        </button>
+
+        <div class="btn-container animate-on-scroll delay-300">
             <a href="about.html" class="btn btn-outline" data-en="About Me" data-zh="关于我"><i class="fas fa-user"></i>
                 About Me</a>
             <a href="mailto:liu.11884@osu.edu" id="email-btn" class="btn" data-en="Email Me" data-zh="给我发邮件"><i
                     class="fas fa-envelope"></i> Email Me</a>
-            <a href="Baowen_Resume.pdf" target="_blank" class="btn btn-outline"
-                data-en="<i class='fas fa-file-pdf'></i> Resume" data-zh="<i class='fas fa-file-pdf'></i> 简历"
-                data-href-en="Baowen_Resume.pdf" data-href-zh="Baowen_Resume_CN.pdf"><i class="fas fa-file-pdf"></i>
+            <a href="resume.html" class="btn btn-outline"
+                data-en="<i class='fas fa-id-card'></i> Resume" data-zh="<i class='fas fa-id-card'></i> 简历"><i
+                    class="fas fa-id-card"></i>
                 Resume</a>
             <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank" class="btn btn-outline"
                 style="border-color: #0077b5; color: #0077b5;" data-en="LinkedIn" data-zh="LinkedIn"><i
@@ -1597,11 +1993,64 @@
         </div>
     </header>
 
+    <section id="now">
+        <h2 class="animate-on-scroll">
+            <span data-en="Now" data-zh="近况">Now</span>
+            <span class="now-updated" data-en="Updated Sep 2026" data-zh="2026 年 9 月更新">Updated Sep 2026</span>
+        </h2>
+        <div class="now-grid">
+            <div class="card now-card animate-on-scroll delay-100">
+                <div class="now-label"><i class="fas fa-bullseye" aria-hidden="true"></i><span data-en="Looking for"
+                        data-zh="正在寻找">Looking for</span></div>
+                <div class="now-main" data-en="Summer 2027 SDE internship" data-zh="2027 年暑期 SDE 实习">Summer 2027 SDE
+                    internship</div>
+                <div class="now-sub"
+                    data-en="Backend / distributed systems / AI infra. US or China, remote-friendly. Also open to 2028 new-grad conversations."
+                    data-zh="后端 / 分布式系统 / AI 基础设施方向，美国或中国均可，接受远程。也欢迎聊 2028 届全职机会。">Backend /
+                    distributed systems / AI infra. US or China, remote-friendly. Also open to 2028 new-grad
+                    conversations.</div>
+            </div>
+            <div class="card now-card animate-on-scroll delay-200">
+                <div class="now-label"><i class="fas fa-hammer" aria-hidden="true"></i><span data-en="Building"
+                        data-zh="正在做">Building</span></div>
+                <div class="now-main" data-en="Online Shopping Platform" data-zh="高并发分布式电商平台">Online Shopping
+                    Platform</div>
+                <div class="now-sub"
+                    data-en="Spring Cloud microservices on AWS ECS, 10K QPS sale traffic, Redis + Lua inventory locks, SQS peak shaving. <a href='#projects'>Details ↓</a>"
+                    data-zh="Spring Cloud 微服务跑在 AWS ECS 上，应对 10K QPS 大促流量，Redis + Lua 库存锁，SQS 削峰。<a href='#projects'>详情 ↓</a>">
+                    Spring Cloud microservices on AWS ECS, 10K QPS sale traffic, Redis + Lua inventory locks, SQS peak
+                    shaving. <a href="#projects">Details ↓</a></div>
+            </div>
+            <div class="card now-card animate-on-scroll delay-300">
+                <div class="now-label"><i class="fas fa-book-open" aria-hidden="true"></i><span data-en="Learning"
+                        data-zh="正在学">Learning</span></div>
+                <div class="now-main" data-en="Kubernetes &amp; system design" data-zh="Kubernetes 与系统设计">Kubernetes
+                    &amp; system design</div>
+                <div class="now-sub"
+                    data-en="Plus Spring AI / LangChain4j for LLM apps, and a steady LeetCode habit. Junior year at OSU, CSE core courses."
+                    data-zh="同时在学 Spring AI / LangChain4j 做 LLM 应用，保持 LeetCode 刷题节奏。OSU 大三，CSE 核心课程进行中。">Plus
+                    Spring AI / LangChain4j for LLM apps, and a steady LeetCode habit. Junior year at OSU, CSE core
+                    courses.</div>
+            </div>
+            <div class="card now-card animate-on-scroll delay-400">
+                <div class="now-label"><i class="fas fa-location-dot" aria-hidden="true"></i><span data-en="Where"
+                        data-zh="在哪">Where</span></div>
+                <div class="now-main" data-en="Columbus, Ohio" data-zh="美国俄亥俄州哥伦布">Columbus, Ohio</div>
+                <div class="now-sub"
+                    data-en="On campus at The Ohio State University. Say hi at <a href='mailto:liu.11884@osu.edu'>liu.11884@osu.edu</a> or in the <a href='#guestbook'>guestbook</a>."
+                    data-zh="在俄亥俄州立大学校园。欢迎发邮件 <a href='mailto:liu.11884@osu.edu'>liu.11884@osu.edu</a> 或到<a href='#guestbook'>留言板</a>打个招呼。">
+                    On campus at The Ohio State University. Say hi at <a
+                        href="mailto:liu.11884@osu.edu">liu.11884@osu.edu</a> or in the <a
+                        href="#guestbook">guestbook</a>.</div>
+            </div>
+        </div>
+    </section>
+
     <section id="about">
         <h2 class="animate-on-scroll" data-en="Education" data-zh="教育背景">Education</h2>
         <div class="card edu-card animate-on-scroll delay-100">
             <div class="edu-logo">
-                <img src="assets/osu-o-logo.png" alt="Ohio State University O logo">
+                <img src="assets/osu-o-logo.png" alt="Ohio State University O logo" loading="lazy">
             </div>
             <h3 data-en="The Ohio State University" data-zh="俄亥俄州立大学 (US.News 41)">The Ohio State University</h3>
             <span class="date" data-en="Expected May 2028 | Columbus, OH" data-zh="预计 2028 年 5 月毕业 | 哥伦布，俄亥俄州">Expected
@@ -1615,7 +2064,7 @@
             <p data-en="<strong>Honors:</strong> Dean's List (&gt;3.5 GPA) 3 semesters"
                 data-zh="<strong>荣誉：</strong> 连续三学期进入院长名单（GPA &gt; 3.5）"><strong>Honors:</strong> Dean's List (&gt;3.5
                 GPA) 3 semesters</p>
-            <p data-en="<strong>Coursework:</strong> Calculus, Computer Science, Fundamentals of Engineering, Linear Algebra, Statistics"
+            <p data-en="<strong>Coursework:</strong> Calculus, Computer Science, Fundamentals of Engineering, Linear Algebra, Physics, Statistics"
                 data-zh="<strong>主要课程：</strong> 微积分、计算机科学、工程基础、线性代数、物理、统计学"><strong>Coursework:</strong> Calculus,
                 Computer Science, Fundamentals of Engineering, Linear Algebra, Physics, Statistics</p>
         </div>
@@ -1625,17 +2074,16 @@
         <h2 class="animate-on-scroll" data-en="Work Experience" data-zh="实习与工作经历">Work Experience</h2>
         <div class="timeline">
             <div class="timeline-item animate-on-scroll delay-100">
-                <div class="timeline-date" data-en="May 2026 – Aug. 2026" data-zh="2026 年 5 月 - 8 月">May 2026 – Aug.
-                    2026</div>
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <div class="card card-uta collapsible-card" style="border-left: 5px solid #b00000 !important;">
+                    <div class="card card-uta collapsible-card">
+                        <div class="timeline-date" data-en="May 2026 – Aug. 2026" data-zh="2026 年 5 月 - 8 月">May 2026 – Aug. 2026</div>
                         <h3 data-en="Undergraduate Research Assistant" data-zh="本科科研助理 (RA)">Undergraduate Research
                             Assistant</h3>
                         <span class="date" data-en="tOSU Dept. of CSE" data-zh="俄亥俄州立大学计算机科学与工程系">tOSU Dept. of
                             CSE</span>
                         <div class="coe-logo">
-                            <img src="assets/osu_eng.jpg" alt="OSU College of Engineering"
+                            <img src="assets/osu_eng.png" data-light-src="assets/osu_eng.png" data-dark-src="assets/osu_eng-dark.png" alt="OSU College of Engineering" loading="lazy"
                                 onerror="this.src='https://placehold.co/200x80?text=OSU+Engineering'">
                         </div>
                         <div class="card-toggle-btn" role="button" tabindex="0" aria-expanded="false">
@@ -1664,17 +2112,16 @@
                 </div>
             </div>
             <div class="timeline-item animate-on-scroll delay-200">
-                <div class="timeline-date" data-en="Jan. 2026 – Sep. 2026" data-zh="2026 年 1 月 - 9 月">Jan. 2026 – Sep.
-                    2026</div>
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <div class="card card-uta collapsible-card" style="border-left: 5px solid #b00000 !important;">
+                    <div class="card card-uta collapsible-card">
+                        <div class="timeline-date" data-en="Jan. 2026 – Sep. 2026" data-zh="2026 年 1 月 - 9 月">Jan. 2026 – Sep. 2026</div>
                         <h3 data-en="Undergraduate Teaching Assistant" data-zh="本科助教 (TA) — 工程基础导论">Undergraduate
                             Teaching Assistant</h3>
                         <span class="date" data-en="tOSU College of Engineering" data-zh="俄亥俄州立大学工程学院">tOSU College of
                             Engineering</span>
                         <div class="coe-logo">
-                            <img src="assets/osu_eng.jpg" alt="OSU College of Engineering"
+                            <img src="assets/osu_eng.png" data-light-src="assets/osu_eng.png" data-dark-src="assets/osu_eng-dark.png" alt="OSU College of Engineering" loading="lazy"
                                 onerror="this.src='https://placehold.co/200x80?text=OSU+Engineering'">
                         </div>
                         <div class="card-toggle-btn" role="button" tabindex="0" aria-expanded="false">
@@ -1694,11 +2141,10 @@
                 </div>
             </div>
             <div class="timeline-item animate-on-scroll delay-300">
-                <div class="timeline-date" data-en="Aug. 2025 – Dec. 2025" data-zh="2025 年 8 月 - 12 月">Aug. 2025 – Dec.
-                    2025</div>
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <div class="card collapsible-card">
+                        <div class="timeline-date" data-en="Aug. 2025 – Dec. 2025" data-zh="2025 年 8 月 - 12 月">Aug. 2025 – Dec. 2025</div>
                         <h3 data-en="Software Development Engineer Intern" data-zh="软件开发工程师实习生">Software Development
                             Engineer Intern</h3>
                         <span class="date" data-en="Beijing Hanwei Jialian Technology Co., Ltd."
@@ -1745,17 +2191,16 @@
                 </div>
             </div>
             <div class="timeline-item animate-on-scroll delay-400">
-                <div class="timeline-date" data-en="May 2025 – Jul. 2025" data-zh="2025 年 5 月 - 7 月">May 2025 – Jul.
-                    2025</div>
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <div class="card card-spic collapsible-card">
+                        <div class="timeline-date" data-en="May 2025 – Jul. 2025" data-zh="2025 年 5 月 - 7 月">May 2025 – Jul. 2025</div>
                         <h3 data-en="Software Development Engineer Intern" data-zh="软件开发工程师实习生">Software Development
                             Engineer Intern</h3>
                         <span class="date" data-en="SPIC Integrated Smart Energy Co., Ltd."
                             data-zh="国家电投集团综合智慧能源有限公司（兆瓦云）">SPIC Integrated Smart Energy Co., Ltd.</span>
                         <div class="spic-logo">
-                            <img src="assets/spic.png" alt="SPIC logo">
+                            <img src="assets/spic.png" data-light-src="assets/spic.png" data-dark-src="assets/spic-dark.png" alt="SPIC logo" loading="lazy">
                         </div>
                         <div class="card-toggle-btn" role="button" tabindex="0" aria-expanded="false">
                             <span class="card-toggle-label" data-en="View details" data-zh="展开详情">View details</span>
@@ -1914,51 +2359,51 @@
                     <h4 style="margin-bottom: 0.5rem; font-size: 0.95rem; font-weight: 600; color: var(--text-sub);"
                         data-en="Languages" data-zh="编程语言">Languages</h4>
                     <div class="skills-container" style="margin-top: 0; margin-bottom: 1.25rem;">
-                        <span class="skill-tag"><i class="devicon-java-plain colored"></i> Java</span>
-                        <span class="skill-tag"><i class="devicon-python-plain colored"></i> Python</span>
-                        <span class="skill-tag"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/java/java-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> Java</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> Python</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> JavaScript</span>
                         <span class="skill-tag"><i class="fas fa-database" style="color: #00758f;"></i> SQL
                             (MySQL/PostgreSQL)</span>
-                        <span class="skill-tag"><i class="devicon-html5-plain colored"></i> HTML/CSS</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/html5/html5-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> HTML/CSS</span>
                     </div>
 
                     <h4 style="margin-bottom: 0.5rem; font-size: 0.95rem; font-weight: 600; color: var(--text-sub);"
                         data-en="Frameworks" data-zh="框架与技术">Frameworks</h4>
                     <div class="skills-container" style="margin-top: 0; margin-bottom: 1.25rem;">
-                        <span class="skill-tag"><i class="devicon-spring-original colored"></i> Spring Boot</span>
-                        <span class="skill-tag"><i class="devicon-spring-original colored"></i> Spring Cloud</span>
-                        <span class="skill-tag"><i class="devicon-spring-original colored"></i> Spring AI</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/spring/spring-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> Spring Boot</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/spring/spring-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> Spring Cloud</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/spring/spring-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> Spring AI</span>
                         <span class="skill-tag"><i class="fas fa-link" style="color: #0284c7;"></i> LangChain4j</span>
                         <span class="skill-tag"><i class="fas fa-layer-group" style="color: #ef4444;"></i>
                             MyBatis-Plus</span>
-                        <span class="skill-tag"><i class="devicon-react-original colored"></i> React</span>
-                        <span class="skill-tag"><i class="devicon-kubernetes-plain colored"></i> Kubernetes</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/react/react-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> React</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/kubernetes/kubernetes-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> Kubernetes</span>
                         <span class="skill-tag"><i class="fas fa-infinity" style="color: #06b6d4;"></i> CI/CD</span>
                     </div>
 
                     <h4 style="margin-bottom: 0.5rem; font-size: 0.95rem; font-weight: 600; color: var(--text-sub);"
                         data-en="Developer Tools" data-zh="开发工具与云平台">Developer Tools</h4>
                     <div class="skills-container" style="margin-top: 0; margin-bottom: 1.25rem;">
-                        <span class="skill-tag"><i class="devicon-docker-plain colored"></i> Docker</span>
-                        <span class="skill-tag"><i class="devicon-nginx-original colored"></i> Nginx</span>
-                        <span class="skill-tag"><i class="devicon-git-plain colored"></i> Git/GitHub</span>
-                        <span class="skill-tag"><i class="devicon-intellij-plain colored"></i> IntelliJ IDEA</span>
-                        <span class="skill-tag"><i class="devicon-vscode-plain colored"></i> VS Code</span>
-                        <span class="skill-tag"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> AWS
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/docker/docker-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> Docker</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/nginx/nginx-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> Nginx</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> Git/GitHub</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/intellij/intellij-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> IntelliJ IDEA</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/vscode/vscode-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> VS Code</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> AWS
                             ECS/SQS/DynamoDB/Lambda/IAM</span>
                     </div>
 
                     <h4 style="margin-bottom: 0.5rem; font-size: 0.95rem; font-weight: 600; color: var(--text-sub);"
                         data-en="Libraries" data-zh="核心类库与组件">Libraries</h4>
                     <div class="skills-container" style="margin-top: 0; margin-bottom: 1.5rem;">
-                        <span class="skill-tag"><i class="devicon-postgresql-plain colored"></i> PgVector</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/postgresql/postgresql-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> PgVector</span>
                         <span class="skill-tag"><i class="fas fa-brain" style="color: #8b5cf6;"></i> RAG
                             Components</span>
                         <span class="skill-tag"><i class="fas fa-paper-plane" style="color: #0ea5e9;"></i> Umi
                             Request</span>
-                        <span class="skill-tag"><i class="devicon-pytorch-original colored"></i> PyTorch</span>
-                        <span class="skill-tag"><i class="devicon-pandas-plain colored"></i> pandas</span>
-                        <span class="skill-tag"><i class="devicon-numpy-plain colored"></i> NumPy</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/pytorch/pytorch-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> PyTorch</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/pandas/pandas-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> pandas</span>
+                        <span class="skill-tag"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/numpy/numpy-original.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> NumPy</span>
                     </div>
                 </div>
 
@@ -1974,6 +2419,18 @@
                     </li>
                 </ul>
             </div>
+        </div>
+    </section>
+
+    <section id="guestbook">
+        <h2 class="animate-on-scroll" data-en="Guestbook" data-zh="留言板">Guestbook</h2>
+        <p class="guestbook-intro animate-on-scroll delay-100"
+            data-en="Leave a note, or just say hi :) classmates, recruiters, and fellow builders all welcome. Comments live in this site's GitHub Discussions, so a GitHub account is all you need."
+            data-zh="留个言，或者打个招呼 :) 同学、招聘官、同行都欢迎。留言保存在本站的 GitHub Discussions 里，有 GitHub 账号就能留言哦！">
+            Leave a note, or just say hi :) classmates, recruiters, and fellow builders all welcome.
+            Comments live in this site's GitHub Discussions, so a GitHub account is all you need.</p>
+        <div class="card guestbook-card animate-on-scroll delay-200">
+            <div id="giscus-container"></div>
         </div>
     </section>
 
@@ -2037,13 +2494,25 @@
         const htmlElement = document.documentElement;
         const icon = themeToggle.querySelector('i');
 
-        // Check stored preference; default to light (米白色)
-        if (localStorage.getItem('theme') === 'dark') {
+        // Company logos ship a dark-mode variant (light text on transparent bg)
+        function syncThemedLogos(isDark) {
+            document.querySelectorAll('img[data-dark-src]').forEach(img => {
+                const next = isDark ? img.dataset.darkSrc : img.dataset.lightSrc;
+                if (img.getAttribute('src') !== next) img.setAttribute('src', next);
+            });
+        }
+
+        // Saved preference wins; otherwise follow the OS setting (prefers-color-scheme)
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (storedTheme ? storedTheme === 'dark' : prefersDark) {
             htmlElement.setAttribute('data-theme', 'dark');
             icon.className = 'fas fa-sun';
+            syncThemedLogos(true);
         } else {
             htmlElement.removeAttribute('data-theme');
             icon.className = 'fas fa-moon';
+            syncThemedLogos(false);
         }
 
         themeToggle.addEventListener('click', () => {
@@ -2051,19 +2520,52 @@
                 htmlElement.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
                 icon.className = 'fas fa-moon';
+                syncThemedLogos(false);
             } else {
                 htmlElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
                 icon.className = 'fas fa-sun';
+                syncThemedLogos(true);
             }
         });
 
         // Tech Beam Logic
         const profilePic = document.getElementById('profile-pic');
+        // Click: shockwave + toggle an 8-bit pixel-art version of the photo (drawn on a canvas)
+        const originalSrc = profilePic.getAttribute('src');
+        let pixelSrc = null, pixelOn = false;
+        function makePixelArt(img, blocks) {
+            // Same crop as object-fit: cover / center top → a square from the top of the image
+            const side = Math.min(img.naturalWidth, img.naturalHeight);
+            const sx = (img.naturalWidth - side) / 2;
+            const small = document.createElement('canvas');
+            small.width = small.height = blocks;
+            const sctx = small.getContext('2d');
+            sctx.drawImage(img, sx, 0, side, side, 0, 0, blocks, blocks);
+            const out = document.createElement('canvas');
+            out.width = out.height = 512;
+            const octx = out.getContext('2d');
+            octx.imageSmoothingEnabled = false;
+            octx.drawImage(small, 0, 0, out.width, out.height);
+            return out.toDataURL('image/png');
+        }
         profilePic.addEventListener('click', () => {
             profilePic.classList.remove('beam-active');
             void profilePic.offsetWidth; // Trigger reflow
             profilePic.classList.add('beam-active');
+
+            try {
+                if (!pixelSrc) pixelSrc = makePixelArt(profilePic, 32);
+            } catch (e) {
+                return; // canvas tainted (e.g. opened via file://) → keep the shockwave only
+            }
+            pixelOn = !pixelOn;
+            profilePic.classList.add('pixel-swap');
+            setTimeout(() => {
+                profilePic.src = pixelOn ? pixelSrc : originalSrc;
+                profilePic.classList.toggle('pixel-mode', pixelOn);
+                profilePic.classList.remove('pixel-swap');
+            }, 160);
         });
 
         // Click-to-copy Email Logic
@@ -2159,6 +2661,8 @@
         }
 
         function applyLanguage(lang) {
+
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
             const currentYear = new Date().getFullYear();
             document.querySelectorAll('[data-en]').forEach(el => {
                 const enText = el.getAttribute('data-en');
@@ -2382,6 +2886,140 @@
         setTimeout(refreshSliderNoAnim, 200);
     </script>
 
+    <!-- Rotating fun facts under the hero subtitle (edit the list below) -->
+    <script>
+        (function () {
+            const FACTS = [
+                { emoji: '📷', en: 'Amateur photographer — the gallery is on the About page.', zh: '业余摄影爱好者——About 页有我的照片。' },
+                { emoji: '🎮', en: 'PUBG Ace rank. Tactical, not reckless — same as my code.', zh: 'PUBG 王牌段位。讲究战术不莽——写代码也一样。' },
+                { emoji: '⛏️', en: 'Minecraft creative-mode builder since forever.', zh: 'Minecraft 创造模式老建筑师。' },
+                { emoji: '🎵', en: 'Alan Walker on the way to class, Jay Chou on the way back.', zh: '上课路上听 Alan Walker，回来路上听周杰伦。' },
+                { emoji: '📐', en: 'Math minor: I genuinely enjoy linear algebra.', zh: '辅修数学：我是真心喜欢线性代数。' },
+                { emoji: '⌨️', en: 'Press ` on this page for a terminal. Try "sudo hire-me".', zh: '在本页按 ` 键有个终端，试试 sudo hire-me。' },
+                { emoji: '🔍', en: 'Press ⌘K / Ctrl+K — this site has a command palette.', zh: '按 ⌘K / Ctrl+K——这个网站有命令面板。' },
+            ];
+
+            const el = document.getElementById('fun-fact');
+            if (!el || !FACTS.length) return;
+            const emojiEl = el.querySelector('.fun-fact-emoji');
+            const textEl = el.querySelector('.fun-fact-text');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const INTERVAL = 5000;
+
+            // Start on a random fact so repeat visitors see something new
+            let i = Math.floor(Math.random() * FACTS.length);
+            let timer = null;
+
+            function render() {
+                const lang = localStorage.getItem('lang') || 'en';
+                emojiEl.textContent = FACTS[i].emoji;
+                textEl.textContent = lang === 'zh' ? FACTS[i].zh : FACTS[i].en;
+            }
+            function next() {
+                i = (i + 1) % FACTS.length;
+                if (reduceMotion) { render(); return; }
+                el.classList.add('swap');
+                setTimeout(() => { render(); el.classList.remove('swap'); }, 350);
+            }
+            function start() { stop(); timer = setInterval(next, INTERVAL); }
+            function stop() { if (timer) clearInterval(timer); timer = null; }
+
+            render();
+            start();
+            el.addEventListener('click', () => { next(); start(); });
+            el.addEventListener('mouseenter', stop);
+            el.addEventListener('mouseleave', start);
+            document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+            // Re-render in the new language when the toggle is used
+            new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        })();
+    </script>
+
+    <!-- Guestbook: giscus (comments + reactions stored in GitHub Discussions) -->
+    <script>
+        (function () {
+            // ---- Comments live in the repo's Discussions ("Announcements" category, so only
+            //      giscus can open threads). IDs come from https://giscus.app for this repo.
+            const GISCUS = {
+                repo: 'PowerSixxx/PowerSixxx.github.io',
+                repoId: 'R_kgDOQredyw',
+                category: 'Announcements',
+                categoryId: 'DIC_kwDOQredy84DFjI7',
+            };
+
+            const container = document.getElementById('giscus-container');
+            if (!container) return;
+
+            const html = document.documentElement;
+            const giscusTheme = () => (html.getAttribute('data-theme') === 'dark' ? 'noborder_dark' : 'noborder_light');
+            const giscusLang = () => ((localStorage.getItem('lang') || 'en') === 'zh' ? 'zh-CN' : 'en');
+
+            // Show a friendly note instead of a broken widget when giscus can't run:
+            // not configured yet, or the page was opened as a local file (giscus needs http(s)).
+            function showNote(en, zh) {
+                container.innerHTML = '<div class="guestbook-note"><i class="fas fa-comment-dots"></i>' +
+                    '<span data-en="' + en + '" data-zh="' + zh + '">' + en + '</span></div>';
+                if (typeof applyLanguage === 'function') applyLanguage(localStorage.getItem('lang') || 'en');
+            }
+            if (!GISCUS.categoryId || GISCUS.categoryId.startsWith('REPLACE')) {
+                showNote('The guestbook is being set up — check back soon!', '留言板正在搭建中，敬请期待！');
+                return;
+            }
+            if (location.protocol === 'file:') {
+                showNote('The guestbook only works over http(s) — open this page via a local server or on baowenliu.com.',
+                    '留言板需要通过 http(s) 访问——请用本地服务或在 baowenliu.com 上查看。');
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://giscus.app/client.js';
+            script.async = true;
+            script.crossOrigin = 'anonymous';
+            Object.entries({
+                repo: GISCUS.repo,
+                'repo-id': GISCUS.repoId,
+                category: GISCUS.category,
+                'category-id': GISCUS.categoryId,
+                mapping: 'specific',
+                term: 'Guestbook',            // one shared thread for the whole site
+                strict: '0',
+                'reactions-enabled': '1',     // 👍 ❤️ 🚀 … on the thread = the "like" button
+                'emit-metadata': '0',
+                'input-position': 'top',
+                theme: giscusTheme(),
+                lang: giscusLang(),
+                loading: 'lazy',
+            }).forEach(([k, v]) => script.setAttribute('data-' + k, v));
+            container.appendChild(script);
+
+            // Keep giscus in sync with the site's theme / language toggles
+            function pushConfig() {
+                const frame = document.querySelector('iframe.giscus-frame');
+                if (!frame) return;
+                frame.contentWindow.postMessage({ giscus: { setConfig: { theme: giscusTheme(), lang: giscusLang() } } }, 'https://giscus.app');
+            }
+            new MutationObserver(pushConfig).observe(html, { attributes: true, attributeFilter: ['data-theme', 'lang'] });
+        })();
+    </script>
+
+    <!-- Keep the BAOWEN watermark vertically centred on the contact bar -->
+    <script>
+        (function () {
+            const footer = document.querySelector('footer.watermark-footer');
+            const bar = footer && footer.querySelector('.footer-contact');
+            if (!bar) return;
+            const align = () => footer.style.setProperty('--wm-top', (bar.offsetTop + bar.offsetHeight / 2) + 'px');
+            align();
+            window.addEventListener('load', align);
+            if (window.ResizeObserver) new ResizeObserver(align).observe(footer);
+        })();
+    </script>
+    <!-- Footer status card: uptime + visitor counts (GoatCounter) -->
+    <script src="assets/site-stats.js?v=20260914b"></script>
+    <!-- Command palette: ⌘K / Ctrl+K -->
+    <script src="assets/palette.js?v=20260914c"></script>
+    <!-- Easter egg: interactive terminal (press ` or click the >_ button) -->
+    <script src="assets/terminal.js?v=20260914h"></script>
 </body>
 
 </html>

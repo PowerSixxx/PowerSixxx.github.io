@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>(function(){var s=localStorage.getItem('theme');if(s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.setAttribute('data-theme','dark');})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume – Baowen Liu</title>
+    <meta name="description"
+        content="Resume of Baowen Liu — B.S. Computer Science & Engineering at The Ohio State University (GPA 3.965). Software engineering internships in distributed systems, Spring Boot, AWS, and RAG platforms.">
+    <meta name="author" content="Baowen Liu">
+    <link rel="canonical" href="https://www.baowenliu.com/resume.html">
+    <meta property="og:title" content="Resume – Baowen Liu">
+    <meta property="og:description" content="Software engineer in training: distributed systems, Spring / AWS, RAG platforms. OSU CSE, GPA 3.965.">
+    <meta property="og:image" content="https://www.baowenliu.com/photo1.jpg">
+    <meta property="og:url" content="https://www.baowenliu.com/resume.html">
+    <meta property="og:type" content="profile">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <!-- Structured data so search engines understand this is a person's resume -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Baowen Liu",
+      "url": "https://www.baowenliu.com/",
+      "email": "mailto:liu.11884@osu.edu",
+      "image": "https://www.baowenliu.com/photo1.jpg",
+      "jobTitle": "Software Development Engineer Intern",
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "The Ohio State University" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Columbus", "addressRegion": "OH", "addressCountry": "US" },
+      "sameAs": [
+        "https://github.com/PowerSixxx",
+        "https://www.linkedin.com/in/baowen-liu-959104340/"
+      ],
+      "knowsAbout": ["Java", "Spring Boot", "Spring Cloud", "Python", "AWS", "Distributed Systems", "Redis", "Elasticsearch", "RAG", "React"]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #f7f5f0;
+            --paper: #ffffff;
+            --text-main: #1c1917;
+            --text-sub: #57534e;
+            --text-muted: #78716c;
+            --accent: #2563eb;
+            --rule: #d6d3cd;
+            --border: #e5e1d8;
+            --tl-accent: #14c3b6;
+        }
+
+        [data-theme="dark"] {
+            --bg: #000000;
+            --paper: #0c0c0e;
+            --text-main: #f1f5f9;
+            --text-sub: #cbd5e1;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --rule: #2a2a30;
+            --border: #1f1f24;
+            --tl-accent: #3ee9db;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            background: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 2rem 1rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        body::before,
+        body::after {
+            display: none !important;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 860px;
+        }
+
+        /* ---- Top bar ---- */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tb-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            height: 36px;
+            padding: 0 0.95rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--paper);
+            color: var(--text-main);
+            font: 500 0.85rem 'Inter', sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .tb-btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--text-muted);
+        }
+
+        .tb-btn.primary {
+            background: var(--text-main);
+            color: var(--paper);
+            border-color: var(--text-main);
+        }
+
+        .tb-btn.icon {
+            width: 36px;
+            padding: 0;
+            justify-content: center;
+        }
+
+        /* ---- Paper ---- */
+        .paper {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem 2.75rem 2.25rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] .paper {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .r-head {
+            text-align: center;
+            margin-bottom: 1.4rem;
+        }
+
+        .r-head h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+
+        .r-contact {
+            margin-top: 0.5rem;
+            font-size: 0.86rem;
+            color: var(--text-sub);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.25rem 0.55rem;
+        }
+
+        .r-contact a {
+            color: var(--text-sub);
+            text-decoration: none;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .r-contact a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .r-contact .sep {
+            color: var(--rule);
+        }
+
+        .r-section {
+            margin-top: 1.35rem;
+        }
+
+        .r-section h2 {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            padding-bottom: 0.3rem;
+            border-bottom: 1.5px solid var(--text-main);
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .r-section h2::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--tl-accent);
+        }
+
+        .r-item {
+            margin-bottom: 0.9rem;
+        }
+
+        .r-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .r-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .r-title {
+            font-weight: 700;
+            font-size: 0.98rem;
+        }
+
+        .r-title .stack {
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        .r-when,
+        .r-where {
+            color: var(--text-sub);
+            font-size: 0.86rem;
+            white-space: nowrap;
+        }
+
+        .r-when {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .r-org {
+            font-style: italic;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        .r-item ul {
+            margin: 0.3rem 0 0 1.1rem;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .r-item li {
+            margin-bottom: 0.18rem;
+        }
+
+        .r-item li strong,
+        .r-org strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .r-skills p {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        .r-skills strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .r-foot {
+            margin-top: 1.25rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .r-foot a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1.25rem 0.75rem 3rem;
+            }
+
+            .paper {
+                padding: 1.75rem 1.25rem 1.5rem;
+                border-radius: 12px;
+            }
+
+            .r-head h1 {
+                font-size: 1.7rem;
+            }
+
+            .r-row {
+                flex-direction: column;
+                gap: 0.1rem;
+            }
+
+            .r-when,
+            .r-where {
+                white-space: normal;
+            }
+        }
+
+        /* ---- Print: clean black-on-white, one page if possible ---- */
+        @page {
+            size: letter;
+            margin: 0.45in 0.55in;
+        }
+
+        @media print {
+            html,
+            html body {
+                background: #fff !important;
+                color: #000 !important;
+                padding: 0 !important;
+                display: block !important;
+            }
+
+            .topbar,
+            .r-foot,
+            .cp-launcher,
+            .term-launcher,
+            .back-to-top {
+                display: none !important;
+            }
+
+            .container {
+                max-width: none;
+            }
+
+            .paper {
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                padding: 0;
+                background: #fff !important;
+            }
+
+            /* Beat the dark-theme heading colours from glass-theme.css when printing */
+            html .paper .r-head h1,
+            html .paper .r-section h2,
+            html .paper .r-title,
+            html .paper .r-item li strong,
+            html .paper .r-skills strong,
+            html .paper .r-org strong {
+                color: #000 !important;
+            }
+
+            html .paper .r-section h2 {
+                border-bottom-color: #000 !important;
+            }
+
+            .r-contact,
+            .r-contact a,
+            .r-when,
+            .r-where,
+            .r-org,
+            .r-item ul,
+            .r-skills p,
+            .r-title .stack {
+                color: #222 !important;
+            }
+
+            .r-section h2 {
+                border-bottom-color: #000;
+            }
+
+            .r-section h2::before {
+                display: none;
+            }
+
+            .r-contact a {
+                border-bottom: none;
+            }
+
+            /* keep each entry together, but let sections flow so page 1 fills up */
+            .r-item {
+                break-inside: avoid;
+            }
+
+            .r-section h2 {
+                break-after: avoid;
+            }
+
+            .r-head {
+                margin-bottom: 0.8rem;
+            }
+
+            .r-head h1 {
+                font-size: 1.55rem;
+            }
+
+            .r-contact {
+                margin-top: 0.25rem;
+            }
+
+            .r-section {
+                margin-top: 0.65rem;
+            }
+
+            .r-section h2 {
+                font-size: 0.7rem;
+                margin-bottom: 0.4rem;
+                padding-bottom: 0.15rem;
+            }
+
+            .r-item {
+                margin-bottom: 0.5rem;
+            }
+
+            .r-item ul {
+                margin-top: 0.15rem;
+                line-height: 1.35;
+            }
+
+            .r-item li {
+                margin-bottom: 0.08rem;
+            }
+
+            .r-item ul,
+            .r-skills p,
+            .r-org,
+            .r-when,
+            .r-where,
+            .r-contact,
+            .r-title .stack {
+                font-size: 0.76rem;
+            }
+
+            .r-skills p {
+                line-height: 1.45;
+            }
+
+            .r-title {
+                font-size: 0.86rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/glass-theme.css?v=20260914_vt">
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="breadcrumb">
+                <a href="index.html" data-en="Home" data-zh="主页">Home</a> &nbsp;›&nbsp;
+                <span data-en="Resume" data-zh="简历">Resume</span>
+            </div>
+            <div class="actions">
+                <a id="pdf-link" class="tb-btn primary" href="Baowen_Resume.pdf" target="_blank"
+                    data-href-en="Baowen_Resume.pdf" data-href-zh="Baowen_Resume_CN.pdf">
+                    <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                    <span data-en="Download PDF" data-zh="下载 PDF">Download PDF</span>
+                </a>
+                <button type="button" class="tb-btn" onclick="window.print()">
+                    <i class="fas fa-print" aria-hidden="true"></i>
+                    <span data-en="Print" data-zh="打印">Print</span>
+                </button>
+                <button type="button" class="tb-btn" id="lang-toggle" title="Switch language">EN | 中文</button>
+                <button type="button" class="tb-btn icon" id="theme-toggle" title="Toggle theme"
+                    aria-label="Toggle theme">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <article class="paper" itemscope itemtype="https://schema.org/Person">
+            <header class="r-head">
+                <h1 itemprop="name" data-en="Baowen Liu" data-zh="刘宝文">Baowen Liu</h1>
+                <div class="r-contact">
+                    <span data-en="380-249-9220" data-zh="135-8181-5272">380-249-9220</span>
+                    <span class="sep">|</span>
+                    <a href="mailto:liu.11884@osu.edu" itemprop="email">liu.11884@osu.edu</a>
+                    <span class="sep">|</span>
+                    <a href="https://www.linkedin.com/in/baowen-liu-959104340/" target="_blank"
+                        rel="noopener">linkedin.com/in/baowen-liu-959104340</a>
+                    <span class="sep">|</span>
+                    <a href="https://www.baowenliu.com/" itemprop="url">www.baowenliu.com</a>
+                </div>
+            </header>
+
+            <!-- ===================== Education ===================== -->
+            <section class="r-section">
+                <h2 data-en="Education" data-zh="教育背景">Education</h2>
+                <div class="r-item">
+                    <div class="r-row">
+                        <span class="r-title" data-en="The Ohio State University"
+                            data-zh="俄亥俄州立大学（The Ohio State University）">The Ohio State University</span>
+                        <span class="r-where" data-en="Columbus, OH" data-zh="美国俄亥俄州哥伦布">Columbus, OH</span>
+                    </div>
+                    <div class="r-row">
+                        <span class="r-org"
+                            data-en="B.S. in Computer Science and Engineering, Minor in Math — GPA: 3.965/4.0 (Top 1%)"
+                            data-zh="计算机科学与工程学士，辅修数学 — GPA: 3.965 / 4.0（专业前 1%）">B.S. in Computer Science and
+                            Engineering, Minor in Math — GPA: 3.965/4.0 (Top 1%)</span>
+                        <span class="r-when" data-en="Aug. 2024 – May 2028" data-zh="2024.08 – 2028.05">Aug. 2024 – May
+                            2028</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== Experience ===================== -->
+            <section class="r-section">
+                <h2 data-en="Experience" data-zh="工作与科研经历">Experience</h2>
+
+                <div class="r-item">
+                    <div class="r-row">
+                        <span class="r-title" data-en="Undergraduate Research Assistant"
+                            data-zh="本科科研助理（RA）">Undergraduate Research Assistant</span>
+                        <span class="r-when" data-en="May 2026 – Aug. 2026" data-zh="2026.05 – 2026.08">May 2026 – Aug.
+                            2026</span>
+                    </div>
+                    <div class="r-row">
+                        <span class="r-org"
+                            data-en="The Ohio State University Department of Computer Science and Engineering"
+                            data-zh="俄亥俄州立大学计算机科学与工程系">The Ohio State University Department of Computer Science
+                            and Engineering</span>
+                        <span class="r-where" data-en="Columbus, OH" data-zh="美国俄亥俄州哥伦布">Columbus, OH</span>
+                    </div>
+                    <ul>
+                        <li data-en="Built an online research platform with dynamic stratified sampling and automated concurrent-user simulations"
+                            data-zh="构建支持动态分层抽样与自动化并发用户仿真的在线科研平台。">Built an online research platform with
+                            dynamic stratified sampling and automated concurrent-user simulations</li>
+                        <li data-en="Developed a full-stack platform using <strong>Node.js</strong>, <strong>JavaScript/JQuery</strong>, <strong>MySQL</strong>, <strong>Bootstrap</strong>, <strong>Webpack</strong>, building <strong>RESTful APIs</strong> with metadata workflows, leveraged <strong>Python</strong>, <strong>Pandas</strong> for experimental data processing"
+                            data-zh="使用 <strong>Node.js</strong>、<strong>JavaScript/JQuery</strong>、<strong>MySQL</strong>、<strong>Bootstrap</strong>、<strong>Webpack</strong> 开发全栈平台，构建支持元数据工作流的 <strong>RESTful API</strong>，利用 <strong>Python</strong>、<strong>Pandas</strong> 进行实验数据处理。">
+                            Developed a full-stack platform using <strong>Node.js</strong>,
+                            <strong>JavaScript/JQuery</strong>, <strong>MySQL</strong>, <strong>Bootstrap</strong>,
+                            <strong>Webpack</strong>, building <strong>RESTful APIs</strong> with metadata workflows,
+                            leveraged <strong>Python</strong>, <strong>Pandas</strong> for experimental data processing
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="r-item">
+                    <div class="r-row">
+                        <span class="r-title" data-en="Undergraduate Teaching Assistant — Fundamentals of Engineering"
+                            data-zh="本科助教（TA）— 工程基础导论">Undergraduate Teaching Assistant — Fundamentals of
+                            Engineering</span>
+                        <span class="r-when" data-en="Jan. 2026 – Sep. 2026" data-zh="2026.01 – 2026.09">Jan. 2026 – Sep.
+                            2026</span>
+                    </div>
+                    <div class="r-row">
+                        <span class="r-org" data-en="The Ohio State University College of Engineering"
+                            data-zh="俄亥俄州立大学工程学院">The Ohio State University College of Engineering</span>
+                        <span class="r-where" data-en="Columbus, OH" data-zh="美国俄亥俄州哥伦布">Columbus, OH</span>
+                    </div>
+                    <ul>
+                        <li data-en="Taught <strong>MATLAB/CAD/Excel</strong> and programming concepts, and performing training sessions to 70 students."
+                            data-zh="教授 <strong>MATLAB/CAD/Excel</strong> 及编程概念，并面向 70 名学生开展实验培训。">Taught
+                            <strong>MATLAB/CAD/Excel</strong> and programming concepts, and performing training sessions
+                            to 70 students.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="r-item">
+                    <div class="r-row">
+                        <span class="r-title" data-en="Software Development Engineer Intern"
+                            data-zh="软件开发工程师实习生">Software Development Engineer Intern</span>
+                        <span class="r-when" data-en="May 2025 – Jul. 2025" data-zh="2025.05 – 2025.07">May 2025 – Jul.
+                            2025</span>
+                    </div>
+                    <div class="r-row">
+                        <span class="r-org" data-en="SPIC Integrated Smart Energy Co., Ltd."
+                            data-zh="国家电投集团综合智慧能源有限公司（兆瓦云）">SPIC Integrated Smart Energy Co., Ltd.</span>
+                        <span class="r-where" data-en="Beijing, China" data-zh="北京">Beijing, China</span>
+                    </div>
+                    <ul>
+                        <li data-en="Built a production-oriented <strong>RAG-based</strong> knowledge retrieval platform supporting technical manuals, operational procedures, and internal documents and 100+ concurrent queries"
+                            data-zh="构建面向生产环境的 <strong>RAG</strong> 知识检索平台，支持技术手册、操作规程与内部文档检索，承载 100+ 并发查询。">
+                            Built a production-oriented <strong>RAG-based</strong> knowledge retrieval platform
+                            supporting technical manuals, operational procedures, and internal documents and 100+
+                            concurrent queries</li>
+                        <li data-en="Developed document ingestion, retrieval, and LLM orchestration pipelines for enterprise power-utility knowledge using <strong>LangChain</strong>, <strong>FastAPI</strong>, <strong>FAISS</strong>, <strong>Cohere embeddings</strong>, enabling semantic search with <strong>pgvector</strong> storage."
+                            data-zh="使用 <strong>LangChain</strong>、<strong>FastAPI</strong>、<strong>FAISS</strong>、<strong>Cohere embeddings</strong> 开发面向企业电力知识的文档导入、检索与 LLM 编排查询数据流，结合 <strong>pgvector</strong> 存储实现语义检索。">
+                            Developed document ingestion, retrieval, and LLM orchestration pipelines for enterprise
+                            power-utility knowledge using <strong>LangChain</strong>, <strong>FastAPI</strong>,
+                            <strong>FAISS</strong>, <strong>Cohere embeddings</strong>, enabling semantic search with
+                            <strong>pgvector</strong> storage.
+                        </li>
+                        <li data-en="Implemented hybrid search combining vector <strong>similarity search</strong> with <strong>BM25</strong> keyword retrieval, improving retrieval accuracy for domain-specific terminology across enterprise knowledge."
+                            data-zh="实现结合向量的<strong>语义近似性检索</strong>与 <strong>BM25</strong> 关键词检索的混合检索（Hybrid Search），提升企业知识中特定领域术语的检索准确率。">
+                            Implemented hybrid search combining vector <strong>similarity search</strong> with
+                            <strong>BM25</strong> keyword retrieval, improving retrieval accuracy for domain-specific
+                            terminology across enterprise knowledge.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="r-item">
+                    <div class="r-row">
+                        <span class="r-title" data-en="Software Development Engineer Intern"
+                            data-zh="软件开发工程师实习生">Software Development Engineer Intern</span>
+                        <span class="r-when" data-en="Aug. 2025 – Dec. 2025" data-zh="2025.08 – 2025.12">Aug. 2025 – Dec.
+                            2025</span>
+                    </div>
+                    <div class="r-row">
+                        <span class="r-org" data-en="Beijing Hanwei Jialian Technology Co., Ltd."
+                            data-zh="北京汉维嘉联科技有限公司">Beijing Hanwei Jialian Technology Co., Ltd.</span>
+                        <span class="r-where" data-en="Beijing, China" data-zh="北京">Beijing, China</span>
+                    </div>
+                    <ul>
+                        <li data-en="Built a distributed <strong>CRM</strong> platform using <strong>Spring Boot, Redis</strong>, and <strong>Elasticsearch</strong>, supporting customer and contact management through scalable <strong>RESTful APIs</strong> with filtering, sorting, and pagination."
+                            data-zh="使用 <strong>Spring Boot</strong>、<strong>Redis</strong> 和 <strong>Elasticsearch</strong> 构建分布式 <strong>CRM</strong> 平台，通过支持过滤、排序与分页的高扩展 <strong>RESTful API</strong> 实现客户与联系人管理。">
+                            Built a distributed <strong>CRM</strong> platform using <strong>Spring Boot, Redis</strong>,
+                            and <strong>Elasticsearch</strong>, supporting customer and contact management through
+                            scalable <strong>RESTful APIs</strong> with filtering, sorting, and pagination.</li>
+                        <li data-en="Implemented an <strong>Event-driven</strong> architecture using <strong>RocketMQ</strong> for decoupled and <strong>asynchronous</strong> transaction"
+                            data-zh="使用 <strong>RocketMQ</strong> 实现<strong>事件驱动</strong>架构，用于解耦与<strong>异步</strong>事务处理。">
+                            Implemented an <strong>Event-driven</strong> architecture using <strong>RocketMQ</strong>
+                            for decoupled and <strong>asynchronous</strong> transaction</li>
+                        <li data-en="Improved customer and lead search by implementing <strong>Elasticsearch inverted-index</strong> search, reducing search <strong>latency</strong> by 40% compared with MySQL fuzzy queries."
+                            data-zh="通过实现 <strong>Elasticsearch 倒排索引</strong>检索优化客户与线索搜索，相比 MySQL 模糊查询将搜索<strong>延迟</strong>降低 40%。">
+                            Improved customer and lead search by implementing <strong>Elasticsearch
+                                inverted-index</strong> search, reducing search <strong>latency</strong> by 40% compared
+                            with MySQL fuzzy queries.</li>
+                        <li data-en="Improved frequent queries via <strong>Redis</strong> with <strong>cache aside</strong>, achieving a hit rate of 80%, reduced repeated queries."
+                            data-zh="通过结合 <strong>Cache-Aside</strong> 的 <strong>Redis</strong> 优化高频查询，实现 80% 命中率，减少重复查询。">
+                            Improved frequent queries via <strong>Redis</strong> with <strong>cache aside</strong>,
+                            achieving a hit rate of 80%, reduced repeated queries.</li>
+                        <li data-en="Built an automated <strong>CI/CD pipeline</strong> using <strong>Jenkins</strong>, <strong>GitHub Actions</strong>, and <strong>Docker</strong> to automate application builds, testing, reducing deployment time by 30%."
+                            data-zh="使用 <strong>Jenkins</strong>、<strong>GitHub Actions</strong> 和 <strong>Docker</strong> 构建自动化 <strong>CI/CD 流水线</strong>，自动化应用构建与测试，将部署时间缩短 30%。">
+                            Built an automated <strong>CI/CD pipeline</strong> using <strong>Jenkins</strong>,
+                            <strong>GitHub Actions</strong>, and <strong>Docker</strong> to automate application builds,
+                            testing, reducing deployment time by 30%.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ===================== Projects ===================== -->
+            <section class="r-section">
+                <h2 data-en="Projects" data-zh="项目经历">Projects</h2>
+
+                <div class="r-item">
+                    <div class="r-row">
+                        <span class="r-title"
+                            data-en="Online Shopping Platform <span class='stack'>| Spring Cloud, AWS ECS, ECR, Docker, DynamoDb</span>"
+                            data-zh="高并发分布式电商购物平台 <span class='stack'>| Spring Cloud, AWS ECS, ECR, Docker, DynamoDB, Redis</span>">Online
+                            Shopping Platform <span class="stack">| Spring Cloud, AWS ECS, ECR, Docker,
+                                DynamoDb</span></span>
+                        <span class="r-when" data-en="Aug. 2026 – Present" data-zh="2026.08 – 至今">Aug. 2026 –
+                            Present</span>
+                    </div>
+                    <ul>
+                        <li data-en="Built online shopping <strong>distribute</strong> system, handle Prime Day Sale event up to 10K QPS traffic"
+                            data-zh="构建在线购物<strong>分布式</strong>系统，应对 Prime Day 大促活动高达 <strong>10K QPS</strong> 的流量。">
+                            Built online shopping <strong>distribute</strong> system, handle Prime Day Sale event up to
+                            10K QPS traffic</li>
+                        <li data-en="Utilized <strong>Distributed Lock</strong> with <strong>Redis</strong> and Lua script, implement the caching inventory Lock and Revert of <strong>Try-Confirm-Cancel</strong> pattern, completely prevented overselling happens for sale events"
+                            data-zh="利用 <strong>Redis</strong> 与 Lua 脚本实现<strong>分布式锁</strong>，落实 <strong>Try-Confirm-Cancel (TCC)</strong> 模式下的缓存库存锁定与回滚，彻底防止大促活动发生超卖。">
+                            Utilized <strong>Distributed Lock</strong> with <strong>Redis</strong> and Lua script,
+                            implement the caching inventory Lock and Revert of <strong>Try-Confirm-Cancel</strong>
+                            pattern, completely prevented overselling happens for sale events</li>
+                        <li data-en="Achieved peak load shifting with <strong>AWS SQS</strong>, handle <strong>burst traffic</strong> requests as <strong>async</strong> jobs to protect service"
+                            data-zh="基于 <strong>AWS SQS</strong> 构建异步任务处理机制，通过消息队列缓冲<strong>突发流量</strong>、实现削峰填谷，降低下游服务瞬时负载，提升系统在高并发场景下的可用性与容错能力。">
+                            Achieved peak load shifting with <strong>AWS SQS</strong>, handle <strong>burst
+                                traffic</strong> requests as <strong>async</strong> jobs to protect service</li>
+                        <li data-en="Containerized microservices with <strong>Docker</strong> and Amazon <strong>ECR</strong>, deployed services to AWS <strong>ECS</strong>, and provisioned infrastructure with AWS <strong>CDK</strong> (TypeScript)/<strong>CloudFormation</strong>, integrating <strong>CodeBuild</strong> and <strong>CodePipeline</strong> to automate multi-environment deployments and reduce release time by 60%."
+                            data-zh="使用 <strong>Docker</strong> 与 Amazon <strong>ECR</strong> 容器化微服务，部署服务至 AWS <strong>ECS</strong>，使用 AWS <strong>CDK</strong> (TypeScript)/<strong>CloudFormation</strong> 编排基础设施，集成 <strong>CodeBuild</strong> 与 <strong>CodePipeline</strong> 实现多环境自动化部署，将发布时间缩短 60%。">
+                            Containerized microservices with <strong>Docker</strong> and Amazon <strong>ECR</strong>,
+                            deployed services to AWS <strong>ECS</strong>, and provisioned infrastructure with AWS
+                            <strong>CDK</strong> (TypeScript)/<strong>CloudFormation</strong>, integrating
+                            <strong>CodeBuild</strong> and <strong>CodePipeline</strong> to automate multi-environment
+                            deployments and reduce release time by 60%.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="r-item">
+                    <div class="r-row">
+                        <span class="r-title"
+                            data-en="User Center System <span class='stack'>| React, AntD Pro, Spring Boot, MyBatis-Plus, MySQL, Docker</span>"
+                            data-zh="企业级用户中心系统 <span class='stack'>| React, Ant Design Pro, Spring Boot, MyBatis-Plus, MySQL, Docker</span>">User
+                            Center System <span class="stack">| React, AntD Pro, Spring Boot, MyBatis-Plus, MySQL,
+                                Docker</span></span>
+                        <span class="r-when" data-en="May 2025 – Dec. 2025" data-zh="2025.05 – 2025.12">May 2025 – Dec.
+                            2025</span>
+                    </div>
+                    <ul>
+                        <li data-en="Developed a production-ready full-stack user system (login, registration, user mgmt)"
+                            data-zh="全栈主导开发生产级通用用户管理平台，实现统一登录注册、角色权限分配及全生命周期用户管理。">Developed a
+                            production-ready full-stack user system (login, registration, user mgmt)</li>
+                        <li data-en="Implemented backend APIs and database models with Spring Boot, MyBatis-Plus, MySQL"
+                            data-zh="基于 <strong>Spring Boot + MyBatis-Plus</strong> 规范设计后端 RESTful API 与数据持久层架构，保障数据一致性。">
+                            Implemented backend APIs and database models with Spring Boot, MyBatis-Plus, MySQL</li>
+                        <li data-en="Built frontend pages with <strong>React</strong> + AntD Pro, including validation and API integration"
+                            data-zh="基于 <strong>React + Ant Design Pro</strong> 搭建管理端前端，完成表单深度校验、组件封装及前后端高效联调。">
+                            Built frontend pages with <strong>React</strong> + AntD Pro, including validation and API
+                            integration</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ===================== Skills ===================== -->
+            <section class="r-section r-skills">
+                <h2 data-en="Technical Skills" data-zh="专业技能">Technical Skills</h2>
+                <p data-en="<strong>Languages</strong>: Java, Python, JavaScript, SQL (MySQL/PostgreSQL), HTML/CSS"
+                    data-zh="<strong>编程语言（Languages）</strong>：Java, Python, JavaScript, SQL (MySQL/PostgreSQL), HTML/CSS">
+                    <strong>Languages</strong>: Java, Python, JavaScript, SQL (MySQL/PostgreSQL), HTML/CSS
+                </p>
+                <p data-en="<strong>Frameworks</strong>: Spring Boot, Spring Cloud, Spring AI, LangChain4j, MyBatis-Plus, React, Kubernetes, CI/CD"
+                    data-zh="<strong>开发框架（Frameworks）</strong>：Spring Boot, Spring Cloud, Spring AI, LangChain4j, MyBatis-Plus, React, Kubernetes, CI/CD">
+                    <strong>Frameworks</strong>: Spring Boot, Spring Cloud, Spring AI, LangChain4j, MyBatis-Plus, React,
+                    Kubernetes, CI/CD
+                </p>
+                <p data-en="<strong>Developer Tools</strong>: Docker, Nginx, Git/GitHub, IntelliJ IDEA, VS Code, AWS ECS/SQS/DynamoDB/Lambda/IAM"
+                    data-zh="<strong>开发工具（Developer Tools）</strong>：Docker, Nginx, Git/GitHub, IntelliJ IDEA, VS Code, AWS ECS/SQS/DynamoDB/Lambda/IAM">
+                    <strong>Developer Tools</strong>: Docker, Nginx, Git/GitHub, IntelliJ IDEA, VS Code, AWS
+                    ECS/SQS/DynamoDB/Lambda/IAM
+                </p>
+                <p data-en="<strong>Libraries</strong>: PgVector, RAG Components, Umi Request, PyTorch, pandas, NumPy"
+                    data-zh="<strong>算法与类库（Libraries）</strong>：PgVector, RAG Components, Umi Request, PyTorch, pandas, NumPy">
+                    <strong>Libraries</strong>: PgVector, RAG Components, Umi Request, PyTorch, pandas, NumPy
+                </p>
+            </section>
+        </article>
+
+        <p class="r-foot" data-en="Prefer the original? <a href='Baowen_Resume.pdf' target='_blank'>Download the PDF</a> · Press Ctrl/⌘ + P to print this page."
+            data-zh="想要原版？<a href='Baowen_Resume_CN.pdf' target='_blank'>下载 PDF</a> · 按 Ctrl/⌘ + P 可直接打印本页。">
+            Prefer the original? <a href="Baowen_Resume.pdf" target="_blank">Download the PDF</a> · Press Ctrl/⌘ + P to
+            print this page.
+        </p>
+    </div>
+
+    <script>
+        (function () {
+            const html = document.documentElement;
+
+            // ---- Language (shared with the rest of the site via localStorage) ----
+            let currentLang = localStorage.getItem('lang') || 'en';
+            function applyLanguage(lang) {
+                html.lang = lang === 'zh' ? 'zh-CN' : 'en';
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    const v = lang === 'zh' ? (el.getAttribute('data-zh') || el.getAttribute('data-en')) : el.getAttribute('data-en');
+                    if (v) el.innerHTML = v;
+                });
+                document.querySelectorAll('[data-href-en]').forEach(el => {
+                    el.setAttribute('href', lang === 'zh' ? el.getAttribute('data-href-zh') : el.getAttribute('data-href-en'));
+                });
+                document.title = lang === 'zh' ? '简历 – 刘宝文' : 'Resume – Baowen Liu';
+            }
+            applyLanguage(currentLang);
+            document.getElementById('lang-toggle').addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                localStorage.setItem('lang', currentLang);
+                applyLanguage(currentLang);
+            });
+
+            // ---- Theme ----
+            const themeBtn = document.getElementById('theme-toggle');
+            const icon = themeBtn.querySelector('i');
+            const syncIcon = () => { icon.className = html.getAttribute('data-theme') === 'dark' ? 'fas fa-sun' : 'fas fa-moon'; };
+            syncIcon();
+            themeBtn.addEventListener('click', () => {
+                const dark = html.getAttribute('data-theme') === 'dark';
+                if (dark) html.removeAttribute('data-theme'); else html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', dark ? 'light' : 'dark');
+                syncIcon();
+            });
+        })();
+    </script>
+
+    <!-- Command palette: ⌘K / Ctrl+K -->
+    <script src="assets/palette.js?v=20260914c"></script>
+</body>
+
+</html>

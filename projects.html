@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
+    <script>(function(){var s=localStorage.getItem('theme');if(s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.setAttribute('data-theme','dark');})();</script>
     <meta charset="UTF-8">
     <title>Projects – Baowen Liu</title>
+    <meta name="description" content="Software projects by Baowen Liu — CS & Engineering student at The Ohio State University.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- The font style is consistent with that of the homepage -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -159,7 +164,9 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="assets/glass-theme.css?v=20260907_pureblack">
+    <link rel="stylesheet" href="assets/glass-theme.css?v=20260914_vt">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 </head>
 <body>
 <div class="container">
@@ -222,6 +229,8 @@
             let currentLang = localStorage.getItem('lang') || 'en';
 
             function applyLanguage(lang) {
+
+                document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
                 document.querySelectorAll('[data-en]').forEach(el => {
                     const enText = el.getAttribute('data-en');
                     const zhText = el.getAttribute('data-zh');
@@ -236,5 +245,7 @@
             applyLanguage(currentLang);
         })();
     </script>
+    <!-- Command palette: ⌘K / Ctrl+K -->
+    <script src="assets/palette.js?v=20260914c"></script>
 </body>
 </html>
