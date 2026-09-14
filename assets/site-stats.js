@@ -13,9 +13,20 @@
     if (window.__baowenSiteStats) return;
     window.__baowenSiteStats = true;
 
-    const GOATCOUNTER = 'baowenliu';                 
+    const GOATCOUNTER = 'baowenliu';        // GoatCounter site code → https://baowenliu.goatcounter.com
     const LAUNCHED = '2025-12-19';          // first deploy of the site
 
+    /* ---------------- GoatCounter tracking: runs on every page ---------------- */
+    // No cookies, no personal data; the script skips localhost by itself.
+    if (GOATCOUNTER) {
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://gc.zgo.at/count.js';
+        s.setAttribute('data-goatcounter', `https://${GOATCOUNTER}.goatcounter.com/count`);
+        document.head.appendChild(s);
+    }
+
+    /* ---------------- Status card: only on pages with the watermark footer ---------------- */
     const footer = document.querySelector('footer.watermark-footer');
     if (!footer) return;
 
@@ -67,15 +78,8 @@
 
     if (!configured) return;
 
-    /* ---------------- GoatCounter: tracking + public counts ---------------- */
+    /* ---------------- Public counts for the card ---------------- */
     const base = `https://${GOATCOUNTER}.goatcounter.com`;
-
-    // Tracking script (no cookies, no personal data). Skips localhost automatically.
-    const s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://gc.zgo.at/count.js';
-    s.setAttribute('data-goatcounter', base + '/count');
-    document.head.appendChild(s);
 
     // Public counter endpoint: /counter/TOTAL.json = whole site; ?start=YYYY-MM-DD limits the range
     const num = (v) => { const n = parseInt(String(v ?? '').replace(/[^\d]/g, ''), 10); return isNaN(n) ? null : n; };
