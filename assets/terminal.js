@@ -16,7 +16,7 @@
     const DATA = {
         name: 'Baowen Liu',
         handle: 'PowerSixxx',
-        email: 'liu.11884@osu.edu',
+        email: 'me@baowenliu.com',
         phoneUS: '+1 380-249-9220',
         phoneCN: '+86 135-8181-5272',
         wechat: '_6Jan-Baower',
