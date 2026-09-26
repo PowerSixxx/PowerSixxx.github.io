@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Canvas+ Privacy Policy</title>
+<title>Canvas+ Privacy Policy · 隐私说明</title>
+<link rel="canonical" href="https://www.baowenliu.com/canvas-plus/privacy">
+<meta name="description" content="How the Canvas+ browser extension handles your data: Canvas data stays in your browser; optional AI summaries, accounts and Pro membership explained.">
+<link rel="icon" href="https://ai.baowenliu.com/logo.png">
 <style>
   :root { --bg: #ffffff; --bg2: #f5f6f8; --fg: #1b1f24; --muted: #5f6b76; --line: #e3e6ea; --primary: #bb0000; --good: #1b7f3b; --good-bg: #e6f4ea; }
   @media (prefers-color-scheme: dark) {
@@ -14,7 +17,7 @@
     font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; }
   main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
   header { display: flex; align-items: center; gap: 12px; }
-  header svg { width: 44px; height: 44px; flex: none; }
+  header img { width: 44px; height: 44px; border-radius: 10px; }
   h1 { font-size: 26px; line-height: 1.2; margin: 0; }
   .meta { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
   nav { margin: 24px 0 8px; display: flex; gap: 8px; }
@@ -39,23 +42,23 @@
 <body>
 <main>
   <header>
-    <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0322e"/><stop offset="1" stop-color="#a30000"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#5a0000" flood-opacity=".28"/></filter></defs><rect x="4" y="4" width="120" height="120" rx="28" fill="url(#g)"/><g filter="url(#s)"><rect x="26" y="34" width="60" height="68" rx="13" fill="#fff"/><path d="M40.5 69.5l10.5 10.5 20-21.5" fill="none" stroke="#a30000" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="89" cy="37" r="21" fill="#fff"/><path d="M89 27v20M79 37h20" stroke="#a30000" stroke-width="7.5" stroke-linecap="round"/></g></svg>
+    <img src="https://ai.baowenliu.com/logo.png" alt="Canvas+" width="44" height="44">
     <div>
       <h1>Canvas+ Privacy Policy<br><span style="font-size:20px;font-weight:600">隐私说明</span></h1>
-      <p class="meta">Effective September 25, 2026 · 生效日期：2026 年 9 月 25 日</p>
+      <p class="meta">Effective September 26, 2026 · 生效日期：2026 年 9 月 26 日</p>
     </div>
   </header>
-  <nav aria-label="Language"><a href="#en">English</a><a href="#zh">中文</a></nav>
+  <nav aria-label="Language"><a href="#en">English</a><a href="#zh">中文</a><a href="https://www.baowenliu.com">baowenliu.com</a></nav>
 
   <!-- ============================ English ============================ -->
   <section id="en" class="lang-block" lang="en">
     <div class="promise">
-      <strong>Canvas+ does not collect any of your data.</strong>
-      Everything the extension reads stays in your own browser.
+      <strong>Your Canvas data stays in your browser.</strong>
+      Deadlines, grades and everything else Canvas+ reads from Canvas never leave your computer. The only things that reach the Canvas+ server are the optional AI summary, the optional Canvas+ account and the optional paid membership, all described below.
       <ul>
-        <li>No servers: Canvas+ has no backend and never sends your data to us or anyone else.</li>
-        <li>No accounts, no tracking, no analytics, no ads.</li>
-        <li>Nothing is sold, shared, or used for anything other than the features you see.</li>
+        <li>Your Canvas name, login, grades and submissions are never sent to us or anyone else.</li>
+        <li>A Canvas+ account is optional and stores only your e-mail address. No password.</li>
+        <li>No tracking, no analytics, no ads. Nothing is sold or shared, or used for anything other than the features you see.</li>
       </ul>
     </div>
 
@@ -67,8 +70,35 @@
       <tr><td>Your To Do / planner items (titles, due dates, submission status)</td><td>The deadline list, countdowns and reminders</td></tr>
       <tr><td>Assignment groups, weights, points and your scores</td><td>“% of final grade” tags and the final-exam calculator</td></tr>
       <tr><td>The course grading scheme</td><td>Letter-grade cut-offs in the calculator</td></tr>
+      <tr><td>The course syllabus / home page text (only for courses with no weights set in Canvas)</td><td>Finding the grade breakdown (e.g. “Homework 20%”) for the calculator</td></tr>
     </table>
     <p>Canvas+ never asks for your password and cannot see it. It reads this data directly from Canvas in your browser; it is not copied anywhere else.</p>
+
+    <h2>Canvas+ AI assignment summary (optional)</h2>
+    <p>Only when you click “AI summary” on an assignment, quiz or discussion (signed in to a free Canvas+ account, and after you agree the first time), Canvas+ sends <strong>that assignment’s own text</strong> — its title, instructions, rubric, due date and points — to the Canvas+ server at <code>ai.baowenliu.com</code>. The server asks a third-party AI provider to write the summary and sends it back. If the assignment links to files (PDF, Word, text), other Canvas pages, or outside web pages, the text of up to 4 of those files/pages (read in your browser with your own Canvas login) and the addresses of up to 3 outside links are sent too; the server then downloads those public web pages itself to read them. Nothing else from your Canvas account is sent.</p>
+    <ul>
+      <li><strong>Never sent:</strong> your name, Canvas login, grades, submissions, messages or any other personal information.</li>
+      <li><strong>Sent along:</strong> a random install ID created by the extension. Using the AI requires a free Canvas+ account (see below); the daily limit (10 summaries on the free plan) is counted per account.</li>
+      <li><strong>Kept on the server:</strong> the summary and a one-way fingerprint (hash) of the assignment text, so the same assignment isn’t summarised twice; daily usage counts per account and per a hashed IP address (raw IP addresses are not stored). The assignment text itself is not stored by Canvas+, and summaries are not linked to who asked for them.</li>
+      <li>The AI provider processes the assignment text only to write the summary, under its own terms and privacy policy.</li>
+      <li>If you never click “AI summary”, nothing is ever sent.</li>
+    </ul>
+
+    <h2>Canvas+ account (optional)</h2>
+    <p>A free Canvas+ account is needed to use the AI summary (so the free daily limit can’t be dodged) and for the Pro membership, which then works on any computer. There is no password. You can sign in:</p>
+    <ul>
+      <li><strong>With Google:</strong> Chrome opens Google’s own sign-in window. Canvas+ asks only for your verified e-mail address (scopes “openid email”) — not your name, contacts, Drive or anything else — and never sees your Google password.</li>
+      <li><strong>With an e-mail code:</strong> we e-mail you a one-time 6-digit code. Only a hash of the code is kept, for 10 minutes. To stop abuse, the number of codes per network (hashed IP) and per day is limited.</li>
+    </ul>
+    <p><strong>Kept on the server:</strong> your e-mail address, when the account was created, and which browsers (random install IDs, at most 3) are signed in. Sign out from “My account” in the panel. To delete your account, e-mail me@baowenliu.com and it will be removed within 30 days.</p>
+
+    <h2>Canvas+ AI Pro (optional paid membership)</h2>
+    <p>Canvas+ AI Pro is a monthly subscription that raises the daily AI summary limit. Payment happens on Stripe’s own checkout page; <strong>your card details go only to Stripe</strong> and are never seen or stored by Canvas+.</p>
+    <ul>
+      <li><strong>Kept on the server when you subscribe:</strong> your account e-mail, your Stripe customer and subscription IDs, the subscription’s status and renewal date, and a backup activation code (with the install IDs of the at most 3 browsers using it). We e-mail you once to confirm the membership.</li>
+      <li>Stripe processes payments under its own privacy policy (stripe.com/privacy).</li>
+      <li>You can cancel any time from “Manage or cancel” in the panel. To have your membership record deleted, e-mail me@baowenliu.com.</li>
+    </ul>
 
     <h2>What Canvas+ changes in Canvas</h2>
     <p>Only one thing, and only when you ask: when you tick the circle next to an item, Canvas+ marks it as done (or not done) in your own Canvas To Do list. It never submits work, changes grades, or posts anything.</p>
@@ -87,13 +117,14 @@
       <tr><td><code>storage</code></td><td>Save your settings and the local caches</td></tr>
       <tr><td><code>scripting</code>, <code>activeTab</code></td><td>Start Canvas+ on a Canvas site you just turned on, and check whether a page is Canvas when you click the toolbar button</td></tr>
       <tr><td><code>alarms</code>, <code>notifications</code></td><td>Show “due in 24 h / 2 h” reminders at the right time</td></tr>
+      <tr><td><code>identity</code></td><td>Open Google’s sign-in window when you choose “Sign in with Google”</td></tr>
     </table>
 
     <h2>Deleting your data</h2>
-    <p>Turn off anything in the panel at any time. Uninstalling Canvas+ removes all of its stored data from Chrome. You can also remove a site from the toolbar popup.</p>
+    <p>Turn off anything in the panel at any time. Uninstalling Canvas+ removes all of its stored data from Chrome. You can also remove a site from the toolbar popup. To delete your Canvas+ account and membership record from the server, e-mail me@baowenliu.com (an active subscription is cancelled first).</p>
 
     <h2>Children</h2>
-    <p>Canvas+ is a tool for students using Canvas. It does not collect personal information from anyone, including children.</p>
+    <p>Canvas+ is a tool for university students and is not directed at children under 13. The optional account stores only an e-mail address; if you believe a child has created one, e-mail me@baowenliu.com and it will be deleted.</p>
 
     <h2>Chrome Web Store</h2>
     <p>The use of information by Canvas+ complies with the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
@@ -110,12 +141,12 @@
   <!-- ============================ 中文 ============================ -->
   <section id="zh" class="lang-block" lang="zh-CN">
     <div class="promise">
-      <strong>Canvas+ 不收集你的任何数据。</strong>
-      插件读取的所有内容都只留在你自己的浏览器里。
+      <strong>你的 Canvas 数据只留在你的浏览器里。</strong>
+      Canvas+ 从 Canvas 读取的截止时间、成绩等内容都不会离开你的电脑。只有可选的「AI 总结」、可选的 Canvas+ 账号和可选的付费会员会用到 Canvas+ 服务器，见下文。
       <ul>
-        <li>没有服务器：Canvas+ 没有后端，不会把你的数据发给我们或任何人。</li>
-        <li>不需要注册账号，没有跟踪、统计分析，也没有广告。</li>
-        <li>不出售、不分享你的数据，也不会用于你看到的功能以外的任何用途。</li>
+        <li>你在 Canvas 里的姓名、账号、成绩和提交的作业，永远不会发给我们或任何人。</li>
+        <li>Canvas+ 账号是可选的，只保存你的邮箱，没有密码。</li>
+        <li>没有跟踪、统计分析和广告；不出售、不分享你的数据，也不会用于你看到的功能以外的任何用途。</li>
       </ul>
     </div>
 
@@ -127,8 +158,35 @@
       <tr><td>你的 To Do / 日程项目（标题、截止时间、提交状态）</td><td>作业列表、倒计时和截止提醒</td></tr>
       <tr><td>作业类别、权重、分值和你的分数</td><td>"占总成绩"标签和期末计算器</td></tr>
       <tr><td>课程的等级线设置</td><td>计算器里的等级分数线</td></tr>
+      <tr><td>课程 Syllabus / 主页的文字（仅限 Canvas 里没设置权重的课）</td><td>找出成绩构成（比如“作业 20%”）填进计算器</td></tr>
     </table>
     <p>Canvas+ 从不索要、也看不到你的密码。这些数据在你的浏览器里直接从 Canvas 读取，不会被复制到任何其他地方。</p>
+
+    <h2>Canvas+ AI 作业总结（可选）</h2>
+    <p>只有当你在作业、测验或讨论上点击「AI 总结」时（需要登录免费的 Canvas+ 账号，第一次还需要你同意），Canvas+ 才会把<strong>这个作业本身的文字</strong>——标题、说明、评分标准、截止时间和分值——发送到 Canvas+ 的服务器 <code>ai.baowenliu.com</code>，由服务器请第三方 AI 服务商生成总结后返回。如果作业里附了文件（PDF、Word、文本）、其他 Canvas 页面或外部网页链接，还会一并发送最多 4 个文件/页面的文字（在你的浏览器里用你自己的 Canvas 登录读取），以及最多 3 个外部链接的网址，由服务器自行下载这些公开网页来阅读。不会发送你 Canvas 账号里的其他任何内容。</p>
+    <ul>
+      <li><strong>不会发送：</strong>你的姓名、Canvas 账号、成绩、提交的作业、消息或其他任何个人信息。</li>
+      <li><strong>一并发送：</strong>插件随机生成的安装 ID。使用 AI 需要先登录免费的 Canvas+ 账号（见下文），每天的使用上限（免费版 10 次）按账号统计。</li>
+      <li><strong>服务器保存：</strong>总结结果和作业文字的单向指纹（哈希），这样同一个作业不用重复生成；以及按账号和经过哈希的 IP 统计的每日次数（不保存原始 IP）。Canvas+ 不保存作业原文，总结结果也不和提问的人关联。</li>
+      <li>AI 服务商只用这些文字来生成总结，并按照它自己的条款和隐私政策处理。</li>
+      <li>如果你从不点「AI 总结」，就不会发送任何内容。</li>
+    </ul>
+
+    <h2>Canvas+ 账号（可选）</h2>
+    <p>使用 AI 总结需要一个免费的 Canvas+ 账号（这样免费的每日次数不会被绕过）；Pro 会员也绑定在账号上，换电脑也能用。没有密码，可以这样登录：</p>
+    <ul>
+      <li><strong>Google 账号：</strong>Chrome 会打开 Google 自己的登录窗口。Canvas+ 只获取你已验证的邮箱地址（权限范围为“openid email”），不会获取你的姓名、联系人、云端硬盘等其他任何信息，也看不到你的 Google 密码。</li>
+      <li><strong>邮箱验证码：</strong>我们给你的邮箱发一个一次性的 6 位验证码，服务器只保存它的哈希值 10 分钟。为了防止滥用，每个网络（经过哈希的 IP）和每天能发送的验证码数量有上限。</li>
+    </ul>
+    <p><strong>服务器保存：</strong>你的邮箱、注册时间，以及哪些浏览器（随机安装 ID，最多 3 个）登录了这个账号。可以在面板的「我的账号」里退出登录。如需删除账号，请发邮件到 me@baowenliu.com，我们会在 30 天内删除。</p>
+
+    <h2>Canvas+ AI Pro（可选的付费会员）</h2>
+    <p>Canvas+ AI Pro 是按月订阅的会员，用来提高每天的 AI 总结次数。付款在 Stripe 自己的付款页面完成，<strong>银行卡信息只交给 Stripe</strong>，Canvas+ 看不到也不保存。</p>
+    <ul>
+      <li><strong>订阅后服务器保存：</strong>你的账号邮箱、Stripe 的客户和订阅编号、订阅状态和续费日期，以及一个备用激活码（和使用它的最多 3 个浏览器的安装 ID）。开通时我们会发一封确认邮件。</li>
+      <li>Stripe 按照它自己的隐私政策（stripe.com/privacy）处理付款。</li>
+      <li>你可以随时在面板里点「管理 / 取消订阅」取消。如需删除会员记录，请发邮件到 me@baowenliu.com。</li>
+    </ul>
 
     <h2>Canvas+ 会修改 Canvas 里的什么</h2>
     <p>只有一件事，而且只在你主动操作时：你点作业左边的圆圈时，Canvas+ 会在你自己的 Canvas To Do 列表里把它标记为完成（或取消完成）。它不会提交作业、修改成绩，也不会发布任何内容。</p>
@@ -147,13 +205,14 @@
       <tr><td><code>storage</code></td><td>保存设置和本地缓存</td></tr>
       <tr><td><code>scripting</code>、<code>activeTab</code></td><td>在你刚启用的 Canvas 网站上启动插件；你点工具栏按钮时，判断当前页面是不是 Canvas</td></tr>
       <tr><td><code>alarms</code>、<code>notifications</code></td><td>在截止前 24 小时 / 2 小时按时弹出提醒</td></tr>
+      <tr><td><code>identity</code></td><td>你选择「使用 Google 账号登录」时，打开 Google 的登录窗口</td></tr>
     </table>
 
     <h2>删除数据</h2>
-    <p>面板里的任何功能都可以随时关闭。卸载 Canvas+ 会从 Chrome 中删除它保存的全部数据。你也可以在工具栏弹窗里移除已启用的网站。</p>
+    <p>面板里的任何功能都可以随时关闭。卸载 Canvas+ 会从 Chrome 中删除它保存的全部数据。你也可以在工具栏弹窗里移除已启用的网站。如需从服务器删除你的 Canvas+ 账号和会员记录，请发邮件到 me@baowenliu.com（如有订阅会先帮你取消）。</p>
 
     <h2>未成年人</h2>
-    <p>Canvas+ 是给使用 Canvas 的学生用的工具，不收集任何人（包括未成年人）的个人信息。</p>
+    <p>Canvas+ 是给大学生用的工具，不面向 13 岁以下的儿童。可选的账号只保存一个邮箱；如果你发现有儿童注册了账号，请发邮件到 me@baowenliu.com，我们会删除。</p>
 
     <h2>Chrome 应用商店</h2>
     <p>Canvas+ 对信息的使用遵守 Chrome 应用商店用户数据政策，包括"有限使用"（Limited Use）要求。</p>
