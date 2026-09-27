@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Canvas+ · A better Canvas for students</title>
-<meta name="description" content="Canvas+ is a free Chrome extension for Canvas: every deadline in one list, a final-exam calculator, dark mode, and Canvas+ AI — assignment guides, syllabus summaries, course Q&amp;A, e-mail drafts and a weekly digest.">
+<meta name="description" content="Canvas+ is a free Chrome extension for Canvas: every deadline in one list, a final-exam calculator, dark mode, instant grade alerts, and Canvas+ AI — assignment guides, syllabus summaries, course Q&amp;A, exam review packs with a mistake book, e-mail drafts and a weekly digest.">
 <link rel="canonical" href="https://www.baowenliu.com/canvas-plus/">
 <link rel="icon" href="icon128.png">
 <meta property="og:title" content="Canvas+ · A better Canvas for students">
@@ -96,6 +96,7 @@
     <div class="top-r">
       <a class="hide-s" href="#features"><span class="en">Features</span><span class="zh">功能</span></a>
       <a class="hide-s" href="#ai">Canvas+ AI</a>
+      <a class="hide-s" href="#exams"><span class="en">Exams</span><span class="zh">备考</span></a>
       <a class="hide-s" href="privacy"><span class="en">Privacy</span><span class="zh">隐私</span></a>
       <button class="lang" id="lang" type="button"><span class="en">中文</span><span class="zh">English</span></button>
     </div>
@@ -129,7 +130,17 @@
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"/></svg></div>
         <h3><span class="en">Final-exam calculator</span><span class="zh">期末计算器</span></h3>
-        <p><span class="en">Pick a target grade and see exactly what you need on the final. No weights in Canvas? Canvas+ reads them from the syllabus.</span><span class="zh">选一个目标成绩，直接告诉你期末要考多少。Canvas 里没设权重？Canvas+ 会从 Syllabus 里读出来。</span></p>
+        <p><span class="en">Pick a target grade and see exactly what you need on the final. No weights in Canvas? Canvas+ reads them from the syllabus. Plus your term and cumulative GPA, and where it’s heading.</span><span class="zh">选一个目标成绩，直接告诉你期末要考多少。Canvas 里没设权重？Canvas+ 会从 Syllabus 里读出来。还能看学期和累计 GPA，以及接下来的走向。</span></p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
+        <h3><span class="en">Know the moment it changes</span><span class="zh">有变化，马上知道</span></h3>
+        <p><span class="en">A notification when a grade is posted, your course total moves, an instructor posts an announcement, or a deadline is moved. Scores stay hidden unless you turn them on.</span><span class="zh">出分、总成绩变化、老师发公告、截止时间被改，都会第一时间弹出通知。分数默认不显示，想看再打开。</span></p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-7.9a1 1 0 0 1-.8-.4L10.1 5a1 1 0 0 0-.8-.4H4a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1z"/><path d="M12 10v6M9 13l3 3 3-3"/></svg></div>
+        <h3><span class="en">All course files in one .zip</span><span class="zh">课件一键打包</span></h3>
+        <p><span class="en">Download every file in a course at once, one folder per module — built right in your browser.</span><span class="zh">一次下载整门课的所有文件，按单元分好文件夹，直接在你的浏览器里打包。</span></p>
       </div>
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.5l1.9 5.1 5.1 1.9-5.1 1.9L11 17.5l-1.9-5.1L4 10.5l5.1-1.9z"/></svg></div>
@@ -156,7 +167,7 @@
           <li><b><span class="en">What it trains</span><span class="zh">锻炼什么能力</span></b> — <span class="en">the skills behind the assignment.</span><span class="zh">这份作业背后的知识和能力。</span></li>
           <li><b><span class="en">Reads attachments</span><span class="zh">会读附件</span></b> — <span class="en">PDFs, Word files, Canvas pages and links.</span><span class="zh">PDF、Word、Canvas 页面和链接。</span></li>
         </ul>
-        <p class="note"><span class="en">Free with a Canvas+ account (sign in with Google — no password). AI can be wrong; the assignment itself is what counts.</span><span class="zh">登录 Canvas+ 账号即可免费使用（可以用 Google 登录，不需要密码）。AI 可能出错，一切以作业原文为准。</span></p>
+        <p class="note"><span class="en">Free with a Canvas+ account (sign in with Google or an e-mail code — no password). AI can be wrong; the assignment itself is what counts.</span><span class="zh">登录 Canvas+ 账号即可免费使用（用 Google 或邮箱验证码登录，不需要密码）。AI 可能出错，一切以作业原文为准。</span></p>
       </div>
     </div>
   </section>
@@ -181,6 +192,20 @@
     <p class="note"><span class="en">Your grades never leave your computer. AI can be wrong — the course itself is what counts.</span><span class="zh">你的成绩不会离开你的电脑。AI 可能出错，一切以课程原文为准。</span></p>
   </section>
 
+  <section class="sec" id="exams">
+    <h2><span class="en">Walk into the exam ready</span><span class="zh">考前心里有底</span></h2>
+    <p class="sub"><span class="en">Tap “Review pack” on a course and pick an exam. Canvas+ reads its date and scope from the syllabus and ticks the modules it covers.</span><span class="zh">在课程上点「复习包」，选一场考试。Canvas+ 会从 syllabus 读出考试时间和范围，自动勾好要考的单元。</span></p>
+    <div class="show">
+      <figure><img src="shot-review.png" alt="Exam review pack with practice questions and explanations" loading="lazy" width="420" height="660">
+        <figcaption><h3><span class="en">Exam review pack</span><span class="zh">考前复习包</span></h3>
+        <p><span class="en">A study outline, practice questions with explanations and flashcards, built from your own slides, PDFs and notes. Export the cards to Anki or Quizlet.</span><span class="zh">根据你自己的课件、PDF 和笔记，生成复习提纲、带解析的练习题和抽认卡，抽认卡可以导出到 Anki / Quizlet。</span></p></figcaption></figure>
+      <figure><img src="shot-mistakes.png" alt="Mistake book with the questions you got wrong, by course" loading="lazy" width="420" height="660">
+        <figcaption><h3><span class="en">Mistake book</span><span class="zh">错题本</span></h3>
+        <p><span class="en">Every practice question you miss is saved, by course. Drill them with shuffled choices until you get each one right twice in a row. No AI, no cost.</span><span class="zh">练习时做错的题自动收进错题本，按课程分类。选项每次打乱，连续做对 2 次才算掌握。不用 AI，不占次数。</span></p></figcaption></figure>
+    </div>
+    <p class="note"><span class="en">Plus a reminder 3 days and 1 day before each exam, with how many mistakes you still have to review.</span><span class="zh">每场考试前 3 天和 1 天还会提醒你，并告诉你错题本里还有几道没掌握。</span></p>
+  </section>
+
   <section class="sec" id="pricing">
     <h2><span class="en">Free — with an optional Pro plan</span><span class="zh">免费使用，另有可选的 Pro 会员</span></h2>
     <p class="sub"><span class="en">Everything except extra AI is free, forever.</span><span class="zh">除了更多的 AI 次数，所有功能永久免费。</span></p>
@@ -189,7 +214,8 @@
         <h3><span class="en">Free</span><span class="zh">免费版</span></h3>
         <div class="amt">$0</div>
         <ul>
-          <li><span class="en">Deadlines, calculator, themes</span><span class="zh">作业倒计时、期末计算器、界面美化</span></li>
+          <li><span class="en">Deadlines, calculator, GPA, alerts, themes</span><span class="zh">作业倒计时、期末计算器、GPA、通知提醒、界面美化</span></li>
+          <li><span class="en">Mistake book and exam reminders</span><span class="zh">错题本和考前提醒</span></li>
           <li><span class="en">All AI features, 5 uses a day</span><span class="zh">所有 AI 功能，每天 5 次</span></li>
         </ul>
       </div>
@@ -215,7 +241,7 @@
   <footer>
     <div class="row">
       <span>© 2026 Canvas+ · <span class="en">made by</span><span class="zh">作者</span> <a href="https://www.baowenliu.com">Baowen Liu</a></span>
-      <span><a href="privacy"><span class="en">Privacy</span><span class="zh">隐私说明</span></a> · <a href="mailto:me@baowenliu.com">me@baowenliu.com</a></span>
+      <span><span class="en">Feedback? Use the form in the panel, or</span><span class="zh">有建议或 bug？在面板里提交反馈，或发邮件到</span> <a href="mailto:me@baowenliu.com">me@baowenliu.com</a> · <a href="privacy"><span class="en">Privacy</span><span class="zh">隐私说明</span></a></span>
     </div>
     <p style="margin:12px 0 0;font-size:13px"><span class="en">Canvas+ is an independent project, not affiliated with or endorsed by Instructure or any school. Canvas is a trademark of Instructure, Inc.</span><span class="zh">Canvas+ 是独立项目，与 Instructure 和任何学校均无关联，也未获得其认可。Canvas 是 Instructure, Inc. 的商标。</span></p>
   </footer>
