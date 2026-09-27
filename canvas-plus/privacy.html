@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Canvas+ Privacy Policy · 隐私说明</title>
 <link rel="canonical" href="https://www.baowenliu.com/canvas-plus/privacy">
-<meta name="description" content="How the Canvas+ browser extension handles your data: Canvas data stays in your browser; optional AI summaries, accounts and Pro membership explained.">
+<meta name="description" content="How the Canvas+ browser extension handles your data: Canvas data stays in your browser; optional AI features, accounts, feedback and Pro membership explained.">
 <link rel="icon" href="https://ai.baowenliu.com/logo.png">
 <style>
   :root { --bg: #ffffff; --bg2: #f5f6f8; --fg: #1b1f24; --muted: #5f6b76; --line: #e3e6ea; --primary: #bb0000; --good: #1b7f3b; --good-bg: #e6f4ea; }
@@ -45,7 +45,7 @@
     <img src="https://ai.baowenliu.com/logo.png" alt="Canvas+" width="44" height="44">
     <div>
       <h1>Canvas+ Privacy Policy<br><span style="font-size:20px;font-weight:600">隐私说明</span></h1>
-      <p class="meta">Effective September 26, 2026 · 生效日期：2026 年 9 月 26 日</p>
+      <p class="meta">Effective September 27, 2026 · 生效日期：2026 年 9 月 27 日</p>
     </div>
   </header>
   <nav aria-label="Language"><a href="#en">English</a><a href="#zh">中文</a><a href="./">Canvas+</a></nav>
@@ -54,7 +54,7 @@
   <section id="en" class="lang-block" lang="en">
     <div class="promise">
       <strong>Your Canvas data stays in your browser.</strong>
-      Deadlines, grades and everything else Canvas+ reads from Canvas never leave your computer. The only things that reach the Canvas+ server are the optional AI summary, the optional Canvas+ account and the optional paid membership, all described below.
+      Deadlines, grades and everything else Canvas+ reads from Canvas never leave your computer. The only things that reach the Canvas+ server are the optional AI features (summaries, Q&amp;A, e-mail drafts, exam review packs), the optional Canvas+ account, feedback you choose to send, and the optional paid membership, all described below.
       <ul>
         <li>Your Canvas name, login, grades and submissions are never sent to us or anyone else.</li>
         <li>A Canvas+ account is optional and stores only your e-mail address. No password.</li>
@@ -71,6 +71,9 @@
       <tr><td>Assignment groups, weights, points and your scores</td><td>“% of final grade” tags and the final-exam calculator</td></tr>
       <tr><td>The course grading scheme</td><td>Letter-grade cut-offs in the calculator</td></tr>
       <tr><td>The course syllabus / home page text (only for courses with no weights set in Canvas)</td><td>Finding the grade breakdown (e.g. “Homework 20%”) for the calculator</td></tr>
+      <tr><td>Your current score in each course, and your final scores and terms from past courses</td><td>The score next to each course, the cumulative / term GPA dashboard and the GPA projection</td></tr>
+      <tr><td>Work Canvas marks as missing, and the course’s late policy (when Canvas shares it)</td><td>The missing-work alert and what a late submission would cost</td></tr>
+      <tr><td>Course modules and the course’s Files (names, folders, and the files you choose)</td><td>Downloading course files as a .zip, and picking slides for an exam review pack</td></tr>
     </table>
     <p>Canvas+ never asks for your password and cannot see it. It reads this data directly from Canvas in your browser; it is not copied anywhere else.</p>
 
@@ -81,16 +84,32 @@
     <p><strong>AI course Q&amp;A:</strong> when you ask a question about a course, Canvas+ reads that course’s syllabus (and the syllabus file it links to), modules (their outline, and the course pages and files in them that match your question), assignments, announcements and the course’s grade setup (assignment groups and their weights — not your scores) in your browser with your own Canvas login, picks the parts most related to your question, and sends them with your question (and your previous two questions and answers in that conversation) to the Canvas+ server, which answers only from that material. Your grades, submissions and name are not sent. Questions and answers are not stored on the server.</p>
     <p><strong>New grade and announcement notifications:</strong> every 15 minutes (and when you open Canvas), Canvas+ asks Canvas — with your own login, from your browser — for recently graded work and new announcements in your current courses, and shows a notification on your computer. Only which items it has already told you about is remembered, in your browser. Nothing is sent to the Canvas+ server. Scores are hidden in notifications unless you turn that on; each kind of notification can be turned off in the reminder settings.</p>
     <p><strong>Weekly digest:</strong> on your first Canvas visit each week, Canvas+ puts together — in your browser — the past week’s new assignments, new grades and announcements and the next 7 days’ deadlines, and keeps it (plus a snapshot of your course totals, to show the change from last week) in your browser’s extension storage only. Grades never leave your computer. If you use “This week’s focus”, Canvas+ sends only the announcements and the assignment names and due dates to the Canvas+ server, which returns a short list of priorities; it is not stored on the server. The Monday reminder is a local Chrome notification and can be turned off in the reminder settings.</p>
+    <p><strong>Exam review packs:</strong> when you make a review pack for an exam, you pick which course files (slides, notes, PDFs, Word files, course pages) it should use. Canvas+ reads those files in your browser with your own Canvas login and sends <strong>their names and text</strong>, with the course name and the exam’s name, date and scope, to the Canvas+ server, which asks the AI provider to write a study outline, practice questions and flashcards. Course materials are the same for everyone in a course, so the finished pack is cached on the server under a one-way fingerprint (hash) of the materials: a classmate who picks the same files for the same exam gets the same pack without another AI request. The material text itself is not stored, and packs are not linked to who made them. Your packs, and your answers to their practice questions, are saved only in your browser.</p>
+    <p><strong>All my exams:</strong> the exam list, and the exam dates under each course, come from that course’s syllabus read by the AI syllabus summary above (a syllabus already read costs nothing). The dates are then kept in your browser only.</p>
     <ul>
       <li><strong>Never sent:</strong> your name, Canvas login, grades, submissions, messages or any other personal information.</li>
-      <li><strong>Sent along:</strong> a random install ID created by the extension. Using the AI requires a free Canvas+ account (see below); the daily limit (5 summaries on the free plan) is counted per account.</li>
+      <li><strong>Sent along:</strong> a random install ID created by the extension. Using the AI requires a free Canvas+ account (see below); the daily limit shown in the panel is counted per account.</li>
       <li><strong>Kept on the server:</strong> the summary and a one-way fingerprint (hash) of the assignment text, so the same assignment isn’t summarised twice; daily usage counts per account and per a hashed IP address (raw IP addresses are not stored). The assignment text itself is not stored by Canvas+, and summaries are not linked to who asked for them.</li>
-      <li>The AI provider processes the assignment text only to write the summary, under its own terms and privacy policy.</li>
-      <li>If you never click “AI summary”, nothing is ever sent.</li>
+      <li>The AI provider (currently DeepSeek, with OpenAI as a backup when DeepSeek is unavailable) processes the text only to write the answer, under its own terms and privacy policy.</li>
+      <li>If you never use an AI feature, nothing is ever sent.</li>
     </ul>
 
+    <h2>Features that stay in your browser</h2>
+    <p>These use only data Canvas+ reads in your browser, and send nothing to the Canvas+ server:</p>
+    <ul>
+      <li><strong>GPA dashboard and projection:</strong> your past course scores and letters, the credits, letters and grading scale you enter, and the “what-if” letters. Your own settings are saved with Chrome’s <code>storage.sync</code> (see below).</li>
+      <li><strong>Mistake book:</strong> multiple-choice questions you answer wrong in a review pack, how often you missed them and whether you have mastered them. Saved only in your browser; “Export to Anki” creates a file on your computer.</li>
+      <li><strong>Missing-work alert:</strong> read from Canvas when you open the panel, shown only there.</li>
+      <li><strong>Deadline changes, course-total changes and exam reminders:</strong> every 15 minutes Canvas+ asks Canvas, with your own login, for your courses (with your current course totals) and upcoming items, and compares them with what it saw last time. When a total changes, a deadline moves, or an exam is 3 days or 1 day away, it shows a notification on your computer (with the course’s mistake-book count). The last totals, deadline times and which reminders were sent are kept in your browser only. Each kind of notification can be turned off in the reminder settings.</li>
+      <li><strong>Course file downloads:</strong> the .zip file is built in your browser.</li>
+      <li><strong>Background picture:</strong> the picture you upload is kept in your browser’s local storage only.</li>
+    </ul>
+
+    <h2>Feedback and bug reports</h2>
+    <p>When you use “Feedback / report a problem” in the panel (signed in to your Canvas+ account), Canvas+ sends to the Canvas+ server: <strong>the type you pick and the message you write</strong>, plus the Canvas+ version, your browser and operating system (for example “Chrome 131 · macOS”), the path of the Canvas page you were on (for example <code>/courses/123/grades</code> — never the rest of the address), and the panel language, so bugs can be reproduced. It is stored with <strong>your account e-mail</strong>, so the developer can reply, and a one-way fingerprint (hash) of the account that limits how many messages can be sent per day. Only the developer can read it, on a password-protected page, and uses it only to answer you and improve Canvas+. Nothing is sent unless you press “Send”; no grades or course content are included unless you type them. To have your feedback deleted, e-mail me@baowenliu.com.</p>
+
     <h2>Canvas+ account (optional)</h2>
-    <p>A free Canvas+ account is needed to use the AI summary (so the free daily limit can’t be dodged) and for the Pro membership, which then works on any computer. There is no password. You can sign in:</p>
+    <p>A free Canvas+ account is needed to use the AI features (so the free daily limit can’t be dodged), to send feedback (so the developer can reply), and for the Pro membership, which then works on any computer. There is no password. You can sign in:</p>
     <ul>
       <li><strong>With Google:</strong> Chrome opens Google’s own sign-in window. Canvas+ asks only for your verified e-mail address (scopes “openid email”) — not your name, contacts, Drive or anything else — and never sees your Google password.</li>
       <li><strong>With an e-mail code:</strong> we e-mail you a one-time 6-digit code. Only a hash of the code is kept, for 10 minutes. To stop abuse, the number of codes per network (hashed IP) and per day is limited.</li>
@@ -98,7 +117,7 @@
     <p><strong>Kept on the server:</strong> your e-mail address, when the account was created, and which browsers (random install IDs, at most 3) are signed in. Sign out from “My account” in the panel. To delete your account, e-mail me@baowenliu.com and it will be removed within 30 days.</p>
 
     <h2>Canvas+ AI Pro (optional paid membership)</h2>
-    <p>Canvas+ AI Pro is a monthly subscription that raises the daily AI summary limit. Payment happens on Stripe’s own checkout page; <strong>your card details go only to Stripe</strong> and are never seen or stored by Canvas+.</p>
+    <p>Canvas+ AI Pro is a monthly subscription that raises the daily AI limit. Payment happens on Stripe’s own checkout page; <strong>your card details go only to Stripe</strong> and are never seen or stored by Canvas+.</p>
     <ul>
       <li><strong>Kept on the server when you subscribe:</strong> your account e-mail, your Stripe customer and subscription IDs, the subscription’s status and renewal date, and a backup activation code (with the install IDs of the at most 3 browsers using it). We e-mail you once to confirm the membership.</li>
       <li>Stripe processes payments under its own privacy policy (stripe.com/privacy).</li>
@@ -112,6 +131,7 @@
     <ul>
       <li><strong>Your settings</strong> (dark mode, colours, language, reminder options, which items are hidden) are saved with Chrome’s <code>storage.sync</code>. If you use Chrome Sync, Google syncs these settings between your own browsers; Canvas+ itself receives nothing.</li>
       <li><strong>Temporary copies</strong> of your deadline list and grade weights are cached in Chrome’s local storage on your computer (for a few minutes to a few hours) so the panel opens quickly and reminders can be shown. They never leave your device.</li>
+      <li><strong>Kept in your browser until you delete them or uninstall:</strong> your review packs and practice answers, your mistake book, exam dates read from syllabi, the snapshots used for change notifications (course totals, deadline times, which reminders were sent), and your background picture. They never leave your device.</li>
     </ul>
 
     <h2>Permissions</h2>
@@ -121,15 +141,15 @@
       <tr><td>Optional access to other sites</td><td>Only for a Canvas site you turn on yourself, one site at a time; you can remove it any time</td></tr>
       <tr><td><code>storage</code></td><td>Save your settings and the local caches</td></tr>
       <tr><td><code>scripting</code>, <code>activeTab</code></td><td>Start Canvas+ on a Canvas site you just turned on, and check whether a page is Canvas when you click the toolbar button</td></tr>
-      <tr><td><code>alarms</code>, <code>notifications</code></td><td>Show “due in 24 h / 2 h” reminders at the right time</td></tr>
+      <tr><td><code>alarms</code>, <code>notifications</code></td><td>Show deadline reminders (24 h / 2 h), new grades and announcements, course-total and deadline changes, exam reminders and the weekly digest at the right time</td></tr>
       <tr><td><code>identity</code></td><td>Open Google’s sign-in window when you choose “Sign in with Google”</td></tr>
     </table>
 
     <h2>Deleting your data</h2>
-    <p>Turn off anything in the panel at any time. Uninstalling Canvas+ removes all of its stored data from Chrome. You can also remove a site from the toolbar popup. To delete your Canvas+ account and membership record from the server, e-mail me@baowenliu.com (an active subscription is cancelled first).</p>
+    <p>Turn off anything in the panel at any time. Uninstalling Canvas+ removes all of its stored data from Chrome. You can also remove a site from the toolbar popup. To delete your Canvas+ account, membership record and feedback from the server, e-mail me@baowenliu.com (an active subscription is cancelled first).</p>
 
     <h2>Children</h2>
-    <p>Canvas+ is a tool for university students and is not directed at children under 13. The optional account stores only an e-mail address; if you believe a child has created one, e-mail me@baowenliu.com and it will be deleted.</p>
+    <p>Canvas+ is a tool for university students and is not directed at children under 13. The optional account stores only an e-mail address (and any feedback sent with it); if you believe a child has created one, e-mail me@baowenliu.com and it will be deleted.</p>
 
     <h2>Chrome Web Store</h2>
     <p>The use of information by Canvas+ complies with the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
@@ -147,7 +167,7 @@
   <section id="zh" class="lang-block" lang="zh-CN">
     <div class="promise">
       <strong>你的 Canvas 数据只留在你的浏览器里。</strong>
-      Canvas+ 从 Canvas 读取的截止时间、成绩等内容都不会离开你的电脑。只有可选的「AI 总结」、可选的 Canvas+ 账号和可选的付费会员会用到 Canvas+ 服务器，见下文。
+      Canvas+ 从 Canvas 读取的截止时间、成绩等内容都不会离开你的电脑。只有可选的 AI 功能（总结、问答、邮件草稿、考前复习包）、可选的 Canvas+ 账号、你主动发送的反馈和可选的付费会员会用到 Canvas+ 服务器，见下文。
       <ul>
         <li>你在 Canvas 里的姓名、账号、成绩和提交的作业，永远不会发给我们或任何人。</li>
         <li>Canvas+ 账号是可选的，只保存你的邮箱，没有密码。</li>
@@ -164,6 +184,9 @@
       <tr><td>作业类别、权重、分值和你的分数</td><td>"占总成绩"标签和期末计算器</td></tr>
       <tr><td>课程的等级线设置</td><td>计算器里的等级分数线</td></tr>
       <tr><td>课程 Syllabus / 主页的文字（仅限 Canvas 里没设置权重的课）</td><td>找出成绩构成（比如“作业 20%”）填进计算器</td></tr>
+      <tr><td>你每门课的当前分数，以及往期课程的最终分数和学期</td><td>课程旁边的当前成绩、累计 / 学期 GPA 仪表盘和 GPA 预测</td></tr>
+      <tr><td>Canvas 标记为漏交的作业，以及课程的迟交规则（如果 Canvas 公开）</td><td>漏交作业提醒，以及现在补交会扣多少分</td></tr>
+      <tr><td>课程 Modules 和课程 Files（文件名、文件夹，以及你选中的文件）</td><td>把课件打包成 .zip 下载，以及为考前复习包挑选课件</td></tr>
     </table>
     <p>Canvas+ 从不索要、也看不到你的密码。这些数据在你的浏览器里直接从 Canvas 读取，不会被复制到任何其他地方。</p>
 
@@ -174,16 +197,32 @@
     <p><strong>AI 课程问答：</strong>当你对某门课提问时，Canvas+ 会在你的浏览器里用你自己的 Canvas 登录读取这门课的 syllabus（及其中链接的 syllabus 文件）、Modules（目录，以及和问题相关的课程页面和文件）、作业、公告和成绩构成设置（作业分类和权重，不含你的分数），挑出和问题最相关的部分，连同你的问题（以及这次对话里前两个问答）一起发送到 Canvas+ 的服务器，服务器只根据这些资料回答。你的成绩、提交内容和名字不会发送。问题和回答不会保存在服务器上。</p>
     <p><strong>出分和新公告提醒：</strong>每 15 分钟（以及你打开 Canvas 时），Canvas+ 会在你的浏览器里用你自己的 Canvas 登录，查看当前课程最近出分的作业和新公告，并在电脑上弹出通知。只会在浏览器里记住哪些已经提醒过，不会发送到 Canvas+ 服务器。通知里默认不显示分数，可以在提醒设置里打开；每种提醒都可以单独关闭。</p>
     <p><strong>本周简报：</strong>每周第一次打开 Canvas 时，Canvas+ 会在你的浏览器里汇总过去一周的新作业、新成绩、公告和接下来 7 天的截止时间，并把它（以及用于对比上周变化的课程总成绩快照）只保存在浏览器的扩展存储里。成绩不会离开你的电脑。使用「本周重点」时，Canvas+ 只会把公告内容和作业名称、截止时间发送到 Canvas+ 服务器，生成一份简短的优先事项，不会保存在服务器上。周一提醒是本地的 Chrome 通知，可以在提醒设置里关闭。</p>
+    <p><strong>考前复习包：</strong>生成复习包时，由你选择要用哪些课程文件（slides、讲义、PDF、Word、课程页面）。Canvas+ 在你的浏览器里用你自己的 Canvas 登录读取这些文件，把<strong>它们的文件名和文字</strong>连同课程名、考试名称、日期和范围发送到 Canvas+ 服务器，由 AI 服务商生成复习提纲、练习题和抽认卡。同一门课的课件对所有同学都一样，所以生成好的复习包会以这些资料的单向指纹（哈希）为索引缓存在服务器上：同学为同一场考试选了同样的文件，会直接拿到同一份复习包，不再重复请求 AI。服务器不保存资料原文，复习包也不和生成它的人关联。你的复习包和练习题作答只保存在你的浏览器里。</p>
+    <p><strong>所有考试：</strong>考试列表和每门课下面的考试时间，来自上面「AI 总结 Syllabus」读取的这门课的 syllabus（已经读过的 syllabus 不占次数），之后只保存在你的浏览器里。</p>
     <ul>
       <li><strong>不会发送：</strong>你的姓名、Canvas 账号、成绩、提交的作业、消息或其他任何个人信息。</li>
-      <li><strong>一并发送：</strong>插件随机生成的安装 ID。使用 AI 需要先登录免费的 Canvas+ 账号（见下文），每天的使用上限（免费版 5 次）按账号统计。</li>
+      <li><strong>一并发送：</strong>插件随机生成的安装 ID。使用 AI 需要先登录免费的 Canvas+ 账号（见下文），面板里显示的每日次数上限按账号统计。</li>
       <li><strong>服务器保存：</strong>总结结果和作业文字的单向指纹（哈希），这样同一个作业不用重复生成；以及按账号和经过哈希的 IP 统计的每日次数（不保存原始 IP）。Canvas+ 不保存作业原文，总结结果也不和提问的人关联。</li>
-      <li>AI 服务商只用这些文字来生成总结，并按照它自己的条款和隐私政策处理。</li>
-      <li>如果你从不点「AI 总结」，就不会发送任何内容。</li>
+      <li>AI 服务商（目前是 DeepSeek，DeepSeek 不可用时由 OpenAI 备用）只用这些文字来生成回答，并按照它自己的条款和隐私政策处理。</li>
+      <li>如果你从不使用 AI 功能，就不会发送任何内容。</li>
     </ul>
 
+    <h2>只在浏览器里运行的功能</h2>
+    <p>下面这些功能只使用 Canvas+ 在你浏览器里读取的数据，不会向 Canvas+ 服务器发送任何内容：</p>
+    <ul>
+      <li><strong>GPA 仪表盘和预测：</strong>往期课程的分数和等级、你填写的学分、等级和换算标准，以及「如果拿到」的假设等级。你自己的设置保存在 Chrome 的 <code>storage.sync</code> 里（见下文）。</li>
+      <li><strong>错题本：</strong>你在复习包里答错的选择题、错了几次、是否已掌握。只保存在你的浏览器里；「导出到 Anki」会在你的电脑上生成文件。</li>
+      <li><strong>漏交作业提醒：</strong>打开面板时从 Canvas 读取，只显示在面板里。</li>
+      <li><strong>截止时间变动、总分变化和考前提醒：</strong>每 15 分钟，Canvas+ 用你自己的 Canvas 登录读取你的课程（含当前总分）和即将截止的项目，和上次看到的对比。总分变化、截止时间变动，或者考试只剩 3 天 / 1 天时，会在你的电脑上弹出通知（附带这门课错题本的待复习数量）。上次的总分、截止时间和已发送过的提醒只保存在你的浏览器里。每种通知都可以在提醒设置里单独关闭。</li>
+      <li><strong>下载课件：</strong>.zip 文件在你的浏览器里生成。</li>
+      <li><strong>背景图片：</strong>你上传的图片只保存在浏览器的本地存储里。</li>
+    </ul>
+
+    <h2>反馈与问题报告</h2>
+    <p>当你在面板里使用「反馈 / 报告问题」（需要登录 Canvas+ 账号）时，Canvas+ 会把<strong>你选择的类型和你写的内容</strong>发送到 Canvas+ 服务器，同时附带 Canvas+ 版本、你的浏览器和操作系统（例如“Chrome 131 · macOS”）、你当时所在 Canvas 页面的路径（例如 <code>/courses/123/grades</code>，不含网址的其他部分）和面板语言，方便复现问题。反馈会和<strong>你的账号邮箱</strong>一起保存，以便开发者回复你，另外保存账号的单向指纹（哈希）用于限制每天的发送次数。只有开发者能在有密码保护的页面上查看，并且只用于回复你和改进 Canvas+。只有你点「发送」才会发送；除非你自己写进去，否则不包含任何成绩或课程内容。如需删除你的反馈，请发邮件到 me@baowenliu.com。</p>
+
     <h2>Canvas+ 账号（可选）</h2>
-    <p>使用 AI 总结需要一个免费的 Canvas+ 账号（这样免费的每日次数不会被绕过）；Pro 会员也绑定在账号上，换电脑也能用。没有密码，可以这样登录：</p>
+    <p>使用 AI 功能需要一个免费的 Canvas+ 账号（这样免费的每日次数不会被绕过）；发送反馈也需要登录（方便开发者回复你）；Pro 会员也绑定在账号上，换电脑也能用。没有密码，可以这样登录：</p>
     <ul>
       <li><strong>Google 账号：</strong>Chrome 会打开 Google 自己的登录窗口。Canvas+ 只获取你已验证的邮箱地址（权限范围为“openid email”），不会获取你的姓名、联系人、云端硬盘等其他任何信息，也看不到你的 Google 密码。</li>
       <li><strong>邮箱验证码：</strong>我们给你的邮箱发一个一次性的 6 位验证码，服务器只保存它的哈希值 10 分钟。为了防止滥用，每个网络（经过哈希的 IP）和每天能发送的验证码数量有上限。</li>
@@ -191,7 +230,7 @@
     <p><strong>服务器保存：</strong>你的邮箱、注册时间，以及哪些浏览器（随机安装 ID，最多 3 个）登录了这个账号。可以在面板的「我的账号」里退出登录。如需删除账号，请发邮件到 me@baowenliu.com，我们会在 30 天内删除。</p>
 
     <h2>Canvas+ AI Pro（可选的付费会员）</h2>
-    <p>Canvas+ AI Pro 是按月订阅的会员，用来提高每天的 AI 总结次数。付款在 Stripe 自己的付款页面完成，<strong>银行卡信息只交给 Stripe</strong>，Canvas+ 看不到也不保存。</p>
+    <p>Canvas+ AI Pro 是按月订阅的会员，用来提高每天的 AI 使用次数。付款在 Stripe 自己的付款页面完成，<strong>银行卡信息只交给 Stripe</strong>，Canvas+ 看不到也不保存。</p>
     <ul>
       <li><strong>订阅后服务器保存：</strong>你的账号邮箱、Stripe 的客户和订阅编号、订阅状态和续费日期，以及一个备用激活码（和使用它的最多 3 个浏览器的安装 ID）。开通时我们会发一封确认邮件。</li>
       <li>Stripe 按照它自己的隐私政策（stripe.com/privacy）处理付款。</li>
@@ -205,6 +244,7 @@
     <ul>
       <li><strong>你的设置</strong>（暗色模式、配色、语言、提醒选项、隐藏哪些板块）保存在 Chrome 的 <code>storage.sync</code> 里。如果你开启了 Chrome 同步，Google 会在你自己的几个浏览器之间同步这些设置；Canvas+ 本身收不到任何东西。</li>
       <li><strong>临时缓存</strong>：作业列表和成绩权重会在你电脑上 Chrome 的本地存储里缓存几分钟到几小时，用来让面板打开更快、按时发出提醒。它们不会离开你的电脑。</li>
+      <li><strong>保存在浏览器里、直到你删除或卸载：</strong>你的复习包和练习题作答、错题本、从 syllabus 读到的考试时间、用于变化提醒的快照（课程总分、截止时间、已发送的提醒）以及背景图片。它们不会离开你的电脑。</li>
     </ul>
 
     <h2>权限说明</h2>
@@ -214,15 +254,15 @@
       <tr><td>可选：访问其他网站</td><td>只用于你自己启用的 Canvas 网站，一次一个，随时可以移除</td></tr>
       <tr><td><code>storage</code></td><td>保存设置和本地缓存</td></tr>
       <tr><td><code>scripting</code>、<code>activeTab</code></td><td>在你刚启用的 Canvas 网站上启动插件；你点工具栏按钮时，判断当前页面是不是 Canvas</td></tr>
-      <tr><td><code>alarms</code>、<code>notifications</code></td><td>在截止前 24 小时 / 2 小时按时弹出提醒</td></tr>
+      <tr><td><code>alarms</code>、<code>notifications</code></td><td>按时弹出截止提醒（24 小时 / 2 小时）、出分和新公告、总分和截止时间变动、考前提醒和每周简报</td></tr>
       <tr><td><code>identity</code></td><td>你选择「使用 Google 账号登录」时，打开 Google 的登录窗口</td></tr>
     </table>
 
     <h2>删除数据</h2>
-    <p>面板里的任何功能都可以随时关闭。卸载 Canvas+ 会从 Chrome 中删除它保存的全部数据。你也可以在工具栏弹窗里移除已启用的网站。如需从服务器删除你的 Canvas+ 账号和会员记录，请发邮件到 me@baowenliu.com（如有订阅会先帮你取消）。</p>
+    <p>面板里的任何功能都可以随时关闭。卸载 Canvas+ 会从 Chrome 中删除它保存的全部数据。你也可以在工具栏弹窗里移除已启用的网站。如需从服务器删除你的 Canvas+ 账号、会员记录和反馈，请发邮件到 me@baowenliu.com（如有订阅会先帮你取消）。</p>
 
     <h2>未成年人</h2>
-    <p>Canvas+ 是给大学生用的工具，不面向 13 岁以下的儿童。可选的账号只保存一个邮箱；如果你发现有儿童注册了账号，请发邮件到 me@baowenliu.com，我们会删除。</p>
+    <p>Canvas+ 是给大学生用的工具，不面向 13 岁以下的儿童。可选的账号只保存一个邮箱（以及用它发送的反馈）；如果你发现有儿童注册了账号，请发邮件到 me@baowenliu.com，我们会删除。</p>
 
     <h2>Chrome 应用商店</h2>
     <p>Canvas+ 对信息的使用遵守 Chrome 应用商店用户数据政策，包括"有限使用"（Limited Use）要求。</p>
