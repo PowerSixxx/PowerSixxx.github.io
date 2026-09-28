@@ -45,7 +45,7 @@
     <img src="https://ai.baowenliu.com/logo.png" alt="Canvas+" width="44" height="44">
     <div>
       <h1>Canvas+ Privacy Policy<br><span style="font-size:20px;font-weight:600">隐私说明</span></h1>
-      <p class="meta">Effective September 27, 2026 · 生效日期：2026 年 9 月 27 日</p>
+      <p class="meta">Effective September 28, 2026 · 生效日期：2026 年 9 月 28 日</p>
     </div>
   </header>
   <nav aria-label="Language"><a href="#en">English</a><a href="#zh">中文</a><a href="./">Canvas+</a></nav>
@@ -85,7 +85,7 @@
     <p><strong>New grade and announcement notifications:</strong> every 15 minutes (and when you open Canvas), Canvas+ asks Canvas — with your own login, from your browser — for recently graded work and new announcements in your current courses, and shows a notification on your computer. Only which items it has already told you about is remembered, in your browser. Nothing is sent to the Canvas+ server. Scores are hidden in notifications unless you turn that on; each kind of notification can be turned off in the reminder settings.</p>
     <p><strong>Weekly digest:</strong> on your first Canvas visit each week, Canvas+ puts together — in your browser — the past week’s new assignments, new grades and announcements and the next 7 days’ deadlines, and keeps it (plus a snapshot of your course totals, to show the change from last week) in your browser’s extension storage only. Grades never leave your computer. If you use “This week’s focus”, Canvas+ sends only the announcements and the assignment names and due dates to the Canvas+ server, which returns a short list of priorities; it is not stored on the server. The Monday reminder is a local Chrome notification and can be turned off in the reminder settings.</p>
     <p><strong>Exam review packs:</strong> when you make a review pack for an exam, you pick which course files (slides, notes, PDFs, Word files, course pages) it should use. Canvas+ reads those files in your browser with your own Canvas login and sends <strong>their names and text</strong>, with the course name and the exam’s name, date and scope, to the Canvas+ server, which asks the AI provider to write a study outline, practice questions and flashcards. Course materials are the same for everyone in a course, so the finished pack is cached on the server under a one-way fingerprint (hash) of the materials: a classmate who picks the same files for the same exam gets the same pack without another AI request. The material text itself is not stored, and packs are not linked to who made them. Your packs, and your answers to their practice questions, are saved only in your browser.</p>
-    <p><strong>All my exams:</strong> the exam list, and the exam dates under each course, come from that course’s syllabus read by the AI syllabus summary above (a syllabus already read costs nothing). The dates are then kept in your browser only.</p>
+    <p><strong>All my exams:</strong> the exam list, and the exam dates under each course, come from two places. (1) Without any AI: every few hours Canvas+ reads your current courses’ assignment list from Canvas, with your own login, in your browser, and picks out the quizzes and assignments that are exams (named like “Midterm” or “Final Exam”, or in an exam group) with their due dates; nothing is sent to the Canvas+ server. (2) The course’s syllabus read by the AI syllabus summary above (a syllabus already read costs nothing). The dates are kept in your browser only, and also feed the calendar view and the exam reminders.</p>
     <ul>
       <li><strong>Never sent:</strong> your name, Canvas login, grades, submissions, messages or any other personal information.</li>
       <li><strong>Sent along:</strong> a random install ID created by the extension. Using the AI requires a free Canvas+ account (see below); the daily limit shown in the panel is counted per account.</li>
@@ -97,6 +97,7 @@
     <h2>Features that stay in your browser</h2>
     <p>These use only data Canvas+ reads in your browser, and send nothing to the Canvas+ server:</p>
     <ul>
+      <li><strong>Course cards and score trend:</strong> each course’s current score from Canvas, and a line of how your course grade changed, rebuilt from your graded work (the date each score was graded and the course’s weights). Worked out and drawn in your browser; the trend is cached there for up to 30 days so the cards open quickly.</li>
       <li><strong>GPA dashboard and projection:</strong> your past course scores and letters, the credits, letters and grading scale you enter, and the “what-if” letters. Your own settings are saved with Chrome’s <code>storage.sync</code> (see below).</li>
       <li><strong>Mistake book:</strong> multiple-choice questions you answer wrong in a review pack, how often you missed them and whether you have mastered them. Saved only in your browser; “Export to Anki” creates a file on your computer.</li>
       <li><strong>Missing-work alert:</strong> read from Canvas when you open the panel, shown only there.</li>
@@ -198,7 +199,7 @@
     <p><strong>出分和新公告提醒：</strong>每 15 分钟（以及你打开 Canvas 时），Canvas+ 会在你的浏览器里用你自己的 Canvas 登录，查看当前课程最近出分的作业和新公告，并在电脑上弹出通知。只会在浏览器里记住哪些已经提醒过，不会发送到 Canvas+ 服务器。通知里默认不显示分数，可以在提醒设置里打开；每种提醒都可以单独关闭。</p>
     <p><strong>本周简报：</strong>每周第一次打开 Canvas 时，Canvas+ 会在你的浏览器里汇总过去一周的新作业、新成绩、公告和接下来 7 天的截止时间，并把它（以及用于对比上周变化的课程总成绩快照）只保存在浏览器的扩展存储里。成绩不会离开你的电脑。使用「本周重点」时，Canvas+ 只会把公告内容和作业名称、截止时间发送到 Canvas+ 服务器，生成一份简短的优先事项，不会保存在服务器上。周一提醒是本地的 Chrome 通知，可以在提醒设置里关闭。</p>
     <p><strong>考前复习包：</strong>生成复习包时，由你选择要用哪些课程文件（slides、讲义、PDF、Word、课程页面）。Canvas+ 在你的浏览器里用你自己的 Canvas 登录读取这些文件，把<strong>它们的文件名和文字</strong>连同课程名、考试名称、日期和范围发送到 Canvas+ 服务器，由 AI 服务商生成复习提纲、练习题和抽认卡。同一门课的课件对所有同学都一样，所以生成好的复习包会以这些资料的单向指纹（哈希）为索引缓存在服务器上：同学为同一场考试选了同样的文件，会直接拿到同一份复习包，不再重复请求 AI。服务器不保存资料原文，复习包也不和生成它的人关联。你的复习包和练习题作答只保存在你的浏览器里。</p>
-    <p><strong>所有考试：</strong>考试列表和每门课下面的考试时间，来自上面「AI 总结 Syllabus」读取的这门课的 syllabus（已经读过的 syllabus 不占次数），之后只保存在你的浏览器里。</p>
+    <p><strong>所有考试：</strong>考试列表和每门课下面的考试时间有两个来源。(1) 不用 AI：Canvas+ 每隔几小时在你的浏览器里、用你自己的 Canvas 登录读取当前课程的作业列表，找出属于考试的测验和作业（名字像 “Midterm”、“Final Exam”，或者在考试类别里）及其截止日期，不会发送到 Canvas+ 服务器。(2) 上面「AI 总结 Syllabus」读取的这门课的 syllabus（已经读过的 syllabus 不占次数）。这些日期只保存在你的浏览器里，也会用在日历视图和考前提醒里。</p>
     <ul>
       <li><strong>不会发送：</strong>你的姓名、Canvas 账号、成绩、提交的作业、消息或其他任何个人信息。</li>
       <li><strong>一并发送：</strong>插件随机生成的安装 ID。使用 AI 需要先登录免费的 Canvas+ 账号（见下文），面板里显示的每日次数上限按账号统计。</li>
@@ -210,6 +211,7 @@
     <h2>只在浏览器里运行的功能</h2>
     <p>下面这些功能只使用 Canvas+ 在你浏览器里读取的数据，不会向 Canvas+ 服务器发送任何内容：</p>
     <ul>
+      <li><strong>课程卡片和成绩走势：</strong>每门课在 Canvas 里的当前成绩，以及根据已出分作业（每项的出分日期和这门课的权重）重新算出的总成绩变化曲线。只在你的浏览器里计算和绘制；走势会在浏览器里缓存最多 30 天，让卡片打开更快。</li>
       <li><strong>GPA 仪表盘和预测：</strong>往期课程的分数和等级、你填写的学分、等级和换算标准，以及「如果拿到」的假设等级。你自己的设置保存在 Chrome 的 <code>storage.sync</code> 里（见下文）。</li>
       <li><strong>错题本：</strong>你在复习包里答错的选择题、错了几次、是否已掌握。只保存在你的浏览器里；「导出到 Anki」会在你的电脑上生成文件。</li>
       <li><strong>漏交作业提醒：</strong>打开面板时从 Canvas 读取，只显示在面板里。</li>
