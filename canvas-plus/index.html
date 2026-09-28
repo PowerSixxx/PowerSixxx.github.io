@@ -67,7 +67,10 @@
   .ai ul { padding-left: 20px; color: var(--muted); }
   .ai li { margin: 6px 0; }
   .ai li b { color: var(--fg); }
-  .price { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 680px; }
+  .price { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; max-width: 980px; align-items: stretch; }
+  .plan { position: relative; }
+  .best { position: absolute; top: -11px; right: 18px; background: var(--red); color: #fff; font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 999px; }
+  .plan .x { color: var(--red); font-weight: 600; }
   .plan { border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
   .plan.pro { border-color: var(--red); background: var(--soft); }
   .pro-tag { margin: -4px 0 12px; font-size: 14px; font-weight: 600; color: var(--red); }
@@ -209,7 +212,7 @@
   </section>
 
   <section class="sec" id="pricing">
-    <h2><span class="en">Free — with an optional Pro plan</span><span class="zh">免费使用，另有可选的 Pro 会员</span></h2>
+    <h2><span class="en">Free — with optional Plus and Pro plans</span><span class="zh">免费使用，另有可选的 Plus / Pro 会员</span></h2>
     <p class="sub"><span class="en">Everything except extra AI is free, forever.</span><span class="zh">除了更多的 AI 次数，所有功能永久免费。</span></p>
     <div class="price">
       <div class="plan">
@@ -221,14 +224,25 @@
           <li><span class="en">All AI features, 3 uses a day</span><span class="zh">所有 AI 功能，每天 3 次</span></li>
         </ul>
       </div>
+      <div class="plan">
+        <h3>Canvas+ AI Plus <span class="soon"><span class="en">Coming soon</span><span class="zh">即将开放</span></span></h3>
+        <div class="amt">$3.99 <small><span class="en">/ month</span><span class="zh">/ 月</span></small></div>
+        <p class="pro-tag"><span class="en">For everyday coursework</span><span class="zh">平时写作业、读 syllabus 够用</span></p>
+        <ul>
+          <li><b><span class="en">10 AI uses a day</span><span class="zh">每天 10 次 AI</span></b><span class="x"><span class="en"> — 3× the free plan</span><span class="zh">，免费版的 3 倍多</span></span></li>
+          <li><span class="en">Your plan follows your account: sign in on up to 3 computers</span><span class="zh">会员跟着账号走：换电脑登录就能用，最多同时 3 台</span></li>
+          <li><span class="en">Cancel any time</span><span class="zh">随时可以取消</span></li>
+        </ul>
+      </div>
       <div class="plan pro">
+        <span class="best"><span class="en">Best value</span><span class="zh">最划算</span></span>
         <h3>Canvas+ AI Pro <span class="soon"><span class="en">Coming soon</span><span class="zh">即将开放</span></span></h3>
         <div class="amt">$5.99 <small><span class="en">/ month</span><span class="zh">/ 月</span></small></div>
         <p class="pro-tag"><span class="en">For exam weeks and heavy course loads</span><span class="zh">考试周、课多的学期，AI 放心用</span></p>
         <ul>
-          <li><b><span class="en">30 AI uses a day</span><span class="zh">每天 30 次 AI</span></b><span class="en"> — 10× the free plan</span><span class="zh">，是免费版的 10 倍</span></li>
+          <li><b><span class="en">30 AI uses a day</span><span class="zh">每天 30 次 AI</span></b><span class="x"><span class="en"> — 10× the free plan</span><span class="zh">，是免费版的 10 倍</span></span></li>
           <li><span class="en">Break down every assignment, summarize every syllabus and build a review pack for each exam, without counting</span><span class="zh">每份作业都能拆解、每门课的 syllabus 都能总结、每场考试都能做复习包，不用精打细算</span></li>
-          <li><span class="en">Your Pro follows your account: sign in on up to 3 computers</span><span class="zh">会员跟着账号走：换电脑登录就能用，最多同时 3 台</span></li>
+          <li><span class="en">Your plan follows your account: sign in on up to 3 computers</span><span class="zh">会员跟着账号走：换电脑登录就能用，最多同时 3 台</span></li>
           <li><span class="en">Cancel any time</span><span class="zh">随时可以取消</span></li>
         </ul>
       </div>
