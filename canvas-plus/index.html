@@ -7,17 +7,31 @@
 <meta name="description" content="Canvas+ is a free Chrome extension for Canvas: every deadline in one list, a final-exam calculator, dark mode, instant grade alerts, and Canvas+ AI — assignment guides, syllabus summaries, course Q&amp;A, exam review packs, Zoom lecture notes and a weekly digest.">
 <link rel="canonical" href="https://www.baowenliu.com/canvas-plus/">
 <link rel="icon" href="icon128.png">
-<meta name="theme-color" content="#09090c">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Canvas+ · A better Canvas for students">
 <meta property="og:description" content="Deadlines, grades and an AI study helper that uses your own course materials — right inside Canvas. Free Chrome extension.">
 <meta property="og:image" content="https://www.baowenliu.com/canvas-plus/shot-deadlines.png">
 <style>
   :root {
-    --bg: #09090c; --bg1: #0f0f14; --bg2: #15151c; --card: rgba(255,255,255,.035); --card2: rgba(255,255,255,.06);
-    --line: rgba(255,255,255,.08); --line2: rgba(255,255,255,.14);
+    --tint: 255,255,255; --bgrgb: 0,0,0; --sh: rgba(0,0,0,.8);
+    --bg: #000; --bg1: #141418; --bg2: #0c0c0f; --card: rgba(255,255,255,.035); --card2: rgba(255,255,255,.06);
+    --line: rgba(255,255,255,.09); --line2: rgba(255,255,255,.15);
     --fg: #f3f3f6; --muted: #9b9ca8; --dim: #6c6d78;
-    --red: #ff3b47; --red2: #c3121d; --redglow: rgba(255,45,60,.35); --ok: #3ddc84;
+    --red: #ff3b47; --red2: #c3121d; --red-tx: #ff7a82; --redglow: rgba(255,45,60,.35); --ok: #3ddc84;
     --r: 18px; --ease: cubic-bezier(.2,.8,.2,1);
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --tint: 0,0,0; --bgrgb: 255,255,255; --sh: rgba(20,24,31,.16);
+      --bg: #fff; --bg1: #ffffff; --bg2: #fafafb; --card: rgba(0,0,0,.025); --card2: rgba(0,0,0,.045);
+      --line: rgba(0,0,0,.08); --line2: rgba(0,0,0,.13);
+      --fg: #111216; --muted: #5d6170; --dim: #8a8d99;
+      --red: #e01e2b; --red-tx: #c3121d; --redglow: rgba(224,30,43,.28); --ok: #17a34a;
+    }
+    .grad { background: linear-gradient(100deg, #ff3b47 0%, #d6101e 45%, #f2611d 100%); -webkit-background-clip: text; background-clip: text; }
+    .plan.pro { box-shadow: 0 30px 70px -30px rgba(224,30,43,.35); }
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -29,7 +43,7 @@
   ::selection { background: var(--red); color: #fff; }
 
   /* background: glow + grid */
-  .bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .bg { display: none; position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
   .bg::before { content: ""; position: absolute; inset: 0;
     background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
     background-size: 64px 64px; mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%); opacity: .55; }
@@ -40,8 +54,8 @@
 
   /* nav */
   .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4);
-    background: rgba(9,9,12,.55); border-bottom: 1px solid transparent; transition: border-color .3s, background .3s; }
-  .nav.scrolled { border-bottom-color: var(--line); background: rgba(9,9,12,.78); }
+    background: rgba(var(--bgrgb),.55); border-bottom: 1px solid transparent; transition: border-color .3s, background .3s; }
+  .nav.scrolled { border-bottom-color: var(--line); background: rgba(var(--bgrgb),.78); }
   .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; text-decoration: none; letter-spacing: -.01em; }
   .brand img { width: 30px; height: 30px; border-radius: 8px; }
@@ -56,8 +70,8 @@
   /* buttons */
   .btn { position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 15px; border: 0; cursor: pointer; transition: transform .2s var(--ease), box-shadow .2s, background .2s; white-space: nowrap; }
   .btn svg { width: 18px; height: 18px; flex: none; }
-  .btn.primary { background: linear-gradient(135deg, #ff4552, #c3121d); color: #fff; box-shadow: 0 10px 30px -6px var(--redglow), inset 0 1px 0 rgba(255,255,255,.25); }
-  .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -6px rgba(255,45,60,.5), inset 0 1px 0 rgba(255,255,255,.25); }
+  .btn.primary { background: linear-gradient(135deg, #ff4552, #c3121d); color: #fff; box-shadow: 0 10px 30px -6px var(--redglow), inset 0 1px 0 #ffffff40; }
+  .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -6px rgba(255,45,60,.5), inset 0 1px 0 #ffffff40; }
   .btn.ghost { color: var(--fg); background: var(--card); border: 1px solid var(--line2); }
   .btn.ghost:hover { background: var(--card2); transform: translateY(-2px); }
   .btn.sm { padding: 8px 14px; font-size: 13px; border-radius: 10px; }
@@ -79,91 +93,153 @@
   /* interactive demo panel */
   .stage { position: relative; justify-self: center; width: 100%; max-width: 420px; }
   .stage::before { content: ""; position: absolute; inset: 8% -6% -4%; background: radial-gradient(closest-side, rgba(255,45,60,.45), transparent); filter: blur(30px); z-index: -1; }
-  .demo { --p-bg: #ffffff; --p-bg2: #f3f4f7; --p-fg: #1b1f24; --p-muted: #6a7380; --p-line: #e6e8ec; --p-acc: #c3121d; --p-soft: #fdecee;
-    position: relative; background: var(--p-bg); color: var(--p-fg); border-radius: 20px; overflow: hidden; font-size: 13px; line-height: 1.45;
-    box-shadow: 0 40px 100px -20px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.12); transition: background .35s, color .35s; }
-  .demo.dark { --p-bg: #17191e; --p-bg2: #20232a; --p-fg: #eceef2; --p-muted: #9aa1ad; --p-line: #2c3038; --p-soft: rgba(255,90,100,.14); }
-  .demo .d-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px 10px; }
-  .d-brand { font-weight: 800; font-size: 16px; letter-spacing: -.01em; }
-  .d-brand b { color: var(--p-acc); }
-  .d-search { flex: 1; display: flex; align-items: center; gap: 6px; background: var(--p-bg2); border: 1px solid var(--p-line); border-radius: 9px; padding: 6px 9px; color: var(--p-muted); font-size: 12px; transition: background .35s, border-color .35s; }
-  .d-search svg { width: 13px; height: 13px; }
-  .d-search kbd { margin-left: auto; font: 600 10px/1 inherit; border: 1px solid var(--p-line); border-radius: 4px; padding: 2px 4px; }
-  .d-av { width: 26px; height: 26px; border-radius: 50%; background: var(--p-acc); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 12px; }
-  .d-tabs { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin: 0 12px; padding: 3px; background: var(--p-bg2); border-radius: 11px; transition: background .35s; }
-  .d-ind { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc((100% - 6px - 6px) / 4); border-radius: 8px; background: var(--p-bg); box-shadow: 0 1px 3px rgba(0,0,0,.15); transition: transform .35s var(--ease), background .35s; }
-  .d-tab { position: relative; z-index: 1; border: 0; background: transparent; font: 600 11.5px/1.2 inherit; color: var(--p-muted); padding: 7px 2px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
-  .d-tab.on { color: var(--p-fg); }
-  .d-tab.ai { color: var(--p-acc); }
-  .d-body { position: relative; height: 410px; overflow: hidden; }
-  .d-pane { position: absolute; inset: 0; padding: 14px 16px; opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity .35s, transform .35s var(--ease); }
-  .d-pane.on { opacity: 1; transform: none; pointer-events: auto; }
-  .d-lbl { font-size: 11px; font-weight: 700; color: var(--p-muted); text-transform: uppercase; letter-spacing: .04em; margin: 2px 0 8px; display: flex; justify-content: space-between; }
-  .dl { display: flex; align-items: center; gap: 10px; padding: 10px 11px; border: 1px solid var(--p-line); border-radius: 12px; margin-bottom: 8px; background: var(--p-bg); transition: opacity .3s, background .35s, border-color .35s; cursor: pointer; }
-  .dl .chk { width: 18px; height: 18px; flex: none; border-radius: 50%; border: 2px solid var(--p-line); display: grid; place-items: center; transition: background .2s, border-color .2s; }
-  .dl .chk svg { width: 11px; height: 11px; color: #fff; opacity: 0; }
-  .dl.done { opacity: .5; }
-  .dl.done .chk { background: #1f9d55; border-color: #1f9d55; }
-  .dl.done .chk svg { opacity: 1; }
-  .dl.done .t { text-decoration: line-through; }
-  .dl .mid { flex: 1; min-width: 0; }
-  .dl .t { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .dl .c { font-size: 11.5px; color: var(--p-muted); display: flex; gap: 6px; align-items: center; }
-  .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
-  .dl .cd { flex: none; width: 112px; text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; font-size: 12px; white-space: nowrap; }
-  .dl .cd small { display: block; font-weight: 600; font-size: 10.5px; color: var(--p-muted); }
-  .dl .cd.hot { color: var(--p-acc); }
-  .calc-top { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-  .chip { border: 1px solid var(--p-line); background: var(--p-bg); color: var(--p-fg); border-radius: 999px; padding: 5px 11px; font: 600 12px/1 inherit; cursor: pointer; transition: all .2s; }
-  .chip.on { background: var(--p-acc); border-color: var(--p-acc); color: #fff; }
-  .ring-row { display: flex; align-items: center; gap: 18px; padding: 14px; border-radius: 14px; background: var(--p-bg2); margin-bottom: 12px; transition: background .35s; }
-  .ring { position: relative; width: 112px; height: 112px; flex: none; }
-  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-  .ring circle { fill: none; stroke-width: 10; }
-  .ring .trk { stroke: var(--p-line); }
-  .ring .val { stroke: var(--p-acc); stroke-linecap: round; transition: stroke-dashoffset .6s var(--ease); }
-  .ring .num { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
-  .ring .num b { font-size: 26px; letter-spacing: -.02em; display: block; line-height: 1; }
-  .ring .num small { font-size: 10.5px; color: var(--p-muted); }
-  .kv { font-size: 12px; color: var(--p-muted); }
-  .kv b { color: var(--p-fg); font-size: 14px; }
-  .kv div { margin: 3px 0; }
-  .weights { display: grid; gap: 6px; }
-  .w { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; font-size: 12px; }
-  .w .bar { grid-column: 1 / -1; height: 6px; border-radius: 99px; background: var(--p-bg2); overflow: hidden; }
-  .w .bar i { display: block; height: 100%; border-radius: 99px; background: var(--p-acc); opacity: .75; }
-  .asg { border: 1px solid var(--p-line); border-radius: 12px; padding: 11px 12px; margin-bottom: 10px; }
-  .asg .t { font-weight: 700; }
-  .asg .c { font-size: 11.5px; color: var(--p-muted); }
-  .ai-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 9px; border: 0; background: linear-gradient(135deg, #e5323d, #b50a14); color: #fff; font: 700 12px/1 inherit; padding: 8px 12px; border-radius: 999px; cursor: pointer; }
-  .ai-btn svg { width: 13px; height: 13px; }
-  .ai-out { border-radius: 12px; background: var(--p-bg2); padding: 11px 12px; min-height: 150px; transition: background .35s; }
-  .ai-out h4 { margin: 0 0 6px; font-size: 12px; color: var(--p-acc); display: flex; align-items: center; gap: 6px; }
-  .ai-out h4 svg { width: 13px; height: 13px; }
-  .ai-out ol { margin: 0; padding-left: 18px; }
-  .ai-out li { margin: 4px 0; opacity: 0; transform: translateY(4px); transition: opacity .35s, transform .35s; }
-  .ai-out li.in { opacity: 1; transform: none; }
-  .ai-out .cur::after { content: "▍"; color: var(--p-acc); animation: blink 1s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: 0; } }
-  .ai-foot { font-size: 11px; color: var(--p-muted); margin-top: 8px; }
-  .set { display: flex; align-items: center; justify-content: space-between; padding: 11px 2px; border-bottom: 1px solid var(--p-line); }
-  .set b { display: block; font-size: 13px; }
-  .set small { color: var(--p-muted); font-size: 11.5px; }
-  .sw { position: relative; width: 38px; height: 22px; border-radius: 99px; background: var(--p-line); border: 0; cursor: pointer; transition: background .25s; flex: none; }
-  .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.3); transition: transform .25s var(--ease); }
-  .sw.on { background: var(--p-acc); }
-  .sw.on::after { transform: translateX(16px); }
-  .sws { display: flex; gap: 8px; }
-  .swc { width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; box-shadow: inset 0 0 0 2px var(--p-bg); }
-  .swc.on { border-color: var(--p-fg); }
+  /* The demo is a copy of the real Canvas+ panel (same layout, colours and wording). */
+  .demo { --p-bg: #fff; --p-head: #f6f7f9; --p-bg2: #f3f4f6; --p-fg: #1f2328; --p-muted: #6b7280; --p-line: #e5e7eb; --p-acc: #bb0000; --p-soft: #fdecec; --p-softline: #f4c2c2;
+    --p-blue: #2563eb; --p-amber-bg: #fdf3dc; --p-amber: #a15c07; --p-row-hot: #fde8e8;
+    position: relative; background: var(--p-bg); color: var(--p-fg); border-radius: 16px; overflow: hidden; font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    box-shadow: 0 40px 100px -20px var(--sh), 0 0 0 1px rgba(var(--tint),.12); transition: background .35s, color .35s; text-align: left; }
+  .demo.dark { --p-bg: #1c1e23; --p-head: #16181c; --p-bg2: #262930; --p-fg: #eceef2; --p-muted: #9aa1ad; --p-line: #30343c; --p-acc: #ff5a5f; --p-soft: rgba(255,90,95,.13); --p-softline: rgba(255,90,95,.35);
+    --p-blue: #6ea8ff; --p-amber-bg: rgba(245,170,40,.15); --p-amber: #f5b642; --p-row-hot: rgba(255,90,95,.12); }
+  .demo button { font: inherit; color: inherit; }
+  .demo svg { display: block; }
+  .p-head { background: var(--p-head); border-bottom: 1px solid var(--p-line); padding: 12px 12px 8px; transition: background .35s, border-color .35s; }
+  .p-row { display: flex; align-items: center; gap: 10px; }
+  .p-brand { font-weight: 800; font-size: 16px; letter-spacing: -.01em; white-space: nowrap; }
+  .p-brand b { color: var(--p-acc); }
+  .p-search { flex: 1; min-width: 0; display: flex; align-items: center; gap: 6px; background: var(--p-bg); border: 1px solid var(--p-line); border-radius: 10px; padding: 6px 8px; color: var(--p-muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; }
+  .p-search svg { width: 13px; height: 13px; flex: none; }
+  .p-search span { overflow: hidden; text-overflow: ellipsis; }
+  .p-new { flex: none; background: var(--p-acc); color: #fff; font-size: 10px; font-weight: 800; border-radius: 999px; padding: 1px 6px; }
+  .p-kbd { flex: none; display: flex; gap: 2px; margin-left: auto; }
+  .p-kbd i { font: 700 10px/1 inherit; font-style: normal; border: 1px solid var(--p-line); border-radius: 4px; padding: 3px 4px; background: var(--p-bg2); }
+  .p-av { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--p-acc); color: #fff; font-weight: 800; font-size: 12.5px; }
+  .p-x { flex: none; color: var(--p-muted); font-size: 18px; line-height: 1; padding: 0 2px; }
+  .p-tabs { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 10px; }
+  .p-ind { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 9px; background: var(--p-bg); box-shadow: 0 1px 3px rgba(0,0,0,.12); transition: transform .35s var(--ease), width .35s var(--ease), background .35s; }
+  .p-tab { position: relative; z-index: 1; border: 0; background: transparent; font-weight: 700 !important; font-size: 12.5px !important; color: var(--p-muted) !important; padding: 8px 2px; border-radius: 9px; cursor: pointer; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .p-tab.on { color: var(--p-fg) !important; }
+  .p-tab.ai { color: var(--p-acc) !important; }
+  .p-tab svg { width: 12px; height: 12px; }
+  .p-tab .rd { width: 6px; height: 6px; border-radius: 50%; background: var(--p-acc); }
+  .p-body { position: relative; height: 468px; overflow: hidden; }
+  .p-pane { position: absolute; inset: 0; padding: 12px; overflow: hidden; opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .3s, transform .3s var(--ease); }
+  .p-pane.on { opacity: 1; transform: none; pointer-events: auto; }
+  .p-seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--p-bg2); border-radius: 9px; padding: 3px; gap: 2px; }
+  .p-seg button { border: 0; background: transparent; border-radius: 7px; padding: 5px 8px; font-weight: 700 !important; font-size: 12px !important; color: var(--p-muted) !important; cursor: pointer; }
+  .p-seg button.on { background: var(--p-bg); color: var(--p-fg) !important; box-shadow: 0 1px 2px rgba(0,0,0,.1); }
+  .p-filters { display: flex; align-items: center; gap: 8px; margin: 10px 0; }
+  .p-filters .p-seg { grid-auto-columns: auto; }
+  .p-tog { display: flex; align-items: center; gap: 6px; color: var(--p-muted); font-size: 12px; white-space: nowrap; cursor: pointer; }
+  .p-sw { position: relative; width: 30px; height: 18px; border-radius: 99px; background: var(--p-line); border: 0; flex: none; transition: background .2s; cursor: pointer; padding: 0; }
+  .p-sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.3); transition: transform .2s var(--ease); }
+  .p-sw.on { background: var(--p-acc); }
+  .p-sw.on::after { transform: translateX(12px); }
+  .p-ib { margin-left: auto; display: flex; gap: 6px; }
+  .p-ib span { width: 28px; height: 28px; border: 1px solid var(--p-line); border-radius: 8px; display: grid; place-items: center; color: var(--p-muted); }
+  .p-ib svg { width: 14px; height: 14px; }
+  .p-list { display: grid; }
+  .p-it { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: start; padding: 10px 8px; border-bottom: 1px solid var(--p-line); border-radius: 10px; transition: background .2s, opacity .25s; }
+  .p-it.hot { background: var(--p-row-hot); border-bottom-color: transparent; }
+  .p-it.done { opacity: .45; }
+  .p-it.done .tt { text-decoration: line-through; }
+  .p-ck { width: 18px; height: 18px; margin-top: 1px; border-radius: 50%; border: 1.6px solid var(--p-muted); display: grid; place-items: center; cursor: pointer; transition: background .2s, border-color .2s; }
+  .p-ck svg { width: 11px; height: 11px; color: #fff; opacity: 0; }
+  .p-it.done .p-ck { background: #1f9d55; border-color: #1f9d55; }
+  .p-it.done .p-ck svg { opacity: 1; }
+  .p-it .tt { font-weight: 700; font-size: 13px; line-height: 1.3; }
+  .p-it .mt { color: var(--p-muted); font-size: 11.5px; display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+  .p-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; transition: background .3s; }
+  .p-wt { display: inline-block; margin-top: 4px; background: var(--p-soft); color: var(--p-acc); font-size: 10.5px; font-weight: 700; border-radius: 999px; padding: 1px 7px; }
+  .p-rt { text-align: right; display: grid; justify-items: end; gap: 3px; }
+  .p-cd { font-weight: 800; font-size: 11.5px; border-radius: 999px; padding: 2px 8px; white-space: nowrap; font-variant-numeric: tabular-nums; background: var(--p-bg2); }
+  .p-cd.red { background: var(--p-row-hot); color: var(--p-acc); }
+  .p-it.hot .p-cd.red { background: transparent; }
+  .p-cd.amb { background: var(--p-amber-bg); color: var(--p-amber); }
+  .p-dt { color: var(--p-muted); font-size: 11px; white-space: nowrap; }
+  .p-acts { display: flex; gap: 4px; }
+  .p-aig { display: inline-flex; align-items: center; gap: 3px; border: 1px solid var(--p-softline); background: var(--p-soft); color: var(--p-acc) !important; border-radius: 999px; font-size: 11px !important; font-weight: 700 !important; padding: 1px 7px; cursor: pointer; }
+  .p-aig svg { width: 11px; height: 11px; }
+  .p-mail { display: grid; place-items: center; border: 1px solid var(--p-softline); background: var(--p-soft); color: var(--p-acc); border-radius: 999px; width: 26px; height: 20px; }
+  .p-mail svg { width: 11px; height: 11px; }
+  /* final calc */
+  .p-card { border: 1px solid var(--p-line); border-radius: 12px; padding: 11px 12px; background: var(--p-bg); }
+  .p-cs { display: flex; align-items: center; gap: 10px; background: var(--p-bg2); border-radius: 12px; padding: 10px 12px; cursor: pointer; }
+  .p-cs b { display: block; font-size: 13.5px; }
+  .p-cs small { color: var(--p-muted); font-size: 11.5px; }
+  .p-cs .chg { margin-left: auto; color: var(--p-muted); font-size: 12px; display: flex; align-items: center; gap: 4px; }
+  .p-cs .chg svg { width: 13px; height: 13px; }
+  .p-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+  .p-tile { background: var(--p-bg2); border-radius: 12px; padding: 9px 11px; }
+  .p-tile small { display: block; color: var(--p-muted); font-size: 11px; font-weight: 700; }
+  .p-tile b { display: block; font-size: 20px; letter-spacing: -.01em; margin: 1px 0; }
+  .p-tile span { color: var(--p-muted); font-size: 11px; }
+  .p-st-h { display: flex; align-items: center; gap: 6px; color: var(--p-muted); font-size: 12px; font-weight: 700; }
+  .p-st-h svg { width: 13px; height: 13px; color: var(--p-acc); }
+  .p-st-big { font-size: 24px; font-weight: 800; letter-spacing: -.02em; margin: 2px 0 0; }
+  .p-st-sub { color: var(--p-muted); font-size: 11.5px; }
+  .p-st-blue { color: var(--p-blue); font-weight: 700; font-size: 12px; margin-top: 4px; }
+  .p-curve { margin-top: 2px; }
+  .p-curve svg { width: 100%; height: auto; overflow: visible; }
+  .p-curve text { font: 600 9.5px/1 -apple-system, "Segoe UI", sans-serif; }
+  .p-need { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 10px; padding: 11px 14px; background: var(--p-bg); border-top: 1px solid var(--p-line); box-shadow: 0 -8px 20px -10px rgba(0,0,0,.15); }
+  .p-need .l { min-width: 0; }
+  .p-need small { display: flex; align-items: center; gap: 6px; color: var(--p-muted); font-size: 11.5px; }
+  .p-need b { display: block; font-size: 12px; }
+  .p-tgt { border: 1px solid var(--p-line); background: var(--p-bg2); border-radius: 999px; font-weight: 700 !important; font-size: 11px !important; padding: 1px 8px; cursor: pointer; }
+  .p-need .big { margin-left: auto; font-size: 26px; font-weight: 800; letter-spacing: -.02em; color: var(--p-fg); font-variant-numeric: tabular-nums; }
+  .p-need .big.bad { color: var(--p-acc); }
+  /* AI guide */
+  .p-back { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .p-back a { color: var(--p-acc); font-weight: 700; font-size: 12.5px; display: flex; align-items: center; gap: 2px; cursor: pointer; }
+  .p-back a svg { width: 14px; height: 14px; }
+  .p-badge { display: inline-flex; align-items: center; gap: 4px; background: var(--p-acc); color: #fff; font-size: 10.5px; font-weight: 800; border-radius: 999px; padding: 2px 8px; }
+  .p-badge svg { width: 11px; height: 11px; }
+  .p-h { font-size: 15px; font-weight: 800; margin: 0; }
+  .p-tldr { background: var(--p-soft); border-radius: 10px; padding: 9px 11px; font-weight: 700; font-size: 12px; margin: 8px 0; }
+  .p-lbl { color: var(--p-muted); font-weight: 700; font-size: 11.5px; margin: 8px 0 4px; }
+  .p-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .p-chips span { border: 1px solid var(--p-line); background: var(--p-bg2); border-radius: 999px; padding: 1px 8px; font-size: 11px; }
+  .p-steps { display: grid; gap: 6px; }
+  .p-step { display: grid; grid-template-columns: auto 1fr; gap: 8px; background: var(--p-bg2); border-radius: 10px; padding: 8px 10px; opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .35s var(--ease); }
+  .p-step.in { opacity: 1; transform: none; }
+  .p-step i { font-style: normal; width: 18px; height: 18px; border-radius: 50%; background: var(--p-acc); color: #fff; font-size: 10.5px; font-weight: 800; display: grid; place-items: center; }
+  .p-step b { display: block; font-size: 12px; }
+  .p-step span { font-size: 11.5px; color: var(--p-fg); opacity: .85; }
+  .p-step em { display: block; font-style: normal; font-size: 11px; color: var(--p-muted); margin-top: 2px; }
+  .p-step em b { display: inline; color: var(--p-acc); font-size: 11px; }
+  .p-fine { color: var(--p-muted); font-size: 11px; margin-top: 8px; }
+  /* appearance */
+  .p-sec { font-size: 12px; font-weight: 800; margin: 2px 2px 6px; }
+  .p-group { border: 1px solid var(--p-line); border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
+  .p-set { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-bottom: 1px solid var(--p-line); cursor: pointer; }
+  .p-set:last-child { border-bottom: 0; }
+  .p-set .tx { flex: 1; min-width: 0; }
+  .p-set b { display: block; font-size: 12.5px; }
+  .p-set small { color: var(--p-muted); font-size: 11px; }
+  .p-set .chev { color: var(--p-muted); display: flex; align-items: center; gap: 4px; font-size: 11.5px; }
+  .p-set .chev svg { width: 14px; height: 14px; }
+  .p-ico { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; background: var(--p-soft); color: var(--p-acc); flex: none; }
+  .p-ico svg { width: 14px; height: 14px; }
+  .p-pals { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; }
+  .p-pal { display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--p-line); background: var(--p-bg); border-radius: 999px; padding: 3px 9px 3px 6px; font-size: 11.5px; cursor: pointer; }
+  .p-pal.on { border-color: var(--p-acc); box-shadow: 0 0 0 1px var(--p-acc) inset; }
+  .p-pal i { width: 9px; height: 9px; border-radius: 50%; }
   .toast { position: absolute; z-index: 3; right: -40px; top: -34px; display: flex; gap: 10px; align-items: center; width: 250px; padding: 11px 13px; border-radius: 14px;
-    background: rgba(22,22,28,.86); border: 1px solid var(--line2); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 20px 40px -10px rgba(0,0,0,.6);
+    background: rgba(var(--bgrgb),.88); border: 1px solid var(--line2); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 20px 40px -10px rgba(0,0,0,.6);
     font-size: 12.5px; line-height: 1.35; opacity: 0; transform: translateY(-10px) scale(.96); transition: opacity .4s, transform .4s var(--ease); pointer-events: none; }
   .toast.show { opacity: 1; transform: none; }
   .toast .ti { width: 32px; height: 32px; flex: none; border-radius: 9px; display: grid; place-items: center; background: linear-gradient(135deg, #ff4552, #c3121d); }
   .toast .ti svg { width: 17px; height: 17px; color: #fff; }
   .toast b { display: block; font-size: 12.5px; }
   .toast span { color: var(--muted); }
+  /* "Try the demo": a ring around the panel and a bubble pointing at something to click */
+  .demo.pulse { animation: ring 1.6s var(--ease) 2; }
+  @keyframes ring { 0% { box-shadow: 0 40px 100px -20px var(--sh), 0 0 0 0 rgba(255,59,71,.55); } 70% { box-shadow: 0 40px 100px -20px var(--sh), 0 0 0 14px rgba(255,59,71,0); } 100% { box-shadow: 0 40px 100px -20px var(--sh), 0 0 0 0 rgba(255,59,71,0); } }
+  .coach { position: absolute; z-index: 5; max-width: 230px; padding: 9px 12px; border-radius: 12px; background: #111216; color: #fff; font-size: 12.5px; line-height: 1.4; box-shadow: 0 12px 30px -8px rgba(0,0,0,.5);
+    opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s var(--ease); pointer-events: none; }
+  .coach.show { opacity: 1; transform: none; }
+  .coach::after { content: ""; position: absolute; bottom: -6px; left: var(--ax, 20px); width: 12px; height: 12px; background: #111216; transform: rotate(45deg); border-radius: 2px; }
+  .coach b { color: #ff8a90; }
   .hint { margin-top: 18px; justify-content: center; font-size: 12px; color: var(--dim); white-space: nowrap; display: flex; gap: 6px; align-items: center; }
   .hint svg { width: 14px; height: 14px; }
 
@@ -174,7 +250,7 @@
   .sc-mq { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
   .sc-track { display: flex; align-items: center; gap: 56px; width: max-content; animation: slide 60s linear infinite; }
   .sc-mq:hover .sc-track { animation-play-state: paused; }
-  .sc { white-space: nowrap; color: #8d8e99; opacity: .8; transition: opacity .25s, color .25s; font-size: 18px; font-weight: 700; letter-spacing: -.005em; }
+  .sc { white-space: nowrap; color: var(--muted); opacity: .8; transition: opacity .25s, color .25s; font-size: 18px; font-weight: 700; letter-spacing: -.005em; }
   .sc:hover { opacity: 1; color: var(--fg); }
   /* marquee */
   .marquee { border-block: 1px solid var(--line); padding: 18px 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
@@ -196,7 +272,7 @@
 
   /* bento */
   .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
-  .tile { position: relative; grid-column: span 2; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)); border: 1px solid var(--line); border-radius: 22px; padding: 26px; overflow: hidden; transition: border-color .3s, transform .4s var(--ease); }
+  .tile { position: relative; grid-column: span 2; background: linear-gradient(180deg, rgba(var(--tint),.05), rgba(var(--tint),.015)); border: 1px solid var(--line); border-radius: 22px; padding: 26px; overflow: hidden; transition: border-color .3s, transform .4s var(--ease); }
   .tile::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
     background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(255,59,71,.13), transparent 45%); }
   .tile:hover { border-color: var(--line2); }
@@ -212,7 +288,7 @@
   .bars i { flex: 1; border-radius: 6px 6px 2px 2px; background: linear-gradient(180deg, var(--red), rgba(255,59,71,.15)); transform-origin: bottom; transform: scaleY(.1); transition: transform 1s var(--ease); }
   .in .bars i { transform: scaleY(1); }
   .notifs { display: grid; gap: 8px; }
-  .notifs div { display: flex; gap: 10px; align-items: center; background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; font-size: 13px; opacity: 0; transform: translateX(-12px); transition: opacity .5s, transform .5s var(--ease); }
+  .notifs div { display: flex; gap: 10px; align-items: center; background: rgba(var(--tint),.04); border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; font-size: 13px; opacity: 0; transform: translateX(-12px); transition: opacity .5s, transform .5s var(--ease); }
   .notifs div b { color: var(--fg); }
   .notifs div span { color: var(--muted); }
   .notifs div i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
@@ -220,13 +296,13 @@
   .in .notifs div:nth-child(2) { transition-delay: .15s; }
   .in .notifs div:nth-child(3) { transition-delay: .3s; }
   .files { display: flex; gap: 10px; align-items: center; }
-  .files .f { width: 40px; height: 50px; border-radius: 6px; background: rgba(255,255,255,.06); border: 1px solid var(--line2); display: grid; place-items: end center; font: 700 9px/1 ui-monospace, monospace; color: var(--muted); padding-bottom: 6px; }
+  .files .f { width: 40px; height: 50px; border-radius: 6px; background: rgba(var(--tint),.06); border: 1px solid var(--line2); display: grid; place-items: end center; font: 700 9px/1 ui-monospace, monospace; color: var(--muted); padding-bottom: 6px; }
   .files .arr { color: var(--red); font-size: 20px; }
   .files .zip { width: 52px; height: 60px; border-radius: 8px; background: linear-gradient(135deg, #ff4552, #c3121d); display: grid; place-items: center; font: 800 11px/1 ui-monospace, monospace; color: #fff; box-shadow: 0 10px 24px -6px var(--redglow); }
   .themes { display: flex; gap: 10px; }
   .themes i { flex: 1; height: 60px; border-radius: 12px; border: 1px solid var(--line2); }
   .kbd { display: inline-flex; gap: 6px; margin-top: 18px; }
-  .kbd kbd { font: 700 13px/1 inherit; background: rgba(255,255,255,.06); border: 1px solid var(--line2); border-bottom-width: 3px; border-radius: 8px; padding: 8px 11px; color: var(--fg); }
+  .kbd kbd { font: 700 13px/1 inherit; background: rgba(var(--tint),.06); border: 1px solid var(--line2); border-bottom-width: 3px; border-radius: 8px; padding: 8px 11px; color: var(--fg); }
 
 
 
@@ -243,8 +319,8 @@
   .stack { position: relative; }
   .scard { --top: 96px; position: sticky; top: calc(var(--top) + var(--i) * 12px); height: 540px; margin-bottom: 64px; display: grid; grid-template-columns: 1fr 1.05fr; gap: 28px;
     padding: 34px 34px 0; border-radius: 28px; overflow: hidden; transform-origin: 50% 0; will-change: transform;
-    background: radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--c) 20%, transparent), transparent 55%), linear-gradient(180deg, #17171e, #111116);
-    border: 1px solid color-mix(in srgb, var(--c) 28%, rgba(255,255,255,.08)); box-shadow: 0 -18px 50px -18px rgba(0,0,0,.85); }
+    background: radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--c) 20%, transparent), transparent 55%), linear-gradient(180deg, var(--bg1), var(--bg2));
+    border: 1px solid color-mix(in srgb, var(--c) 28%, rgba(var(--tint),.08)); box-shadow: 0 -18px 50px -18px var(--sh); }
   .scard:last-child { margin-bottom: 0; }
   .scard::before { content: ""; position: absolute; left: 34px; right: 34px; top: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--c), transparent); opacity: .8; }
   .scard-tx { padding-bottom: 34px; }
@@ -255,12 +331,12 @@
   .scard ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14.5px; color: var(--fg); }
   .scard li { display: flex; gap: 10px; }
   .scard li span:first-child { flex: none; width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center; font-weight: 800; color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); }
-  .scard-shot { align-self: end; height: 470px; border-radius: 18px 18px 0 0; overflow: hidden; box-shadow: 0 -10px 40px -10px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.1); }
+  .scard-shot { align-self: end; height: 470px; border-radius: 18px 18px 0 0; overflow: hidden; box-shadow: 0 -10px 40px -10px var(--sh), 0 0 0 1px rgba(var(--tint),.1); }
   .scard-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .rules { margin-top: 26px; font-size: 13.5px; color: var(--muted); border-left: 2px solid var(--red); padding-left: 14px; }
   .rules b { color: var(--fg); }
   /* comparison */
-  .cmp-wrap { border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: rgba(255,255,255,.02); }
+  .cmp-wrap { border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: rgba(var(--tint),.02); }
   .cmp-scroll { overflow-x: auto; }
   table.cmp { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 15px; }
   .cmp th, .cmp td { padding: 15px 18px; text-align: center; border-bottom: 1px solid var(--line); }
@@ -273,7 +349,7 @@
   .cmp th.us img { width: 26px; height: 26px; border-radius: 7px; display: block; margin: 0 auto 6px; }
   .y, .n, .p { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; }
   .y { background: rgba(61,220,132,.14); color: var(--ok); }
-  .n { background: rgba(255,255,255,.05); color: var(--dim); }
+  .n { background: rgba(var(--tint),.05); color: var(--dim); }
   .p { background: rgba(255,190,60,.12); color: #ffbe3c; }
   .y svg, .n svg, .p svg { width: 14px; height: 14px; }
   .cmp td .tx { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
@@ -281,11 +357,11 @@
 
   /* pricing */
   .price { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
-  .plan { position: relative; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 22px; padding: 28px; background: rgba(255,255,255,.025); transition: transform .4s var(--ease), border-color .3s; }
+  .plan { position: relative; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 22px; padding: 28px; background: rgba(var(--tint),.025); transition: transform .4s var(--ease), border-color .3s; }
   @media (hover: hover) { .plan:hover { transform: translateY(-4px); border-color: var(--line2); } }
   .plan.pro { border-color: rgba(255,59,71,.55); background: linear-gradient(180deg, rgba(255,59,71,.14), rgba(255,59,71,.03)); box-shadow: 0 30px 80px -30px rgba(255,45,60,.45); }
   .plan h3 { margin: 0; font-size: 17px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .soon { padding: 2px 9px; border-radius: 999px; background: rgba(255,59,71,.14); color: #ff7a82; font-size: 11.5px; font-weight: 700; }
+  .soon { padding: 2px 9px; border-radius: 999px; background: rgba(255,59,71,.14); color: var(--red-tx); font-size: 11.5px; font-weight: 700; }
   .best { position: absolute; top: -12px; right: 22px; background: linear-gradient(135deg, #ff4552, #c3121d); color: #fff; font-size: 12px; font-weight: 800; padding: 4px 11px; border-radius: 999px; box-shadow: 0 8px 20px -6px var(--redglow); }
   .amt { font-size: 44px; font-weight: 800; letter-spacing: -.03em; margin: 12px 0 2px; }
   .amt small { font-size: 15px; color: var(--muted); font-weight: 600; letter-spacing: 0; }
@@ -298,7 +374,7 @@
 
   /* privacy */
   .priv { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .priv div { border: 1px solid var(--line); border-radius: 20px; padding: 24px; background: rgba(255,255,255,.025); }
+  .priv div { border: 1px solid var(--line); border-radius: 20px; padding: 24px; background: rgba(var(--tint),.025); }
   .priv svg { width: 26px; height: 26px; color: var(--ok); margin-bottom: 12px; }
   .priv b { display: block; font-size: 17px; margin-bottom: 6px; }
   .priv p { margin: 0; color: var(--muted); font-size: 14.5px; }
@@ -314,11 +390,11 @@
   .faq details[open] summary i { background: var(--red); border-color: var(--red); }
   .faq details[open] summary i::after { transform: translate(-50%, -50%) rotate(0); }
   .faq .a { color: var(--muted); padding: 0 4px 22px; font-size: 15.5px; max-width: 46em; }
-  .faq .a a { color: #ff7a82; }
+  .faq .a a { color: var(--red-tx); }
 
   /* final cta */
   .final { position: relative; text-align: center; border: 1px solid var(--line2); border-radius: 30px; padding: 80px 24px; overflow: hidden;
-    background: radial-gradient(600px 300px at 50% 0%, rgba(255,45,60,.35), transparent 70%), rgba(255,255,255,.02); }
+    background: radial-gradient(600px 300px at 50% 0%, rgba(255,45,60,.35), transparent 70%), rgba(var(--tint),.02); }
   .final h2 { margin-bottom: 14px; }
   .final .sub { margin: 0 auto 32px; }
   .final .cta { justify-content: center; }
@@ -357,10 +433,9 @@
     .wrap { padding: 0 16px; }
     .nav .btn { display: none; }
     .sec { padding-top: 80px; padding-bottom: 80px; }
-    .demo { font-size: 12.5px; }
-    .d-tab { font-size: 10.5px; }
+    .p-tab { font-size: 11px !important; }
+    .p-search span, .p-new { display: none; }
     .toast { width: 230px; right: 0; }
-    .dl .cd { width: 96px; }
     table.cmp { min-width: 540px; font-size: 13.5px; }
     .cmp th, .cmp td { padding: 12px 10px; }
     .final { padding: 56px 18px; }
@@ -393,7 +468,7 @@
     <a class="pill rv" href="#ai"><i><span class="en">NEW</span><span class="zh">新</span></i><span class="en">Lecture notes for Zoom recordings</span><span class="zh">Zoom 录播课堂笔记上线</span> →</a>
     <h1 class="rv d1"><span class="en">Canvas, but it finally <span class="grad">works for you.</span></span><span class="zh">让 Canvas<br><span class="grad">真正为你所用</span></span></h1>
     <p class="lead rv d2"><span class="en">Every deadline in one list, what you need on the final, instant grade alerts — and an AI study helper that only uses your own course materials. Right inside Canvas.</span><span class="zh">所有截止时间一目了然，期末要考多少一算就知道，出分马上提醒，还有一个只用你自己课程资料的 AI 学习助手。全部就在 Canvas 里。</span></p>
-    <div class="cta rv d3"><a class="btn primary " href="https://chromewebstore.google.com/detail/enihdeipikgagnnkpnanlhfechaflmif"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span class="en">Add to Chrome — free</span><span class="zh">免费添加到 Chrome</span></a><a class="btn ghost" href="#demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 4 7 17 2.5-7.5L21 11z"/></svg><span class="en">Try it below</span><span class="zh">先试试看</span></a></div>
+    <div class="cta rv d3"><a class="btn primary " href="https://chromewebstore.google.com/detail/enihdeipikgagnnkpnanlhfechaflmif"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span class="en">Add to Chrome — free</span><span class="zh">免费添加到 Chrome</span></a><a class="btn ghost" href="#demo" id="tryDemo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 4 7 17 2.5-7.5L21 11z"/></svg><span class="en">Try the demo</span><span class="zh">先试试看</span></a></div>
     <div class="trust rv d3">
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span class="en">Free forever</span><span class="zh">永久免费</span></span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span class="en">No uploading your files</span><span class="zh">不用上传任何文件</span></span>
@@ -403,44 +478,7 @@
   </div>
   <div class="stage rv d2" id="demo">
     <div class="toast" id="toast" aria-live="polite"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div><div id="toastTx"></div></div>
-    <div class="demo" id="dm">
-      <div class="d-head"><div class="d-brand">Canvas<b>+</b></div><div class="d-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span class="en">Search courses…</span><span class="zh">搜索课程、作业…</span><kbd>⌘K</kbd></div><div class="d-av">B</div></div>
-      <div class="d-tabs" role="tablist"><span class="d-ind" id="dInd"></span>
-        <button class="d-tab on" data-p="0"><span class="en">Deadlines</span><span class="zh">作业倒计时</span></button>
-        <button class="d-tab" data-p="1"><span class="en">Final calc</span><span class="zh">期末计算器</span></button>
-        <button class="d-tab ai" data-p="2">✦ <span class="en">AI Course</span><span class="zh">AI 课程</span></button>
-        <button class="d-tab" data-p="3"><span class="en">Appearance</span><span class="zh">界面美化</span></button>
-      </div>
-      <div class="d-body">
-        <div class="d-pane on" data-p="0">
-          <div class="d-lbl"><span><span class="en">This week</span><span class="zh">本周</span></span><span id="dlLeft"></span></div>
-          <div id="dlList"></div>
-        </div>
-        <div class="d-pane" data-p="1">
-          <div class="calc-top" id="cCourses"></div>
-          <div class="ring-row">
-            <div class="ring"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><circle class="val" id="cRing" cx="60" cy="60" r="50" stroke-dasharray="314.16" stroke-dashoffset="314.16"/></svg>
-              <div class="num"><div><b id="cNeed">–</b><small><span class="en">on the final</span><span class="zh">期末需要</span></small></div></div></div>
-            <div class="kv"><div><span class="en">Now</span><span class="zh">当前</span> <b id="cNow"></b></div><div><span class="en">Final is worth</span><span class="zh">期末占</span> <b id="cW"></b></div><div id="cMsg"></div></div>
-          </div>
-          <div class="d-lbl"><span><span class="en">Target grade</span><span class="zh">目标成绩</span></span></div>
-          <div class="calc-top" id="cTargets"></div>
-          <div class="weights" id="cWeights"></div>
-        </div>
-        <div class="d-pane" data-p="2">
-          <div class="asg"><div class="t">Lab 4: Pipes &amp; fork()</div><div class="c">CSE 2431 · <span class="en">due in 5 h · 4% of your grade</span><span class="zh">5 小时后截止 · 占总成绩 4%</span></div>
-            <button class="ai-btn" id="aiGo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 3.5l1.9 5.1 5.1 1.9-5.1 1.9L11 17.5l-1.9-5.1L4 10.5l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg><span class="en">AI guide</span><span class="zh">AI 拆解</span></button></div>
-          <div class="ai-out"><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 3.5l1.9 5.1 5.1 1.9-5.1 1.9L11 17.5l-1.9-5.1L4 10.5l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg><span class="en">How to approach it</span><span class="zh">怎么做</span></h4><ol id="aiList"></ol></div>
-          <div class="ai-foot"><span class="en">Explains the steps — never writes the answer for you.</span><span class="zh">只讲思路和步骤，不替你写答案。</span></div>
-        </div>
-        <div class="d-pane" data-p="3">
-          <div class="set"><div><b><span class="en">Dark mode</span><span class="zh">暗色模式</span></b><small><span class="en">No white flashes between pages</span><span class="zh">切换页面不闪白</span></small></div><button class="sw" id="swDark" aria-label="Dark mode"></button></div>
-          <div class="set"><div><b><span class="en">Accent colour</span><span class="zh">主题色</span></b><small><span class="en">Pick one</span><span class="zh">选一个你喜欢的</span></small></div><div class="sws" id="swAcc"></div></div>
-          <div class="set"><div><b><span class="en">Hide “Help” and “History”</span><span class="zh">隐藏 Help 和 History</span></b><small><span class="en">Or any course-menu item</span><span class="zh">以及任意课程菜单项</span></small></div><button class="sw on" aria-label="Hide"></button></div>
-          <div class="set"><div><b><span class="en">Grade alerts</span><span class="zh">出分提醒</span></b><small><span class="en">Score hidden until you tap</span><span class="zh">分数默认隐藏</span></small></div><button class="sw on" aria-label="Alerts"></button></div>
-        </div>
-      </div>
-    </div>
+    <div class="demo" id="dm" role="group" aria-label="Canvas+ demo"></div>
     <div class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 4 7 17 2.5-7.5L21 11z"/></svg><span class="en">It’s live — click around</span><span class="zh">这是可以点的演示</span></div>
   </div>
 </section>
@@ -499,31 +537,31 @@
     <div class="stack" id="stack"><article class="scard" data-s="0" style="--i:0;--c:#ff3b47">
       <div class="scard-tx"><span class="schip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 3.5l1.9 5.1 5.1 1.9-5.1 1.9L11 17.5l-1.9-5.1L4 10.5l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg><span class="en">AI assignment guide</span><span class="zh">AI 作业拆解</span></span><h3><span class="en">AI assignment guide</span><span class="zh">AI 作业拆解</span></h3><p><span class="en">Reads the instructions, attached PDFs, Word files and links, then explains what to hand in, how to approach each part and where people lose points.</span><span class="zh">读完作业说明和附带的 PDF、Word、链接，告诉你要交什么、每部分怎么入手、哪里容易扣分。</span></p>
         <ul><li><span>+</span><span class="en">What to hand in, and the requirements that are easy to miss</span><span class="zh">要交什么，以及容易漏掉的要求</span></li><li><span>+</span><span class="en">Reads PDFs, Word files, Canvas pages and links</span><span class="zh">会读 PDF、Word、Canvas 页面和链接</span></li></ul></div>
-      <div class="scard-shot"><img src="shot-ai.png" alt="" loading="eager" width="420" height="660"></div>
+      <div class="scard-shot"><img class="en" src="shot-ai.png" alt="" loading="eager" width="420" height="660"><img class="zh" src="shot-ai-zh.png" alt="" loading="eager" width="420" height="660"></div>
     </article><article class="scard" data-s="1" style="--i:1;--c:#ff7a3d">
       <div class="scard-tx"><span class="schip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><span class="en">Syllabus summary</span><span class="zh">Syllabus 总结</span></span><h3><span class="en">Syllabus summary</span><span class="zh">Syllabus 总结</span></h3><p><span class="en">Exam dates (one click to your calendar), grade breakdown, late policy, attendance and office hours.</span><span class="zh">考试时间（一键加入日历）、成绩构成、迟交政策、出勤和 office hours。</span></p>
         <ul><li><span>+</span><span class="en">Every exam to Google / Apple Calendar in one click</span><span class="zh">一键把所有考试加入 Google / Apple 日历</span></li><li><span>+</span><span class="en">Also reads the PDF the syllabus links to</span><span class="zh">连 syllabus 里链接的 PDF 也会读</span></li></ul></div>
-      <div class="scard-shot"><img src="shot-syllabus.png" alt="" loading="eager" width="420" height="660"></div>
+      <div class="scard-shot"><img class="en" src="shot-syllabus.png" alt="" loading="eager" width="420" height="660"><img class="zh" src="shot-syllabus-zh.png" alt="" loading="eager" width="420" height="660"></div>
     </article><article class="scard" data-s="2" style="--i:2;--c:#f5b82e">
       <div class="scard-tx"><span class="schip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="en">Course Q&amp;A</span><span class="zh">课程问答</span></span><h3><span class="en">Course Q&amp;A</span><span class="zh">课程问答</span></h3><p><span class="en">“Can I submit this late?” Answered only from your course, with the exact sentences it used. If the course doesn’t say, it tells you.</span><span class="zh">「能不能 late submit？」只根据这门课的资料回答，附上原文；没写就直接告诉你。</span></p>
         <ul><li><span>+</span><span class="en">Quotes the exact sentences it used</span><span class="zh">附上它依据的原文</span></li><li><span>+</span><span class="en">Says so when the course doesn’t say</span><span class="zh">资料里没写就直接告诉你</span></li></ul></div>
-      <div class="scard-shot"><img src="shot-qa.png" alt="" loading="lazy" width="420" height="660"></div>
+      <div class="scard-shot"><img class="en" src="shot-qa.png" alt="" loading="lazy" width="420" height="660"><img class="zh" src="shot-qa-zh.png" alt="" loading="lazy" width="420" height="660"></div>
     </article><article class="scard" data-s="3" style="--i:3;--c:#3ddc84">
       <div class="scard-tx"><span class="schip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg><span class="en">Exam review pack</span><span class="zh">考前复习包</span></span><h3><span class="en">Exam review pack</span><span class="zh">考前复习包</span></h3><p><span class="en">A study outline, practice questions with explanations and flashcards from your own slides and notes. Export to Anki or Quizlet.</span><span class="zh">用你自己的课件和笔记生成复习提纲、带解析的练习题和抽认卡，可导出到 Anki / Quizlet。</span></p>
         <ul><li><span>+</span><span class="en">Ticks the modules the exam covers</span><span class="zh">自动勾好考试范围内的单元</span></li><li><span>+</span><span class="en">Flashcards export to Anki / Quizlet</span><span class="zh">抽认卡可导出到 Anki / Quizlet</span></li></ul></div>
-      <div class="scard-shot"><img src="shot-review.png" alt="" loading="lazy" width="420" height="660"></div>
+      <div class="scard-shot"><img class="en" src="shot-review.png" alt="" loading="lazy" width="420" height="660"><img class="zh" src="shot-review-zh.png" alt="" loading="lazy" width="420" height="660"></div>
     </article><article class="scard" data-s="4" style="--i:4;--c:#38bdf8">
       <div class="scard-tx"><span class="schip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H4zM20 4h-4a3 3 0 0 0-3 3"/><path d="m16 11 2 2 3-4"/></svg><span class="en">Mistake book</span><span class="zh">错题本</span></span><h3><span class="en">Mistake book</span><span class="zh">错题本</span></h3><p><span class="en">Every practice question you miss is saved by course. Drill until you get each right twice in a row. No AI, no cost.</span><span class="zh">做错的题按课程自动收集，连续做对 2 次才算掌握。不用 AI，不占次数。</span></p>
         <ul><li><span>+</span><span class="en">Shuffled choices every time</span><span class="zh">选项每次打乱</span></li><li><span>+</span><span class="en">No AI, doesn’t use your daily uses</span><span class="zh">不用 AI，不占每天的次数</span></li></ul></div>
-      <div class="scard-shot"><img src="shot-mistakes.png" alt="" loading="lazy" width="420" height="660"></div>
+      <div class="scard-shot"><img class="en" src="shot-mistakes.png" alt="" loading="lazy" width="420" height="660"><img class="zh" src="shot-mistakes-zh.png" alt="" loading="lazy" width="420" height="660"></div>
     </article><article class="scard" data-s="5" style="--i:5;--c:#8b5cf6">
       <div class="scard-tx"><span class="schip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg><span class="en">Weekly digest</span><span class="zh">每周简报</span></span><h3><span class="en">Weekly digest</span><span class="zh">每周简报</span></h3><p><span class="en">Every Monday: new assignments, what’s due, grade changes, important announcements and this week’s priorities.</span><span class="zh">每周一：新作业、临近截止、成绩变化、重要公告和本周重点。</span></p>
         <ul><li><span>+</span><span class="en">Every Monday, automatically</span><span class="zh">每周一自动生成</span></li><li><span>+</span><span class="en">This week’s priorities on top</span><span class="zh">本周重点放在最上面</span></li></ul></div>
-      <div class="scard-shot"><img src="shot-digest.png" alt="" loading="lazy" width="420" height="660"></div>
+      <div class="scard-shot"><img class="en" src="shot-digest.png" alt="" loading="lazy" width="420" height="660"><img class="zh" src="shot-digest-zh.png" alt="" loading="lazy" width="420" height="660"></div>
     </article><article class="scard" data-s="6" style="--i:6;--c:#ec4899">
       <div class="scard-tx"><span class="schip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="en">E-mail your professor</span><span class="zh">给教授写邮件</span></span><h3><span class="en">E-mail your professor</span><span class="zh">给教授写邮件</span></h3><p><span class="en">A polite, editable draft for an extension, a rubric question or office hours. Nothing is sent for you.</span><span class="zh">请求延期、问 rubric、约 office hour，生成得体可改的草稿，不会替你发送。</span></p>
         <ul><li><span>+</span><span class="en">Your name and theirs filled in on your computer</span><span class="zh">名字只在你的电脑上填入</span></li><li><span>+</span><span class="en">Never sent for you</span><span class="zh">不会替你发送</span></li></ul></div>
-      <div class="scard-shot"><img src="shot-email.png" alt="" loading="lazy" width="420" height="660"></div>
+      <div class="scard-shot"><img class="en" src="shot-email.png" alt="" loading="lazy" width="420" height="660"><img class="zh" src="shot-email-zh.png" alt="" loading="lazy" width="420" height="660"></div>
     </article></div>
   </div>
 </section>
@@ -556,7 +594,7 @@
   <div class="priv">
     <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b><span class="en">Grades never leave your browser</span><span class="zh">成绩不离开你的浏览器</span></b><p><span class="en">Grades, submissions and your Canvas login are never sent anywhere. Canvas+ reads Canvas with your own session — no passwords, no tokens.</span><span class="zh">成绩、提交的作业和 Canvas 账号都不会被发送出去。Canvas+ 用你自己的登录读取 Canvas，不需要密码或令牌。</span></p></div>
     <div class="rv d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><b><span class="en">AI sees only what it needs</span><span class="zh">AI 只看必要的内容</span></b><p><span class="en">Just the assignment text or the relevant part of the syllabus. The server doesn’t keep the AI’s answers.</span><span class="zh">只发送作业文字或 syllabus 里相关的部分，服务器不保存 AI 的回答。</span></p></div>
-    <div class="rv d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg><b><span class="en">No ads. No selling. No tracking.</span><span class="zh">无广告、不出售、不跟踪</span></b><p><span class="en">Your account is just your e-mail and plan. Nothing is sold or used for advertising. </span><span class="zh">账号只保存邮箱和会员状态，不出售，也不用于广告。</span><a href="privacy.html" style="color:#ff7a82"><span class="en">Privacy policy</span><span class="zh">隐私说明</span></a></p></div>
+    <div class="rv d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg><b><span class="en">No ads. No selling. No tracking.</span><span class="zh">无广告、不出售、不跟踪</span></b><p><span class="en">Your account is just your e-mail and plan. Nothing is sold or used for advertising. </span><span class="zh">账号只保存邮箱和会员状态，不出售，也不用于广告。</span><a href="privacy.html" style="color:var(--red-tx)"><span class="en">Privacy policy</span><span class="zh">隐私说明</span></a></p></div>
   </div>
 </section>
 <section class="sec wrap" id="faq">
