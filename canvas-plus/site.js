@@ -7,14 +7,15 @@
   var key = 'cp-lang', saved = null;
   try { saved = localStorage.getItem(key); } catch (e) {}
   var q = new URLSearchParams(location.search).get('lang');
+  var EMBED = !!window.CP_EMBED;   // inside an <iframe> on another page (demo.html): only the panel
   var lang = q || saved || (/^zh/i.test(navigator.language || '') ? 'zh' : 'en');
   var zh = function () { return root.getAttribute('data-lang') === 'zh'; };
-  function setLang(l) { root.setAttribute('data-lang', l); root.lang = l === 'zh' ? 'zh-CN' : 'en'; try { localStorage.setItem(key, l); } catch (e) {} renderDemo(); }
-  $('#lang').addEventListener('click', function () { setLang(zh() ? 'en' : 'zh'); });
+  function setLang(l) { root.setAttribute('data-lang', l); root.lang = l === 'zh' ? 'zh-CN' : 'en'; if (!EMBED) try { localStorage.setItem(key, l); } catch (e) {} renderDemo(); }
+  if ($('#lang')) $('#lang').addEventListener('click', function () { setLang(zh() ? 'en' : 'zh'); });
 
   // ---- nav border + reveal on scroll + tile glow ----
   var nav = $('#nav');
-  addEventListener('scroll', function () { nav.classList.toggle('scrolled', scrollY > 8); }, { passive: true });
+  if (nav) addEventListener('scroll', function () { nav.classList.toggle('scrolled', scrollY > 8); }, { passive: true });
   if ('IntersectionObserver' in window && !reduce) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
     $$('.rv').forEach(function (el) { io.observe(el); });
@@ -236,10 +237,10 @@
     toast.classList.add('show');
     setTimeout(function () { toast.classList.remove('show'); }, 3600);
   }
-  if (!reduce) { setTimeout(cycleToast, 1800); setInterval(cycleToast, 7000); }
+  if (toast && !reduce) { setTimeout(cycleToast, 1800); setInterval(cycleToast, 7000); }
 
   // "Try the demo": bring the panel into view, ring it, and point at things to click, one after another.
-  var stage = $('#demo'), coach = document.createElement('div'); coach.className = 'coach'; stage.appendChild(coach);
+  var stage = $('#demo') || dm.parentNode, coach = document.createElement('div'); coach.className = 'coach'; stage.appendChild(coach);
   var tourT = [];
   function point(sel, html) {
     var el = $(sel, dm); if (!el) return;
@@ -264,7 +265,7 @@
     ];
     steps.forEach(function (f, i) { tourT.push(setTimeout(f, (reduce ? 0 : 500) + i * 3200)); });
   }
-  $('#tryDemo').addEventListener('click', function (e) { e.preventDefault(); tour(); });
+  if ($('#tryDemo')) $('#tryDemo').addEventListener('click', function (e) { e.preventDefault(); tour(); });
   dm.addEventListener('pointerdown', function (e) { if (e.isTrusted) endTour(); });
 
   function renderDemo() { draw(); if (cur === 2) runAI(); }
@@ -297,4 +298,10 @@
   onStack();
 
   setLang(lang === 'zh' ? 'zh' : 'en');
+  // For the page that embeds the demo: follow its language and light / dark mode.
+  window.cpDemo = { setLang: function (l) { setLang(l === 'zh' ? 'zh' : 'en'); }, setDark: function (d) { dark = !!d; auto = false; draw(); } };
+  if (EMBED) {
+    var th = new URLSearchParams(location.search).get('theme'); if (th === 'dark') window.cpDemo.setDark(true);
+    addEventListener('message', function (e) { var d = e.data || {}; if (d.cpDemo) { if (d.lang) window.cpDemo.setLang(d.lang); if (d.theme) window.cpDemo.setDark(d.theme === 'dark'); } });
+  }
 })();

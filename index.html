@@ -102,6 +102,42 @@
             scroll-behavior: smooth;
         }
 
+
+        /* ---- Canvas+ : badge above the name + featured project ---- */
+        .cp-badge { display: inline-flex; align-items: center; gap: 10px; margin: 0 auto 18px; padding: 6px 16px 6px 6px; border-radius: 999px;
+            background: var(--bg-card); border: 1px solid var(--border); box-shadow: 0 6px 20px -8px rgba(0, 0, 0, .18); color: var(--text-main);
+            font-weight: 600; font-size: 15px; line-height: 1.2; text-decoration: none; transition: transform .2s, box-shadow .2s, border-color .2s; }
+        .cp-badge:hover { transform: translateY(-2px); border-color: var(--timeline-accent); box-shadow: 0 10px 26px -8px var(--timeline-glow); }
+        .cp-badge img { width: 28px; height: 28px; border-radius: 8px; flex: none; }
+        .cp-badge b { color: var(--timeline-accent); }
+        .cp-badge .cp-sub { color: var(--text-sub); font-weight: 500; }
+        .cp-badge .cp-arrow { color: var(--text-sub); transition: transform .2s; }
+        .cp-badge:hover .cp-arrow { transform: translateX(3px); }
+        .card.cp-feature { display: grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items: start; padding: 28px; margin-bottom: 1.5rem;
+            border: 1px solid var(--timeline-accent-soft); background: linear-gradient(135deg, var(--bg-card) 55%, var(--timeline-accent-soft)); }
+        .cp-feature .cp-label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--timeline-accent);
+            background: var(--timeline-accent-soft); border-radius: 999px; padding: 4px 10px; margin-bottom: 12px; }
+        .cp-feature h3 { display: flex; align-items: center; gap: 12px; margin: 0 0 6px; }
+        .cp-feature h3 img { width: 40px; height: 40px; border-radius: 10px; flex: none; }
+        .cp-feature p { color: var(--text-sub); margin: 10px 0 14px; }
+        .cp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+        .cp-tags span { font-size: 12px; font-weight: 600; background: var(--bg-body); border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; color: var(--text-main); }
+        .cp-links { display: flex; flex-wrap: wrap; gap: 10px; }
+        .cp-links a { font-size: 14px; font-weight: 700; padding: 9px 16px; border-radius: 999px; text-decoration: none; transition: transform .2s; }
+        .cp-links a:hover { transform: translateY(-2px); }
+        .cp-links .cp-store { background: var(--text-main); color: var(--bg-card); }
+        .cp-links .cp-site { border: 1px solid var(--border); color: var(--text-main); }
+        .cp-live { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .cp-live iframe { display: block; width: 100%; max-width: 400px; height: 512px; border: 0; border-radius: 18px; background: transparent;
+            box-shadow: 0 24px 60px -24px rgba(0, 0, 0, .4); color-scheme: normal; }
+        .cp-live-hint { font-size: 12px; color: var(--text-sub); }
+        @media (max-width: 760px) {
+            .card.cp-feature { grid-template-columns: 1fr; padding: 22px; }
+            .cp-live iframe { max-width: 100%; }
+            .cp-badge { font-size: 13.5px; }
+            .cp-badge .cp-sub { display: none; }
+        }
+
         /* Dynamic Scroll animation */
         .animate-on-scroll {
             opacity: 0;
@@ -1959,6 +1995,12 @@
             style="display:none; align-items:center; justify-content:center; color:#fff; font-size:2rem; background:#cbd5e1;">
             BL</div>
 
+        <a class="cp-badge animate-on-scroll" href="canvas-plus/" title="Canvas+">
+            <img src="canvas-plus/icon128.png" alt="" width="28" height="28">
+            <span data-en="Creator of &lt;b&gt;Canvas+&lt;/b&gt;" data-zh="&lt;b&gt;Canvas+&lt;/b&gt; 开发者">Creator of <b>Canvas+</b></span>
+            <span class="cp-sub" data-en="· Chrome extension for Canvas" data-zh="· Canvas 浏览器插件">· Chrome extension for Canvas</span>
+            <span class="cp-arrow" aria-hidden="true">→</span>
+        </a>
         <h1 class="animate-on-scroll" data-en="Hello, I am Baowen Liu" data-zh="你好，我是刘宝文">Hello, I am Baowen Liu</h1>
         <p class="animate-on-scroll delay-100"
             data-en="Computer Science and Engineering &amp; Math Student at The Ohio State University&lt;br&gt;Pursuing a Career in Software Development Engineer"
@@ -2272,6 +2314,24 @@
 
     <section id="projects">
         <h2 class="animate-on-scroll" data-en="Projects" data-zh="项目">Projects</h2>
+        <div class="card cp-feature animate-on-scroll delay-100">
+            <div>
+                <span class="cp-label" data-en="★ Featured · Creator &amp; developer" data-zh="★ 精选项目 · 独立开发">★ Featured · Creator &amp; developer</span>
+                <h3><img src="canvas-plus/icon128.png" alt="" width="40" height="40"><span data-en="Canvas+ — Chrome extension for Canvas" data-zh="Canvas+ — Canvas 浏览器插件">Canvas+ — Chrome extension for Canvas</span></h3>
+                <span class="date" data-en="Sep. 2026 – Present" data-zh="2026.09 – 至今">Sep. 2026 – Present</span>
+                <p data-en="Every deadline in one list, a final-grade calculator with class standing, and an AI study helper that only uses the student’s own course materials. Built solo: the extension, the backend and the website."
+                    data-zh="所有截止时间集中在一个列表、带班级排位的期末计算器，以及只根据学生自己课程资料回答的 AI 学习助手。插件、后端和官网全部由我独立完成。">Every deadline in one list, a final-grade calculator with class standing, and an AI study helper that only uses the student’s own course materials. Built solo: the extension, the backend and the website.</p>
+                <div class="cp-tags"><span>Chrome MV3</span><span>JavaScript</span><span>Cloudflare Workers</span><span>D1 (SQLite)</span><span>Stripe</span><span>LLM APIs</span></div>
+                <div class="cp-links">
+                    <a class="cp-store" href="https://chromewebstore.google.com/detail/enihdeipikgagnnkpnanlhfechaflmif" target="_blank" rel="noopener" data-en="Chrome Web Store" data-zh="Chrome 应用商店">Chrome Web Store</a>
+                    <a class="cp-site" href="canvas-plus/" data-en="Website ↗" data-zh="官网 ↗">Website ↗</a>
+                </div>
+            </div>
+            <div class="cp-live">
+                <iframe id="cp-demo" src="canvas-plus/demo.html" title="Canvas+ live demo" loading="lazy"></iframe>
+                <span class="cp-live-hint" data-en="Live demo — click around" data-zh="可以点的演示">Live demo — click around</span>
+            </div>
+        </div>
         <div class="grid">
             <div class="card collapsible-card animate-on-scroll delay-100">
                 <h3 data-en="Online Shopping Platform | Spring Cloud, AWS ECS, ECR, Docker, DynamoDb"
@@ -2475,12 +2535,25 @@
             }, 1600);
         }
 
+
+        // Canvas+ live demo (iframe): follow this page's language and light / dark mode.
+        (function () {
+            const f = document.getElementById('cp-demo');
+            if (!f) return;
+            const send = () => { try { f.contentWindow.postMessage({ cpDemo: 1, lang: document.documentElement.lang === 'zh-CN' ? 'zh' : 'en',
+                theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light' }, '*'); } catch (e) {} };
+            f.addEventListener('load', send);
+            new MutationObserver(send).observe(document.documentElement, { attributes: true, attributeFilter: ['lang', 'data-theme'] });
+        })();
+
         // Scroll Animation (Observer)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show');
-                } else {
+                } else if (entry.boundingClientRect.top > 0) {
+                    // Only hide it again once it's below the screen (scrolled back up). Hiding it when it leaves at the top
+                    // moved it back into view (translateY), which showed it again — the flicker under the nav bar.
                     entry.target.classList.remove('show');
                 }
             });

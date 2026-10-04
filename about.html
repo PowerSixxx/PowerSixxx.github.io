@@ -1267,7 +1267,9 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show');
-                } else {
+                } else if (entry.boundingClientRect.top > 0) {
+                    // Only hide it again once it's below the screen (scrolled back up). Hiding it when it leaves at the top
+                    // moved it back into view (translateY), which showed it again — the flicker under the nav bar.
                     entry.target.classList.remove('show');
                 }
             });
