@@ -103,7 +103,10 @@
   .demo button { font: inherit; color: inherit; }
   .demo svg { display: block; }
   .p-head { background: var(--p-head); border-bottom: 1px solid var(--p-line); padding: 12px 12px 8px; transition: background .35s, border-color .35s; }
-  .p-row { display: flex; align-items: center; gap: 10px; }
+  /* Same 4 columns as the tabs below: the search box runs from the left edge of tab 2 to the right edge of tab 3. */
+  .p-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; align-items: center; }
+  .p-row .p-search { grid-column: 2 / 4; }
+  .p-end { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
   .p-brand { font-weight: 800; font-size: 16px; letter-spacing: -.01em; white-space: nowrap; }
   .p-brand b { color: var(--p-acc); }
   .p-search { flex: 1; min-width: 0; display: flex; align-items: center; gap: 6px; background: var(--p-bg); border: 1px solid var(--p-line); border-radius: 10px; padding: 6px 8px; color: var(--p-muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; }
@@ -612,6 +615,6 @@
     <span><span class="en">Made by</span><span class="zh">作者</span> <a href="https://www.baowenliu.com" style="color:var(--fg)">Baowen Liu</a> · <a href="mailto:me@baowenliu.com">me@baowenliu.com</a> · <a href="privacy.html"><span class="en">Privacy</span><span class="zh">隐私说明</span></a></span></div>
   <p class="legal">© 2026 Canvas+ · <span class="en">Canvas+ is an independent project, not affiliated with or endorsed by Instructure or any school. Canvas is a trademark of Instructure, Inc. School names only show where Canvas+ works with the school’s Canvas; they don’t imply any partnership or endorsement.</span><span class="zh">Canvas+ 是独立项目，与 Instructure 和任何学校均无关联，也未获得其认可。Canvas 是 Instructure, Inc. 的商标。页面上的学校名称仅表示 Canvas+ 可以在该校的 Canvas 上使用，不代表任何合作或认可。</span></p>
 </div></footer>
-<script src="site.js?v=4ed30577"></script>
+<script src="site.js?v=718b51d6"></script>
 </body>
 </html>

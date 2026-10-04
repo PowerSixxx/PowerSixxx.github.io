@@ -182,7 +182,7 @@
     dm.classList.toggle('dark', dark);
     var tabs = TABS.map(function (x, i) { return '<button class="p-tab' + (i === cur ? ' on' : '') + (i === 2 ? ' ai' : '') + '" data-tab="' + i + '">' + (i === 2 ? ic('spark') : '') + L(x[0], x[1]) + (i === 2 ? '<span class="rd"></span>' : '') + '</button>'; }).join('');
     var panes = [paneDL(), paneCalc(), paneAI(), paneLook()].map(function (h, i) { return '<div class="p-pane' + (i === cur ? ' on' : '') + '">' + h + '</div>'; }).join('');
-    dm.innerHTML = '<div class="p-head"><div class="p-row"><span class="p-brand">Canvas<b>+</b></span><span class="p-search">' + ic('search') + '<span>' + L('Search…', '搜索课程、作业…') + '</span><span class="p-new">' + L('New', '新') + '</span><span class="p-kbd"><i>⌘</i><i>K</i></span></span><span class="p-av">A</span><span class="p-x">×</span></div>' +
+    dm.innerHTML = '<div class="p-head"><div class="p-row"><span class="p-brand">Canvas<b>+</b></span><span class="p-search">' + ic('search') + '<span>' + L('Search…', '搜索课程、作业…') + '</span><span class="p-new">' + L('New', '新') + '</span><span class="p-kbd"><i>⌘</i><i>K</i></span></span><span class="p-end"><span class="p-av">A</span><span class="p-x">×</span></span></div>' +
       '<div class="p-tabs"><span class="p-ind"></span>' + tabs + '</div></div><div class="p-body">' + panes + '</div>';
     placeInd(true);
   }
