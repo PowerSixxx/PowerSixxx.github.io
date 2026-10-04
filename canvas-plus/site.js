@@ -297,6 +297,19 @@
   }); });
   onStack();
 
+  // Pricing: once Plus / Pro are on sale (the server has a price), show the real price and a button instead of "Coming soon".
+  var plans = $$('[data-plan]');
+  if (plans.length && window.fetch) fetch('https://ai.baowenliu.com/v1/prices').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+    if (!j) return;
+    plans.forEach(function (el) {
+      var pr = j[el.dataset.plan]; if (!pr || !pr.amount) return;
+      var soon = $('.soon', el); if (soon) soon.remove();
+      var amt = $('.amt', el), small = amt && $('small', amt);
+      if (amt && small) { amt.firstChild.nodeValue = (pr.currency === 'usd' ? '$' : pr.currency.toUpperCase() + ' ') + (pr.amount / 100).toFixed(2); }
+      var btn = $('.plan-buy', el); if (btn) btn.hidden = false;
+    });
+  }).catch(function () {});
+
   setLang(lang === 'zh' ? 'zh' : 'en');
   // For the page that embeds the demo: follow its language and light / dark mode.
   window.cpDemo = { setLang: function (l) { setLang(l === 'zh' ? 'zh' : 'en'); }, setDark: function (d) { dark = !!d; auto = false; draw(); } };
