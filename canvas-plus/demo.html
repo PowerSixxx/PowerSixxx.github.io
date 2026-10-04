@@ -40,7 +40,9 @@
   /* Equal columns even when the panel is narrow (embedded on another page): smaller tab labels instead of uneven tabs. */
   .demo { container: cp / inline-size; }
   .p-tab { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-  @container cp (max-width: 400px) { .p-tab { font-size: 11px !important; gap: 2px; } .p-tab .rd { display: none; } .p-tab svg { width: 10px; height: 10px; } }
+  @container cp (max-width: 400px) { .p-tab { font-size: 11px !important; gap: 2px; } .p-tab .rd { display: none; } .p-tab svg { width: 10px; height: 10px; }
+    .p-filters { gap: 6px; } .p-tog { font-size: 11px; gap: 4px; } .p-ib { gap: 4px; } .p-ib span { width: 24px; height: 24px; } .p-seg button { padding: 5px 6px; } }
+  @container cp (max-width: 350px) { .p-ib span:first-child { display: none; } }
   .p-tab.ai { color: var(--p-acc) !important; }
   .p-tab svg { width: 12px; height: 12px; }
   .p-tab .rd { width: 6px; height: 6px; border-radius: 50%; background: var(--p-acc); }
