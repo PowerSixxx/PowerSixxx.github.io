@@ -13,218 +13,26 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --bg: #f7f5f0;
-            --bg-card: #ffffff;
-            --bg-header: #efece6;
-            --text-main: #1c1917;
-            --text-sub: #57534e;
-            --accent: #2563eb;
-            --border: #e5e1d8;
-        }
+    <link rel="stylesheet" href="assets/css/projects.css?v=20261012-clean">
 
-        [data-theme="dark"] {
-            --bg: #000000;
-            --bg-card: #0c0c0e;
-            --bg-header: #141417;
-            --text-main: #f1f5f9;
-            --text-sub: #94a3b8;
-            --accent: #3b82f6;
-            --border: #1f1f24;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif; }
-
-        html, body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            min-height: 100vh;
-            padding: 2.5rem 1.5rem 3rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        body::before, body::after { display: none !important; }
-
-        .container {
-            width: 100%;
-            max-width: 900px;
-        }
-
-        .breadcrumb {
-            font-size: 0.9rem;
-            color: var(--text-sub);
-            margin-bottom: 1.5rem;
-        }
-
-        .breadcrumb a {
-            color: var(--text-sub);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--accent);
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 2.4rem;
-            margin-bottom: 2rem;
-        }
-
-        .projects-table {
-            width: 100%;
-            border-radius: 1rem;
-            overflow: hidden;
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-
-        thead {
-            background-color: var(--bg-header);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.08em;
-            color: var(--text-sub);
-        }
-
-        th, td {
-            padding: 0.9rem 1.2rem;
-            vertical-align: top;
-        }
-
-        th:nth-child(1),
-        td:nth-child(1) {
-            width: 22%;
-        }
-
-        th:nth-child(3),
-        td:nth-child(3) {
-            width: 17%;
-            text-align: right;
-            white-space: nowrap;
-        }
-
-        tbody tr {
-            border-top: 1px solid var(--border);
-        }
-
-        tbody tr:hover {
-            background-color: rgba(31, 41, 55, 0.85);
-        }
-
-        .project-name {
-            font-weight: 600;
-        }
-
-        .project-desc {
-            font-size: 0.9rem;
-            color: var(--text-sub);
-        }
-
-        .link-group a {
-            color: var(--accent);
-            font-size: 0.9rem;
-            text-decoration: none;
-            margin-left: 0.25rem;
-        }
-
-        .link-group a:first-child {
-            margin-left: 0;
-        }
-
-        .link-group a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 720px) {
-            body {
-                padding: 1.5rem 1rem 2rem;
-            }
-            h1 {
-                font-size: 1.9rem;
-            }
-            th, td {
-                padding: 0.75rem 0.7rem;
-            }
-            th:nth-child(1),
-            td:nth-child(1) {
-                width: 30%;
-            }
-            th:nth-child(3),
-            td:nth-child(3) {
-                width: 22%;
-            }
-        }
-
-        /* Phones: stack each row as a card instead of squeezing three columns.
-           Selectors carry .projects-table so they beat the !important rules in glass-theme.css. */
-        @media (max-width: 600px) {
-            .projects-table thead {
-                display: none;
-            }
-
-            .projects-table table,
-            .projects-table tbody,
-            .projects-table tr,
-            .projects-table td {
-                display: block;
-                width: 100% !important;
-            }
-
-            .projects-table tbody tr {
-                padding: 1rem 1.1rem 1.15rem;
-                border-top: 1px solid var(--border);
-            }
-
-            .projects-table tbody tr:first-child {
-                border-top: 0;
-            }
-
-            .projects-table td {
-                padding: 0 !important;
-                border: 0 !important;
-                text-align: left !important;
-                white-space: normal !important;
-            }
-
-            .projects-table td.project-name {
-                font-size: 1.02rem;
-                margin-bottom: 0.35rem;
-            }
-
-            .projects-table td.project-desc {
-                margin-bottom: 0.8rem;
-                line-height: 1.55;
-            }
-
-            .projects-table .link-group a {
-                display: inline-block;
-                margin: 0 0.4rem 0 0;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="assets/glass-theme.css?v=20260914_vt">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="assets/css/site.css?v=20261012i">
+    <script src="assets/js/scroll-instrument.js?v=20261012b" defer></script>
+    <script src="assets/js/site.js?v=20261012b" defer></script>
+    <link rel="icon" type="image/png" href="assets/images/bw_logo.png">
 </head>
-<body>
+<body data-page="projects">
+<nav class="ac-nav" aria-label="Main navigation"><a href="index.html" class="ac-brand" aria-label="Baowen Liu home"><img src="assets/images/bw_logo.png" alt="Baowen Liu" width="46" height="46"></a><div class="ac-nav-links"><a href="index.html" data-en="Home" data-zh="主页">Home</a><a href="about.html" data-en="About" data-zh="关于">About</a><a href="projects.html" data-en="Projects" data-zh="项目" aria-current="page">Projects</a><a href="study.html" data-en="Notes" data-zh="笔记">Notes</a><a href="resume.html" data-en="Résumé" data-zh="简历">Résumé</a></div><div class="ac-nav-actions"><button id="ac-lang" class="ac-language" aria-label="Switch language">EN / 中文</button><button id="ac-theme" class="ac-theme" aria-label="Toggle theme"><i class="fas fa-moon" aria-hidden="true"></i><span class="ac-theme-glyph" aria-hidden="true">◐</span></button><a class="ac-contact-link" href="mailto:me@baowenliu.com" data-en="Say hello ↗" data-zh="联系我 ↗">Say hello ↗</a><button class="ac-menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button></div></nav>
 <div class="container">
     <div class="breadcrumb">
         <a href="index.html" data-en="Home" data-zh="主页">Home</a> &nbsp;›&nbsp;
         <span data-en="Projects" data-zh="项目">Projects</span>
     </div>
 
-    <h1 data-en="Projects" data-zh="项目">Projects</h1>
+    <div class="ac-page-heading"><p class="ac-eyebrow" data-en="01 / SELECTED WORK" data-zh="01 / 项目作品">01 / SELECTED WORK</p><h1 data-en="Things I<br><em>have built.</em>" data-zh="我创造的<br><em>那些东西。</em>">Things I<br><em>have built.</em></h1><p data-en="Useful tools. Scalable systems. Ideas put into practice." data-zh="实用工具，可扩展的系统，付诸实践的想法。">Useful tools. Scalable systems. Ideas put into practice.</p></div>
 
-    <div class="projects-table">
+    <div id="work" class="projects-table ac-section" data-rail="SELECTED WORK">
         <table>
             <thead>
                 <tr>
@@ -233,7 +41,7 @@
                     <th data-en="LINK" data-zh="链接">LINK</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody><tr id="canvas-plus"><td class="project-name">Canvas+</td><td class="project-desc"><span data-en="A Chrome extension for Canvas. A cleaner workspace, thoughtful details, and less friction in everyday coursework." data-zh="为 Canvas 打造的 Chrome 插件：更清爽的学习工作区，让日常课程体验更顺畅。">A Chrome extension for Canvas. A cleaner workspace, thoughtful details, and less friction in everyday coursework.</span></td><td class="link-group"><a href="canvas-plus/index.html" data-en="Explore ↗" data-zh="了解 ↗">Explore ↗</a></td></tr><tr id="shopping"><td class="project-name" data-en="Online Shopping Platform" data-zh="分布式电商平台">Online Shopping Platform</td><td class="project-desc"><span data-en="Spring Cloud microservices on AWS ECS, with Redis inventory locks and SQS peak shaving." data-zh="基于 Spring Cloud 与 AWS ECS 的微服务平台，使用 Redis 库存锁与 SQS 削峰。">Spring Cloud microservices on AWS ECS, with Redis inventory locks and SQS peak shaving.</span></td><td class="link-group"><a href="index.html#projects" data-en="Details ↗" data-zh="详情 ↗">Details ↗</a></td></tr><tr id="user-center"><td class="project-name" data-en="User Center System" data-zh="用户中心系统">User Center System</td><td class="project-desc"><span data-en="A full-stack user management system with React, Ant Design Pro, Spring Boot, MyBatis-Plus and MySQL." data-zh="使用 React、Ant Design Pro、Spring Boot、MyBatis-Plus 与 MySQL 构建的全栈用户管理系统。">A full-stack user management system with React, Ant Design Pro, Spring Boot, MyBatis-Plus and MySQL.</span></td><td class="link-group"><a href="index.html#projects" data-en="Details ↗" data-zh="详情 ↗">Details ↗</a></td></tr>
                 <!-- Projects -->
 
                 <tr id="gomoku">
@@ -267,34 +75,12 @@
         </table>
     </div>
 </div>
-</script>
     <!-- Language sync with main site -->
-    <script>
-        // Language sync with main site
-        (function () {
-            // Load saved language or default to English
-            let currentLang = localStorage.getItem('lang') || 'en';
 
-            function applyLanguage(lang) {
-
-                document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-                document.querySelectorAll('[data-en]').forEach(el => {
-                    const enText = el.getAttribute('data-en');
-                    const zhText = el.getAttribute('data-zh');
-                    const text = (lang === 'zh' ? (zhText || enText) : enText) || '';
-                    if (text) {
-                        el.innerHTML = text;
-                    }
-                });
-            }
-
-            // Apply language on initial load
-            applyLanguage(currentLang);
-        })();
-    </script>
     <!-- Visitor counting (GoatCounter) -->
-    <script src="assets/site-stats.js?v=20260914c"></script>
+    <script src="assets/js/site-stats.js?v=20260914c"></script>
     <!-- Command palette: ⌘K / Ctrl+K -->
-    <script src="assets/palette.js?v=20260923"></script>
+    <script src="assets/js/palette.js?v=20261012h"></script>
+<footer class="ac-simple-footer"><a href="index.html">BAOWEN LIU</a><span data-en="BUILD WITH CARE. LOOK WITH CURIOSITY." data-zh="认真创造。保持好奇。">BUILD WITH CARE. LOOK WITH CURIOSITY.</span><a href="mailto:me@baowenliu.com" data-en="LET’S CONNECT ↗" data-zh="联系我 ↗">LET’S CONNECT ↗</a></footer>
 </body>
 </html>

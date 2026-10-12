@@ -18,12 +18,12 @@
     <link rel="canonical" href="https://www.baowenliu.com/about.html">
     <meta property="og:title" content="About Me - Baowen Liu">
     <meta property="og:description" content="Beyond the code: my hobbies, interests, and life at Ohio State.">
-    <meta property="og:image" content="https://www.baowenliu.com/assets/baowen-selfie.jpg">
+    <meta property="og:image" content="https://www.baowenliu.com/assets/images/baowen-selfie.jpg">
     <meta property="og:url" content="https://www.baowenliu.com/about.html">
     <meta property="og:type" content="profile">
     <meta name="twitter:card" content="summary">
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="assets/images/bw_logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -34,1032 +34,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    
-    <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <style>
-        .about-intro-layout {
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
 
-        .about-selfie {
-            width: 260px;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            object-fit: cover;
-        }
-        .hs-card-layout {
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: flex-start;
-            gap: 2rem;
-        }
+    <link rel="stylesheet" href="assets/css/about.css?v=20261012-clean">
 
-        .hs-text {
-            flex: 1;
-        }
-
-        .hs-logo-wrapper {
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hs-logo {
-            width: 120px;
-            max-width: 30vw;
-            object-fit: contain;
-        }
-        /* Global color matching variable */
-        :root {
-            --primary: #2563eb;
-            --bg-body: #f7f5f0;
-            --bg-card: #ffffff;
-            --text-main: #1c1917;
-            --text-sub: #57534e;
-            --border: #e5e1d8;
-            --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-            --panel-bg: #ffffff;
-            --card-hover: #fcfbfa;
-        }
-
-        [data-theme="dark"] {
-            --primary: #3b82f6;
-            --bg-body: #000000;
-            --bg-card: #0c0c0e;
-            --text-main: #f1f5f9;
-            --text-sub: #94a3b8;
-            --border: #1f1f24;
-            --shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.85);
-            --panel-bg: #0c0c0e;
-            --card-hover: #16161a;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-        html, body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
-        body::before, body::after { display: none !important; }
-        
-        /* Dynamic animation */
-        .animate-on-scroll { 
-            opacity: 0; transform: translateY(30px) scale(0.98); 
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
-        }
-        .animate-on-scroll.show { opacity: 1; transform: translateY(0) scale(1); }
-        .delay-100 { transition-delay: 100ms; } .delay-200 { transition-delay: 200ms; } .delay-300 { transition-delay: 300ms; } .delay-400 { transition-delay: 400ms; }
-
-        /* --------------------------------------------------------------------------
-           Capsule Navigation Bar (Pill Header) - Always Fixed to Viewport Top
-           -------------------------------------------------------------------------- */
-        body {
-            padding-top: 5.5rem !important;
-        }
-
-        html {
-            scroll-behavior: smooth !important;
-            scroll-padding-top: 6rem !important;
-        }
-
-        section,
-        footer {
-            scroll-margin-top: 6rem !important;
-        }
-
-        nav,
-        nav.capsule-nav {
-            position: fixed !important;
-            top: 1.1rem !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            z-index: 99999 !important;
-            max-width: 1180px !important;
-            width: min(1180px, calc(100% - 2.4rem)) !important;
-            margin: 0 !important;
-            padding: 0.5rem 1.4rem !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: space-between !important;
-            border-radius: 999px !important;
-            background: rgba(255, 255, 255, 0.88) !important;
-            backdrop-filter: blur(20px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            border: 1px solid rgba(0, 0, 0, 0.08) !important;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03) !important;
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
-        }
-
-        [data-theme="dark"] nav,
-        [data-theme="dark"] nav.capsule-nav {
-            background: rgba(16, 16, 20, 0.88) !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-        }
-
-        .nav-brand,
-        .logo {
-            display: flex !important;
-            align-items: center !important;
-            gap: 0.65rem !important;
-            text-decoration: none !important;
-            flex-shrink: 0 !important;
-        }
-
-        .brand-avatar {
-            width: 32px !important;
-            height: 32px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            border-radius: 50% !important;
-            overflow: hidden !important;
-        }
-
-        .brand-title,
-        .portfolio-title {
-            font-size: 1.02rem !important;
-            font-weight: 700 !important;
-            letter-spacing: 0.02em !important;
-            text-transform: none !important;
-            color: #1c1917 !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-        }
-
-        [data-theme="dark"] .brand-title,
-        [data-theme="dark"] .portfolio-title {
-            color: #f4f4f5 !important;
-        }
-
-        .nav-links {
-            display: flex !important;
-            align-items: center !important;
-            gap: 0.35rem !important;
-            list-style: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        .nav-links li {
-            position: relative !important;
-        }
-
-        .nav-links a {
-            text-decoration: none !important;
-            font-size: 0.88rem !important;
-            font-weight: 500 !important;
-            color: #57534e !important;
-            padding: 0.45rem 0.9rem !important;
-            border-radius: 999px !important;
-            transition: all 0.2s ease !important;
-            white-space: nowrap !important;
-            display: inline-block !important;
-        }
-
-        .nav-links a:hover {
-            color: #1c1917 !important;
-            background: rgba(0, 0, 0, 0.05) !important;
-        }
-
-        .nav-links a.nav-pill-active,
-        .nav-links a.active {
-            background: #18181b !important;
-            color: #ffffff !important;
-            font-weight: 600 !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-        }
-
-        [data-theme="dark"] .nav-links a {
-            color: #a1a1aa !important;
-        }
-
-        [data-theme="dark"] .nav-links a:hover {
-            color: #ffffff !important;
-            background: rgba(255, 255, 255, 0.08) !important;
-        }
-
-        [data-theme="dark"] .nav-links a.nav-pill-active,
-        [data-theme="dark"] .nav-links a.active {
-            background: #f4f4f5 !important;
-            color: #09090b !important;
-            box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2) !important;
-        }
-
-        .nav-actions,
-        .nav-right,
-        .nav-container {
-            display: flex !important;
-            align-items: center !important;
-            gap: 0.55rem !important;
-            position: static !important;
-        }
-
-        .nav-resume-btn {
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 0.3rem !important;
-            font-size: 0.82rem !important;
-            font-weight: 500 !important;
-            color: #27272a !important;
-            text-decoration: none !important;
-            border: 1px solid rgba(0, 0, 0, 0.14) !important;
-            border-radius: 999px !important;
-            padding: 0.38rem 0.9rem !important;
-            background: rgba(255, 255, 255, 0.7) !important;
-            transition: all 0.2s ease !important;
-            white-space: nowrap !important;
-        }
-
-        .nav-resume-btn:hover {
-            background: #ffffff !important;
-            border-color: rgba(0, 0, 0, 0.3) !important;
-            color: #000000 !important;
-            transform: translateY(-1px) !important;
-        }
-
-        [data-theme="dark"] .nav-resume-btn {
-            border: 1px solid rgba(255, 255, 255, 0.18) !important;
-            color: #e4e4e7 !important;
-            background: rgba(255, 255, 255, 0.04) !important;
-        }
-
-        [data-theme="dark"] .nav-resume-btn:hover {
-            background: rgba(255, 255, 255, 0.12) !important;
-            border-color: rgba(255, 255, 255, 0.35) !important;
-            color: #ffffff !important;
-        }
-
-        .lang-toggle {
-            background: rgba(255, 255, 255, 0.7) !important;
-            border: 1px solid rgba(0, 0, 0, 0.14) !important;
-            color: #44403c !important;
-            padding: 0.38rem 0.85rem !important;
-            border-radius: 999px !important;
-            font-size: 0.82rem !important;
-            font-weight: 500 !important;
-            cursor: pointer !important;
-            transition: all 0.2s ease !important;
-            white-space: nowrap !important;
-        }
-
-        .lang-toggle:hover {
-            background: #ffffff !important;
-            border-color: rgba(0, 0, 0, 0.3) !important;
-            color: #1c1917 !important;
-            transform: translateY(-1px) !important;
-        }
-
-        [data-theme="dark"] .lang-toggle {
-            background: rgba(255, 255, 255, 0.04) !important;
-            border: 1px solid rgba(255, 255, 255, 0.18) !important;
-            color: #e2e8f0 !important;
-        }
-
-        [data-theme="dark"] .lang-toggle:hover {
-            background: rgba(255, 255, 255, 0.12) !important;
-            border-color: rgba(255, 255, 255, 0.35) !important;
-            color: #ffffff !important;
-        }
-
-        #theme-toggle,
-        .theme-btn,
-        #theme-btn {
-            width: 34px !important;
-            height: 34px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            background: rgba(255, 255, 255, 0.7) !important;
-            border: 1px solid rgba(0, 0, 0, 0.14) !important;
-            border-radius: 50% !important;
-            color: #44403c !important;
-            font-size: 0.95rem !important;
-            cursor: pointer !important;
-            transition: all 0.2s ease !important;
-            padding: 0 !important;
-        }
-
-        #theme-toggle:hover,
-        .theme-btn:hover,
-        #theme-btn:hover {
-            background: #ffffff !important;
-            border-color: rgba(0, 0, 0, 0.3) !important;
-            color: #1c1917 !important;
-            transform: scale(1.06) !important;
-        }
-
-        [data-theme="dark"] #theme-toggle,
-        [data-theme="dark"] .theme-btn,
-        [data-theme="dark"] #theme-btn {
-            background: rgba(255, 255, 255, 0.04) !important;
-            border: 1px solid rgba(255, 255, 255, 0.18) !important;
-            color: #f1f5f9 !important;
-        }
-
-        [data-theme="dark"] #theme-toggle:hover,
-        [data-theme="dark"] .theme-btn:hover,
-        [data-theme="dark"] #theme-btn:hover {
-            background: rgba(255, 255, 255, 0.12) !important;
-            border-color: rgba(255, 255, 255, 0.35) !important;
-            color: #ffffff !important;
-        }
-
-        /* Responsive Capsule Nav */
-        @media (max-width: 900px) {
-            .nav-resume-btn {
-                width: 34px;
-                height: 34px;
-                padding: 0 !important;
-                justify-content: center;
-                border-radius: 50% !important;
-            }
-
-            .nav-resume-btn .nav-resume-label {
-                display: none;
-            }
-
-            .nav-resume-btn .nav-resume-icon {
-                display: inline-block;
-            }
-            .nav-item-about,
-            .nav-item-skills {
-                display: none !important;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding-top: 4.5rem !important;
-            }
-            nav,
-            nav.capsule-nav {
-                width: calc(100% - 1.4rem) !important;
-                max-width: 100% !important;
-                top: 0.65rem !important;
-                padding: 0.35rem 0.85rem !important;
-                box-sizing: border-box !important;
-            }
-            .nav-brand,
-            .logo {
-                gap: 0.45rem !important;
-                flex-shrink: 0 !important;
-            }
-            .brand-avatar {
-                width: 26px !important;
-                height: 26px !important;
-            }
-            .brand-avatar svg {
-                width: 26px !important;
-                height: 26px !important;
-            }
-            .brand-title,
-            .portfolio-title {
-                font-size: 0.88rem !important;
-                letter-spacing: 0.01em !important;
-            }
-            .nav-links {
-                gap: 0 !important;
-                padding: 2px !important;
-            }
-            .nav-item-hero,
-            .nav-item-about,
-            .nav-item-experience,
-            .nav-item-projects,
-            .nav-item-skills {
-                display: none !important;
-            }
-            .nav-links a {
-                font-size: 0.82rem !important;
-                padding: 0.35rem 0.75rem !important;
-            }
-            .nav-actions {
-                gap: 0.38rem !important;
-                flex-shrink: 0 !important;
-            }
-            .nav-resume-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 0.82rem !important;
-            }
-            .lang-toggle {
-                padding: 0.3rem 0.55rem !important;
-                font-size: 0.75rem !important;
-            }
-            #theme-toggle,
-            .theme-btn,
-            #theme-btn {
-                width: 28px !important;
-                height: 28px !important;
-                font-size: 0.82rem !important;
-            }
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 999px;
-            border: none;
-            background: var(--primary);
-            color: #ffffff;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s, transform 0.3s, background-color 0.3s;
-            z-index: 150;
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            background-color: #1d4ed8;
-        }
-
-        /* Head (including the Easter egg button */
-        .header { padding: 4rem 1rem; text-align: center; }
-        .header-title-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.5rem; }
-        .header h1 { font-size: 2.5rem; color: var(--text-main); margin: 0; }
-        .header p { color: var(--text-sub); font-size: 1.1rem; }
-
-        /* Easter egg button style */
-        #firework-btn {
-            background: none; border: none; font-size: 1.5rem; cursor: pointer;
-            transition: transform 0.2s; animation: pulse 2s infinite;
-        }
-        #firework-btn:active { transform: scale(0.8); }
-        #firework-btn:hover { transform: scale(1.2) rotate(15deg); }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-
-        /* Card style */
-        .simple-card { 
-            background: var(--bg-card); padding: 2rem; border-radius: 12px; 
-            max-width: 900px; margin: 0 auto 2rem auto; 
-            box-shadow: var(--shadow); border: 1px solid var(--border);
-        }
-        .simple-card h2 { color: var(--text-main); margin-bottom: 1rem; border-left: 4px solid var(--primary); padding-left: 1rem; }
-        .simple-card ul { padding-left: 1.2rem; color: var(--text-sub); }
-        .simple-card p, .simple-card li { color: var(--text-sub); margin-bottom: 0.5rem; }
-
-        /* Hobbies Panel */
-        .showcase-container {
-            max-width: 1000px; margin: 0 auto 4rem auto;
-            background: var(--panel-bg);
-            border-radius: 20px; padding: 2.5rem;
-            color: var(--text-main);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .photo-section {
-            max-width: 1000px;
-            margin: 0 auto 4rem auto;
-            background: var(--panel-bg);
-            border-radius: 20px;
-            padding: 2.5rem;
-            color: var(--text-main);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .photo-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--text-main);
-        }
-
-        .photo-sub {
-            color: var(--text-sub);
-            font-size: 0.98rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .photo-grid {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            overflow-y: hidden;
-            padding-bottom: 0.5rem;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .photo-card {
-            flex: 0 0 280px;
-            background: var(--bg-body);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-            scroll-snap-align: start;
-        }
-
-        .photo-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow);
-            background: var(--card-hover);
-        }
-
-        .photo-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .photo-caption {
-            padding: 0.9rem 1.1rem 1.1rem;
-            font-size: 0.9rem;
-            color: var(--text-sub);
-        }
-
-        .photo-grid::-webkit-scrollbar {
-            height: 6px;
-            width: 0;
-        }
-
-        .photo-grid::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .photo-grid::-webkit-scrollbar-thumb {
-            background: rgba(148, 163, 184, 0.6);
-            border-radius: 999px;
-        }
-
-        .photo-grid::-webkit-scrollbar-thumb:hover {
-            background: rgba(100, 116, 139, 0.8);
-        }
-
-        .photo-nav {
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .photo-nav-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: var(--bg-body);
-            color: var(--text-main);
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow);
-            transition: background-color 0.2s, transform 0.2s, border-color 0.2s;
-        }
-
-        .photo-nav-btn:hover {
-            background: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
-            transform: translateY(-1px);
-        }
-
-        .showcase-header { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main); }
-
-        .toggle-wrapper {
-            background: var(--bg-body); width: fit-content; padding: 4px; border-radius: 10px;
-            display: flex; position: relative; margin-bottom: 2rem; border: 1px solid var(--border);
-        }
-        .toggle-glider {
-            position: absolute; top: 4px; left: 4px; width: 120px; height: 36px;
-            background: var(--primary); border-radius: 8px;
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1;
-        }
-        .toggle-btn {
-            position: relative; z-index: 2; width: 120px; height: 36px;
-            background: none; border: none; color: var(--text-sub); font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: color 0.3s;
-        }
-        .toggle-btn.active { color: white; }
-
-        .grid-panel { display: none; }
-        .grid-panel.active { display: grid; }
-
-        /* Game Card */
-        .games-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
-        .game-card {
-            background: var(--bg-body); border-radius: 12px; padding: 1.5rem; text-align: center;
-            border: 1px solid var(--border); transition: all 0.3s;
-        }
-        .game-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow); background: var(--card-hover); }
-        .card-img-box {
-            width: 80px; height: 80px; margin: 0 auto 1rem auto;
-            border-radius: 16px; overflow: hidden; background: #e2e8f0;
-        }
-        .card-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main); }
-        .card-stat { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 0.2rem; }
-        .stat-badge { display: inline-block; margin-top: 0.8rem; padding: 4px 12px; background: rgba(37, 99, 235, 0.1); color: var(--primary); border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-
-        /* Music Card */
-        .music-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.2rem; }
-        .music-card {
-            background: var(--bg-body); border-radius: 12px; overflow: hidden; 
-            border: 1px solid var(--border); transition: all 0.3s;
-        }
-        .music-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow); }
-        .music-cover-wrapper { width: 100%; aspect-ratio: 1/1; position: relative; overflow: hidden; background: #eee; }
-        .music-cover { width: 100%; height: 100%; object-fit: cover; }
-        .music-info { padding: 0.8rem; }
-        .music-title { font-size: 0.95rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.2rem; }
-        .music-artist { font-size: 0.75rem; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.6rem; }
-        audio { width: 100%; height: 28px; opacity: 0.8; outline: none; margin-top: auto; }
-        [data-theme="dark"] audio { filter: invert(0.9) hue-rotate(180deg); }
-
-        .btn-home {
-            display: block;
-            width: fit-content;
-            margin: 2.5rem auto 1.5rem auto;
-            padding: 0.85rem 2.2rem;
-            background: #18181b;
-            color: #ffffff;
-            border: 1.5px solid #18181b;
-            text-decoration: none;
-            border-radius: 999px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            letter-spacing: 0.01em;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            text-align: center;
-        }
-        .btn-home:hover {
-            background: #27272a;
-            border-color: #27272a;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
-        }
-        [data-theme="dark"] .btn-home,
-        html[data-theme="dark"] .btn-home {
-            background: #ffffff;
-            color: #09090b;
-            border: 1.5px solid #ffffff;
-            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
-        }
-        [data-theme="dark"] .btn-home:hover,
-        html[data-theme="dark"] .btn-home:hover {
-            background: #f4f4f5;
-            color: #000000;
-            border-color: #f4f4f5;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 22px rgba(255, 255, 255, 0.25);
-        }
-        /* Footer — same watermark footer as index.html */
-        footer.watermark-footer {
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            min-height: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 4rem;
-            padding: 7rem 1rem 2.25rem;   /* room above the contact bar so the watermark isn't clipped */
-            color: var(--text-main);
-            background: #000000 !important;
-            border-top: 1px solid #18181b !important;
-            box-shadow: none !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-        }
-
-        footer.watermark-footer::before {
-            content: "BAOWEN";
-            position: absolute;
-            left: 50%;
-            top: var(--wm-top, 46%);
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            font-size: clamp(5rem, 20vw, 16.5rem);
-            line-height: 0.8;
-            font-weight: 800;
-            letter-spacing: 0;
-            color: rgba(0, 0, 0, 0.05);
-            white-space: nowrap;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        [data-theme="dark"] footer.watermark-footer::before {
-            color: rgba(255, 255, 255, 0.18) !important;
-        }
-
-        footer.watermark-footer::after {
-            display: none !important;
-        }
-
-        .footer-socials {
-            margin-top: 0.35rem;
-        }
-
-        /* Footer contact info layout */
-        .footer-contact {
-            width: min(100%, 760px);
-            margin: 0 auto 0.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0;
-            padding: 0.8rem 1.45rem;
-            border: 1px solid rgba(255, 255, 255, 0.55);
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow:
-                0 6px 20px rgba(0, 0, 0, 0.03),
-                inset 0 1px 0 rgba(255, 255, 255, 0.45),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.02);
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-        }
-
-        .footer-contact p {
-            margin: 0;
-            color: #1c1917;
-            font-size: 0.92rem;
-            font-weight: 600;
-            line-height: 1.2;
-            white-space: nowrap;
-        }
-
-        .footer-contact p+p {
-            border-left: 1px solid rgba(0, 0, 0, 0.12);
-            margin-left: 1.25rem;
-            padding-left: 1.25rem;
-        }
-
-        [data-theme="dark"] .footer-contact {
-            background: rgba(255, 255, 255, 0.015) !important;
-            border: 1px solid rgba(255, 255, 255, 0.10) !important;
-            box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.35),
-                inset 0 1px 0 rgba(255, 255, 255, 0.10),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-        }
-
-        [data-theme="dark"] .footer-contact p {
-            color: #ffffff !important;
-        }
-
-        [data-theme="dark"] .footer-contact p+p {
-            border-left: 1px solid rgba(255, 255, 255, 0.25) !important;
-        }
-
-        .footer-socials a {
-            color: rgba(51, 65, 85, 0.58);
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .footer-socials a:hover {
-            color: var(--primary);
-        }
-
-        .footer-copyright {
-            margin-top: 0.25rem;
-            color: rgba(51, 65, 85, 0.48);
-            font-size: 0.86rem;
-        }
-
-        .copy-toast {
-            position: fixed;
-            left: 50%;
-            bottom: 5rem;
-            transform: translateX(-50%);
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            background-color: var(--text-main);
-            color: #ffffff;
-            font-size: 0.85rem;
-            box-shadow: var(--shadow);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease, transform 0.25s ease;
-            z-index: 130;
-        }
-
-        .copy-toast.show {
-            opacity: 1;
-            transform: translate(-50%, -6px);
-        }
-
-
-        @media (max-width: 768px) {
-            /* Mobile spacing + fonts */
-            body {
-                font-size: 0.95rem;
-            }
-
-            .header {
-                padding: 3rem 1rem;
-            }
-
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .header p {
-                font-size: 0.95rem;
-            }
-
-            .simple-card, .showcase-container {
-                padding: 1.5rem;
-                width: 95%;
-                border-radius: 16px;
-            }
-
-            .about-intro-layout {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-selfie {
-                width: 70vw;
-                max-width: 260px;
-            }
-
-            .hs-card-layout {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .hs-logo-wrapper {
-                margin-bottom: 0.5rem;
-            }
-
-            .hs-text {
-                width: 100%;
-            }
-
-            .photo-section {
-                padding: 1.5rem;
-                width: 95%;
-                border-radius: 16px;
-            }
-
-            .photo-title {
-                font-size: 1.5rem;
-            }
-
-            .photo-sub {
-                font-size: 0.9rem;
-            }
-
-            .photo-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .simple-card h2 {
-                font-size: 1.4rem;
-            }
-
-            .simple-card p,
-            .simple-card li {
-                font-size: 0.95rem;
-            }
-
-            .showcase-header {
-                font-size: 1.5rem;
-            }
-
-            .card-title {
-                font-size: 1rem;
-            }
-
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .music-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
-            }
-
-            audio {
-                height: 24px;
-            }
-
-            footer.watermark-footer {
-                min-height: 360px;
-                padding: 4rem 1rem 2rem;
-            }
-
-            footer.watermark-footer::before {
-                top: var(--wm-top, 42%);
-                font-size: clamp(4.75rem, 28vw, 7rem);
-            }
-
-            .footer-contact {
-                width: min(100%, 360px);
-                flex-direction: column;
-                align-items: center;
-                gap: 0.65rem;
-                padding: 1rem 1.1rem;
-                border-radius: 14px;
-            }
-
-            .footer-contact p {
-                width: 100%;
-                text-align: center;
-                white-space: normal;
-                margin: 0;
-            }
-
-            .footer-contact p+p {
-                border-left: none !important;
-                border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
-                margin-left: 0 !important;
-                padding-left: 0 !important;
-                padding-top: 0.65rem !important;
-            }
-
-            [data-theme="dark"] .footer-contact p+p {
-                border-left: none !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
-            }
-
-        }
-    </style>
-    <link rel="stylesheet" href="assets/glass-theme.css?v=20260914_vt">
+    <link rel="stylesheet" href="assets/css/site.css?v=20261012i">
+    <link rel="stylesheet" href="assets/css/photo-wall.css?v=20261012l">
+    <script src="assets/js/photo-previews.js?v=20261012l" defer></script>
+    <script src="assets/js/progressive-photos.js?v=20261012l" defer></script>
+    <script src="assets/js/scroll-instrument.js?v=20261012b" defer></script>
+    <script src="assets/js/site.js?v=20261012l" defer></script>
 </head>
-<body class="about-page">
+<body class="about-page" data-page="about">
 
-    <nav class="capsule-nav">
-        <a href="index.html" class="nav-brand logo">
-            <div class="brand-avatar">
-                <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="50" fill="var(--text-main)"/>
-                    <text x="42" y="80" font-size="80" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">L</text>
-                    <text x="14" y="70" font-size="80" fill="none" stroke="var(--text-main)" stroke-width="6" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
-                    <text x="14" y="70" font-size="80" fill="var(--bg-card)" style="font-family: 'Times New Roman', serif !important; font-weight: bold;">B</text>
-                </svg>
-            </div>
-            <span class="portfolio-title">BAOWEN</span>
-        </a>
-
-        <ul class="nav-links">
-            <li class="nav-item-hero"><a href="about.html" class="nav-pill-active" data-en="About Me" data-zh="关于我">About Me</a></li>
-            <li class="nav-item-about"><a href="index.html#about" data-en="Education" data-zh="教育背景">Education</a></li>
-            <li class="nav-item-experience"><a href="index.html#experience" data-en="Experience" data-zh="工作经历">Experience</a></li>
-            <li class="nav-item-projects"><a href="index.html#projects" data-en="Projects" data-zh="项目">Projects</a></li>
-            <li class="nav-item-skills"><a href="index.html#skills" data-en="Skills & Interests" data-zh="技能与爱好">Skills & Interests</a></li>
-            <li class="nav-item-contact"><a href="index.html#contact" data-en="Contact" data-zh="联系我">Contact</a></li>
-        </ul>
-
-        <div class="nav-actions">
-            <a href="Baowen_Resume.pdf" target="_blank" class="nav-resume-btn" aria-label="Resume (PDF)"
-                data-href-en="Baowen_Resume.pdf" data-href-zh="Baowen_Resume_CN.pdf">
-                <i class="fas fa-file-pdf nav-resume-icon" aria-hidden="true"></i>
-                <span class="nav-resume-label" data-en="Resume.pdf ↗" data-zh="简历.pdf ↗">Resume.pdf ↗</span>
-            </a>
-            <button id="lang-toggle" class="lang-toggle" title="Switch language">EN | 中文</button>
-            <button id="theme-btn" class="theme-btn" title="Toggle theme (Day/Night)">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-    </nav>
+    <nav class="ac-nav" aria-label="Main navigation"><a href="index.html" class="ac-brand" aria-label="Baowen Liu home"><img src="assets/images/bw_logo.png" alt="Baowen Liu" width="46" height="46"></a><div class="ac-nav-links"><a href="index.html" data-en="Home" data-zh="主页">Home</a><a href="about.html" data-en="About" data-zh="关于" aria-current="page">About</a><a href="projects.html" data-en="Projects" data-zh="项目">Projects</a><a href="study.html" data-en="Notes" data-zh="笔记">Notes</a><a href="resume.html" data-en="Résumé" data-zh="简历">Résumé</a></div><div class="ac-nav-actions"><button id="lang-toggle" class="ac-language" aria-label="Switch language">EN / 中文</button><button id="theme-btn" class="ac-theme" aria-label="Toggle theme"><i class="fas fa-moon" aria-hidden="true"></i><span class="ac-theme-glyph" aria-hidden="true">◐</span></button><a class="ac-contact-link" href="mailto:me@baowenliu.com" data-en="Say hello ↗" data-zh="联系我 ↗">Say hello ↗</a><button class="ac-menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button></div></nav>
 
     <div class="header">
         <div class="header-title-row animate-on-scroll">
-            <h1 id="more-about-title" data-en="About Me" data-zh="关于我">More About Me</h1>
-            <button id="firework-btn" title="Click for magic!">✨</button>
+            <h1 id="more-about-title" data-en="Beyond<br><em>the code.</em>" data-zh="代码<br><em>之外。</em>">Beyond<br><em>the code.</em></h1>
         </div>
         <p class="animate-on-scroll delay-100" data-en="Beyond the code: My hobbies, interests, and life." data-zh="除了代码之外，这里是我的兴趣爱好和生活。">Beyond the code: My hobbies, interests, and life.</p>
     </div>
 
-    <div class="simple-card no-glass-box animate-on-scroll" style="padding: 2rem;">
+    <div id="biography" data-rail="INTRODUCTION" class="ac-section simple-card no-glass-box animate-on-scroll" style="padding: 2rem;">
 
         <div class="about-intro-layout">
 
             <!-- Left: Selfie -->
-            <img src="assets/baowen-selfie.jpg"
+            <img src="assets/images/baowen-selfie.jpg"
                  alt="Baowen Liu Portrait"
                  class="about-selfie">
 
@@ -1084,9 +86,9 @@
 
 
 
-    <div class="showcase-container animate-on-scroll delay-300">
+    <div id="hobbies" data-rail="INTERESTS" class="ac-section showcase-container animate-on-scroll delay-300">
         <div class="showcase-header" data-en="Hobbies" data-zh="兴趣爱好">Hobbies</div>
-        
+
         <div class="toggle-wrapper">
             <div class="toggle-glider" id="glider"></div>
             <button class="toggle-btn active" onclick="switchTab('games')" data-en="Video Games" data-zh="电子游戏">Video Games</button>
@@ -1095,19 +97,19 @@
 
         <div id="games-panel" class="grid-panel games-grid active">
             <div class="game-card animate-on-scroll delay-100">
-                <div class="card-img-box img-skeleton"><img src="assets/game_mc.webp" alt="MC" onerror="this.src='https://placehold.co/150x150?text=MC'" loading="lazy"></div>
+                <div class="card-img-box img-skeleton"><img src="assets/images/game_mc.webp" alt="MC" onerror="this.src='https://placehold.co/150x150?text=MC'" loading="lazy"></div>
                 <div class="card-title" data-en="Minecraft" data-zh="我的世界">Minecraft</div>
                 <div class="card-stat" data-en="Creative Mode" data-zh="创造模式">Creative Mode</div>
                 <span class="stat-badge" data-en="Builder" data-zh="建造者">Builder</span>
             </div>
             <div class="game-card animate-on-scroll delay-200">
-                <div class="card-img-box img-skeleton"><img src="assets/game_pubg.webp" alt="PUBG" onerror="this.src='https://placehold.co/150x150?text=PUBG'" loading="lazy"></div>
+                <div class="card-img-box img-skeleton"><img src="assets/images/game_pubg.webp" alt="PUBG" onerror="this.src='https://placehold.co/150x150?text=PUBG'" loading="lazy"></div>
                 <div class="card-title" data-en="PUBG" data-zh="绝地求生（PUBG）">PUBG</div>
                 <div class="card-stat" data-en="Rank: Ace" data-zh="段位：王牌">Rank: Ace</div>
                 <span class="stat-badge" data-en="Tactical" data-zh="战术型">Tactical</span>
             </div>
             <div class="game-card animate-on-scroll delay-300">
-                <div class="card-img-box img-skeleton"><img src="assets/game_go.webp" alt="Go" onerror="this.src='https://placehold.co/150x150?text=Go'" loading="lazy"></div>
+                <div class="card-img-box img-skeleton"><img src="assets/images/game_go.webp" alt="Go" onerror="this.src='https://placehold.co/150x150?text=Go'" loading="lazy"></div>
                 <div class="card-title" data-en="Go (Weiqi)" data-zh="围棋（Weiqi）">Go (Weiqi)</div>
                 <div class="card-stat" data-en="Rank: 5-Dan" data-zh="段位：业余五段">Rank: 5-Dan</div>
                 <span class="stat-badge" data-en="Master" data-zh="大师">Master</span>
@@ -1116,57 +118,49 @@
 
         <div id="music-panel" class="grid-panel music-grid">
             <div class="music-card animate-on-scroll delay-100">
-                <div class="music-cover-wrapper img-skeleton"><img src="assets/cover_faded.webp" alt="Faded — Alan Walker album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=Faded'" loading="lazy"></div>
+                <div class="music-cover-wrapper img-skeleton"><img src="assets/images/cover_faded.webp" alt="Faded — Alan Walker album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=Faded'" loading="lazy"></div>
                 <div class="music-info">
                     <div class="music-title" data-en="Faded" data-zh="Faded">Faded</div>
                     <div class="music-artist" data-en="Alan Walker" data-zh="Alan Walker">Alan Walker</div>
-                    <audio controls preload="none"><source src="assets/faded.mp3" type="audio/mpeg"></audio>
+                    <audio controls preload="none"><source src="assets/audio/faded.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
             <div class="music-card animate-on-scroll delay-200">
-                <div class="music-cover-wrapper img-skeleton"><img src="assets/cover_eot.webp" alt="End of Time — Alan Walker, K-391 album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=EOT'" loading="lazy"></div>
+                <div class="music-cover-wrapper img-skeleton"><img src="assets/images/cover_eot.webp" alt="End of Time — Alan Walker, K-391 album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=EOT'" loading="lazy"></div>
                 <div class="music-info">
                     <div class="music-title" data-en="End of Time" data-zh="End of Time">End of Time</div>
                     <div class="music-artist" data-en="Alan Walker, K-391" data-zh="Alan Walker, K-391">Alan Walker, K-391</div>
-                    <audio controls preload="none"><source src="assets/endoftime.mp3" type="audio/mpeg"></audio>
+                    <audio controls preload="none"><source src="assets/audio/endoftime.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
             <div class="music-card animate-on-scroll delay-300">
-                <div class="music-cover-wrapper img-skeleton"><img src="assets/cover_huahai.webp" alt="花海 — Jay Chou album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=HuaHai'" loading="lazy"></div>
+                <div class="music-cover-wrapper img-skeleton"><img src="assets/images/cover_huahai.webp" alt="花海 — Jay Chou album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=HuaHai'" loading="lazy"></div>
                 <div class="music-info">
                     <div class="music-title" data-en="花海" data-zh="花海">花海</div>
                     <div class="music-artist" data-en="Jay Chou" data-zh="周杰伦">Jay Chou</div>
-                    <audio controls preload="none"><source src="assets/huahai.mp3" type="audio/mpeg"></audio>
+                    <audio controls preload="none"><source src="assets/audio/huahai.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
             <div class="music-card animate-on-scroll delay-400">
-                <div class="music-cover-wrapper img-skeleton"><img src="assets/cover_qing.webp" alt="晴 — Silence Wang album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=Qing'" loading="lazy"></div>
+                <div class="music-cover-wrapper img-skeleton"><img src="assets/images/cover_qing.webp" alt="晴 — Silence Wang album cover" class="music-cover" onerror="this.src='https://placehold.co/200?text=Qing'" loading="lazy"></div>
                 <div class="music-info">
                     <div class="music-title" data-en="晴" data-zh="晴">晴</div>
                     <div class="music-artist" data-en="Silence Wang" data-zh="汪苏泷">Silence Wang</div>
-                    <audio controls preload="none"><source src="assets/qing.mp3" type="audio/mpeg"></audio>
+                    <audio controls preload="none"><source src="assets/audio/qing.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="photo-section animate-on-scroll delay-300">
+    <div id="photography" data-rail="PHOTOGRAPHY" class="ac-section photo-section animate-on-scroll delay-300">
         <h2 class="photo-title" data-en="My Photography" data-zh="我的摄影作品">My Photography</h2>
         <p class="photo-sub" data-en="A few moments I've captured from my travels and campus life." data-zh="这里是我在旅行和校园生活中记录的一些瞬间。">
             A few moments I've captured from my travels and campus life.
         </p>
 
-        <div class="photo-nav">
-            <button type="button" class="photo-nav-btn" onclick="scrollPhotos(-1)" aria-label="Previous photo">
-                ‹
-            </button>
-            <button type="button" class="photo-nav-btn" onclick="scrollPhotos(1)" aria-label="Next photo">
-                ›
-            </button>
-        </div>
-        <div class="photo-grid">
+<div class="photo-grid">
             <figure class="photo-card animate-on-scroll delay-100">
-                <div class="img-skeleton"><img src="assets/photo-lantern-boat.webp" alt="Lantern festival boat at night" loading="lazy"></div>
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#72190f;--photo-preview:url('/assets/images/previews/photo-lantern-boat.jpg')"><img data-src="assets/images/photo-lantern-boat.webp" alt="Lantern festival boat at night" width="1200" height="900"></div>
                 <figcaption class="photo-caption" data-en="Lantern festival night scene on the river." data-zh="河面上的灯会夜景。">
                     Lantern festival night scene on the river.
                 </figcaption>
@@ -1174,40 +168,68 @@
 
 
             <figure class="photo-card animate-on-scroll delay-200">
-                <div class="img-skeleton"><img src="assets/photo-campus-snow.webp" alt="Snowy campus path with robot" loading="lazy"></div>
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#d0e2f0;--photo-preview:url('/assets/images/previews/photo-campus-snow.jpg')"><img data-src="assets/images/photo-campus-snow.webp" alt="Snowy campus path with robot" width="900" height="1200"></div>
                 <figcaption class="photo-caption" data-en="A quiet snowy day on campus with a delivery robot." data-zh="校园里安静的雪天和送货机器人。">
                     A quiet snowy day on campus with a delivery robot.
                 </figcaption>
             </figure>
 
             <figure class="photo-card animate-on-scroll delay-250">
-                <div class="img-skeleton"><img src="assets/photo-forest-cows.webp" alt="Cows grazing in a green forest" loading="lazy"></div>
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#939c67;--photo-preview:url('/assets/images/previews/photo-forest-cows.jpg')"><img data-src="assets/images/photo-forest-cows.webp" alt="Cows grazing in a green forest" width="1133" height="1200"></div>
                 <figcaption class="photo-caption" data-en="Cows grazing quietly in a forest in Inner Mongolia." data-zh="内蒙古森林里安静吃草的牛群。">
                     Cows grazing quietly in a forest in Inner Mongolia.
                 </figcaption>
             </figure>
 
             <figure class="photo-card animate-on-scroll delay-300">
-                <div class="img-skeleton"><img src="assets/photo-night-stars.webp" alt="Night sky full of stars over ruins" loading="lazy"></div>
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#4f4b76;--photo-preview:url('/assets/images/previews/photo-night-stars.jpg')"><img data-src="assets/images/photo-night-stars.webp" alt="Night sky full of stars over ruins" width="1200" height="900"></div>
                 <figcaption class="photo-caption" data-en="Starry night sky above ancient ruins in the desert." data-zh="沙漠遗址上空的繁星夜空。">
                     Starry night sky above ancient ruins in the desert.
                 </figcaption>
             </figure>
 
             <figure class="photo-card animate-on-scroll delay-350">
-                <div class="img-skeleton"><img src="assets/photo-tesla-windfarm.webp" alt="Tesla parked in front of wind turbines at sunset" loading="lazy"></div>
-                <figcaption class="photo-caption" 
-                    data-en="Golden light draping the grassland, wind turbines standing quietly along the fading horizon." 
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#aebcc4;--photo-preview:url('/assets/images/previews/photo-tesla-windfarm.jpg')"><img data-src="assets/images/photo-tesla-windfarm.webp" alt="Tesla parked in front of wind turbines at sunset" width="1200" height="900"></div>
+                <figcaption class="photo-caption"
+                    data-en="Golden light draping the grassland, wind turbines standing quietly along the fading horizon."
                     data-zh="金色夕阳洒落在草原上，风机静静矗立在渐远的天边。">
                     Golden light draping the grassland, wind turbines standing quietly along the fading horizon.
                 </figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll">
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#09090c;--photo-preview:url('/assets/images/previews/darkStreet.jpg')"><img data-src="assets/images/darkStreet.jpg" alt="Neon-lit winter street" width="1080" height="1620"></div>
+                <figcaption class="photo-caption" data-en="Neon lights and snow along a winter street." data-zh="冬日街巷里的霓虹与积雪。">Neon lights and snow along a winter street.</figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll">
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#1c3e42;--photo-preview:url('/assets/images/previews/Mount.jpg')"><img data-src="assets/images/Mount.jpg" alt="Snow-covered mountain beyond city traffic" width="1620" height="1080"></div>
+                <figcaption class="photo-caption" data-en="A snow-covered mountain above the city traffic." data-zh="城市车流远处的雪山。">A snow-covered mountain above the city traffic.</figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll">
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#6b9ad9;--photo-preview:url('/assets/images/previews/sea.jpg')"><img data-src="assets/images/sea.jpg" alt="Waves and reflected figures on the shoreline" width="810" height="1216"></div>
+                <figcaption class="photo-caption" data-en="Ocean waves and reflections on the shore." data-zh="海浪与岸边的倒影。">Ocean waves and reflections on the shore.</figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll">
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#173864;--photo-preview:url('/assets/images/previews/blueSky.jpg')"><img data-src="assets/images/blueSky.jpg" alt="Birds and a plane above a rooftop tower" width="1080" height="1620"></div>
+                <figcaption class="photo-caption" data-en="Birds, a passing plane, and a rooftop tower." data-zh="飞鸟、掠过的飞机与屋顶塔楼。">Birds, a passing plane, and a rooftop tower.</figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll">
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#557aa5;--photo-preview:url('/assets/images/previews/BlueSEA.jpg')"><img data-src="assets/images/BlueSEA.jpg" alt="City street in cool blue tones" width="1080" height="1620"></div>
+                <figcaption class="photo-caption" data-en="A city street in shades of blue." data-zh="蓝色调里的城市街道。">A city street in shades of blue.</figcaption>
+            </figure>
+
+            <figure class="photo-card animate-on-scroll">
+                <div class="progressive-photo" data-progressive-photo style="--photo-colour:#b7937c;--photo-preview:url('/assets/images/previews/sea_boston.jpg')"><img data-src="assets/images/sea_boston.jpg" alt="Birds over the Boston shoreline at sunset" width="4032" height="3024"></div>
+                <figcaption class="photo-caption" data-en="Birds over the Boston shoreline at sunset." data-zh="波士顿海岸日落时分的飞鸟。">Birds over the Boston shoreline at sunset.</figcaption>
             </figure>
         </div>
     </div>
 
     <a href="index.html" class="btn-home" data-en="← Back to Home" data-zh="← 返回主页">← Back to Home</a>
-
-    <button id="back-to-top" class="back-to-top">↑</button>
 
     <footer id="contact" class="watermark-footer">
         <div class="footer-contact">
@@ -1236,247 +258,15 @@
         Copied to clipboard
     </div>
 
-    <script>
-        // Simple toast for copy actions
-        const copyToast = document.getElementById('copy-toast');
-        function showCopyToast() {
-            if (!copyToast) return;
-            copyToast.classList.add('show');
-            setTimeout(() => {
-                copyToast.classList.remove('show');
-            }, 1600);
-        }
-
-        // Click-to-copy WeChat ID
-        const wechatBtn = document.getElementById('wechat-btn');
-        if (wechatBtn && navigator.clipboard) {
-            wechatBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const wechatID = "_6Jan-Baower";
-                navigator.clipboard.writeText(wechatID).then(() => {
-                    wechatBtn.style.color = "var(--primary)";
-                    showCopyToast();
-                    setTimeout(() => {
-                        wechatBtn.style.color = "";
-                    }, 1500);
-                });
-            });
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                } else if (entry.boundingClientRect.top > 0) {
-                    // Only hide it again once it's below the screen (scrolled back up). Hiding it when it leaves at the top
-                    // moved it back into view (translateY), which showed it again — the flicker under the nav bar.
-                    entry.target.classList.remove('show');
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-
-        // 2. Tab Logic
-
-        // 2.5 Photo strip navigation
-        function scrollPhotos(direction) {
-            const grid = document.querySelector('.photo-grid');
-            if (!grid) return;
-            const card = grid.querySelector('.photo-card');
-            const cardWidth = card ? card.offsetWidth + 24 : 300; // include gap
-            grid.scrollBy({
-                left: direction * cardWidth,
-                behavior: 'smooth'
-            });
-        }
-        function switchTab(tabName) {
-            const glider = document.getElementById('glider');
-            const btns = document.querySelectorAll('.toggle-btn');
-            
-            btns.forEach(btn => btn.classList.remove('active'));
-            
-            if(tabName === 'games') {
-                glider.style.transform = 'translateX(0)';
-                btns[0].classList.add('active');
-            } else {
-                glider.style.transform = 'translateX(100%)'; 
-                btns[1].classList.add('active');
-            }
-
-            const gamesPanel = document.getElementById('games-panel');
-            const musicPanel = document.getElementById('music-panel');
-
-            if(tabName === 'games') {
-                musicPanel.style.display = 'none';
-                gamesPanel.style.display = 'grid';
-                resetAnimations(gamesPanel);
-            } else {
-                gamesPanel.style.display = 'none';
-                musicPanel.style.display = 'grid';
-                resetAnimations(musicPanel);
-            }
-        }
-
-        function resetAnimations(panel) {
-            const cards = panel.querySelectorAll('.animate-on-scroll');
-            cards.forEach(card => {
-                card.classList.remove('show');
-                setTimeout(() => card.classList.add('show'), 50);
-            });
-        }
-
-        // 3. Dark Mode
-        const btn = document.getElementById('theme-btn');
-        const icon = btn.querySelector('i');
-        const html = document.documentElement;
-
-        // Saved preference wins; otherwise follow the OS setting (prefers-color-scheme)
-        const storedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (storedTheme ? storedTheme === 'dark' : prefersDark) {
-            html.setAttribute('data-theme', 'dark');
-            icon.className = 'fas fa-sun';
-        } else {
-            html.removeAttribute('data-theme');
-            icon.className = 'fas fa-moon';
-        }
-
-        btn.addEventListener('click', () => {
-            if (html.getAttribute('data-theme') === 'dark') {
-                html.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-                icon.className = 'fas fa-moon';
-            } else {
-                html.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                icon.className = 'fas fa-sun';
-            }
-        });
-
-        // 4. Back to Top Button
-        const backToTopBtn = document.getElementById('back-to-top');
-        if (backToTopBtn) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    backToTopBtn.classList.add('show');
-                } else {
-                    backToTopBtn.classList.remove('show');
-                }
-            });
-
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        }
-
-        // 5. firework Easter eggs
-        function launchFireworks() {
-            // Fire two fireworks
-            var duration = 2 * 1000;
-            var animationEnd = Date.now() + duration;
-            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
-
-            function randomInRange(min, max) {
-                return Math.random() * (max - min) + min;
-            }
-
-            var interval = setInterval(function() {
-                var timeLeft = animationEnd - Date.now();
-
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
-                }
-
-                var particleCount = 50 * (timeLeft / duration);
-                
-                // Shoot from both sides of the screen
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-            }, 250);
-        }
-
-        document.getElementById('firework-btn').addEventListener('click', launchFireworks);
-        document.getElementById('more-about-title').addEventListener('click', launchFireworks);
-
-        // 6. Language Toggle Logic (shared with index.html)
-        const langToggle = document.getElementById('lang-toggle');
-        let currentLang = localStorage.getItem('lang') || 'en';
-
-        function applyLanguage(lang) {
-
-            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-            const currentYear = new Date().getFullYear();
-            document.querySelectorAll('[data-en]').forEach(el => {
-                const enText = el.getAttribute('data-en');
-                const zhText = el.getAttribute('data-zh');
-                let text = (lang === 'zh' ? (zhText || enText) : enText) || '';
-                if (text) {
-                    text = text.replace('{YEAR}', currentYear);
-                    el.innerHTML = text;
-                }
-            });
-
-            // Update Resume PDF links based on language
-            const resumeHref = lang === 'zh' ? 'Baowen_Resume_CN.pdf' : 'Baowen_Resume.pdf';
-            document.querySelectorAll('a[href*="Baowen_Resume"]').forEach(a => {
-                a.setAttribute('href', resumeHref);
-            });
-            document.querySelectorAll('[data-href-en]').forEach(el => {
-                const enHref = el.getAttribute('data-href-en');
-                const zhHref = el.getAttribute('data-href-zh');
-                el.setAttribute('href', lang === 'zh' ? (zhHref || enHref) : enHref);
-            });
-        }
-
-        function updateLangToggleLabel() {
-            if (!langToggle) return;
-            langToggle.textContent = currentLang === 'en' ? 'EN | 中文' : '中 | EN';
-        }
-
-        // Initialize language on page load
-        applyLanguage(currentLang);
-        updateLangToggleLabel();
-
-        if (langToggle) {
-            langToggle.addEventListener('click', () => {
-                currentLang = currentLang === 'en' ? 'zh' : 'en';
-                localStorage.setItem('lang', currentLang);
-                applyLanguage(currentLang);
-                updateLangToggleLabel();
-            });
-        }
-    </script>
+    <script src="assets/js/about-page.js?v=20261012-clean"></script>
 
     <!-- Skeleton shimmer: reveal images once they have loaded -->
-    <script>
-        document.querySelectorAll('.img-skeleton').forEach(box => {
-            const img = box.querySelector('img');
-            if (!img) { box.classList.add('is-loaded'); return; }
-            const done = () => box.classList.add('is-loaded');
-            if (img.complete && img.naturalWidth) done();
-            else { img.addEventListener('load', done, { once: true }); img.addEventListener('error', done, { once: true }); }
-        });
-    </script>
-    <!-- Keep the BAOWEN watermark vertically centred on the contact bar -->
-    <script>
-        (function () {
-            const footer = document.querySelector('footer.watermark-footer');
-            const bar = footer && footer.querySelector('.footer-contact');
-            if (!bar) return;
-            const align = () => footer.style.setProperty('--wm-top', (bar.offsetTop + bar.offsetHeight / 2) + 'px');
-            align();
-            window.addEventListener('load', align);
-            if (window.ResizeObserver) new ResizeObserver(align).observe(footer);
-        })();
-    </script>
-    <!-- Footer status card: uptime + visitor counts (GoatCounter) -->
-    <script src="assets/site-stats.js?v=20260914c"></script>
+
+<!-- Footer status card: uptime + visitor counts (GoatCounter) -->
+    <script src="assets/js/site-stats.js?v=20260914c"></script>
     <!-- Command palette: ⌘K / Ctrl+K -->
-    <script src="assets/palette.js?v=20260923"></script>
+    <script src="assets/js/palette.js?v=20261012h"></script>
     <!-- Easter egg: interactive terminal (press ` or click the >_ button) -->
-    <script src="assets/terminal.js?v=20260923"></script>
+    <script src="assets/js/terminal.js?v=20260923"></script>
 </body>
 </html>

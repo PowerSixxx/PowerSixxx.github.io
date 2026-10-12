@@ -1,0 +1,208 @@
+/* study page structure and print styles. */
+:root {
+    --bg: #f7f5f0;
+    --bg-card: #ffffff;
+    --bg-header: #efece6;
+    --text-main: #1c1917;
+    --text-sub: #57534e;
+    --accent: #2563eb;
+    --border: #e5e1d8;
+}
+
+[data-theme="dark"] {
+    --bg: #000000;
+    --bg-card: #0c0c0e;
+    --bg-header: #141417;
+    --text-main: #f1f5f9;
+    --text-sub: #94a3b8;
+    --accent: #3b82f6;
+    --border: #1f1f24;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html, body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 2.5rem 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+body::before, body::after { display: none !important; }
+
+.container {
+    width: 100%;
+    max-width: 900px;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+    color: var(--text-sub);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: var(--accent);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+}
+
+.projects-table {
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+thead {
+    background-color: var(--bg-header);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--text-sub);
+}
+
+th,
+td {
+    padding: 0.9rem 1.2rem;
+    vertical-align: top;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 30%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 22%;
+    text-align: right;
+    white-space: nowrap;
+}
+
+tbody tr {
+    border-top: 1px solid var(--border);
+}
+
+tbody tr:hover {
+    background-color: rgba(31, 41, 55, 0.85);
+}
+
+.project-name {
+    font-weight: 600;
+}
+
+.project-desc {
+    font-size: 0.9rem;
+    color: var(--text-sub);
+}
+
+.link-group a {
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: none;
+    margin-left: 0.25rem;
+}
+
+.link-group a:first-child {
+    margin-left: 0;
+}
+
+.link-group a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 720px) {
+    body {
+        padding: 1.5rem 1rem 2rem;
+    }
+
+    h1 {
+        font-size: 1.9rem;
+    }
+
+    th,
+    td {
+        padding: 0.75rem 0.7rem;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+        width: 30%;
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+        width: 22%;
+    }
+}
+
+/* Phones: stack each row as a card instead of squeezing three columns.
+   Selectors carry .projects-table so they beat the !important rules in glass-theme.css. */
+@media (max-width: 600px) {
+    .projects-table thead {
+        display: none;
+    }
+
+    .projects-table table,
+    .projects-table tbody,
+    .projects-table tr,
+    .projects-table td {
+        display: block;
+        width: 100% !important;
+    }
+
+    .projects-table tbody tr {
+        padding: 1rem 1.1rem 1.15rem;
+        border-top: 1px solid var(--border);
+    }
+
+    .projects-table tbody tr:first-child {
+        border-top: 0;
+    }
+
+    .projects-table td {
+        padding: 0 !important;
+        border: 0 !important;
+        text-align: left !important;
+        white-space: normal !important;
+    }
+
+    .projects-table td.project-name {
+        font-size: 1.02rem;
+        margin-bottom: 0.35rem;
+    }
+
+    .projects-table td.project-desc {
+        margin-bottom: 0.8rem;
+        line-height: 1.55;
+    }
+
+    .projects-table .link-group a {
+        display: inline-block;
+        margin: 0 0.4rem 0 0;
+    }
+}

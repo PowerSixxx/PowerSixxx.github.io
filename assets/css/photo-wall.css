@@ -1,0 +1,63 @@
+/* Fixed frames exist before any full-resolution image is requested. */
+.progressive-photo {
+  position:relative;
+  display:block;
+  overflow:hidden;
+  isolation:isolate;
+  background:var(--photo-colour,var(--line));
+}
+.progressive-photo::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:var(--photo-colour,var(--line)) var(--photo-preview,none) center/cover no-repeat;
+  filter:var(--photo-filter,brightness(1)) blur(20px);
+  transform:scale(1.04);
+  opacity:1;
+  transition:opacity 500ms ease;
+  pointer-events:none;
+}
+.progressive-photo>.progressive-photo-image {
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:block;
+  width:100%; height:100%;
+  object-fit:cover;
+  opacity:0;
+  filter:var(--photo-filter,brightness(1)) blur(20px);
+  transform:scale(1.04);
+  transition:filter 500ms ease,transform 500ms ease,opacity 500ms ease;
+}
+.progressive-photo.is-loaded::before { opacity:0; }
+.progressive-photo.is-loaded>.progressive-photo-image {
+  opacity:1;
+  filter:var(--photo-filter,brightness(1)) blur(0px);
+  transform:scale(1);
+}
+.photo-grid .photo-card .progressive-photo { height:320px; }
+.photo-grid .photo-card:last-child:nth-child(odd) .progressive-photo { height:420px; }
+.photo-grid .photo-card .progressive-photo>img { height:100%!important; }
+.orbit-card.progressive-photo { position:absolute; }
+.ac-photo-break.progressive-photo { --photo-filter:brightness(.68); }
+.ac-photo-break.progressive-photo>div { z-index:2; }
+.progressive-photo.is-error::after {
+  content:"Image unavailable";
+  position:absolute;
+  inset:auto 12px 12px;
+  z-index:2;
+  padding:6px 10px;
+  font-size:12px;
+  color:var(--ink);
+  background:var(--paper);
+}
+html[lang^="zh"] .progressive-photo.is-error::after { content:"图片暂时无法加载"; }
+@media(max-width:700px) {
+  .photo-grid .photo-card .progressive-photo,
+  .photo-grid .photo-card:last-child:nth-child(odd) .progressive-photo { height:260px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .progressive-photo::before,.progressive-photo>.progressive-photo-image { transition:none; }
+  .progressive-photo>.progressive-photo-image { transform:none; }
+}

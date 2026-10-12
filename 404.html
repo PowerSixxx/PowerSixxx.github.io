@@ -7,132 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Not Found – Baowen Liu</title>
     <meta name="robots" content="noindex">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="assets/images/bw_logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --bg-body: #f7f5f0;
-            --text-main: #1c1917;
-            --text-sub: #57534e;
-            --primary: #2563eb;
-            --border: #e5e1d8;
-        }
-
-        [data-theme="dark"] {
-            --bg-body: #000000;
-            --text-main: #f1f5f9;
-            --text-sub: #94a3b8;
-            --primary: #3b82f6;
-            --border: #1f1f24;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            background: var(--bg-body);
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            color: var(--text-main);
-            padding: 2rem 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Same BAOWEN watermark as the site footer */
-        body::before {
-            content: "BAOWEN";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            font-size: clamp(5rem, 22vw, 18rem);
-            font-weight: 800;
-            line-height: 0.8;
-            color: rgba(0, 0, 0, 0.04);
-            white-space: nowrap;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        [data-theme="dark"] body::before {
-            color: rgba(255, 255, 255, 0.10);
-        }
-
-        .box {
-            position: relative;
-            text-align: center;
-            max-width: 480px;
-        }
-
-        .code {
-            font-size: clamp(4rem, 14vw, 7rem);
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -0.04em;
-            color: var(--primary);
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            margin: 1rem 0 0.6rem;
-        }
-
-        p {
-            color: var(--text-sub);
-            line-height: 1.6;
-            margin-bottom: 1.8rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.8rem;
-            border-radius: 999px;
-            background: var(--text-main);
-            color: var(--bg-body);
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
-        .links {
-            margin-top: 1.4rem;
-            font-size: 0.9rem;
-            color: var(--text-sub);
-        }
-
-        .links a {
-            color: var(--primary);
-            text-decoration: none;
-            margin: 0 0.4rem;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/404.css?v=20261012-clean">
+    <link rel="stylesheet" href="assets/css/site.css?v=20261012i">
+    <script src="assets/js/scroll-instrument.js?v=20261012b" defer></script>
+    <script src="assets/js/site.js?v=20261012b" defer></script>
 </head>
 
-<body>
+<body data-page="404">
+<nav class="ac-nav" aria-label="Main navigation"><a href="index.html" class="ac-brand" aria-label="Baowen Liu home"><img src="assets/images/bw_logo.png" alt="Baowen Liu" width="46" height="46"></a><div class="ac-nav-links"><a href="index.html" data-en="Home" data-zh="主页">Home</a><a href="about.html" data-en="About" data-zh="关于">About</a><a href="projects.html" data-en="Projects" data-zh="项目">Projects</a><a href="study.html" data-en="Notes" data-zh="笔记">Notes</a><a href="resume.html" data-en="Résumé" data-zh="简历">Résumé</a></div><div class="ac-nav-actions"><button id="ac-lang" class="ac-language" aria-label="Switch language">EN / 中文</button><button id="ac-theme" class="ac-theme" aria-label="Toggle theme"><i class="fas fa-moon" aria-hidden="true"></i><span class="ac-theme-glyph" aria-hidden="true">◐</span></button><a class="ac-contact-link" href="mailto:me@baowenliu.com" data-en="Say hello ↗" data-zh="联系我 ↗">Say hello ↗</a><button class="ac-menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button></div></nav>
     <div class="box">
         <div class="code">404</div>
         <h1 data-en="Page not found" data-zh="页面不存在">Page not found</h1>
@@ -146,16 +34,11 @@
         </div>
     </div>
 
-    <script>
-        // Follow the site's saved language preference
-        const lang = localStorage.getItem('lang') || 'en';
-        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-        document.querySelectorAll('[data-en]').forEach(el => {
-            el.textContent = el.getAttribute(lang === 'zh' ? 'data-zh' : 'data-en');
-        });
-    </script>
+
     <!-- Visitor counting (GoatCounter) -->
-    <script src="assets/site-stats.js?v=20260914c"></script>
+    <script src="assets/js/site-stats.js?v=20260914c"></script>
+<footer class="ac-simple-footer"><a href="index.html">BAOWEN LIU</a><span data-en="BUILD WITH CARE. LOOK WITH CURIOSITY." data-zh="认真创造。保持好奇。">BUILD WITH CARE. LOOK WITH CURIOSITY.</span><a href="mailto:me@baowenliu.com" data-en="LET’S CONNECT ↗" data-zh="联系我 ↗">LET’S CONNECT ↗</a></footer>
+    <script src="assets/js/palette.js?v=20261012h"></script>
 </body>
 
 </html>

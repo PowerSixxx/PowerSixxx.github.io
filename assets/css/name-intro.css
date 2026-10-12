@@ -1,0 +1,11 @@
+/* Animation overlays the heading without changing its metrics or text nodes. */
+@media (prefers-reduced-motion: no-preference) {
+  .name-intro-pending #name,
+  #name.name-intro-active { visibility: hidden !important; }
+}
+.name-intro-layer { position: absolute; z-index: 5; pointer-events: none; white-space: pre; }
+.name-intro-layer span { position: absolute; display: block; white-space: pre; will-change: transform, clip-path; }
+@media (prefers-reduced-motion: reduce) {
+  .name-intro-layer { display: none; }
+  #name.name-intro-active { visibility: visible !important; }
+}
