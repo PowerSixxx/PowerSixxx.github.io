@@ -22,8 +22,6 @@ The site includes a bilingual name reveal, animated scroll ruler, light and dark
 
 Photos load near the viewport, transitioning from a small blurred preview to the full image without shifting the layout. The site adapts to mobile screens and respects the system's reduced motion preference.
 
-The orbit and name reveal are inspired by [ArtCraft](https://getartcraft.com/), adapted to this site's typography, content, and personal photos. Implementation notes are in [docs/](docs/).
-
 ## Run locally
 
 Built with HTML, CSS, and vanilla JavaScript. No build step is required.

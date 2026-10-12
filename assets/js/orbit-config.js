@@ -1,6 +1,4 @@
-/* Parameters transcribed from ArtCraft's shipped galaxy bundle on 2026-10-10.
-   See ../../docs/artcraft-reference.md for evidence and intentional approximations.
-   The images, copy, renderer and controls belong to this independent demo. */
+/* Homepage orbit parameters and personal photo collection. */
 window.ORBIT_CONFIG = {
   layout: { arms: 6, turns: 1.05, radiusFraction: 0.7, birthFraction: 0.08,
     cardCount: 16, referenceMegapixels: 0.6, cardHeightFraction: 0.28,

@@ -100,5 +100,5 @@
   revealTargets.forEach(el => { el.classList.add('ac-reveal'); observer.observe(el); });
   reduced.addEventListener('change', () => { if (reduced.matches) revealTargets.forEach(el => el.classList.add('is-visible')); });
   applyLanguage(localStorage.getItem('lang') || 'en'); syncLabels();
-  instrument = window.createArtcraftInstrument?.(sectionList);
+  instrument = window.createScrollInstrument?.(sectionList);
 })();

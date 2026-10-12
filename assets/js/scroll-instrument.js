@@ -1,8 +1,6 @@
-/* Reconstructed from REA-observed ArtCraft ruler module 54227 on 2026-10-12.
-   Original defaults and mapping/letter-flight formula: analysis/ruler/REPORT.md.
-   Native DOM/RAF implementation; personal labels and system reduced motion. */
-window.createArtcraftInstrument = function(sections) {
-  const cfg = window.ARTCRAFT_INSTRUMENT_CONFIG = {
+/* Scroll ruler and letter flight, with native DOM/RAF and reduced motion support. */
+window.createScrollInstrument = function(sections) {
+  const cfg = window.SCROLL_INSTRUMENT_CONFIG = {
     rail:60, edge:12, nav:48, threshold:.12, heading:34, riding:20, queue:16,
     top:28, gap:26, slot:20, bottom:36, flip:200, detach:240, stagger:.16, arc:28,
     heroLead:100, heroZone:320, zoomDelay:150, zoomDamping:10,

@@ -1,4 +1,4 @@
-/* ArtCraft-inspired blade reveal. Keep the real heading intact for the scroll ruler. */
+/* Homepage name reveal. Keep the real heading intact for the scroll ruler. */
 (() => {
   const heading = document.getElementById('name');
   const root = document.documentElement;

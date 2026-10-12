@@ -1,4 +1,4 @@
-/* Personal site / ArtCraft-inspired editorial system. Screen rules intentionally
+/* Personal site / editorial layout. Screen rules intentionally
    leave the résumé's existing one-page print layout intact. */
 @media screen {
 :root{--paper:#f1f0ed;--ink:#111113;--muted:#70706d;--line:#cfceca;--accent:#2563eb;--scrim:241,240,237;--bg:var(--paper);--bg-body:var(--paper);--bg-page:var(--paper);--bg-card:var(--paper);--bg-header:#e9e8e4;--surface-card:var(--paper);--text-main:var(--ink);--text-primary:var(--ink);--text-sub:var(--muted);--text-secondary:var(--muted);--border:var(--line);--primary:var(--ink);--shadow:none;--glass-surface:var(--paper);--glass-border:var(--line);--accent-blue:var(--ink);--timeline-accent:var(--ink);--tl-accent:var(--ink);color-scheme:light}
@@ -47,7 +47,7 @@ html body nav.ac-nav{position:fixed!important;top:0!important;left:0!important;r
 .ac-hero h2{display:block!important;text-align:center!important}.music-cover-wrapper{width:100%!important;height:300px!important;aspect-ratio:16/10!important;overflow:hidden}.music-cover{width:100%!important;height:100%!important;object-fit:cover!important}
 @media(max-width:700px){.ac-hero h2 em{display:block;margin-top:4px}.music-cover-wrapper{height:240px!important}}
 }
-/* Shared alignment and observed ArtCraft instrument geometry. */
+/* Shared alignment and scroll instrument geometry. */
 @media screen{
 :root{--ac-grid:1280px;--ac-gutter:40px;--ruler-rail:60px}
 html body{padding-right:var(--ruler-rail)!important}
