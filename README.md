@@ -1,83 +1,58 @@
-# Baowen Liu — 个人网站
+# Baowen Liu
 
-纯 HTML、CSS、JavaScript 静态网站，无构建步骤。GitHub Pages 从仓库根目录提供页面，域名配置保留在 `CNAME`。
+**Building useful things. Seeing more.**
 
-## 目录
+My personal website — a place for my projects, study notes, photography, and the things I learn along the way. I'm a Computer Science and Engineering student with a Mathematics minor at The Ohio State University, and the creator of [Canvas+](https://getcanvasplus.com/).
 
-```text
-index.html                 首页、环绕动画、经历、项目和留言板
-about.html                 个人介绍、兴趣、音乐和摄影
-projects.html              项目目录
-study.html                 Notes（LeetCode 和课程笔记）
-resume.html                中英文简历、打印版
-404.html                   未找到页面
-assets/
-  images/                  所有照片、封面、logo 和宣传图片
-  audio/                   音乐文件
-  css/
-    site.css               全站外观、对齐、响应式规则
-    photo-wall.css         固定照片框、模糊与缩放过渡
-    index.css / about.css  各页的基础布局和组件
-    projects.css / study.css / resume.css / 404.css
-  js/
-    site.js                公共导航、语言适配、照片查看和章节索引
-    progressive-photos.js  300px 预加载与解码后的渐进显示
-    photo-previews.js      自动生成的小图、主色和尺寸清单
-    scroll-instrument.js   右侧滚动刻度与标题动画
-    orbit-config.js        首页环绕参数和图片清单
-    orbit-engine.js        环绕渲染与鼠标交互
-    index-page.js          首页像素头像、详情展开、趣味文字和 giscus
-    about-page.js          兴趣切换、图片加载、联系方式
-    resume-page.js         简历语言、PDF 链接和主题
-    palette.js             Cmd+K / Ctrl+K 命令面板
-    terminal.js            终端彩蛋
-    site-stats.js          页脚上线天数和访客统计
-scripts/
-  generate-photo-previews.py  生成占位小图与主色
-canvas-plus/
-  index.html               跳转到 getcanvasplus.com，保留原入口
-  demo.html / site.js      首页嵌入的交互演示
-  privacy*.html            保留公开隐私政策地址
-Baowen_Resume*.pdf          保留公开下载地址
-CNAME / robots.txt / sitemap.xml
-baidu_verify_*.html         保留站点验证文件
-docs/
-  artcraft-reference.md    原站 REA 分析记录
-  cleanup.md               本次整理范围及验证结果
-```
+[Visit the website](https://www.baowenliu.com/) · [LeetCode Notes](https://powersixxx.github.io/leetcode-blog/) · [LinkedIn](https://www.linkedin.com/in/baowen-liu-959104340/)
 
-## 本地预览
+个人网站：记录我的项目、学习笔记与摄影作品，支持中英文切换。
+
+## Explore
+
+- **Home** — an interactive photo orbit, education, experience, selected projects, and guestbook.
+- **About** — interests, music, and a photography gallery.
+- **Projects** — the things I've built, including Canvas+.
+- **Notes** — LeetCode and university course notes.
+- **Résumé** — English and Chinese résumés with PDF downloads.
+
+## Experience
+
+The site includes a bilingual name reveal, animated scroll ruler, light and dark themes, and a searchable command palette. Press **⌘ K / Ctrl K** to navigate, or discover the terminal with the backtick key.
+
+Photos load near the viewport, transitioning from a small blurred preview to the full image without shifting the layout. The site adapts to mobile screens and respects the system's reduced motion preference.
+
+The orbit and name reveal are inspired by [ArtCraft](https://getartcraft.com/), adapted to this site's typography, content, and personal photos. Implementation notes are in [docs/](docs/).
+
+## Run locally
+
+Built with HTML, CSS, and vanilla JavaScript. No build step is required.
+
+From the project folder, start a local server:
 
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-打开 http://127.0.0.1:8000/ 。使用 HTTP 预览以支持留言板和像素头像，不要直接双击 HTML。
+Open [localhost:8000](http://127.0.0.1:8000/). Use a local server rather than opening HTML files directly, so browser features and the guestbook can work normally.
 
-## 常用修改位置
+## Customize
 
-| 内容 | 文件 |
+| Change | Location |
 | --- | --- |
-| 页面文字和中英翻译 | 对应 HTML 的 `data-en` / `data-zh` |
-| 配色、页面边距、按钮尺寸、手机适配 | `assets/css/site.css` |
-| 环绕图片、数量、半径、速度 | `assets/js/orbit-config.js` |
-| 趣味文字、留言板设置 | `assets/js/index-page.js` 的 `FACTS` / `GISCUS` |
-| 命令面板菜单 | `assets/js/palette.js` 的 `COMMANDS` |
-| 终端命令 | `assets/js/terminal.js` |
-| 简历内容 | `resume.html`，同时更新两个 PDF |
+| Page content and translations | Root HTML files; `data-en` / `data-zh` |
+| Shared styles and mobile layout | `assets/css/site.css` |
+| Orbit photos and animation settings | `assets/js/orbit-config.js` |
+| Name reveal timing | `assets/js/name-intro.js` |
+| Photos, logos, and covers | `assets/images/` |
+| Command palette entries | `assets/js/palette.js` |
 
-环绕照片密度由 `cardRadiusFraction`（活动范围）、`evenPhases`（均匀分布）和 `look.density`（图片尺寸）调整。当前环绕图片不重复，桌面 16 张、手机 14 张；支持浅色/深色、中英文和减少动态效果。
+After adding photos, regenerate their small previews with Python 3 and Pillow:
 
-## 发布
+```bash
+python3 scripts/generate-photo-previews.py
+```
 
-将整理后的全部文件一起提交、推送至 GitHub Pages 所用分支。页面入口、简历 PDF、Canvas+ 跳转与隐私政策地址保持原路径；所有图片引用已经改到 `assets/images/`。不需要上传旧调试截图或本机备份。
+## Hosting
 
-## License
-
-MIT License, Baowen Liu
-
-## 照片预览与加载
-
-照片墙、首页横幅和环绕图片使用 `assets/js/progressive-photos.js`。主色与预览清单位于 `photo-previews.js`，小图位于 `assets/images/previews/`。距离视口约 300px 才请求原图，解码后用 500ms 清晰与缩放过渡；减少动态效果时直接显示。
-
-新增照片后，可用 Python 3 + Pillow 运行 `python3 scripts/generate-photo-previews.py` 重新生成预览。生成文件直接随网站部署，线上不需要 Python。
+This repository hosts the static site through GitHub Pages. The custom domain is recorded in `CNAME`. Publish the site files, including assets and generated previews, together; no Python runtime is needed on the deployed site.
