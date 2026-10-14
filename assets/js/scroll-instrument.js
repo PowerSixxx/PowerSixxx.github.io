@@ -4,7 +4,7 @@ window.createScrollInstrument = function(sections) {
     rail:60, edge:12, nav:48, threshold:.12, heading:34, riding:20, queue:16,
     top:28, gap:26, slot:20, bottom:36, flip:200, detach:240, stagger:.16, arc:28,
     heroLead:100, heroZone:320, zoomDelay:150, zoomDamping:10,
-    velocityRadius:180, velocityStretch:.6, intro:1, tickStagger:.01, snapDelay:400, snapDuration:.7, wheelLerp:.12, footerZone:360, footerDamping:10
+    velocityRadius:180, velocityStretch:.6, intro:1, tickStagger:.01, footerZone:360, footerDamping:10
   };
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const clamp = x => Math.max(0,Math.min(1,x));
@@ -37,7 +37,7 @@ window.createScrollInstrument = function(sections) {
   const canvas=document.createElement('canvas'), measure=canvas.getContext('2d');
   let records=[], vh=innerHeight,vw=innerWidth,doc=0,max=1,base=60,span=1;
   let zoom=0,intent=false,drag=false,ghostY=0,hovered=false,last=0,lastY=scrollY,velocity=0;
-  let start=performance.now(),raf=0,refreshNeeded=true,zoomTimer=0,snapTimer=0,jump=null,dragTarget=0,downY=0,moved=0,states=[],wheelTarget=null;
+  let start=performance.now(),raf=0,refreshNeeded=true,zoomTimer=0,jump=null,dragTarget=0,downY=0,moved=0,states=[];
   const heroHeading=document.querySelector('.ac-hero h1');
   function refresh(){refreshNeeded=true;}
   function rebuild(){
@@ -65,11 +65,9 @@ window.createScrollInstrument = function(sections) {
     });refreshNeeded=false;
   }
   function goTo(top,duration){
-    wheelTarget=null;
     top=Math.max(0,Math.min(max,top));
     if(reduce.matches){scrollTo({top,behavior:'instant'});return;}
     jump={from:scrollY,to:top,start:performance.now(),duration:(duration||1.25*(.4+.6*Math.min(1,Math.abs(top-scrollY)/(2.5*vh))))*1000};
-    clearTimeout(snapTimer);
   }
   function pointHorizontal(r,j,y,scale,alpha){const offset=(r.cum[j]+r.advances[j]/2)*scale;return{x:vw-cfg.rail-(r.total*scale-offset),y,rotation:0,scale,alpha};}
   function pointVertical(r,j,y){const scale=cfg.riding/cfg.heading;return{x:vw-cfg.rail/2,y:y+(r.total-r.cum[j]-r.advances[j]/2)*scale,rotation:-90,scale,alpha:.35};}
@@ -96,7 +94,6 @@ window.createScrollInstrument = function(sections) {
   function animate(now){
     raf=0;const dt=Math.min(.1,(now-last)/1000)||.016;last=now;if(refreshNeeded)rebuild();
     if(jump){const t=clamp((now-jump.start)/jump.duration);scrollTo({top:mix(jump.from,jump.to,expo(t)),behavior:'instant'});if(t>=1)jump=null;}
-    if(wheelTarget!==null&&!drag&&!jump){scrollTo({top:mix(scrollY,wheelTarget,1-Math.exp(-60*cfg.wheelLerp*dt)),behavior:'instant'});if(Math.abs(wheelTarget-scrollY)<.5)wheelTarget=null;}
     if(drag&&!reduce.matches)scrollTo({top:mix(scrollY,dragTarget,.18),behavior:'instant'});
     const speed=(scrollY-lastY)/dt;velocity+=(speed-velocity)*(1-Math.exp(-6*dt));lastY=scrollY;
     const {p,drift}=snapshot(dt);const quiet=reduce.matches||vw<900;
@@ -173,27 +170,18 @@ window.createScrollInstrument = function(sections) {
   rail.addEventListener('pointerenter',()=>{hovered=true;hover(true);});
   rail.addEventListener('pointerleave',()=>{hovered=false;if(!drag)hover(false);});
   rail.addEventListener('pointermove',e=>{ghostY=Math.max(base,Math.min(base+span,e.clientY));if(drag){moved=Math.max(moved,Math.abs(e.clientY-downY));dragTarget=railTarget(e.clientY);}});
-  rail.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag=true;jump=null;wheelTarget=null;clearTimeout(snapTimer);downY=e.clientY;moved=0;dragTarget=scrollY;rail.setPointerCapture(e.pointerId);});
+  rail.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag=true;jump=null;downY=e.clientY;moved=0;dragTarget=scrollY;rail.setPointerCapture(e.pointerId);});
   rail.addEventListener('pointerup',e=>{drag=false;if(moved<4)goTo(railTarget(e.clientY));if(!hovered)hover(false);});
   rail.addEventListener('pointercancel',()=>{drag=false;hover(false);});
   rail.addEventListener('keydown',e=>{const moves={ArrowDown:scrollY+max*.01,ArrowUp:scrollY-max*.01,PageDown:scrollY+vh,PageUp:scrollY-vh,Home:0,End:max};if(e.key in moves){e.preventDefault();goTo(moves[e.key]);}});
-  function snap(){if(reduce.matches||drag||jump||vw<900)return;if(Math.abs(velocity)>120){snapTimer=setTimeout(snap,80);return;}const i=states.findIndex((s,i)=>s.flip>.04&&s.flip<.96&&records[i].terminalStart===null);if(i<0)return;const r=records[i],s=states[i],goal=s.flip>=.5?1:0;let y;
-    if(r.isHero)y=Math.max(0,(r.origin[0]?.y-r.heroFont/2||0)-cfg.nav-cfg.heroLead)+(goal?cfg.heroZone+4:-4);
-    else y=(r.anchor+base-vh*cfg.threshold-cfg.flip*(1-goal))/(1+(cfg.nav+2*cfg.edge)/max)+(goal?4:-4);
-    goTo(y,cfg.snapDuration);
-  }
-  function input(){jump=null;clearTimeout(snapTimer);snapTimer=setTimeout(snap,cfg.snapDelay);}
-  addEventListener('wheel',e=>{
-    input();
-    if(reduce.matches||vw<900||e.ctrlKey||e.shiftKey||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
-    for(let node=e.target;node&&node!==document.body;node=node.parentElement){
-      if(node.matches?.('textarea,select,dialog,.term-body,.cp-list'))return;
-      const css=getComputedStyle(node);if(node.scrollHeight>node.clientHeight+1&&/auto|scroll/.test(css.overflowY))return;
-    }
-    e.preventDefault();wheelTarget=Math.max(0,Math.min(max,(wheelTarget??scrollY)+e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?vh:1)));
-  },{passive:false});
-  addEventListener('touchmove',()=>{wheelTarget=null;input();},{passive:true});
-  addEventListener('keydown',()=>{wheelTarget=null;});
+  // Follow native scrolling. Only explicit chapter clicks and ruler dragging move the page.
+  function cancelJump(){jump=null;}
+  addEventListener('wheel',cancelJump,{passive:true});
+  addEventListener('touchstart',cancelJump,{passive:true});
+  addEventListener('touchmove',cancelJump,{passive:true});
+  addEventListener('keydown',e=>{
+    if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key)&&e.target!==rail)cancelJump();
+  });
   addEventListener('resize',refresh);new ResizeObserver(refresh).observe(document.body);
   document.fonts?.ready.then(refresh);new MutationObserver(refresh).observe(root,{attributes:true,attributeFilter:['lang','data-theme']});
   reduce.addEventListener('change',refresh);document.addEventListener('visibilitychange',()=>{last=0;if(!document.hidden&&!raf)raf=requestAnimationFrame(animate);});

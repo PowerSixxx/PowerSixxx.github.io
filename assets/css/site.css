@@ -253,3 +253,12 @@ html body footer.watermark-footer::before{content:'BAOWEN LIU'!important;left:50
   background: var(--line);
   pointer-events: none;
 }
+
+/* Keep the small homepage captions legible in both themes. */
+.ac-hero .proof,
+.ac-hero .fun-fact {
+  color: var(--ink) !important;
+}
+.ac-hero .fun-fact .fun-fact-next {
+  opacity: 1;
+}
